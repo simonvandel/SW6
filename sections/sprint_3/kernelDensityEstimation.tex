@@ -1,20 +1,4 @@
-\subsection{Calculation of Local Crowd Factors}\jenote{Maybe find a better title}
-
-\lanote{When using multivariate density estimation our bandwidth should be a matrix. Alternatively we can simplify the bandwidth to a scalar by assuming our bandwidth matrix is the identity matrix multiplied with a scalar}
-\pgfmathdeclarefunction{epanechnikov2d}{1}{%
-  \pgfmathparse{3.0/(4.0 * #1) * (1.0 - (x/#1)^2))}%
-}
-
-\pgfmathdeclarefunction{gaussian2d}{1}{%
-  \pgfmathparse{1.0/(sqrt(2 * pi) * #1) * e ^ (-1.0 / 2.0 * (x/#1)^2))}%
-}
-
-\pgfmathdeclarefunction{epanechnikov3d}{1}{%
-  \pgfmathparse{3.0/(4.0 * #1) * (1.0 - (sqrt(y^2 + x^2)/#1)^2))}%
-}
-This section will first explain how kernel density estimation is used to estimate the local crowd density. Afterwards, we explain how this approach can be extended to estimating velocity, turbulence, and pressure.
-
-\subsubsection{Kernel Density Estimation}
+\subsection{Kernel Density Estimation}
 
 Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire area. These counts could then be displayed in histograms for a better overview. The problem with this approach is the definition of the local areas. Whatever way you decide to define the areas will affect the outcome of the count, which in turn will affect the histograms, giving a possibly skewed overview\kanote{jens, insert article reference here}. Since we do not want this, we need to use a different method.
 
@@ -271,11 +255,3 @@ We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by int
 %\end{tikzpicture}
 
 \sinote*{brug det her et sted}{We assume that each person has the same density. This is done since we do not currently have a way to find the area each person takes up. This is also a reasonable assumption, and one that most crowd safety literature makes. As long as we keep the densities on 1 for the general formulas, any deviating values for the factor can simply be multiplied on the function.}
-
-\sinote{mangler at beskrive hvordan vi bruger intensitet variablen i density og velocity, pressure og turbulens. Der mangler måske også en extension til velocity, pressure og turbulens}
-
-\subsection{Velocity, turbulence and pressure}
-\begin{equation}
-\label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)
-\end{equation}

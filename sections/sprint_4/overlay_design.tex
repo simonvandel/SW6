@@ -19,7 +19,7 @@ The three overlays density, turbulence and pressure have their visualisation tec
 
 %%% Velocity
 \subsection{Velocity}
-The velocity overlay has to visualise three things: speed of the crowd, heading direction of the crowd and the significance of these values, represented by the density. The difference to the other three overlays is the heading direction. We thought the most intuitive way to show a direction is using arrows. 
+The velocity overlay has to visualise three things: speed of the crowd, heading direction of the crowd and the significance of these values, represented by the density. The difference to the other three overlays is the heading direction and the way we represent significance. We thought the most intuitive way to show a direction is using arrows. 
 
 %%%% Første design ide med normale pile, problemer med dette
 
@@ -69,7 +69,7 @@ Our first design iteration used arrows with the traditional shape as seen in \cr
 
 The second design iteration focused on making the arrowhead for explicit, and composing arrows better. \Cref{fig:second_arrow_design} illustrates the design. This design features arrows that are more reminiscent of the less-than and greater-than symbols.
 
-
+The opacity, ie. significance, of the arrows is binary. Either an arrow is shown, or it is not. If the general speed of the area is below a certain point, the significance of the heading direction is small, so we do not draw the arrow. Else, we draw the arrow.
 
 %%% Summary
 \sinote{Skal der være et summary?}
