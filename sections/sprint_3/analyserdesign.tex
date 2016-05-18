@@ -1,0 +1,66 @@
+\subsection{Analyser Design}\label{s3:analyser_design}
+
+The analysis of the crowd conditions of large events require a great amount of calculations. From the interviews with SmukFest we can expect numbers upwards of 50000 people during peek hours, and there are many events dealing with much larger numbers of people, such as the Hajj \cite{website:Wikipedia-Hajj2}. If the application is to work on large scales, we need to consider the design of the analyser module, in order to keep the amount of calculations, network communication, and memory use to a minimum.
+
+\subsubsection{Asynchronous Analysis}
+
+The first way we reduce the amount of calculations, is to do the analysis asynchronously from user requests. If we were to do a new analysis every time a user requests to see the crowd conditions for a given time period, multiple users would quickly cripple the system.\alnote*{ret Queue til en anden policy} {Instead we have a request-handler module, that handles the incoming requests and queues them up for the analyser.} In order to fully benefit from this we also have to store completed analyses, such that identical requests can utilise the same results. This prompts the need for a storage module, which stores and catalogues completed analyses. This way the request-handler can bypass the analyser if the requested data is already available in storage, saving computation time.
+
+This architecture allows us, and also require us, to have policies for the request-handler and storage modules. The policy for the request-handler should consider the priority of the incoming requests, whether it be first come first serve, or a priority based system where certain users are prioritised. Another possibility is to rank requests based on the expected popularity, an example being that the newest data will likely be the most requested data. The storage module also require a policy as to which data to keep and for how long to keep it. Once again different policies can be considered depending on the scope of the system. If we have enough space we can choose to keep all the analysed data, but we would likely prefer to prioritise the data, and only keep a certain amount.
+
+Given the asynchronous design, any data required by the analysis should be retrieved and prepared in advance, so that the analysis does not get unnecessarily delayed. This includes two parts, the first being the retrieval of position data from the aSTEP core, and the other being selection of the points which the analyser will analyse.
+
+\subsubsection{Supplying Position Data}
+
+Due to the nature of the velocity and heading-direction analysis, data preparation involves a short history of positions to be available. The direct approach of preparing data for each analysis and then delete it once the analysis has been completed would likely cause an unnecessary amount of network traffic. Take the example illustrated in \cref{memposexample} where an analysis is done for the time of $t_0$, where the last couple of positions for $t_{-1}$, $t_{-2}$, and $t_{-3}$ are also prepared. Then afterwards another analysis is done for time $t_{1}$, and we prepare data from $t_0$, $t_{-1}$, and $t_{-2}$. Here it would have been beneficial to retain $t_{-2}$, $t_{-1}$ and $t_{-0}$, since a lot of it overlaps with the analysis of $t_1$. Depending on the policy chosen for the request-handler, the data preparation should accommodate for future requests. Under the assumption that the most recent data would be the most requested data or that we store all completed analyses indefinitely, it would be preferable to keep position data for the latest $n$ steps, where $t_{-n}$ is the oldest position used in the heading-direction analysis. Different policies for the request handler will however affect the optimal choice of data kept in preparation.
+
+\begin{figure}
+    \centering
+    \begin{tabular}{rcccc}
+        \nth{1} analysis: & $t_{-3}$ & $t_{-2}$ & $t_{-1}$ & $t_{0}$ \\
+        \nth{2} analysis: & $t_{-2}$ & $t_{-1}$ & $t_{0}$  & $t_{1}$
+    \end{tabular}
+    \caption{Overlapping data required for analysis}\label{memposexample}
+\end{figure}
+
+
+\subsubsection{Selection of Points to Analyse}\label{s3:select_points}
+
+Now that we have prepared the position data for the analyser, we have to select some points to analyse the local crowd factors for.
+
+We divide the area to analyse into a grid of hexagons. Hexagons have the nice property that a regular tiling can be made with them, i.e. they can be placed in a pattern where they cover an entire area without overlapping nor leaving gaps. While squares also hold this property, we prefer hexagons since they are the closest resembling regular tiling of the actual area affecting the point, which is a circle with radius of the bandwidth. \Cref{fig:analysis_hexagon_divide} provides an illustration of this. The center of each hexagon is a point that the analyser should analyse.
+
+\begin{figure}
+\centering
+\begin{tikzpicture} [
+    hexa/.style= {shape=regular polygon,
+                  regular polygon sides=6,
+                  minimum size=1cm, draw,
+                  inner sep=0,anchor=south,
+                  fill=lightgray}
+    ]
+
+\foreach \j in {0,...,4}{% 
+     \ifodd\j 
+         \foreach \i in {0,...,3}{\node[hexa] (h\j;\i) at ({\j/2+\j/4},{(\i+1/2)*sin(60)}) {.};}        
+    \else
+         \foreach \i in {0,...,3}{\node[hexa] (h\j;\i) at ({\j/2+\j/4},{\i*sin(60)}) {.};}
+    \fi}
+\end{tikzpicture}
+\caption{Illustration of dividing the area to analyse into a grid of hexagons.}\label{fig:analysis_hexagon_divide}
+\end{figure}
+
+
+\subsubsection{Lightweight Results}
+
+While we are primarily concerned with reduction of complexity and computation time of the analysis, there are other aspect of the design that require some attention. The amount of data required for a single analysis can reach rather large sizes, and in order to keep network traffic with potentially multiple users to a minimum, the analyser should, as a bi-product of its analysis, reduce the size of a completed analysis. In other words, a lightweight data structure for the results should be conceived. 
+
+The conceived data structure stores the result of the crowd condition analysis along with the matching position, by taking advantage of the uniform distribution of analysed points in a grid. This allows the data structure to only keep track of the global position of a single point and then the distance between points, as well as the dimensions of the analysed area. From this information a client can recreate the grid and start plotting the sequential data accordingly.
+
+This removes the need to send a global position for each point, however it does require the structure to hold every single point in the grid, even if the point is not affected by any person and all its values are zero.
+
+
+
+
+
+

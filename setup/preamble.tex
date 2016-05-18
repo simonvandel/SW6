@@ -1,0 +1,124 @@
+\documentclass[a4paper,12pt,UKenglish,twoside]{report}
+
+%%%% PACKAGES %%%%
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % encoding=utf8
+\usepackage{fourier} % font
+\usepackage[UKenglish]{babel} % language support - hyphenations etc.
+\usepackage[dvipsnames]{xcolor} % adds more colors and color functionality
+\usepackage{graphicx} % insertion of images
+\graphicspath{ {figures/}}
+\usepackage[font={it}, labelfont={bf}]{caption} % captions for figures
+\usepackage{subcaption} % side by side figures
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usepackage{tikzscale}
+\usepackage{packages/tikz-uml}
+\usetikzlibrary{automata,positioning,arrows}
+\usetikzlibrary{calc}
+\usepackage{listings}
+\usepackage[nomessages]{fp}
+\usepackage{bbm}
+\usepackage[3D]{movie15}
+\usepackage{hyperref}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage[super]{nth} % adds \nth{n} commands to create ordinals of the form 1st, 2nd, 3rd, 4th, etc
+\usepackage{glossaries}
+
+
+%itemize spacing
+\usepackage{enumitem}
+
+%\addtocontents{toc}{\setcounter{tocdepth}{1}}% Allow \section in ToC
+
+\setcounter{tocdepth}{1}
+\usepackage{fixme} % fixme config
+\fxsetup{
+  mode=multiuser,
+  status=draft,
+  theme=color,
+  layout={inline}
+}
+\FXRegisterAuthor{si}{asi}{Simon}
+\FXRegisterAuthor{ka}{aka}{Kasper}
+\FXRegisterAuthor{la}{ala}{Lasse}
+\FXRegisterAuthor{al}{aal}{Alexander}
+\FXRegisterAuthor{je}{aje}{Jens}
+
+\usepackage[ % citation support
+bibencoding=utf8,
+  hyperref=true,
+  backend=biber,
+  style=ieee,
+  sorting=none,
+  natbib=true
+  ]{biblatex}
+  \addbibresource{bib/sources.bib}
+
+\usepackage{csquotes} % recommended by biblatex
+\usepackage{lastpage}
+
+\sloppy
+
+% http://tex.stackexchange.com/questions/42063/illogical-twoside-margins
+% layout page auto-centering horizontally and allow for press binding
+\usepackage[hcentering,bindingoffset=8mm]{geometry}
+
+\usepackage{hyperref} % hyperlinks in pdf
+\usepackage[capitalise]{cleveref} % clever references. Use with \cref...
+\let\origref\cref
+\def\cref#1{\origref{#1}}
+\let\Origref\Cref
+\def\Cref#1{\Origref{#1}}
+
+\usepackage{fancyvrb}
+
+
+  % ¤¤ Kapiteludssende ¤¤ %
+\usepackage{titlesec}
+\titleformat{\chapter}
+  {\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{-2ex}{0ex}
+
+\let\Oldpart\part
+\newcommand{\parttitle}{}
+\renewcommand{\part}[1]{\Oldpart{#1}\renewcommand{\parttitle}{#1}}
+
+\usepackage{fancyhdr}
+\usepackage{nopageno}
+\setlength{\headheight}{52pt}
+
+\fancypagestyle{fancyplain}{} % no ordinary headers and footers in pages with chapters
+\fancyhead{} % clear default header
+\fancyfoot{} % clear default footer
+
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\space#1}{}} % do not print "chapter"
+
+\fancypagestyle{BasicStyle}{
+	\fancyhead[OL, ER]{
+		\parbox{17mm}{{\includegraphics[scale=0.25]{aau_logo_cropped.png}}}\parbox{45mm}{\textsc{Aalborg University}\\\textit{sw602f16}}}
+	\fancyhead[OR, EL]{\parbox{56mm}{\nouppercase{{\textsc{\parttitle}} \\ \leftmark}}}
+
+	\fancyfoot[OR, EL]{Page {\thepage} of \pageref{LastPage}}
+	\fancyfoot[OL, ER]{May 26\textsuperscript{th}, 2016}
+}
+
+\pagenumbering{roman}
+\pagestyle{empty} % Use empty at first
+\setlength{\belowcaptionskip}{-12pt}
+\raggedbottom
+
+%% Redefine crefs
+\Crefname{listing}{Code snippet}{Code snippets}
+\crefname{listing}{code snippet}{code snippets}
+
+%% Macros / custom commands
+\input{setup/cmds.tex}
+
+%% Paragraph formatting (no indent + empty line)
+\usepackage[parfill]{parskip}

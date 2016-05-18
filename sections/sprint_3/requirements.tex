@@ -1,0 +1,67 @@
+\section{Requirements Specification} \label{sec:s3_reqs}
+
+Based on the feedback received from the second Alarm HS meeting, additional requirements will be added to the requirement specification from \cref{sec:s2_reqs}. This gives the following requirement specification.
+
+\textbf{Must have}
+\begin{enumerate}
+    \item The system must be able to analyse position data collected from the crowd via mobile technology.
+    \item The system must be able to present a visualisation of relevant information about the state of the crowd.
+    \item The system must be able to run on multiple platforms.
+    \item A highly detailed map that enables a detailed overview of the festival. This entails the inclusion of points of interest on the map, such as toilets, bars, or fixpoints. The map should also include geographical structures such as buildings, fences and pedestrian paths.
+    \item A real-time representation displaying position data of the people present in the festival areas. This includes estimation of position data, where the actual readings are not available.
+    \item Toggleable levels of detail. The different information available must be possible to disable, so that cluttering and information overflow can be avoided.
+    \item Preservation of privacy. It must not be possible to infer specific information of the individual festival attendees. This is in accordance with the values of the festival, as well as danish law.
+    \item An interface for computers. Since the main use will be in a control room, the application must be able to run on a desktop computer.
+    \item User authorization, so the system is only available to employees with a valid login.
+    \item \textbf{[Added]} A map legend, explaining the visualisations on the map. It must be clear what a colour in the visualisation symbolises.
+    \item \textbf{[Added]} Multiple levels of data access for different users. It must be possible to restrict users ability to access certain data, in order to only show information that is relevant to that user.
+\end{enumerate}
+
+\textbf{Should have}
+\begin{enumerate}[resume]
+    \item A search function. Specific places of interest should be possible to find through search, in order to enable faster orientation on the map.
+    \item A mobile interface for use outside the control room. This is oriented towards field personnel, such as paramedics and security guards.
+    \item \textbf{[Added]} A way of creating markers at specific positions on the map that can contain information, for example a marker indicating a medical situation. These markers should then be visible by other users for which this marker is relevant.
+    \item \textbf{[Added]} A menu with searchable contact information about the festival workers, in case a specific person needs to be contacted.
+    \item \textbf{[Added]} An feature that provides the user with help information, that explains the features and functionality of the system.
+    \item \textbf{[Added]} All data displayed to the user could also be stored for later retrieval, allowing for analysis of a problematic situation, which could improve the ability to handle similar future situations.
+\end{enumerate}
+
+\textbf{Could have}
+\begin{enumerate}[resume]
+    \item Navigation assistance for use in crowds. Should serve to enable faster reaction times, by supplying a route to personnel having to traverse the festival.
+    \item An automated reaction to problematic situations. This would entail having the system analysing current situations and notifying the operators of possible problems that may have occurred, such as crowd congestion.
+    \item A display of available personnel. In order to better judge the coverage of personnel, real-time tracking could provide a better overview for the control room operators. Matters of personal privacy for the personnel also has to be considered.
+    \item \textbf{[Added]} Users with a sufficient access level should be able to send notifications/commands to other users. E.g. \enquote{Centre on this position} would centre the other user's application to the specific position.
+    \item \textbf{[Added]} Festival guests can report situations on the map. For example, \enquote{Fight here} or \enquote{too many people}.
+\end{enumerate}
+
+\textbf{Won't have}
+\begin{enumerate}[resume]
+    \item Projection onto camera images. Such a functionality would require a system by itself, and is considered out of scope.
+\end{enumerate}
+
+
+%% Outcommented reqs
+\iffalse
+\textbf{Must have}
+\begin{enumerate}
+    \item A map legend, explaining the visualisations on the map. It must be clear what a colour in the visualisation symbolises.
+    \item Multiple levels of data access for different users. It must be possible to restrict users ability to access certain data, in order to only show information that is relevant to that user. 
+\end{enumerate}
+
+\textbf{Should have}
+\begin{enumerate}[resume]
+    \item A way of creating markers at specific positions on the map that can contain information, for example a marker indicating a medical situation. These markers should then be visible by other users for which this marker is relevant.
+    \item A menu with searchable contact information about the festival workers, in case a specific person needs to be contacted.
+    \item An feature that provides the user with help information, that explains the features and functionality of the system.
+    \item All data displayed to the user could also be stored for later retrieval, allowing for analysis of a problematic situation, which could improve the ability to handle similar future situations.
+\end{enumerate}
+
+\textbf{Could have}
+\begin{enumerate}[resume]
+    \item A way of visualising the positions of guards or other personnel.
+    \item Users with a sufficient access level should be able to send notifications/commands to other users. E.g. \enquote{Centre on this position} would centre the other user's application to the specific position.
+    \item Festival guests can report situations on the map. For example, \enquote{Fight here} or \enquote{too many people}.
+\end{enumerate}
+\fi

@@ -1,0 +1,80 @@
+\section{First Meeting with Alarm HS}\label{sec:first_meeting_alarmhs_summary}
+
+The meeting was held February 29, 2016 over Skype. It was in the form of a semi-structured interview. Participating in the interview was Anders Nord, substitute chairman Alarm HS, and Mads Jensen, chairman for Alarm HS. In addition to Anders and Mads, the management also includes substitute chairman Ulla Skytte.
+
+\subsection*{Current System}
+
+\begin{itemize}
+    \item Alarm HS is mainly concerned with surveillance, operational, and coordination tasks during the festival.
+    \item Ancillary staff contacts them with problems over phone or radio, and Alarm HS then assists in solving these problems.
+    \item They have medical teams that can be dispatched. 
+    \item More specific tasks are forwarded to more specialised teams, which handles these situations.
+    \begin{itemize}
+        \item In case of a medical emergency, Alarm HS forwards contacts to Alarm HS Sundhedsfaglig Koordination to assist. Alarm HS Sundhedsfaglig Koordination consists of trained medical professionals that handles the medical situation, and dispatches medical teams to certain key points.
+        \item Other assisting teams can be dispatched by Alarm HS to help, for example with blocking off the area.
+        \item One team consisting of guards that can be summoned in case of fights breaking out, or similar events.
+        \item These specialised teams use the same tools/systems as Alarm HS.
+    \end{itemize}
+    They use video surveillance of selected areas during the festival.
+    \begin{itemize}
+        \item They have external companies the helps them determine optimal positions for the cameras.
+        \item The surveillance has been improved using the cameras, but it still has some inadequacies.
+        \item There are conflicting interests regarding surveillance. The festival's security organisation wants more surveillance, but the festival management does not.
+        \item Camera surveillance is focused on the festival area itself, and not in the camp areas. There is a single camera monitoring the bus stop at the \emph{Kærligheden} camp area for documentation purposes.
+        begin{itemize}    
+            \item More surveillance in camp areas, specifically \emph{Kærligheden}, could be desirable.
+            \item Guards patrol the camp areas, coordinated locally by the guards. Alarm HS is contacted if the guards needs assistance.
+        end{itemize}
+        \item A operator controls the camera surveillance.
+        \item If Alarm HS wants to look at a specific area, the operator finds a camera overlooking the area, if available, and switches to this camera’s view.
+        \item Surveillance footage is recorded and stored.
+        \item They have software systems and cameras, currently only at \emph{Bøgescenen}, that makes it possible to overlay the footage with a heat map, by measuring the amount of people per square meter. This functionality is however not currently used due to limited bandwidth for surveillance.
+    \end{itemize}
+    \item Problems with crowds are handled by another team, called crowd management. This team also performs risk analysis, both prior to and during the festival. Based on the performing artists main audiences they plan the festival accordingly. This team includes Søren Eskildsen.
+    \item Alarms HS plays a more \enquote{real-time} role, coordinating teams in the event of an incident.
+\end{itemize}
+
+\subsection*{Prototype Presentation}
+\begin{itemize}
+    \item Anders comments that it could be useful to use as an overview, which could be used to identify problematic areas, which could then be observed via surveillance cameras.
+    \item Anders comments that it could facilitate directing medical personnel through the crowd faster, by avoiding bottlenecks.
+    \item Anders mentions that problems arise when crowds move from one finished performance to a new performance, and the heat map could give an indication of such situations developing.
+    \item Medical personnel uses a map system, presumably the festival's own map application, to navigate to key dispatch points.
+    \item Anders asks if our solution could provide something similar in an app, allowing medical personnel to see the live updated heat map along with the key points.
+    \begin{itemize}
+        \item This could ease the navigation of the medical teams, as they would be able to get an overview of the crowds themselves, and choose an appropriate route to the key point, without needing Alarm HS to guide them.
+        \item This would require the map to show points of interest such as buildings, paths and key points.
+        \item Key points are essential for the personnel for navigating the festival.
+    \end{itemize}
+    \item Mads asks about the possibility of adding the heat map overlay to a camera image. It was mentioned that this was not really a possibility with the technology we plan on using.
+    \item Mads mentions that a highly detailed map would be very useful.
+    \begin{itemize}
+        \item He mentions showing toilets and fences as examples.
+        \item Anders adds that a search function could be useful, for example searching for a toilet number, and have the map show its location.
+        \item Anders mentions that details should be easily toggleable, making it possible to toggle relevant information for a specific use case, and not be confused by irrelevant information for this situation, which could be important in stressed situations.
+    \end{itemize}
+    \item Anders mentions that the medical teams could find the most suitable route to a destination themselves, if they are able to see their current position and destination, and toggle the heat map on to see which areas to navigate around.
+    \item It would not be necessary for the application to find the route, but only show the relevant information to the medical personnel.
+    \item Allowing guests to use the system/part of the system was mentioned.
+     \begin{itemize}
+        \item Anders mentions that it could be integrated in the existing festival app, but that he doubts the festival management would support the idea.
+        \item Additionally he mentions that the guests use for the system would be limited.
+        \item They are able to send push notification to their existing app, and Anders mentions that push notification about alternative routes could be used to direct crowds, rather than them having to use the heat map system themselves. These push notifications are handled by a different, technical team. Area specific push notification are mentioned as an idea.
+        \item Mads mentions privacy concerns, as it would be hard to justify why guests should have access to this information. It is much easier to justify the surveillance for use by the security staff.
+    \end{itemize}
+    \item Anders considers the system an upgrade to their existing system.
+    \item Concerns regarding anonymity were discussed, and it was mentioned that anonymity is important. Mads mentions concerns on the symbolic value of the surveillance, and thus the need for anonymity.
+    \item The issue of showing individual persons on the heat map was discussed.
+    \begin{itemize}
+        \item Anders mentions that the information could potentially be used to locate missing persons, though generally the positions and movements of individual people are not the concern of Alarms HS.
+        \item Hard to draw the line between too much surveillance and the usefulness of the information gained.
+    \end{itemize}
+    \item Anders mentions that the system could facilitate the use of their existing surveillance, and help mitigate potential problems earlier, and allow them to focus on problematic areas.
+    \item Mads mentions that there are many use cases for the system, and many teams could use it in different situations.
+    \begin{itemize}
+        \item The desired functionality of the system depends on the users of the system.
+        \item Anders mentions that the system should run continuously, on a designated screen, and maybe be available on their work computers.
+        \item Anders mentions that the system would also be very relevant for the crowd safety, medical, and guard teams.
+    \end{itemize}
+    \item Anders also mentions closing the festival area when the concerts have ended as a potential use case. Here guards guide the guest towards exits, and guards in less populated area could be directed to more populated areas.
+\end{itemize}

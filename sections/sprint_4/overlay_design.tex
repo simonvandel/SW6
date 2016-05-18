@@ -1,0 +1,75 @@
+\section{Local Crowd Factors Overlay Design} \label{sec:s4_overlay}
+%%% Intro paragraph
+
+\Cref{s3:analyser_implementation} describes how the analysis produces local crowd factors for a set of points on a map. This section considers ways to visualise these four local crowd factors (density, velocity, turbulence, pressure) on a map.
+
+%%% Designing the different overlays
+When visualising information, one has to be careful not to oversaturate the visualisation causing information overload. We will in this project use two different factors for conveying information: color and opacity. 
+
+Color signifies the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. A cold color, e.g. blue, signifies a low value. A warm color, e.g. red, signifies a high value. 
+
+Opacity signifies the significance of the value being displayed. The opacity is always the density of the area in this project. The idea is that although an area has a high velocity, the density of the area may be low, meaning that there is no real danger in the area. A low opacity, i.e. almost translucent, means that the displayed value has little significance. Vice versa for high opacity. 
+
+These factors are common for all the four overlays, helping the user to understand each crowd factor faster.
+
+%%% Density, Pressure, Turbulence hexagoner
+%%%% Hvordan vi gør det
+\subsection{Density, Turbulence, Pressure}
+The three overlays density, turbulence and pressure have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}. The color and opacity of the hexagons depends on the value of the crowd factor.
+
+%%% Velocity
+\subsection{Velocity}
+The velocity overlay has to visualise three things: speed of the crowd, heading direction of the crowd and the significance of these values, represented by the density. The difference to the other three overlays is the heading direction. We thought the most intuitive way to show a direction is using arrows. 
+
+%%%% Første design ide med normale pile, problemer med dette
+
+Our first design iteration used arrows with the traditional shape as seen in \cref{fig:first_arrow_design}. There are some problems with this design. It is difficult to determine which end of the arrow is the arrowhead. Additionally, multiple arrows do not \enquote{compose} as well as we wanted to; Seeing multiple arrows in succession does not give a good indication of the general heading direction.
+
+\begin{figure}[htbp]
+\begin{subfigure}[c]{.49\linewidth}
+    \centering
+    \begin{tikzpicture} [
+    hexa/.style= {shape=regular polygon,
+                  regular polygon sides=6,
+                  minimum size=1cm, draw,
+                  inner sep=0,anchor=south,
+                  fill=lightgray}
+    ]
+
+    \node[hexa] at (0,0) {\Large$\rightarrow$};
+    \node[hexa] at (0,{1*sin(60)}) {\Large$\leftarrow$};
+    \node[hexa] at ({1/2+1/4},{0.5*sin(60)}) {\Large$\rightarrow$};
+\end{tikzpicture}
+    \caption{First design iteration.}
+    \label{fig:first_arrow_design}
+\end{subfigure}
+%
+\begin{subfigure}[c]{.49\linewidth}
+    \centering
+    \begin{tikzpicture} [
+    hexa/.style= {shape=regular polygon,
+                  regular polygon sides=6,
+                  minimum size=1cm, draw,
+                  inner sep=0,anchor=south,
+                  fill=lightgray}
+    ]
+
+    \node[hexa] at (0,0) {\Large$>$};
+    \node[hexa] at (0,{1*sin(60)}) {\Large$<$};
+    \node[hexa] at ({1/2+1/4},{0.5*sin(60)}) {\Large$>$};
+\end{tikzpicture}
+    \caption{Second design iteration.}
+    \label{fig:second_arrow_design}
+\end{subfigure}
+\caption{Design iterations for heading direction arrows.}
+\end{figure}
+
+
+%%%% Andet design af pile (simpel), fordele
+
+The second design iteration focused on making the arrowhead for explicit, and composing arrows better. \Cref{fig:second_arrow_design} illustrates the design. This design features arrows that are more reminiscent of the less-than and greater-than symbols.
+
+
+
+%%% Summary
+\sinote{Skal der være et summary?}

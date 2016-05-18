@@ -1,0 +1,67 @@
+\chapter{Class Diagram}
+
+\begin{figure}
+    \centering
+    \caption{Class diagram}
+    \label{fig:class}
+\begin{tikzpicture} 
+
+\umlclass[type=trait, x= 1, y=5]{Coordinate}{+ lat : Angle \\+ lng: Angle}{}
+
+\umlclass[type=class, x=1, y=1]{Position}{+ lat : Angle \\+ lng: Angle}{
++ Position(lat: Angle, lng:Angle)
+}
+
+\umlclass[type=class, x= 1, y=-4]{ConfidencePosition}{+ lat : Angle \\+ lng: Angle \\+ confidence: Length}{
++ ConfindecePosition(\\ \quad lat : Angle, \\ \quad lng : Angle, \\ \quad confidence : Length)
+}
+
+\umlclass[type=abstract, x=8, y=2]{Person}{
++ positions : Stream[Coordinate]} {
++ Person(positions: Stream[Coordinate]) \\
++ getPosition(time:DateTime) : Position
+}
+
+\umlclass[type=class, x=8, y=5.5]{Group}{
++ persons : Stream[Person] }
+{ + Group(Stream[Persons])}
+
+\umlclass[type=trait, x=9, y=9]{Weight}{
++ density : Double \\
++ velocity : DenseVector[Double] \\
++ turbulence : Double \\
++ pressure : Double 
+}{}
+\umlclass[type=class, x=1, y=9]{WeightedPosition}{}{}
+
+
+\umlclass[type=class, x=8, y=-5]{RealPerson}{
++ positions : Stream[Coordinate]} {
++ Person(positions: Stream[Coordinate]) \\
++ getPosition(time:DateTime) : Position
+}
+
+\umlclass[type=class, x=8, y=-1.5]{FakePerson}{
++ positions : Stream[Coordinate] \\
++ steps : Stream[Int]} {
++ Person(positions: Stream[Coordinate]) \\
++ getPosition(time:DateTime) : Position
+}
+
+\umlreal{Position}{Coordinate}
+\umlinherit{ConfidencePosition}{Position}{}
+\umlaggreg[mult=0..*]{Person}{Coordinate}
+\umlaggreg[mult=0..*]{Group}{Person}
+\umlreal[stereo=mixing]{WeightedPosition}{Coordinate}
+\umlreal[stereo=mixing]{WeightedPosition}{Weight}
+
+
+\umlreal{Position}{Coordinate}
+\umlinherit{ConfidencePosition}{Position}{}
+\umlaggreg[mult=0..*]{Person}{Coordinate}
+\umlaggreg[mult=0..*]{Group}{Person}
+\umlreal[stereo=mixing]{WeightedPosition}{Coordinate}
+\umlreal[stereo=mixing]{WeightedPosition}{Weight}
+
+\end{tikzpicture}
+\end{figure}

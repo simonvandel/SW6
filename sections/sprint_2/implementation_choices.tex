@@ -1,0 +1,13 @@
+\section{Implementation Choices}
+
+
+\subsection{Choice of Map Rendering Libraries}\label{sec:sprint2_map_rendering}
+
+As described in \cref{sec:s2_gui}, the main visual focus of the web application should be the map. The requirements in \cref{sec:reqs} specifies that the map should provide a detailed overview of the festival but still allow individual levels of detail. This section motivates the use of various JavaScript libraries used for implementing the mapping functionality for our application.
+
+We use MapBox.js\cite~{website:mapbox.js} for rendering a map on the front-end of our application. Mapbox.js is an extension of another open-source library named Leaflet. It provides a base map that can be extended to our needs. It can display map tiles from a variety of sources, including OpenStreetMap, which we use.
+
+\sinote{De næste to paragraffer kan måske merges}
+To add visualisations on top of the base map provided by Mapbox.js, several plug-ins to Leaflet exists, which are also compatible with Mapbox.js. We experimented with both Leaflet.heat\cite{website:leaflet.heat} and heatmap.js~\cite{website:heatmap.js}. These plug-ins add a heat mapping functionality to the map.
+
+Although the plug-ins are easy to use, they have some limitations. These libraries use weights to determine the color of a specific area. These weights are unit-less, so we have no way of controlling the influence each weight has to the total density in an area. Additionally, the libraries did not support drawing hexagons, which we needed. We handle these issues in the next sprint (\cref{sec:own_leaflet_plugin}).

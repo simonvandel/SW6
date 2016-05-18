@@ -1,0 +1,40 @@
+\section{Meetings}
+
+In order to validate the prototype we again arranged meetings with potential users, to get their feedback on the system. Two meetings were arranged during this sprint. The meeting with SmukFest was held at their premises in Skanderborg, and the meeting with Alarm HS was held on Skype. 
+
+\subsection{Meeting With SmukFest}
+
+Through our contact with Alarm HS we arranged a meeting with Søren Eskildsen, who is head of security for SmukFest. The point of the meeting was to establish whether the system could have a use at the organisational level of the festival. Søren Eskildsen is in charge of crowd management, meaning that it is his task to make sure that the festival is safe by predicting and avoiding dangerous situations. Søren's main task is to schedule the concerts in a way such that dangerous situations do not arise. If dangerous situations do occur, his job also includes solving them as quickly and safely as possible.
+
+Currently SmukFest uses analysis tools for crowd management, such as the DIM-ICE model, and the extensive literature there exists on the subject \kanote{insert reference}\cite{}. Søren employs a team of experts together with these tools to asses possible problematic situations and plan the schedules for the guards accordingly.
+
+In addition to the security personnel employed by the festival, Søren also has information screens, emergency exits, and the ability to close off areas in his toolkit. They currently do not use any software to help in the analysis phase of crowd management, which is during the months leading up the start of the festival. Søren expressed great interest for a software tool, that is able to simulate the flow of people and predict where potential congestion could happen, based on three types of information:
+
+\begin{itemize}
+    \item The area with fences, buildings, paths and similar.
+    \item A prediction of the flow between different events, the area in which the event resides, how the circulation at the events are, and how the inflow and outflow from the events are.
+    \item Real-time position data about people.
+
+\end{itemize}
+
+The system should be able to update its simulation based on changes in this information.
+
+The prototype was presented to Søren. He did not express any need for knowing the general distribution of people on the festival, as there are currently only a few congestion areas on the festival. Only these points needs to be surveilled in order to get the real-time picture needed for crowd management. Other points, such as density in front of stages and so on, are not really that important for crowd management at SmukFest since these rarely pose any real safety threats. The big problems arise from the flow of people. When big groups of people travel through narrow openings, congestion can occur, which leads to dangerous situations.
+
+Currently they are developing systems, both via cameras and Wi-Fi triangulation, to monitor these areas. A general Wi-Fi triangulation system, displaying density across the whole festival, is therefore not needed. Søren expressed that because he did not deal with the daily organisation of the festival our prototype was not as relevant for him. Such a system was more relevant for the personnel in Alarm HS.
+
+
+\subsection{Meeting With Alarm HS}
+
+In the previous meeting with Alarm HS, they agreed to provide feedback on the system during development. Between the first meeting and this meeting, the following changes have been made to the system.
+
+\begin{itemize}
+    \item More realistic crowds that move in predetermined patterns.\kanote{Er det strengt taget en ændring i systemet, eller blot en ændring i prototypen?}
+    \item Points of interest overlays. Toilet locations, stages and other buildings are now seperate toggleable overlays.
+    \item Search functionality to quickly find specific points of interest on the map.
+    \item Find my location button. When pressed, the current position is marked on the map.
+\end{itemize}
+
+The general reaction from Anders, who was representing Alarm HS in this meeting, was good. The system was developing towards the right direction. However, as expected, the system could still be improved, as Anders also pointed out.
+
+A summary of the meeting can be seen in \cref{sec:second_meeting_alarmhs_summary}.

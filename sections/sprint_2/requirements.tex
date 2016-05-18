@@ -1,0 +1,71 @@
+\section{Requirements} \label{sec:s2_reqs}
+%% Describes requirements identified at the beginning of the first sprint
+%% Intro
+
+Based on the meeting with the operational coordinators of Alarm HS, new requirements were identified. These requirements will be added to the requirement specification presented in \cref{sec:s1_requirements}. This gives the following requirement specification, where the requirements added for this sprint are written in italic font.
+
+\textbf{Must have}
+\begin{enumerate}
+    \item The system must be able to analyse position data collected from the crowd via mobile technology.
+    \item The system must be able to present a visualisation of relevant information about the state of the crowd.
+    \item The system must be able to run on multiple platforms.
+    \item \textbf{[Added]} A highly detailed map that enables a detailed overview of the festival. This entails the inclusion of points of interest on the map, such as toilets, bars, or fixpoints. The map should also include geographical structures such as buildings, fences and pedestrian paths.
+    \item \textbf{[Added]} A real-time representation displaying position data of the people present in the festival areas. This includes estimation of position data, where the actual readings are not available.
+    \item \textbf{[Added]} Toggleable levels of detail. The different information available must be possible to disable, so that cluttering and information overflow can be avoided.
+    \item \textbf{[Added]} Preservation of privacy. It must not be possible to infer specific information of the individual festival attendees. This is in accordance with the values of the festival, as well as danish law.
+    \item \label{itm:desktop_req} \textbf{[Added]} An interface for computers. Since the main use will be in a control room, the application must be able to run on a desktop computer.
+    \item \textbf{[Added]} User authorization, so the system is only available to employees with a valid login.
+\end{enumerate}
+
+\textbf{Should have}
+\begin{enumerate}[resume]
+    \item \textbf{[Added]} A search function. Specific places of interest should be possible to find through search, in order to enable faster orientation on the map.
+    \item \label{itm:mobile_req} \textbf{[Added]} A mobile interface for use outside the control room. This is oriented towards field personnel, such as paramedics and security guards.
+\end{enumerate}
+
+\textbf{Could have}
+\begin{enumerate}[resume]
+    \item \textbf{[Added]} Navigation assistance for use in crowds. Should serve to enable faster reaction times, by supplying a route to personnel having to traverse the festival.
+    \item \textbf{[Added]} An automated reaction to problematic situations. This would entail having the system analysing current situations and notifying the operators of possible problems that may have occurred, such as crowd congestion.
+    \item \textbf{[Added]} A display of available personnel. In order to better judge the coverage of personnel, real-time tracking could provide a better overview for the control room operators. Matters of personal privacy for the personnel also has to be considered.
+\end{enumerate}
+
+\textbf{Won't have}
+\begin{enumerate}[resume]
+    \item \textbf{[Added]} Projection onto camera images. Such a functionality would require a system by itself, and is considered out of scope.
+\end{enumerate}
+
+%% Commented out if we want to change how we emphasize..
+\iffalse
+\textbf{Must have}
+\begin{enumerate}
+    \item The system must be able to analyse position data collected from the crowd via mobile technology.
+    \item The system must be able to present a visualisation of relevant information about the state of the crowd.
+    \item The system must be able to run on multiple platforms.
+    \item A highly detailed map that enables a detailed overview of the festival. This entails the inclusion of points of interest on the map, such as toilets, bars, or fixpoints. The map should also include geographical structures such as buildings, fences and pedestrian paths.
+    \item A real-time representation displaying position data of the people present in the festival areas. This includes estimation of position data, where the actual readings are not available.
+    \item Toggleable levels of detail. The different information available must be possible to disable, so that cluttering and information overflow can be avoided.
+    \item Preservation of privacy. It must not be possible to infer specific information of the individual festival attendees. This is in accordance with the values of the festival, as well as danish law.
+    \item An interface for computers. Since the main use will be in a control room, the application must be able to run on a desktop computer.
+    \item User authorization, so the system is only available to employees with a valid login.
+\end{enumerate}
+
+\textbf{Should have}
+\begin{enumerate}[resume]
+    \item A search function. Specific places of interest should be possible to find through search, in order to enable faster orientation on the map.
+    \item A mobile interface for use outside the control room. This is oriented towards field personnel, such as paramedics and security guards.
+\end{enumerate}
+
+\textbf{Could have}
+\begin{enumerate}[resume]
+    \item Navigation assistance for use in crowds. Should serve to enable faster reaction times, by supplying a route to personnel having to traverse the festival.
+    \item An automated reaction to problematic situations. This would entail having the system analysing current situations and notifying the operators of possible problems that may have occurred, such as crowd congestion.
+    \item A display of available personnel. In order to better judge the coverage of personnel, real-time tracking could provide a better overview for the control room operators. Matters of personal privacy for the personnel also has to be considered.
+\end{enumerate}
+
+\textbf{Won't have}
+\begin{enumerate}[resume]
+    \item Projection onto camera images. Such a functionality would require a system by itself, and is considered out of scope.
+\end{enumerate}
+\fi
+

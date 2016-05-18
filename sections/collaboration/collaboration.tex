@@ -1,0 +1,16 @@
+\chapter{Collaboration in aSTEP}
+
+This chapter describes particular cases of collaborations we have made with other groups of the aSTEP multi-project.
+
+\section{Discussions on aSTEP Core API Requirements}
+In Sprint 2, after we had elicited our initial program requirements, we had to inform the aSTEP core groups about our requirements of the aSTEP service.\sinote{Jeg ved ikke helt hvor spændende det er at skrive om det her? Ellers må en anden gerne tage over.}
+
+\section{Continuous Integration Maintenance}
+To increase the overall quality of the software by the aSTEP groups, all aSTEP groups decided to use a continuous integration service to make sure that all software committed to the aSTEP projects pass a build test and unit tests.
+
+The authors of this report volunteered to setup and maintain the continuous integration service.
+
+\section{HTTPS Server Configuration}
+Due to the relative sensitive location data being handled by the aSTEP platform and in particular this project, we and the other members of the aSTEP project wanted to secure the network communication by encryption. As encryption algorithms are notoriously hard to get right, no non-expert should ever implement them themselves. We therefore decided to use HTTPS for all connections to and from the aSTEP platform. This ensures that no one can eavesdrop on sensitive data.
+
+The HTTPS support was added to the aSTEP core platform by the authors of this report, as we had prior experience setting this up.\sinote{jeg giver os ikke så meget credit, skal der fyldes mere på?}

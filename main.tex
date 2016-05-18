@@ -1,0 +1,41 @@
+\input{setup/preamble.tex}
+
+\begin{document}
+
+%% Front matter
+\include{front/frontpage}
+\include{front/colophon}
+\include{front/titlepage}
+\blankpage
+\include{front/preface}\thispagestyle{empty}
+\blankpage
+
+\setcounter{tocdepth}{2}
+\pagestyle{empty}
+\listoffixmes
+\tableofcontents
+\listoffigures
+\begingroup
+  \let\clearpage\relax
+  \listoftables
+\endgroup
+\clearpage
+\pagestyle{BasicStyle}
+\pagenumbering{arabic}
+
+%% Report body
+\input{sections/introduction/introduction.tex}
+\input{sections/sprint_1/sprint1.tex}
+\input{sections/sprint_2/sprint2.tex}
+\input{sections/sprint_3/sprint3.tex}
+\input{sections/sprint_4/sprint4.tex}
+\input{sections/collaboration/collaboration.tex}
+\input{sections/future_work/future_work.tex}
+
+%% End matter
+\printbibliography
+\appendix
+\input{sections/appendix/meeting_summaries.tex}
+\input{diagrams/class_diagram.tex}
+
+\end{document}

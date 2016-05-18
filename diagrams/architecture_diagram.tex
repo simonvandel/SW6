@@ -1,0 +1,72 @@
+\begin{figure}[htbp]
+    \centering    
+\tikzstyle{block} = [draw, fill=gray!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{big} = [draw, fill=yellow!20, rectangle, 
+    minimum height=6em, minimum width=14em]
+\tikzstyle{big2} = [draw, fill=blue!20, rectangle, 
+    minimum height=18em, minimum width=26em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]    
+\tikzset{%
+  cascaded/.style = {%
+    general shadow = {%
+      shadow scale = 1,
+      shadow xshift = -1ex,
+      shadow yshift = 1ex,
+      draw,
+      thick,
+      fill = blue!20},
+    general shadow = {%
+      shadow scale = 1,
+      shadow xshift = -.5ex,
+      shadow yshift = .5ex,
+      draw,
+      thick,
+      fill = gray!20},
+    fill = gray!20, 
+    draw,
+    thick,
+    minimum width = 1.5cm,
+    minimum height = 1cm}}
+    
+
+\resizebox{\linewidth}{!}{
+\begin{tikzpicture}[auto, node distance=4cm,>=latex']
+    % We start by placing the blocks
+    \node[] (center) {};
+    \node[below of=center, node distance=2.5cm] (dummy) {};
+    \node[big2, right of=dummy, node distance=3.4cm] (package) {};
+    \node [block] (controller) {Controller};
+    \node [block, below of=controller] (model) {Model};
+    \node [below of=controller, node distance=4.5cm] (fake1) {};
+    \node [big, right of=fake1, node distance=5.3cm] (viewGroup) {};
+    \node[cascaded,label=below:, right of=fake1 ] (views) {};
+    \node[block, right of=views, node distance=2.2cm] (json) {Json};
+    \node[block, above of=controller] (user) {User};
+    \node [cloud, draw,cloud puffs=10,cloud puff arc=120, aspect=2, inner ysep=1em, left of=controller, node distance=6cm] (astep)
+    {aSTEP core};
+    \node[below of=views, node distance=0.0cm] (viewText) {Views};
+    \node[right of=controller, node distance=6.8cm] (hotmapDummy) {};
+    \node[above of=hotmapDummy, node distance=0.5cm] (hotmap) {HotMap server};
+    
+    \draw (viewGroup) -- (5.2,4);
+
+
+    \path[->]
+            (controller)    edge  node[sloped, anchor=center, above, text width=2.0cm] { update view } (viewGroup)
+            ([xshift=-1ex]controller.south)    edge  node[sloped, anchor=center, below, text width=2.0cm] { update model } ([xshift=-1ex]model.north)
+            ([yshift=1ex]controller.west)    edge  node[sloped, anchor=center, above, text width=2.0cm] { aSTEP request } ([yshift=1ex]astep.east)
+            (user)    edge  node[sloped, anchor=center, above, text width=2.0cm] { user request } (controller)
+            (5.2,4)    edge  node[sloped, anchor=center, above, text width=2.0cm] { updated view } (user)
+            ([yshift=-1ex]astep.east)    edge  node[sloped, anchor=center, below, text width=2.0cm] { aSTEP reply } ([yshift=-1ex]controller.west)
+            ([xshift=1ex]model.north)    edge  node[sloped, anchor=center, below, text width=2.0cm] { response } ([xshift=1ex]controller.south);
+            
+\end{tikzpicture}
+
+}
+\caption{Architecture diagram}
+\label{fig:architecture_diagram}
+\end{figure}

@@ -1,0 +1,27 @@
+\chapter{Future Work}
+\label{ch:future_work}
+
+This chapter presents improvements to the system that was not implemented by the authors of this report. This list should be of interest to other students who wish to continue work on the aSTEP multi-project and in particular the specific area this project is concerned with.
+
+\section{Warning System}
+As Leif Bjørn proposed in \cref{sub:telia_parken_meeting}, a warning system would be desirable. With such an addition in place, the system is able to determine that a crowd situation can  evolve to be of a particular dangerous form, To perform such an analysis, prior incidents could be considered as a form of training data
+
+\section{Statistics}
+Being able to monitor different statistics such as a person count, would help the user determine how much they can rely on the system at the moment. A person count in this context refers to the amount of people that the system is able to locate at the moment. It could be interesting to be able to see historical statistics on for example the person count to be able to compare different situations.
+
+\section{Navigation}
+\sinote{Is already described a little in \cref{sec:s2_reqs}}
+
+\section{Prediction of Crowd Movement}
+Being able to predict the movement of a crowd, would greatly enhance the system's ability to function as a toolbox for crowd movement.
+
+\section{User Placeable Markers}
+The idea is for guards to be able to place markers on the map using their smartphones. A marker could have a note saying \enquote{Fight here}. The operators of the system would then be able to see this marker and its location, and take appropriate action.
+
+\section{Switch From Mapbox.js to Leaflet}
+Although Mapbox.js is an open-source library, it needs an access token issued from Mapbox in order to function. There is no particular reason that Leaflet can not be used directly, instead of Mapbox.js, other than Mapbox.js having more features. This would make the mapping functionality independent on the commercial company Mapbox.
+
+\section{Better Selection of Points to Analyse}
+As described in \cref{s3:select_points} the analyser divides the area to analyse into a grid of hexagons. This means that the number of points increases quadratically in the area to analyse.  This approach does obviously not scale well as the area to analyse increases. By naively selecting all points in a grid to analyse, many wasteful computations are made, since most of the time there are no people in the area of the hexagons.
+
+This problem can be solved by only selecting points to analyse that have people within the bandwidth.
