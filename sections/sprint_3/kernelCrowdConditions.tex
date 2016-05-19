@@ -65,7 +65,7 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 \label{fig:radiansHeadingdirection}
 \end{figure}
 
-Here we have 8 observations, 4 on each side of 0 radians pairwise the same distance from 0 radians. In this scenario we want the mean to be 0 radians, since this is the direction the people are generally heading, but if we calculate the mean, we get $\pi$, also illustrated in the figure. This problem was first introduced and solved by  
+Here we have 8 observations, 4 on each side of 0 radians pairwise equal distance from 0 radians. In this scenario we want the mean to be 0 radians, since this is the direction the people are generally heading, but if we calculate the mean, we get $\pi$, also illustrated in the figure. This problem was first introduced and solved by \citet{localTrendStatistics}. Their solution is \jenote{TODO: Explain how they calculate the directional mean via complex numbers instead of using simple mean and how it solves the problem}
 
 \begin{equation}
 \label{eq:}
@@ -82,7 +82,7 @@ Pressure is a bit different. The fator were originally intruduced by \citet{empi
 \begin{equation}
 D_x \cdot \text{var}(\vv{V_x})
 \end{equation}
-where $D_x$ is the local crowd density and $\text{var}\vv{V_x}$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by Franke et al 2012 \cite{wirz2012inferring}
+where $D_x$ is the local crowd density and $\text{var}\vv{V_x}$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by \citet{wirz2012inferring}
 \begin{equation}
 \label{eq:}
 P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
