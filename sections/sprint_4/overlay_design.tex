@@ -4,11 +4,11 @@
 \Cref{s3:analyser_implementation} describes how the analysis produces crowd factors for a set of points on a map. This section considers ways to visualise the result of the analysis, such that the information can be of help to an operator.
 
 %%% Designing the different overlays
-When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. The system will use two different factors for conveying information: color and opacity. 
+When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. The application will use two different factors for conveying information: color and opacity.
 
-Color signifies the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. A cold color, e.g. blue, signifies a low value. A warm color, e.g. red, signifies a high value. 
+Color signifies the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. A cold color, e.g. blue, signifies a low value, and a warm color, e.g. red, signifies a high value. 
 
-Opacity signifies the significance of the value being displayed. The opacity is always the density of the area in this project. The idea is that although an area has a high velocity, the density of the area may be low, meaning that there is no real danger in the area. A low opacity, i.e. almost translucent, means that the displayed value has little significance. Vice versa for high opacity. 
+Opacity signifies the significance of the value being displayed. The opacity is always the density of the area in the application. The idea is that although an area has a high velocity, the density of the area may be low, meaning that there is no real danger in the area. A low opacity, i.e. almost transparent, means that the displayed value has little significance. Vice versa for high opacity. 
 
 These factors are common for all the four overlays, helping the user to understand each crowd factor faster.
 
