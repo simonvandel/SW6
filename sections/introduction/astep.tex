@@ -1,19 +1,18 @@
 \section{The aSTEP multi-project} \label{sec:astep}
-Due to this increasing popularity of LBS, Aalborg University has started the aSTEP multi-project this year. The aSTEP multi-project aims at making the creation of \gls{lbs} applications easier, by providing some of the key functionality that is essential to \gls{lbs} in a core, which then can be used to when developing a new application. The aSTEP multi-project consists of 40 students divided into ten groups. 
+% Goal with the aSTEP project
+Due to this increasing interest in \gls{lbs}, Aalborg University has started the aSTEP multi-project. The aSTEP multi-project aims at facillitating development of \gls{lbs} applications by providing certain \gls{lbs} core functionalities in a core that can be used when developing an \gls{lbs} application. Additionally the aSTEP project also includes the development of some showcase applications.
 
-The multi-project is split into two super-groups, namely the core super-group and the application super-group. The core super-group is responsible for developing the core functionality required in most \gls{lbs} applications, while the application super-group is responsible for developing some applications that showcase the possibilities and usage of the aSTEP core platform.
+\subsection{Multi-project collaboration}
+% Split into core + app group
+The aSTEP multi-project consists of 40 students, divided into ten groups. The groups split into two super-groups, a core super-group and a application super-group. The core groups are responsible for the development of the common core functionalities, while the app groups are responsible for development of applications that utilize the core functionality, showing the posibilities and usages of the aSTEP core platform. 
 
-% The bachelor project on software focus on development of applications in large multi groups. 
+% Multi-project collaboration
+To organize the multi-project, weekly meetings were held, with one member from each group attending. The purpose of these meetings were to agree on common practices, tools, and methods used across the aSTEP groups, and sharing of information relevant to for all aSTEP groups, such as information about the progress and plans of the different groups. At the beginning of the project it was agreed that and agile development method would suit the nature of the project well, and so the semester was divided into four development sprints, each of which lasted about four weeks.
 
-
-%% Refactor
-\subsection{Multi-project Collaboration}
-
-As the application developed in this project relies on data and functionality from the aSTEP core platform, an important part of the project is to collaborate with the groups working on the aSTEP core. In this multi-project there are ten groups, each consisting of around four people. Weekly super-group meetings are held, with one representative from each group attending, with the purpose of sharing information about the progress of the individual groups. Important information relevant for all groups or students working on the aSTEP multi-project are also discussed at these super-group meetings. Furthermore, a channel based chat application called \emph{Slack} is used by all the members of the aSTEP project to organize communication during the project.
-
-\subsection{aSTEP Architecture}
-In the beginning of the project, all the groups in aSTEP agreed upon an architecture for the whole project, such that all groups would have a common understanding of the structure of the project,  and ensuring that application super-group would have an understanding of how the core should be used. The project follows a 3-tier architecture, with a database layer, a business logic layer, and finally a client layer. 
+\subsection{aSTEP architecture}
+% aSTEP architecture
+In the beginning of the project, all the groups in aSTEP agreed upon an architecture for the whole project, such that all groups would have a common understanding of the structure of the project, and ensuring that the application groups would have a common understanding of how the core should be used. The project follows a 3-tier architecture, with a database layer, a business logic layer, and a client layer. 
 
 The database layer is responsible for storing location data and retrieving stored location data upon request, and provides a data-access API that is used by the business layer. The business layer provides the logic for collecting locations data, and provides a RESTful API for use by the client layer. The client layer can consist of many different client applications that utilise location data in different ways.
 
-By using a 3-tier architecture it is possible to split the logic of the system into several components, ensuring a low-coupling and high cohesion. This facilitates working in many different groups that have separate responsibilities. 
+By using a 3-tier architecture it is possible to split the logic of the system into several components, ensuring a low-coupling and high cohesion. This facilitates working in many different groups that have separate responsibilities.
