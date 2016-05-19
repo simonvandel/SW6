@@ -1,12 +1,18 @@
 \section{User Testing} \label{sec:s4_test}
 %%% Intro paragraph
 
-The previous section presents how the local crowd factors are visualised. Although the visualisation displays a lot of information about a crowd, it does not necessarily mean that the information is useful in the domain of crowd safety. This section describes how we test the usefulness of the visualised information and the application in general.
+In order to evaluate the usefulness of the crowd condition visualisation from the previous section, we conducted a user test\sinote{Is this a good term?}. In this section we will describe the test and analyse its results.
+
+\sinote{Separer test metoden fra at anders bliver introduceret. Beskriv hvad testen går ud på og hvad vi tester}
 
 \subsection{Test Method}
-Anders Nord, who is part of Alarm HS, kindly agreed to participate in this user test. The user test was performed, as the other meetings, over Skype. Anders was presented with the application which was configured to display the following predefined crowd scenarios. We will in this test not consider the pressure overlay, because we estimated that it would be difficult to explain the concept in detail.  
 
-The first scenario was a very simple \enquote{tutorial}. Its purpose is to give Anders an intuition of how the density, velocity and turbulence overlays behave and the information they can provide. \Cref{fig:tutorial_screens} provides a visual illustration of this. The top two groups is showing how density, velocity and turbulence overlays work.
+In order to measure the performance of the system, we ask the test subject to analyse a test data scenario, that contains some interesting crowd condition situations. If the system visualises the crowd conditions in a good way, The test subject would be able to understand the crowd conditions.
+
+
+We start the test with a very simple \enquote{tutorial}. Its purpose is to give the test subject an intuition of how the density, velocity and turbulence overlays behave and the information they can provide. \Cref{fig:tutorial_screens} provides a visual illustration of this. Since the pressure condition would require a more thorough explanation not suitable for this short test, we will not evaluate the pressure overlay in the test.
+
+\sinote{Annoter alle figurer og brug disse annoteringer til forklaringer}
 
 \begin{figure}[htbp]
 \begin{subfigure}[t]{.49\linewidth}
@@ -24,34 +30,39 @@ The first scenario was a very simple \enquote{tutorial}. Its purpose is to give 
 \label{fig:tutorial_screens}
 \end{figure}
 
-After the tutorial scenario, we switched to a more detailed data set. The data set resembles a normal day on SmukFest, and is artificially created by us. The data contains a variety of interesting situations. A large, dense crowd is standing in front of a stage. South of the stage, people are moving in an oddly shaped infinity sign. This means that there is a crossroad, where groups of people are meeting. In the top left corner of the area, people are moving in opposite directions close to each other. \Cref{fig:test_data_screens} shows this visualised. 
+\sinote{oddly shaped infinity sign - nej, brug annoteringer}
+
+After the tutorial scenario, we will switch to a more detailed data set. The data set is artificially created by us, and resembles a normal day on SmukFest with a variety of interesting situations. \Cref{fig:test_data_screens} shows this visualised. A large, dense crowd is standing in front of a stage. South of the stage, people are moving in an oddly shaped infinity sign. This means that there is a crossroad, where groups of people are meeting. In the top left corner of the area, people are moving in opposite directions close to each other. 
 
 \begin{figure}[htbp]
 \begin{subfigure}[t]{.49\linewidth}
     \centering
     \includegraphics[width=\linewidth]{people_test_data.png}
-    \caption{Distribution of people - Each green dot is a person.}
+    \caption{Distribution of people - Each green dot represents a person.}
 \end{subfigure}
 \enspace
 \begin{subfigure}[t]{.49\linewidth}
     \centering
     \includegraphics[width=\linewidth]{velocity_density_test_data.png}
-    \caption{Velocity and density - The density is very high at the front of the stage and also at a few positions where multiple groups of people meet. Velocity can be seen at the oddly shaped infinity sign south of the stage.}
+    \caption{Velocity and density - The crowd is very dense at center stage and also at a few positions where multiple groups of people meet. Velocity can be seen at the oddly shaped infinity sign south of the stage.}
 \end{subfigure}
 \enspace
 \begin{subfigure}[t]{.49\linewidth}
     \centering
     \includegraphics[width=\linewidth]{turbulence_test_data.png}
-    \caption{Turbulence - The turbulence is high at two positions; at the crossroads of the oddly shaped infinity sign and at the very top left corner. Even though the density was very high at the front of the stage, which could be dangerous, it turns out that the turbulence is low, meaning that people are standing close to each other. This would indicate that the high density area in front of the stage is a small threat.}
+    \caption{Turbulence - The turbulence is high at two positions; at the crossroads of the oddly shaped infinity sign and at the very top left corner. Even though density at center stage is high, the turbulence is low. This indicates that people are standing close to each other, but there is little movement. This would indicate that the high density area in front of the stage is less of a threat.}
 \end{subfigure}
 \caption{Screenshots of the test data scenario}
 \label{fig:test_data_screens}
 \end{figure}
 
-In order to measure the performance of the system, we asked Anders to analyse this test data scenario. The idea being that if the system could visualise the data set in a good way, Anders would be able to find the interesting situations hidden in the data set.
+Anders Nord of Alarm HS, kindly agreed to participate in this user test. The user test was performed over Skype as in other meetings. Anders was presented with the application which was configured to display the following predefined crowd scenarios. 
+
+
 
 %%% Testing results, high abstraction level
 \subsection{Test Results}
+\sinote{Vi kan måske være lidt mindre positiv her. Prøv at være mere kritisk på fejl og mangler}
 Anders immediately noticed, using the density overlay, that the density was high in front of the stage, and at the crossroads where people meet. 
 
 Switching to the velocity overlay, he did not immediately notice the arrows, as they were small. When we hinted that there were arrows, he was able to find the cycle of moving people in the oddly shaped infinite sign. Having both the velocity and density overlays enabled at the same time, Anders understood why the density was high at the crossroads; Many groups were heading to the crossroad.
