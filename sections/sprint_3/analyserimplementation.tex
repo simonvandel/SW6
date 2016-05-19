@@ -4,8 +4,7 @@ In order to fully understand the need for a good implementation of the analyser,
 
 \begin{algorithmic}[1]
 
-%\Function{Analyser}{List[Point], List[People,] Bandwidth}
-\Function{Analyser}{List Point List People Bandwidth}
+\Function{Analyser}{List[Point], List[People,] Bandwidth}
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \ForAll{People, P}
@@ -81,7 +80,7 @@ In order to fully understand the need for a good implementation of the analyser,
 %    
 %Return Points
 
-This algorithm has a running time of $$O(\text{points} \cdot \text{people})$$ which might seem as a decent complexity, but considering the constants and the amount of points and people, we need to reduce this.
+This algorithm has a running time of $$O(\text{points} \cdot \text{people})$$ \alnote{er running time det rigtige ord?} which might seem as a decent complexity, but considering the constants and the amount of points and people, we need to reduce this.
 
 
 \subsubsection{Reducing Complexity}
@@ -110,8 +109,7 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 \kanote{kommentér koden}
 \begin{algorithmic}[1]
 
-%\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
-\Function{Analyser}{List Point points rTree person rTree Bandwidth}
+\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
 \ForAll{points, p}
     \State CulledPeople $\gets$ \Call{rTree.inRange}{Bandwidth,p}
     \Call{analysePoint}{p,CulledPeople}
