@@ -4,7 +4,7 @@
 \Cref{s3:analyser_implementation} describes how the analysis produces crowd factors for a set of points on a map. This section considers ways to visualise the result of the analysis, such that the information can be of help to an operator.
 
 %%% Designing the different overlays
-When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. The application will use two different factors for conveying information: color and opacity.
+When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{}\sinote{indsæt note til sprint2 design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citep{}\sinote{indæt franke}.
 
 Color signifies the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. A cold color, e.g. blue, signifies a low value, and a warm color, e.g. red, signifies a high value. 
 
@@ -72,4 +72,4 @@ The second design iteration focused on making the arrowhead for explicit, and co
 The opacity, ie. significance, of the arrows is binary. Either an arrow is shown, or it is not. If the general speed of the area is below a certain point, the significance of the heading direction is small, so we do not draw the arrow. Else, we draw the arrow.
 
 %%% Summary
-\sinote{Skal der være et summary?}
+\sinote{Skal der være et summary? Kasper: yeah, probably}
