@@ -6,24 +6,24 @@
 %%% Designing the different overlays
 When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{}\sinote{indsæt note til sprint2 design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citep{}\sinote{indæt franke}.
 
-Color signifies the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. A cold color, e.g. blue, signifies a low value, and a warm color, e.g. red, signifies a high value. 
+Color represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The color scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed.
 
-Opacity signifies the significance of the value being displayed. The opacity is always the density of the area in the application. The idea is that although an area has a high velocity, the density of the area may be low, meaning that there is no real danger in the area. A low opacity, i.e. almost transparent, means that the displayed value has little significance. Vice versa for high opacity. 
+Since the density of a crowd should always be considered when evaluating the danger represented by another crowd factor, we wish to convey the density levels at all times. This is done by making the opacity depend on density. The idea is that although an area has a high turbulence, the density of the area may be low, meaning that there is less of a danger in the area.
 
-These factors are common for all the four overlays, helping the user to understand each crowd factor faster.
+The fact that each overlay is representing its values in the same manner, supports a common intuition which helps the user better understand each crowd factor.
 
 %%% Density, Pressure, Turbulence hexagoner
 %%%% Hvordan vi gør det
 \subsection{Density, Turbulence, Pressure}
-The three overlays density, turbulence and pressure have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}. The color and opacity of the hexagons depends on the crowd factor values.
+The three overlays density, turbulence, and pressure have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}.
 
 %%% Velocity
 \subsection{Velocity}
-The velocity overlay has to visualise three things: speed of the crowd, heading direction of the crowd and the significance of these values, represented by the density. The difference to the other three overlays is the heading direction and the way we represent significance. We thought the most intuitive way to show a direction is using arrows. 
+The velocity overlay require special attention since its value is a combination of the speed and direction of the crowd. We thought that an arrow would be the most intuitive way to show a direction and have its color represent the speed.
 
 %%%% Første design ide med normale pile, problemer med dette
 
-Our first design iteration used arrows with the traditional shape as seen in \cref{fig:first_arrow_design}. There are some problems with this design. It is difficult to determine which end of the arrow is the arrowhead. Additionally, multiple arrows do not \enquote{compose} as well as we wanted to; Seeing multiple arrows in succession does not give a good indication of the general heading direction.
+Our first design iteration used arrows with the shape as seen in \cref{fig:first_arrow_design}. However we found it difficult to determine the direction the arrow was pointing. Additionally we found that multiple arrows do not \enquote{compose} as well as we wanted to, as multiple arrows in succession did not give us a good indication of the general direction.
 
 \begin{figure}[htbp]
 \begin{subfigure}[c]{.49\linewidth}
@@ -67,7 +67,7 @@ Our first design iteration used arrows with the traditional shape as seen in \cr
 
 %%%% Andet design af pile (simpel), fordele
 
-The second design iteration focused on making the arrowhead for explicit, and composing arrows better. \Cref{fig:second_arrow_design} illustrates the design. This design features arrows that are more reminiscent of the less-than and greater-than symbols.
+The second design iteration focused on improving the visibility of the arrowhead, and making the arrows compose better. \Cref{fig:second_arrow_design} illustrates this design. This design features arrows that are more reminiscent of the less-than and greater-than symbols. Because these arrows appear less symmetric, a break in the pattern is more noticeable. The direction of the arrow is more explicit 
 
 The opacity, ie. significance, of the arrows is binary. Either an arrow is shown, or it is not. If the general speed of the area is below a certain point, the significance of the heading direction is small, so we do not draw the arrow. Else, we draw the arrow.
 
