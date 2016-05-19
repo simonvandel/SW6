@@ -4,7 +4,8 @@ In order to fully understand the need for a good implementation of the analyser,
 
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List[Point], List[People,] Bandwidth}
+%\Function{Analyser}{List[Point], List[People,] Bandwidth}
+\Function{Analyser}{List Point List People Bandwidth}
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \ForAll{People, P}
@@ -109,14 +110,16 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 \kanote{kommentér koden}
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
+%\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
+\Function{Analyser}{List Point points rTree person rTree Bandwidth}
 \ForAll{points, p}
     \State CulledPeople $\gets$ \Call{rTree.inRange}{Bandwidth,p}
     \Call{analysePoint}{p,CulledPeople}
 \EndFor
+\EndFunction
 
 \Function{analysePoint}{Point x, List[person] people}
-\ForAll{}
+%\ForAll{}
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
