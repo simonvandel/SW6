@@ -1,10 +1,10 @@
-\section{Crowd Factors Overlay Design} \label{sec:s4_overlay}
+\section{Overlay Design} \label{sec:s4_overlay}
 %%% Intro paragraph
 
 \Cref{s3:analyser_implementation} describes how the analysis produces crowd factors for a set of points on a map. This section considers ways to visualise the result of the analysis, such that the information can be of help to an operator.
 
 %%% Designing the different overlays
-When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{}\sinote{indsæt note til sprint2 design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citep{}\sinote{indæt franke}.
+When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{sec:s2_design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citet[authoryear]{wirz2012inferring}.
 
 Color represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The color scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed.
 
@@ -67,9 +67,11 @@ Our first design iteration used arrows with the shape as seen in \cref{fig:first
 
 %%%% Andet design af pile (simpel), fordele
 
-The second design iteration focused on improving the visibility of the arrowhead, and making the arrows compose better. \Cref{fig:second_arrow_design} illustrates this design. This design features arrows that are more reminiscent of the less-than and greater-than symbols. Because these arrows appear less symmetric, a break in the pattern is more noticeable. The direction of the arrow is more explicit 
+The second design iteration focused on improving the visibility of the arrowhead, and making the arrows compose better. \Cref{fig:second_arrow_design} illustrates this design. This design features arrows that are more reminiscent of the less-than and greater-than symbols. Because these arrows appear less symmetric, a break in the pattern is more noticeable. The  increased size of the arrowhead makes it easier to tell the direction.
 
-The opacity, ie. significance, of the arrows is binary. Either an arrow is shown, or it is not. If the general speed of the area is below a certain point, the significance of the heading direction is small, so we do not draw the arrow. Else, we draw the arrow.
+The opacity in this overlay differ from the rest. Instead of letting the opacity scale on density, it depends on the speed of the crowd. Density is still important when considering the danger level of the crowd velocity, but since the velocity overlay can easily be combined with the density overlay, opacity can be used in a different way. 
 
-%%% Summary
-\sinote{Skal der være et summary? Kasper: yeah, probably}
+
+It does not make sense to display the direction of a crowd that moves at a slow pace, because there is no dominating direction. Additionally, as the surface area of the arrow is small, it can be hard to differentiate different opacity values. We therefore use a binary opacity; Either an arrow is shown, or it is not. 
+
+Since visualisation is a subjective matter, the considerations made in this section should also be viewed as such. Because of this we ought to evaluate our design in collaboration with potential users.
