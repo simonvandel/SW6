@@ -3,8 +3,10 @@
 \sinote{mangler at beskrive hvordan vi bruger intensitet variablen i density og velocity, pressure og turbulens. Der mangler måske også en extension til velocity, pressure og turbulens}
 
 \subsection{Velocity, turbulence and pressure}
-The factors found in this section 
+This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three last factors found for detecting the local crowd condition. The calculations for these crowd factors have been developed by Franke et al in 2012 \cite{wirz2012inferring}. The main difference between the caculations done in their paper and this project is in pressure. 
+
 \subsubsection{Velocity}
+The local crowd velocity is essentially calculated as in Franke et al \cite{wirz2012inferring}. 
 \begin{equation}
 \label{eq:}
 \vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
@@ -27,12 +29,17 @@ T_x = 1 - \left|\frac{\sum_{i=1}^{N'} h_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\
 \end{equation}
 
 \subsubsection{Pressure}
+Pressure is a bit different. The fator were originally intruduced by Helbing et al 2007 \cite{empircalstudy} as 
+\begin{equation}
+D_x \cdot \text{var}(\vv{V_x})
+\end{equation}
+where $D_x$ is the local crowd density and $\text{var}\vv{V_x}$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by Franke et al 2012 \cite{wirz2012inferring}
 \begin{equation}
 \label{eq:}
-P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right| \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
+P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
 \end{equation}
-
 \begin{equation}
 \label{eq:}
 P_x = D_x \cdot \frac{\sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
 \end{equation}
+The main difference from this to Franke et al 2012 is that our density is relative and not probabilitylistic, meaning that the result will also be relative rather than probabilistic. Helbing et al 2007\cite{empircalstudy} did not only introduce the factor but also recorded data and pressure from an incident at \jenote{find lige ud af hvor og hvornår det uheld skete} in relative values. This means that we can in our system compare the results for specific areas with the limits and high pressure found from real world incidents, this will be used later in \jenote{referer til det sted hvor vi sætter gradienten for pres og potentiel warning layer}.
