@@ -4,7 +4,7 @@ In order to fully understand the need for a good implementation of the analyser,
 
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List of Points, List of People, Bandwidth}
+\Function{Analyser}{List[Point], List[People,] Bandwidth}
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \ForAll{People, P}
@@ -80,17 +80,18 @@ In order to fully understand the need for a good implementation of the analyser,
 %    
 %Return Points
 
-This algorithm has a running time of $$O(4\cdot((\text{points} \cdot \text{people}) \cdot 2 \cdot O(KernelFunction)))$$ which might seem as a decent complexity, but considering the constants and the amount of points and people, we need to reduce this.
+This algorithm has a running time of $$O(\text{points} \cdot \text{people})$$ which might seem as a decent complexity, but considering the constants and the amount of points and people, we need to reduce this.
 
 
 \subsubsection{Reducing Complexity}
 
-The first thing we need to reduce is the complexity. Removing constant from the notation the complexity itself comes out to $$O(\text{points} \cdot \text{people})$$ which prompts us to reduce either the amount of points or the amount of people.
+The first thing we need to reduce is the complexity. This would mean either the reduction of points or people.
 
-points can obviously be reduced, but not without also reducing the granularity of the result. But even if we reduce the number of points, we are not able to reduce the complexity. So if we want to reduce the complexity we need to reduce the amount of people iterated through. Considering that the kernel function will return zero for any person further away from the point than the bandwidth, we can reduce the complexity given that a reasonable bandwidth is used. This also relies on the reasonable assumption that people take up space, and that therefore we can only have a certain amount people inside a given bandwidth.
-\kanote{færdiggør analysen når vi har en bandwidth}
+Points can obviously be reduced, but not without also reducing the granularity of the result. But even if we reduce the number of points, we are not able to reduce the complexity. So if we want to reduce the complexity we need to reduce the amount of people iterated through. Considering that the kernel function will return zero for any person further away from the point than the bandwidth, we can reduce the complexity given that a reasonable bandwidth is used. This also relies on the reasonable assumption that people take up space, and that therefore we can only have a certain amount people inside a given bandwidth.
 
-But before we can utilize this, we need a way to check if a person is further away than the bandwidth, without having to iterate through all the people. Luckily such a way exists in the form of R-trees. An R-tree is a data structure that allows us to do range searches in $O(log_m(n))$ \cite{} \kanote{R-tree kilde + overvej at uddybe lidt}.
+But before we can utilize this, we need a way to check if a person is further away than the bandwidth, without having to iterate through all the people. Luckily such a way exists in the form of R-trees. An R-tree is a data structure that takes $O(n)$ to build, and allows us to do range searches in $O(log(n))$ \cite{rtree}. If we start the analysis with building an r-tree of the people, each point would only have to query $O(log(n)$ people, giving us the complexity of $$O(\text{points} \cdot log(\text{people}) + \text{people})$$ which reduces to $$O(\text{points} \cdot log(\text{people}))$$.
+
+\kanote{hvad er faktisk kompleksiteten af range search?}
 
 
 \subsubsection{Reducing Constants}
@@ -105,3 +106,47 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 %% Hvorfor det er nice
 
 % Hvorfor regner vi ikke tingene ud hver for sig?
+\kanote{kommentér koden}
+\begin{algorithmic}[1]
+
+\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
+\ForAll{points, p}
+    \State CulledPeople $\gets$ \Call{rTree.inRange}{Bandwidth,p}
+    \Call{analysePoint}{p,CulledPeople}
+\EndFor
+
+\Function{analysePoint}{Point x, List[person] people}
+\ForAll{}
+
+\ForAll{points, x}
+    \State KernelSum $\gets 0$
+    \State VelocitySum $\gets 0$
+    \ForAll{People, P}
+        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{P}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+    \EndFor
+    \State x.LocalVelocity $\gets$ VelocitySum $/$ KernelSum
+\EndFor
+
+\ForAll{points, x}
+    \State KernelSum $\gets 0$
+    \State TurbuSum $\gets 0$
+    \ForAll{People, P}%
+        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{P}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+    \EndFor
+    \State LocalTurbulence $\gets$ TurbuSum $/$ KernelSum
+\EndFor
+
+\ForAll{points, x}
+    \State KernelSum $\gets 0$
+    \State PressSum $\gets 0$
+    \ForAll{People, P}
+        \State VelocityDif $\gets$ (\Call{VelocityOf}{P} $-$ x.LocalVelocity)
+        \State PressSum $\gets$ PressSum $+$ \Call{Abs}{VelocityDif}$^2$ $\cdot$ \Call{Kernel}{P}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+    \EndFor
+    \State LocalPressure $\gets$ x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)
+\EndFor
+\EndFunction
+\end{algorithmic}

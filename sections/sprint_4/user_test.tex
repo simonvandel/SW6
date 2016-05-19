@@ -9,8 +9,6 @@ In order to measure the performance of the system, we ask the test subject to an
 
 We start the test with a very simple \enquote{tutorial}. Its purpose is to give the test subject an intuition of how the density, velocity and turbulence overlays behave and the information they can provide. \Cref{fig:tutorial_screens} provides a visual illustration of this. Since the pressure condition would require a more thorough explanation not suitable for this short test, we will not evaluate the pressure overlay in the test.
 
-\sinote{Annoter alle figurer og brug disse annoteringer til forklaringer}
-
 \begin{figure}[htbp]
 \begin{subfigure}[t]{.49\linewidth}
     \centering
@@ -27,9 +25,7 @@ We start the test with a very simple \enquote{tutorial}. Its purpose is to give 
 \label{fig:tutorial_screens}
 \end{figure}
 
-\sinote{oddly shaped infinity sign - nej, brug annoteringer}
-
-After the tutorial scenario, we will switch to a more detailed data set. The data set is artificially created by us, and resembles a normal day on SmukFest with a variety of interesting situations. \Cref{fig:test_data_screens} shows this visualised. A large, dense crowd is standing in front of a stage. South of the stage, people are moving in an oddly shaped infinity sign. This means that there is a crossroad, where groups of people are meeting. In the top left corner of the area, people are moving in opposite directions close to each other. 
+After the tutorial scenario, we will switch to a more detailed data set. The data set is artificially created by us, and resembles a normal day on SmukFest with a variety of interesting situations. \Cref{fig:test_data_screens} shows this visualised. A large dense crowd is standing in front of a stage, denoted as A. South of the stage, people are moving in a circular walking pattern marked by the dashed lined. This causes a crossroad near the C, where the paths of different groups cross. In the top left corner of the area, near the B, people are moving in opposite directions close to each other, simulating people entering and exiting the festival area.
 
 \begin{figure}[htbp]
 \begin{subfigure}[t]{.49\linewidth}
@@ -41,13 +37,13 @@ After the tutorial scenario, we will switch to a more detailed data set. The dat
 \begin{subfigure}[t]{.49\linewidth}
     \centering
     \includegraphics[width=\linewidth]{velocity_density_test_data.png}
-    \caption{Velocity and density - The crowd is very dense at center stage and also at a few positions where multiple groups of people meet. Velocity can be seen at the oddly shaped infinity sign south of the stage.}
+    \caption{Velocity and density - The crowd is very dense at center stage, A, and also at a few positions where multiple groups of people meet B, C. Velocity can be seen along the dashed line south of the stage.}
 \end{subfigure}
 \enspace
 \begin{subfigure}[t]{.49\linewidth}
     \centering
     \includegraphics[width=\linewidth]{turbulence_test_data.png}
-    \caption{Turbulence - The turbulence is high at two positions; at the crossroads of the oddly shaped infinity sign and at the very top left corner. Even though density at center stage is high, the turbulence is low. This indicates that people are standing close to each other, but there is little movement. This would indicate that the high density area in front of the stage is less of a threat.}
+    \caption{Turbulence - The turbulence is high at two positions; at the crossroads C, and at the festival entrance B. Even though density at center stage is high, the turbulence is low. This indicates that people are standing close to each other, but there is little movement. This would indicate that the high density area in front of the stage is less of a threat.}
 \end{subfigure}
 \caption{Screenshots of the test data scenario}
 \label{fig:test_data_screens}
@@ -60,7 +56,7 @@ Anders Nord of Alarm HS, kindly agreed to participate in this user test. The use
 \sinote{Vi kan måske være lidt mindre positiv her. Prøv at være mere kritisk på fejl og mangler}
 Anders immediately noticed, using the density overlay, that the density was high in front of the stage, and at the crossroads where people meet. 
 
-Switching to the velocity overlay, he did not immediately notice the arrows, as they were small. When we hinted that there were arrows, he was able to find the cycle of moving people in the oddly shaped infinite sign. Having both the velocity and density overlays enabled at the same time, Anders understood why the density was high at the crossroads; Many groups were heading to the crossroad.
+Switching to the velocity overlay, he did not immediately notice the arrows, as they were small. When we hinted that there were arrows, he was able to find the circular movement patterns. Having both the velocity and density overlays enabled at the same time, Anders understood why the density was high at the crossroads; Many groups were heading to the crossroad.
 
 The meaning of the turbulence overlay was not completely clear to Anders as he turned it on, but he quickly noticed that there was no turbulence at the area in front of the stage. His hypothesis was that the crowd was standing still at the area, which we could confirm. He also noticed the high turbulence at the crossroad and at the top left corner.
 
