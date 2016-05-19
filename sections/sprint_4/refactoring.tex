@@ -5,18 +5,16 @@
 
 %%% Summary --> Did the refactoring give us the desired results?
 
-\subsection{class diagram}
-\alnote{begrung UML}
-\alnote{husk refere til uml standard}
+\subsection{class architecture}
+In order to fully describe the system design of the hotMap server, the UML v2.5 standard are used to express how the class hierarchy were implemented. UML is a well known modeling language, for visualizing software system designs in order to more easily describe the static structure of a software system.
+Therefor a UML class diagram are used for describing the model layer of the hotMap server.
+The UML v2.5 standard for class diagram are mainly used for modeling the class diagram, but scala has some features such as mixin which cannot be fully represented using the UML standard alone.
 
-In this section the model layer of the hotMap server's structure will be described, using a class diagram. The UML v2.5 standard for class diagram are mainly used for modeling the class diagram. The UML standard is not sufficient enough to represent all scala functionalities. In the static structure of the server application mixing is used which is a scala functionality that the UML standard cannot represent, so in order to represent mixing, realization arrows are used with a mixing stereotype.
+Mixin is an language dependent functionality, which allows a class $A$ to contain methods from other classes or interfaces without having that $A$ is a generalization of these other classes or traits. How class $A$ gain access to those methods through mixin are defined by the language. Mixin avoids inheritance ambiguity such as the diamond problem while having the ability to extend multiple classes, because it's not possible to inherit from a mixin type.
 
-Scala does not have interfaces, but instead uses traits. These are similar but allow for default implementation of methods. When a class implements an interface,  
+Scala does not have interfaces, but instead uses traits. These are similar but allow for default implementation of methods within the trait. When a concrete classes extends traits, it is called a realization of that trait, which in UML are indicated by a dashed arrow from the class to the interfaces. In scala traits can also be instantiated if all it's instance variables and methods are implemented. In scala only traits can be mixed into classes or another trait, but not the other way around.
 
-
-In scala it's not possible to make interfaces, but instead there are trait's which essentially is the same as a interface except it is possible to have a default implementation of a method in a trait. Traits in scala also have the ability to inherit from classes, which usually does not apply for interfaces. When classes implement methods required by an interface, in the UML v2.5 standard this is called realization for traits.
-
-Mixing means that a class or trait should realize more than one specific trait. This is illustrated by drawing two realizations arrows with the stereotype mixing, from the class to the traits. In \cref{fig:class} $Point$ is a mixing of $Coordinate$ and $Weight$, which means that the type $Point$ referees to a class which realises both $Coordinate$ and $Weight$. As seen on \cref{fig:class} there are no types which realises theirs class, so in order to construct a $Point$ a class inheriting from Coordinate implements the required method from the trait $Weight$ at instantiation time of the class.
+In scala type aliases of mixin types are used to denoted a class mixed with some other class. As an example of this we have on \cref{fig:class} that $Point$ is a alias for any type which realizes $Coordinate$ mixed with a $Weight$. As mentioned before UML cannot represent mixin, so it was chosen to show this by drawing a realization arrow with a mixin stereotype from the alias to the mixed type. Stereotypes are denoted by some text surrounded with $<<$ and $>>$ above the arrow.
 
 \begin{figure}[!htb]
 \centering
