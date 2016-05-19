@@ -1,14 +1,10 @@
-% -*- root: C:/Users/hutli/Documents/SW6/main.tex -*-
-
 \sinote{mangler at beskrive hvordan vi bruger intensitet variablen i density og velocity, pressure og turbulens. Der mangler måske også en extension til velocity, pressure og turbulens}
 
 \subsection{Velocity, turbulence and pressure}
 This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three last factors found for detecting the local crowd condition. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is in pressure. 
 
 \subsubsection{Velocity}
-The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not 
-
-We use the relative kernel function instead of a probabilistic, as Franke et al does. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because also divide with the kernel density sum. 
+The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We use diverge from Franke et al by using relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum. 
 \begin{equation}
 \label{eq:}
 \vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
@@ -20,6 +16,54 @@ The function can be reduced to:
 \end{equation}
 
 \subsubsection{Turbulence}
+Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. We need a way to represent a direction. A problem arises when using standard cyclic degrees or radians. The problem here is that if we 
+
+\begin{figure}\centering
+\begin{tikzpicture}[scale=3]
+\draw[->] (-1.2,0) to (1.2,0) node[anchor=west] {$x$};
+\draw[->] (0,-1.2) to (0,1.2) node[anchor=south] {$y$};
+\draw (1,0) node[anchor=north west] {$0$};
+\draw (0,1) node[anchor=south east] {$\frac{\pi}{2}$};
+\draw (-1,0) node[anchor=north east] {$\pi$};
+\draw (0,-1) node[anchor=north east] {$\frac{3\pi}{2}$};
+
+\coordinate (Right) at (1,0);
+\coordinate (Center) at (0,0);
+\circoord {0}{0}{1}{-45} {A};
+\circoord {0}{0}{1}{-40} {B};
+\circoord {0}{0}{1}{-35} {C};
+\circoord {0}{0}{1}{-30} {D};
+\circoord {0}{0}{1}{30} {E};
+\circoord {0}{0}{1}{35} {F};
+\circoord {0}{0}{1}{40} {G};
+\circoord {0}{0}{1}{45} {H};
+\circoord {0}{0}{1}{180} {I};
+
+\draw[dashed] (Center) -- (A);
+\draw[dashed] (Center) -- (B);
+\draw[dashed] (Center) -- (C);
+\draw[dashed] (Center) -- (D);
+\draw[dashed] (Center) -- (E);
+\draw[dashed] (Center) -- (F);
+\draw[dashed] (Center) -- (G);
+\draw[dashed] (Center) -- (H);
+\draw[dashed, line width=2pt] (Center) -- (I);
+
+\draw[fill] (A) circle (0.5pt);
+\draw[fill] (B) circle (0.5pt);
+\draw[fill] (C) circle (0.5pt);
+\draw[fill] (D) circle (0.5pt);
+\draw[fill] (E) circle (0.5pt);
+\draw[fill] (F) circle (0.5pt);
+\draw[fill] (G) circle (0.5pt);
+\draw[fill] (H) circle (0.5pt);
+\draw (I) circle (1pt) node[anchor=south west] {Mean};
+
+\draw (Right) arc (0:360:1);
+\end{tikzpicture}
+\caption{Example of heading directions in a cyclic coordinate system}
+\label{fig:radiansHeadingdirection}
+\end{figure}
 
 \begin{equation}
 \label{eq:}
