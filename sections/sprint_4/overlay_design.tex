@@ -8,7 +8,7 @@ When visualising information, one has to be careful not to oversaturate the visu
 
 Color represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The color scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed.
 
-Since the density of a crowd should always be considered when evaluating the danger represented by another crowd factor, we wish to convey the density levels at all times. This is done by making the opacity dependent on the density. The idea is that although an area has a high turbulence, the density of the area may be low, meaning that there is a lower probability of danger in the area.
+Since the density of a crowd should always be considered when evaluating the danger represented by another crowd factor, we wish to convey the density levels at all times. This is done by making the opacity dependent on the density. The idea is that although an area has a high turbulence, the density of the area may be low, meaning that there is a lower probability of danger in the area. We define that the opacity can at maximum be 90\%, since the underlying map should always be visible.
 
 Since each overlay is representing its values in the same manner, it supports a common intuition which helps the user better understand each crowd factor.
 
@@ -17,6 +17,15 @@ Since each overlay is representing its values in the same manner, it supports a 
 \subsection{Density, Turbulence, Pressure}
 The three overlays density, turbulence, and pressure have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}.
 
+The max values for each crowd factor follows the values :
+
+\begin{describe}
+\item[Density]: 8 people per square meter
+\item
+\end{describe}
+
+\sinote{Skriv threshold værdier ind for de 4 faktorer}
+
 %%% Velocity
 \subsection{Velocity}
 The velocity overlay require special attention since its value is a combination of the speed and direction of the crowd. We thought that an arrow would be the most intuitive way to show a direction and have its color represent the speed.
@@ -24,6 +33,8 @@ The velocity overlay require special attention since its value is a combination 
 %%%% Første design ide med normale pile, problemer med dette
 
 Our first design iteration used arrows with the shape as seen in \cref{fig:first_arrow_design}. However we found it difficult to determine the direction the arrow was pointing. Additionally we found that multiple arrows do not \enquote{compose} as well as we wanted to, as multiple arrows in succession did not give us a good indication of the general direction.
+
+
 
 \begin{figure}[htbp]
 \begin{subfigure}[c]{.49\linewidth}
@@ -70,5 +81,6 @@ Our first design iteration used arrows with the shape as seen in \cref{fig:first
 The second design iteration focused on improving the visibility of the arrowhead, and making the arrows compose better. \Cref{fig:second_arrow_design} illustrates this design. This design features arrows that are more reminiscent of the less-than and greater-than symbols. Because these arrows appear less symmetric, a break in the pattern is more noticeable. The  increased size of the arrowhead makes it easier to tell the direction.
 
 The opacity in this overlay differs from the rest. Instead of the opacity being proportional to the density, it depends on the speed of the crowd. Density is still important when considering the danger level of the crowd velocity, but since the velocity overlay can easily be combined with the density overlay, opacity can be used in a different way. First, it does not make sense to display the direction of a crowd that moves at a slow pace, because there is no dominating direction. Second, as the surface area of the arrow is small, it can be hard to differentiate different opacity values. We therefore use a binary opacity; Either an arrow is shown, or it is not. 
+\sinote{Ved hvilken værdi viser vi ikke længere velocity?}
 
 Since visualisation is a subjective matter, the considerations made in this section should also be viewed as such. Because of this we ought to evaluate our design in collaboration with potential users.
