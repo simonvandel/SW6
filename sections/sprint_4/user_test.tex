@@ -5,16 +5,17 @@ In order to evaluate the usefulness of the crowd condition visualisation from th
 
 \subsection{Test Method}
 
-\sinote{Gør besrkivelsen af testen mere struktureret, så det fremstår mere præcist. Hvad var expectations af testene?}
-
 In order to measure the performance of the system, we ask the test subject to analyse a test data scenario, that contains some interesting crowd condition situations. If the system visualises the crowd conditions in a good way, the test subject should be able to understand the crowd conditions.
 
-The test consists of the following:
+The test is structured as follows:
 
 \begin{enumerate}
     \item Tutorial scenario
-    \item Test data scena
+    \item Detailed data set scenario
+    \item Evaluation
 \end{enumerate}
+
+The test subject should as often as possible navigate the application without the help of the test conductor, in order to observe the intuitiveness of the system. If the test subject is stuck, the test conductor can assist the test subject. Comments and questions are handled on an ad-hoc basis as they naturally arise during the test.
 
 We start the test with a very simple tutorial, consisting of four groups of people with different characteristics. Its purpose is to give the test subject an intuition of how the density, velocity and turbulence overlays behave and the information they can provide. \Cref{fig:tutorial_screens} provides a visual illustration of this. Since the pressure condition would require a more thorough explanation not suitable for this short test, we will not evaluate the pressure overlay in the test.
 
@@ -64,18 +65,14 @@ Anders Nord of Alarm HS, kindly agreed to participate in this user test. The use
 
 %%% Testing results, high abstraction level
 \subsection{Test Results}
-\sinote{Vi kan måske være lidt mindre positiv her. Prøv at være mere kritisk på fejl og mangler}
 Anders immediately noticed, using the density overlay, that the density was high in front of the stage, and at the crossroads where people meet. 
 
 Switching to the velocity overlay, he did not immediately notice the arrows, as they were small. When we hinted that there were arrows, he was able to find the circular movement patterns. Having both the velocity and density overlays enabled at the same time, Anders understood why the density was high at the crossroads; Many groups were heading to the crossroad.
 
 The meaning of the turbulence overlay was not completely clear to Anders as he turned it on, but he quickly noticed that there was no turbulence at the area in front of the stage. His hypothesis was that the crowd was standing still at the area, which we could confirm. He also noticed the high turbulence at the crossroad and at the top left corner.
 
-Overall, Anders was able to find all the interesting situations we had put in the test data, meaning that the visualisations of the system were good. He however expressed that he was not completely confident in his knowledge about what each overlay represents. To overcome this issue, Anders suggested that a user of the system receives some sort of training on the system.
+Overall, Anders was able to find all the interesting situations we had put in the test data, meaning that the visualisations of the system were good. He however expressed that he was not completely confident in his knowledge about what each overlay represents. To overcome this issue, Anders suggested that a user of the system receives some sort of training on the system. 
 
-
-
-
-
+We can conclude that the test was succesfull, as Anders found all the interesting situations. We need to reconsider the design of the turbulence overlay, as it was not intuitive, and the design of the velocity, as the arrows were difficult to see.
 
 

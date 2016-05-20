@@ -6,25 +6,38 @@
 %%% Designing the different overlays
 When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{sec:s2_design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citet{wirz2012inferring}.
 
-Color represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The color scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed.
+Color represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The color scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed. \Cref{tab:color_scale} explains the color scale. As different people associate different values to colors, it is difficult to find a universal color scheme that is perfect for everyone. This color scheme is arbitrarily chosen as ranging from blue to red.
+
+\begin{table}[htbp]
+\definecolor{low}{HTML}{0000FF}
+\definecolor{medium}{HTML}{00FFFF}
+\definecolor{high}{HTML}{00FF00}
+\definecolor{higher}{HTML}{FFFF00}
+\definecolor{highest}{HTML}{FF0000}
+    \centering
+    \sinote{disse tal skal passe med de tal i \cref{sec:related_work}}
+    \begin{tabular}{l l l l l} \toprule
+                        & Density & Velocity & Turbulence & Pressure \\ \midrule
+    \cellcolor{low}     & 0       & 0        & 0          & 0         \\
+    \cellcolor{medium}  & 2       & 1        & 0.25       & 0.0075         \\
+    \cellcolor{high}    & 4       & 2        & 0.5        & 0.015         \\
+    \cellcolor{higher}  & 6       & 3        & 0.75       & 0.0225         \\
+    \cellcolor{highest} & 8       & 4        & 1          & 0.03         \\ \bottomrule
+    \end{tabular}
+    \caption{Table illustrating how the four crowd factors scale their color. The max values follows the values presented in \cref{sec:related_work}.}
+    \label{tab:color_scale}
+\end{table}
 
 Since the density of a crowd should always be considered when evaluating the danger represented by another crowd factor, we wish to convey the density levels at all times. This is done by making the opacity dependent on the density. The idea is that although an area has a high turbulence, the density of the area may be low, meaning that there is a lower probability of danger in the area. We define that the opacity can at maximum be 90\%, since the underlying map should always be visible.
 
-The max values for each crowd factor follows the values presented in \cref{sec:related_work}:
-
-\begin{description}
-\item[Density] 8
-\item[Turbulence] 1
-\item[Velocity] 4
-\item[Pressure] 0.05
-\end{description}
 
 Since each overlay is representing its values in the same manner, it supports a common intuition which helps the user better understand each crowd factor.
 
 %%% Density, Pressure, Turbulence hexagoner
 %%%% Hvordan vi gør det
-\subsection{Density, Turbulence, Pressure}
+\subsection{Density, Turbulence, and Pressure}
 The three overlays density, turbulence, and pressure have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}.
+
 
 %%% Velocity
 \subsection{Velocity}
@@ -72,7 +85,7 @@ Our first design iteration used arrows with the shape as seen in \cref{fig:first
     \caption{Second design iteration.}
     \label{fig:second_arrow_design}
 \end{subfigure}
-\caption{Design iterations for heading direction arrows.}
+\caption{Design iterations for arrows.}
 \end{figure}
 
 
