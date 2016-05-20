@@ -28,8 +28,6 @@ The following enumeration describes the propose of each transaction shown on \cr
 \end{enumerate}
 
 
-In this architecture the clients request content from the HotMap web server, where the controller handles these requests. The controller then authenticates the client through the core API, and requests data from the core. After this the controller updates the model, which then returns the data. Finally the controller updates the view which is then returned to the client. If there is no new data available upon request, the controller instead replies to to client that no new updates are available via the Json formatter.
-
 \subsection{Graphical User Interface Design} \label{sec:s2_gui}
 
 During this sprint we designed a graphical user interface (GUI) for our web application. We based this design on the requirements we had from the meeting with the SmukFest personnel. The focus of the design was to maximise available information without causing information overflow, as well as making the application responsive, such that it automatically adapts to multiple screen sizes. 

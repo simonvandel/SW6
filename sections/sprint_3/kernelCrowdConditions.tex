@@ -78,7 +78,7 @@ However, an area where everybody is moving in a uniform direction, the introduct
 
 These two conflicting observations makes it impossible to perfectly evaluate a still standing persons influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining peoples heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
 
-All these considerations leaves us with this formula for calculating turbulence:
+All these considerations leaves us with this formula for calculating turbulence, where $N'$ is the number of people with a heading direction:
 
 \begin{equation}
 \label{eq:}
@@ -90,7 +90,9 @@ T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} z_i \cdot \l
 T_x = 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
 \end{equation}
 
-Wher
+
+
+
 
 \subsubsection{Pressure}
 Pressure is a bit different. The fator were originally intruduced by \citet{empircalstudy} as 
