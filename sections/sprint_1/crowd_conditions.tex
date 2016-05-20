@@ -33,10 +33,9 @@ Large crowds are intrinsically dangerous, as the effects of individual people's 
 %\enquote{Having an estimated number of the actual crowd density, would be preferred}
 \subsection{Crowd Condition Characteristics}
 
-Regarding the safety and comfort of the crowd, even if event organisers and their safety staff are well educated, the condition of a crowd can be difficult to deduce\sinote{(kilde fra source omkring video vs. mobile)}, and even if a hazard is discovered it may be too late to prevent an oncoming accident. Because of this, it is important to be aware of preconditions of a developing hazard as early as possible, so that appropriate action can be taken.
-\jenote{Dette skal stå under velocity} Certain conditions of a crowd can have a direct effect on how fast people can pass through it. When navigating in such a crowd the direct route to your destination may therefore not be the fastest.
+The condition of a crowd and its effect on safety and comfort can be difficult to deduce, even if event organisers and their safety staff are well educated\cite{franke2015smart}, and even if a hazard is discovered it may be too late to prevent an oncoming accident. Because of this, it is important to be aware of preconditions of a developing hazard as early as possible, so that appropriate action can be taken.
 
-In \lanote*{Delete this?}{2012 Franke et al}\cite{wirz2012inferring}, four distinct characteristics were found that can be used to infer crowd conditions; density, velocity, turbulence and pressure.
+In \citet{wirz2012inferring}, four distinct characteristics were found that can be used to infer crowd conditions; density, velocity, turbulence and pressure.
 
 \subsection{Density}
 Density is the amount of people relative to available space. In this project we will look at $People / m^2$, but it is important to keep in mind that it is possible to expand to other forms of measuring available space.
@@ -53,6 +52,68 @@ As described, the safety and comfort of a crowd does not only depend on density,
 
 \subsubsection{Crowd Velocity}
 We use the standard concept of velocity, i.e. the direction people are moving and the magnitude of that movement. Specifically we use the SI unit of a vector in meters per second to depict the movement of individual people. The velocity of an individual at time $t$ is the vector given by the last two observations, $t$ and $t-1$, projected onto time $t$. We can use the velocity of individual people in an area to find the local crowd velocity. The local crowd velocity is the estimated velocity of a crowd at a specific point. \jenote{Overvej grafik til at local crowd density}
+
+
+\begin{figure}\centering
+\begin{subfigure}[c]{0.49\linewidth}
+\begin{tikzpicture}[framed]
+\coordinate(P) at (0,0);
+\coordinate(P') at (1,0);
+\coordinate(A) at (0.25,1);
+\coordinate(A') at (1.25,1);
+\coordinate(B) at (-0.3,-1);
+\coordinate(B') at (0.7,-1);
+\coordinate(C) at (-1.5,0.5);
+\coordinate(C') at (-0.5,0.5);
+
+\draw[->, thick] (A) -- (A');
+\draw[->, thick] (B) -- (B');
+\draw[->, thick] (C) -- (C');
+\draw[->, thick] (P) -- (P');
+
+\filldraw[color = red]
+(A) circle (2pt)
+(B) circle (2pt)
+(C) circle (2pt);
+
+\filldraw[color = blue]
+(P) circle (3pt);
+\draw (P) node[anchor=south west] {Local Crowd Velocity};
+
+\end{tikzpicture}
+\caption{Uniform velocity}
+\end{subfigure}
+\begin{subfigure}{0.49\linewidth}
+\begin{tikzpicture}[framed]
+\coordinate(P) at (0,0);
+\coordinate(P') at (0.66,0);
+\coordinate(A) at (0.25,1);
+\coordinate(A') at (1.25,1);
+\coordinate(B) at (-0.3,-1);
+\coordinate(B') at (-1.3,-1);
+\coordinate(C) at (-1.5,0.5);
+\coordinate(C') at (-0.5,0.5);
+
+\draw[->, thick] (A) -- (A');
+\draw[->, thick] (B) -- (B');
+\draw[->, thick] (C) -- (C');
+\draw[->, thick] (P) -- (P');
+
+\filldraw[color = red]
+(A) circle (2pt)
+(B) circle (2pt)
+(C) circle (2pt);
+\filldraw[color = blue]
+(P) circle (3pt);
+\draw node[anchor=south west] {Local Crowd Velocity};
+
+\end{tikzpicture}
+\caption{Nonuniform velocity}
+\end{subfigure}
+\label{fig:radiansHeadingdirection}
+\end{figure}
+
+Certain conditions of a crowd can have a direct effect on how fast people can pass through it. When navigating in such a crowd the shortest route to your destination may therefore not be the fastest.
 
 The local crowd velocity can then be used to predict where the crowd, or specific parts of the crowd, is heading and to an extension how the crowd conditions will change. For example, if two crowds are moving towards each other and their combined density will exceed the capacity of their collision point, it is reasonable to expect congestion in that point, however there is no guarantee that people will not change direction. \jenote{Overvej grafik til at forklare eksemplet}
 
