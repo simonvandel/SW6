@@ -66,22 +66,31 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 \label{fig:radiansHeadingdirection}
 \end{figure}
 
-If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number of magnitude on
+If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. While this could have also been done with a two dimensional vector, we chose to keep with the complex numbers of the original solution, partly in order to better differentiate from velocity and also since the a vector would have implied not only direction but also speed.
 
+Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ Where $z_i$ is the heading direction for person $i$.
 
+In order to apply this in our system, we need to adjust the heading directions according to their kernel values. But before we do this, we have to consider a special case. Recalling our definition from \cref{subsubsec:headingDirection}, a persons heading direction is the average angle across his previous observed positions. Since we can not possibly observe infinitely many previous positions, it is possible that a person, who have been standing still for a while, has no defined heading direction.In order to best account for this, we must consider a still standing persons influence on the turbulence of an area.
 
+Consider an area where everybody are standing still. This should be considered the opposite of a turbulent area, suggesting that a still standing person should contribute to less turbulence in an area.
 
-\jenote{TODO: Explain how they calculate the directional mean via complex numbers instead of using simple mean and how it solves the problem}
+However, an area where everybody is moving in a uniform direction, the introduction of still standing people would surely increase the turbulence of that area.
+
+These two conflicting observations makes it impossible to perfectly evaluate a still standing persons influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining peoples heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
+
+All these considerations leaves us with this formula for calculating turbulence:
 
 \begin{equation}
 \label{eq:}
-T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} h_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
+T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
 \end{equation}
 
 \begin{equation}
 \label{eq:}
-T_x = 1 - \left|\frac{\sum_{i=1}^{N'} h_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
+T_x = 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
 \end{equation}
+
+Wher
 
 \subsubsection{Pressure}
 Pressure is a bit different. The fator were originally intruduced by \citet{empircalstudy} as 
