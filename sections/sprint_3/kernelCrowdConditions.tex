@@ -16,7 +16,8 @@ The function can be reduced to:
 \end{equation}
 
 \subsubsection{Turbulence}
-Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. We need a way to represent a direction. When trying to find the mean heading direction a problem arises if we are using standard cyclic degrees or radians. The problem is best understood with an example. \Cref{fig:radiansHeadingdirection} illustrates the problem with radians.
+Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. In order to do this, we require a way to represent a direction. Following the method of \citet{localTrendStatistics}, we choose to represent direction as an angle, since direction in inherently cyclic. However the cyclic nature of angles provides an obstacle when we wish to find the average direction. In \cref{fig:radiansHeadingdirection} the problem is illustrated.
+
 
 \begin{figure}\centering
 \begin{tikzpicture}[scale=3]
@@ -65,7 +66,12 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 \label{fig:radiansHeadingdirection}
 \end{figure}
 
-Here we have 8 observations, 4 on each side of 0 radians pairwise equal distance from 0 radians. In this scenario we want the mean to be 0 radians, since this is the direction the people are generally heading, but if we calculate the mean, we get $\pi$, also illustrated in the figure. This problem was first introduced and solved by \citet{localTrendStatistics}. Their solution is \jenote{TODO: Explain how they calculate the directional mean via complex numbers instead of using simple mean and how it solves the problem}
+If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number of magnitude on
+
+
+
+
+\jenote{TODO: Explain how they calculate the directional mean via complex numbers instead of using simple mean and how it solves the problem}
 
 \begin{equation}
 \label{eq:}

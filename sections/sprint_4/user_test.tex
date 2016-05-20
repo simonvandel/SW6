@@ -1,13 +1,20 @@
 \section{User Acceptance Testing} \label{sec:s4_test}
 %%% Intro paragraph
 
-In order to evaluate the usefulness of the crowd condition visualisation from the previous section, we conducted a user acceptance test. This test aim at testing whether the system is ready for use, and is suitable to conclude on the final sprint. In this section we will describe the test and analyse its results.
+In order to evaluate the usefulness of the crowd condition visualisation from the previous section, we conducted a user acceptance test. This test aims at testing whether the system is ready for use, and is suitable to conclude on the final sprint. In this section we will describe the test and analyse its results.
 
 \subsection{Test Method}
 
 \sinote{Gør besrkivelsen af testen mere struktureret, så det fremstår mere præcist. Hvad var expectations af testene?}
 
 In order to measure the performance of the system, we ask the test subject to analyse a test data scenario, that contains some interesting crowd condition situations. If the system visualises the crowd conditions in a good way, the test subject should be able to understand the crowd conditions.
+
+The test consists of the following:
+
+\begin{enumerate}
+    \item Tutorial scenario
+    \item Test data scena
+\end{enumerate}
 
 We start the test with a very simple tutorial, consisting of four groups of people with different characteristics. Its purpose is to give the test subject an intuition of how the density, velocity and turbulence overlays behave and the information they can provide. \Cref{fig:tutorial_screens} provides a visual illustration of this. Since the pressure condition would require a more thorough explanation not suitable for this short test, we will not evaluate the pressure overlay in the test.
 
@@ -50,6 +57,8 @@ After the tutorial scenario, we will switch to a more detailed data set. The dat
 \caption{Screenshots of the test data scenario}
 \label{fig:test_data_screens}
 \end{figure}
+
+The test is successful if the test subject is able to identify all the interesting situations described above. 
 
 Anders Nord of Alarm HS, kindly agreed to participate in this user test. The user test was performed over Skype as in other meetings. Anders was presented with the application which was configured to display the aforementioned predefined crowd scenarios. A summary of the meeting can be seen in \cref{appendix:final_meeting_anders_nord}.
 
