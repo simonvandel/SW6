@@ -1,10 +1,10 @@
 \sinote{mangler at beskrive hvordan vi bruger intensitet variablen i density og velocity, pressure og turbulens. Der mangler måske også en extension til velocity, pressure og turbulens}
 
-\subsection{Velocity, turbulence and pressure}
-This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three last factors found for detecting the local crowd condition. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is in pressure. 
+\subsection{Estimating Velocity, Turbulence and Pressure}
+This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three other factors for detecting the local crowd conditions. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure.
 
 \subsubsection{Velocity}
-The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al by using relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum. 
+The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al. by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum.
 \begin{equation}
 \label{eq:}
 \vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
@@ -90,9 +90,7 @@ T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} z_i \cdot \l
 T_x = 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
 \end{equation}
 
-\kanote{forklar at en uniform bevægelse vil give en højere magnitude, og at når vi flipper den med '1 minus', at vi så finder turbulencen}
-
-
+The formula works by summarising the individual heading directions and normalising them, in order to find the average heading direction. With each heading direction having a magnitude of $1$, the normalised summation will have a magnitude between $0$ and $1$ depending on the uniformity, with $1$ being a completely uniform heading direction. We then subtract this from $1$, such that a high uniformity will result in a low turbulence level.
 
 \subsubsection{Pressure}
 Pressure is a bit different. The fator were originally intruduced by \citet{empircalstudy} as 
