@@ -1,6 +1,9 @@
 ### LaTeX ###
 *.acn
 *.acr
+figures/3dEpanechnikov-eps-converted-to.pdf
+figures/class-eps-converted-to.pdf
+*.latexmain
 *.alg
 *.aux
 *.bbl

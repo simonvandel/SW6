@@ -8,12 +8,14 @@ We will in this section do a simple bandwidth selection experiment that illustra
 
 \subsubsection{Undersmoothing and Oversmoothing}
 
-The bandwidth is important because it controls how many data samples to include. There are two extremes: a too low bandwidth or a too high bandwidth. A too low bandwidth will cause the density estimation to be noisy; the estimate will have a big variance in its output. We call this an undersmoothed estimate. On the other extreme the bandwidth can be too high, meaning that too many data samples would be included in the estimation, which would obscure the true density. We call this an oversmoothed estimation. An optimal bandwidth is not undersmoothed nor oversmoothed, but instead follows the structure of the true underlying density. \Cref{fig:bandwidth_selectors} explains this visually.
+The bandwidth is important because it controls how many data samples to include. There are two extremes: a too low bandwidth or a too high bandwidth. A too low bandwidth will cause the density estimation to be noisy; the estimate will have a big variance in its output. We call this an undersmoothed estimate. On the other extreme the bandwidth can be too high, meaning that too many data samples would be included in the estimation, which would obscure the true density. We call this an oversmoothed estimation. An optimal bandwidth is not undersmoothed nor oversmoothed, but instead follows the structure of the true underlying density. \Cref{fig:bandwidth_selectors} explains this visually.\lanote{Til figurer med lange captions: Tilføj en kort caption til brug i listoffigures}
+
+\lanote{Overvej at indsæt legend i figur 4.6}
 
 \begin{figure}[htbp]
 \centering
     \includegraphics[width=0.5\textwidth]{bandwidth_selectors.png}
-    \caption{The blue marks at the bottom of the plot shows a random sample from the Gaussian distribution. The grey curve shows the true density. The red curve visualises an undersmoothed estimation. The green curve visualises an oversmoothed estimation. The black curve is estimated using a near optimal bandwidth. \cite{wiki:kernel_density_estimation}}
+    \caption{The blue marks at the bottom of the plot shows a random sample from the Gaussian distribution. The grey curve shows the true density. The red curve visualises an undersmoothed estimation. The green curve visualises an oversmoothed estimation. The black curve is estimated using a near optimal bandwidth~\cite{wiki:kernel_density_estimation}.}
     \label{fig:bandwidth_selectors}
 \end{figure}
 

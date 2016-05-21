@@ -4,7 +4,7 @@
 This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three last factors found for detecting the local crowd condition. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is in pressure. 
 
 \subsubsection{Velocity}
-The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We use diverge from Franke et al by using relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum. 
+The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al by using relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum. 
 \begin{equation}
 \label{eq:}
 \vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
@@ -16,7 +16,8 @@ The function can be reduced to:
 \end{equation}
 
 \subsubsection{Turbulence}
-Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. We need a way to represent a direction. When trying to find the mean heading direction a problem arises if we are using standard cyclic degrees or radians. The problem is best understood with an example. \Cref{fig:radiansHeadingdirection} illustrates the problem with radians.
+Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. In order to do this, we require a way to represent a direction. Following the method of \citet{localTrendStatistics}, we choose to represent direction as an angle, since direction in inherently cyclic. However the cyclic nature of angles provides an obstacle when we wish to find the average direction. In \cref{fig:radiansHeadingdirection} the problem is illustrated.
+
 
 \begin{figure}\centering
 \begin{tikzpicture}[scale=3]
@@ -65,17 +66,33 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 \label{fig:radiansHeadingdirection}
 \end{figure}
 
-Here we have 8 observations, 4 on each side of 0 radians pairwise equal distance from 0 radians. In this scenario we want the mean to be 0 radians, since this is the direction the people are generally heading, but if we calculate the mean, we get $\pi$, also illustrated in the figure. This problem was first introduced and solved by \citet{localTrendStatistics}. Their solution is \jenote{TODO: Explain how they calculate the directional mean via complex numbers instead of using simple mean and how it solves the problem}
+If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. While this could have also been done with a two dimensional vector, we chose to keep with the complex numbers of the original solution, partly in order to better differentiate from velocity and also since the a vector would have implied not only direction but also speed.
+
+Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ Where $z_i$ is the heading direction for person $i$.
+
+In order to apply this in our system, we need to adjust the heading directions according to their kernel values. But before we do this, we have to consider a special case. Recalling our definition from \cref{subsubsec:headingDirection}, a persons heading direction is the average angle across his previous observed positions. Since we can not possibly observe infinitely many previous positions, it is possible that a person, who have been standing still for a while, has no defined heading direction.In order to best account for this, we must consider a still standing persons influence on the turbulence of an area.
+
+Consider an area where everybody are standing still. This should be considered the opposite of a turbulent area, suggesting that a still standing person should contribute to less turbulence in an area.
+
+However, an area where everybody is moving in a uniform direction, the introduction of still standing people would surely increase the turbulence of that area.
+
+These two conflicting observations makes it impossible to perfectly evaluate a still standing persons influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining peoples heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
+
+All these considerations leaves us with this formula for calculating turbulence, where $N'$ is the number of people with a heading direction:
 
 \begin{equation}
 \label{eq:}
-T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} h_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
+T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
 \end{equation}
 
 \begin{equation}
 \label{eq:}
-T_x = 1 - \left|\frac{\sum_{i=1}^{N'} h_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
+T_x = 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
 \end{equation}
+
+\kanote{forklar at en uniform bevægelse vil give en højere magnitude, og at når vi flipper den med '1 minus', at vi så finder turbulencen}
+
+
 
 \subsubsection{Pressure}
 Pressure is a bit different. The fator were originally intruduced by \citet{empircalstudy} as 
