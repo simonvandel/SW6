@@ -140,7 +140,11 @@ The relative densities are the absolute densities divided by the area that each 
 
 The last kernel density type is probabilistic. This is the absolute densities divided by the total amount of people, meaning that the total sum of probabilistic local crowd densities has to be 1.
 
-Kernel functions have an area of 1 beneath them since they denote the probability of finding an observation at certain distances from them. In essence this means that all observations exist in the distribution of the function. In our case, this denotes how much an observed person weighs for the density of the point. The problem is that observations can exist further away than a distance of 1. We assume that all distances are in SI unit meters. We want a way to raise or lower the distance of observations that should be considered in the estimation, in order to include all observations of importance, but still have the kernel density functions have an area of 1. This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot} with the area underneath. The area of this function is still 1 and therefore holds the property of a kernel density function.
+\subsubsection{Bandwidth}
+
+Kernel functions have an area of 1 beneath them since they denote the probability of finding an observation at certain distances from them. In essence this means that all observations exist in the distribution of the function. In our case, this denotes how much an observed person weighs for the density of the point. The problem is that observations can exist further away than a distance of 1. We assume that all distances are in SI unit meters. We want a way to adjust the limit marking which observations should be considered in the estimation, in order to include all observations of importance, but still have the kernel density functions have an area of 1. 
+
+This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel density function.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
@@ -175,7 +179,9 @@ anchor=center]
 \label{fig:1dEpanechnikovDistributionWithHPlot}
 \end{figure}
 
-Currently we have only been looking at the distribution over one dimension. In our domain we get observations from a plane, in two dimensions. We can extend the kernel function to work on a two dimensional area by calculating the distance from the kernel function center point to the desired point in two dimensions. In 2 dimensions, the distance would be the same as a radius in a circle. This can be seen plotted in \cref{fig:3dEpanechnikov}.
+\subsubsection{Multidimensional Estimation}
+
+So far we have only been looking at the distribution in one dimension. In our domain we get observations from a plane, giving us two dimensions to consider. This would require us to model our bandwidth as dependent on two variables, but given our domain we can instead extend the kernel function to work by calculating the distance from the kernel center to the observation, and therefore use a single variable bandwidth. This can be seen plotted in \cref{fig:3dEpanechnikov}.
 
 \begin{figure}[htbp]
 \centering
@@ -185,6 +191,8 @@ Currently we have only been looking at the distribution over one dimension. In o
 \end{figure}
 
 \Cref{fig:3dEpanechnikov} represents the distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weights.
+
+\subsubsection{Relative Density Form}
 
 As explained earlier, the function is currently on a probability form, and not on the desired relative density form. In order to modify it, we first transform it to an absolute form. People closer to a point will weigh more than people further away from the point. We assume that every person contributes the same density, so the mean value of the function should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the desired volume. The desired volume is that of which the kernel function has a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a circular coordinate set. As defined previously, the distance from point to center is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
 

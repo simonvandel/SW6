@@ -1,7 +1,9 @@
 \subsection{Implementation of the Analyser}\label{s3:analyser_implementation}
 
-In order to fully understand the need for a good implementation of the analyser, we start with a quick rundown of the complexity of the unoptimized direct analysis algorithm, which follows the mathematical formulas in \cref{sub:kernelDensityEstimation}.
+In order to fully understand the need for a good implementation of the analyser, we start with a quick rundown of the complexity of the unoptimized direct analysis algorithm seen in \cref{alg:unoptimised_algorithm}, which follows the mathematical formulas in \cref{sub:kernelDensityEstimation}.
 
+\begin{center}
+\captionof{algorithm}{Unoptimised algorithm}\label{alg:unoptimised_algorithm}
 \begin{algorithmic}[1]
 
 \Function{Analyser}{List[Point] points, List[person] People, Bandwidth}
@@ -45,6 +47,7 @@ In order to fully understand the need for a good implementation of the analyser,
 \EndFor
 \EndFunction
 \end{algorithmic}
+\end{center}
 
 This algorithm has an asymptotic time complexity of $$O(\text{points} \cdot \text{people})$$ which might seem decent, but considering the amount of points and people we can expect to analyse, we want to reduce this as much as possible.
 
@@ -68,9 +71,8 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 %% Hvorfor det er nice
 
 \kanote{kommentér koden}
-\begin{algorithm}
-\caption{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
-
+\begin{center}
+\captionof{algorithm}{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
 \begin{algorithmic}[1]
 
 \Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
@@ -140,4 +142,4 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 
 \end{algorithmic}
 
-\end{algorithm}
+\end{center}
