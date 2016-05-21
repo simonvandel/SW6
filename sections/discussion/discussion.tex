@@ -1,6 +1,7 @@
 \chapter{Discussion}
 
 % intro
+This chapter discusses considerations that have to be made before the system is put into use.
 
 % ethics
 \section{Ethics \& Malicious Usage}
@@ -19,8 +20,9 @@ The evaluation of the system as described in \cref{sec:s4_test}, finds that the 
 %% data - router requirements (WIFI) OR gps data
 The system is designed in a location based service-agnostic way such that multiple methods of capturing positions can be used. The aSTEP project supports positions captured by Wi-Fi triangulation and GPS. Both of these techniques have benefits and drawbacks.
 
-Wi-Fi triangulation is useful as it does not require any user interaction. In order for the triangulation to work, many Wi-Fi access points have to be placed strategically on a premise. If this infrastructure is not already in place, it can be expensive to set up.
+Wi-Fi triangulation is useful as it does not require any user interaction. In order for the triangulation to work, many Wi-Fi access points have to be placed strategically on a premise to get the best accuracy. If this infrastructure is not already in place, it can be expensive to set up.
 
-Positions gathered from users GPS devices are more difficult to obtain as an application has to be installed on the user's device that continuosly sends position data.
+Positions gathered from users' GPS devices are more difficult to obtain as an application has to be installed on the user's device that continuously captures position data. This means that users have to interact with the system in order to be tracked. The accuracy of GPS positions can have varying quality depending on the environment the user is in.
 
 %% accuracy of data
+The usefulness of the system ultimately depends on the data the system operates on. The accuracy of the position data that is used in the system, has to be considered if the system is to be used.

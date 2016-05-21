@@ -1,7 +1,7 @@
 \sinote{mangler at beskrive hvordan vi bruger intensitet variablen i density og velocity, pressure og turbulens. Der mangler måske også en extension til velocity, pressure og turbulens}
 
 \subsection{Estimating Velocity, Turbulence and Pressure}
-This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three other factors for detecting the local crowd conditions. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure.
+This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three other factors for detecting the local crowd conditions presented in \cref{}. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure.
 
 \subsubsection{Velocity}
 The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al. by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum.
@@ -11,6 +11,7 @@ The local crowd velocity is essentially calculated as in \citet{wirz2012inferrin
 \end{equation}
 
 The function can be reduced to:
+
 \begin{equation}
 \label{eq:}
 \vv{V_x} = \frac{\sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
@@ -112,7 +113,11 @@ P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i
 P_x = D_x \cdot \frac{\sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
 \end{equation}
 
-The main difference between this and the solution from Franke et al. is that our density is relative and not probabilistic, meaning that the result will also be relative rather than probabilistic. \Citet{empircalstudy} did not only introduce the factor, but also recorded data and pressure in relative values from the incident during the Hajj on the 12th of January 2006\cite{website:Wikipedia-Hajj}. This means that we can compare our results for local crowd pressure with the limits and high pressure found from real world incidents, this will be used later in \jenote{referer til det sted hvor vi sætter gradienten for pres og potentiel warning layer}.
+The main difference between this and the solution from Franke et al. is that our density is relative and not probabilistic, meaning that the result will also be relative rather than probabilistic. \Citet{empircalstudy} did not only introduce the factor, but also recorded data and pressure in relative values from the incident during the Hajj on the 12th of January 2006\cite{website:Wikipedia-Hajj}. This means that we can compare our results for local crowd pressure with the limits and high pressure found from real world incidents.
+
+
+
+%this will be used later in \jenote{referer til det sted hvor vi sætter gradienten for pres og potentiel warning layer}.
 
 
 
