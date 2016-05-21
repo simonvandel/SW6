@@ -51,8 +51,7 @@ The specific pros and cons is summarised in \cref{sec:crowd_conditions_summary}.
 As described, the safety and comfort of a crowd does not only depend on density, but also on the movement in a crowd. Movement in a crowd can be split up into two categories, where people are heading, and what their velocity is.
 
 \subsubsection{Crowd Velocity}
-We use the standard concept of velocity, i.e. the direction people are moving and the magnitude of that movement. Specifically we use the SI unit of a vector in meters per second to depict the movement of individual people. The velocity of an individual at time $t$ is the vector given by the last two observations, $t$ and $t-1$, projected onto time $t$. We can use the velocity of individual people in an area to find the local crowd velocity. The local crowd velocity is the estimated velocity of a crowd at a specific point. \jenote{Overvej grafik til at local crowd density}
-
+We use the standard concept of velocity, i.e. the direction people are moving and the magnitude of that movement. Specifically we use the SI unit of a vector in meters per second to depict the movement of individual people. The velocity of an individual at time $t$ is the vector given by the last two observations, $t$ and $t-1$, projected onto time $t$. We can use the velocity of individual people in an area to find the local crowd velocity. The local crowd velocity is the estimated velocity of a crowd at a specific point, and can be seen illustrated in \cref{localCrowdVelocity}.
 
 \begin{figure}\centering
 \begin{subfigure}[c]{0.49\linewidth}
@@ -83,7 +82,7 @@ We use the standard concept of velocity, i.e. the direction people are moving an
 \end{tikzpicture}
 \caption{Uniform velocity}
 \end{subfigure}
-\begin{subfigure}{0.49\linewidth}
+\begin{subfigure}[c]{0.49\linewidth}
 \begin{tikzpicture}[framed]
 \coordinate(P) at (0,0);
 \coordinate(P') at (0.66,0);
@@ -110,23 +109,25 @@ We use the standard concept of velocity, i.e. the direction people are moving an
 \end{tikzpicture}
 \caption{Nonuniform velocity}
 \end{subfigure}
-\label{fig:radiansHeadingdirection}
+\caption{An illustration of the local crowd velocity in different situations}
+\label{fig:localCrowdVelocity}
 \end{figure}
+
+Local crowd velocity can be understood as the general velocity of the crowd in the point, and tries to capture how a person would feel the general velocity of the crowd being present in that point. It also tries to capture the most probable velocity the people in the crowd has, and therefore can be used to predict where people generally are moving.
 
 Certain conditions of a crowd can have a direct effect on how fast people can pass through it. When navigating in such a crowd the shortest route to your destination may therefore not be the fastest.
 
-The local crowd velocity can then be used to predict where the crowd, or specific parts of the crowd, is heading and to an extension how the crowd conditions will change. For example, if two crowds are moving towards each other and their combined density will exceed the capacity of their collision point, it is reasonable to expect congestion in that point, however there is no guarantee that people will not change direction. \jenote{Overvej grafik til at forklare eksemplet}
+The local crowd velocity can then be used to predict where the crowd, or specific parts of the crowd, is heading and to an extension how the crowd conditions will change. For example, if two crowds are moving towards each other and their combined density will exceed the capacity of their collision point, it is reasonable to expect congestion in that point, however there is no guarantee that people will not change direction. 
 
 % Crowd’s movement velocity. The local crowd velocity can be seen as the weighted average velocity of each user at a given location by weighting the speed values of each user depending on the distance to that location with a Gaussian weighting scheme. <--- Useful sentence for later, BUT it has been copied, not written ourselves!
 
 The specific pros and cons is summarised in \cref{sec:crowd_conditions_summary}.
 
 \subsubsection{Heading Direction}\label{subsubsec:headingDirection}\jenote{Giv credit til den der fandt på det}
-People can change their velocity quickly and drastically. They often have a goal, and the best way to reach that goal is not necessary to set a \sinote{heading istedet?}{velocity} straight for it, because of objects being in the way or other inconvenient obstacles. Because of this, we also have to consider the heading direction of individuals. Instead of expecting people to move according to their velocity we expect them to move according to how they have moved over the last couple of observations. In other words, we expect peoples direction of movement to be the average angle with which they have changed their direction of movement over previous observations. This is called heading direction and is illustrated in \cref{fig:headingvsvelocity}. The illustration shows the movement of a person, currently present in point t. $v$ is the velocity of the person over the last two observations, $t$ and $t-1$, and $h$ the heading direction of the person over all observations in the example, $t-4$ through $t$. In this example we can imagine that the person is moving around a obstacle to reach the other side. In order to reach tho other side of the obstacle the person will have to continue to move around the obstacle, i.e. continue according to their heading direction.
+People can change their velocity quickly and drastically. They often have a goal, and the best way to reach that goal is not necessary to set a heading straight for it, due to objects being in the way or other inconvenient obstacles. Because of this, we also have to consider the heading direction of individuals. Instead of expecting people to move according to their velocity we expect them to move according to how they have moved over the last couple of observations. In other words, we expect peoples direction of movement to be the average angle with which they have changed their direction of movement over previous observations. This is called heading direction and is illustrated in \cref{fig:headingvsvelocity}. The illustration shows the movement of a person, currently present in point t. $v$ is the velocity of the person over the last two observations, $t$ and $t-1$, and $h$ the heading direction of the person over all observations in the example, $t-4$ through $t$. In this example we can imagine that the person is moving around a obstacle to reach the other side. In order to reach tho other side of the obstacle the person will have to continue to move around the obstacle, i.e. continue according to their heading direction.
 
 The heading direction is useful based on the assumption that the person is most likely to continue his or her movement at any given time. Note that the heading direction is not the same as averaging over all vectors in an observation, for example, averaging over all vectors in, $t-4$ through $t$, will only bring the resulting vector further from the heading direction.
 
-\jenote{Overvej at lave et eksempel med zigzag bevægelse}
 \begin{figure}\centering
 \begin{tikzpicture}
 \circoord{0}{3}{3}{-90} {A};
@@ -155,12 +156,12 @@ The heading direction is useful based on the assumption that the person is most 
 
 \subsection{Turbulence}\jenote{Giv credit til den der fandt på det}
 \label{sub:crowdFactorTurbulence}
-Local crowd turbulence is the irregularity in the heading direction of the crowd. This means that a point in a crowd where people are moving in a lot of different directions will have a higher turbulence than one where people are more uniform in their movement. It is based on on the heading direction rather than the local crowd velocity, since heading direction is more precise in illustrating where individual people are heading towards. The more variance there is in heading directions of the people in the crowd the more unsettled people get, increasing the risk of people falling and crowd panic. This factor has been found to be good as an early indicator for hazardous situations in a crowd, especially in crowds with a low density. \jenote{Kilde: inferring crowd conditions, 2012 franke et al}
+Local crowd turbulence is the irregularity in the heading direction of the crowd. This means that a point in a crowd where people are moving in a lot of different directions will have a higher turbulence than one where people are more uniform in their movement. It is based on on the heading direction rather than the local crowd velocity, since heading direction is more precise in illustrating where individual people are heading towards. The more variance there is in heading directions of the people in the crowd the more unsettled people get, increasing the risk of people falling and crowd panic. This factor has been found to be good as an early indicator for hazardous situations in a crowd, especially in crowds with a low density\cite{wirz2012inferring}.
 
 %Turbulence can be hard to infer from visual observations. The severity of the situation is also hard to observe without any form of calculations. Here a mobile based system with specific positions over time for the users, can do this a lot easier, since the velocity is easily observed here and calculations for turbulence can then be done before visualising it for the user.
 
 \subsection{Pressure}
-The pressure is the variance of the local crowd velocity times the local crowd density, and was suggested by Helbing and Johansson \jenote{indsæt kilder, de er [3], [10] i franke et al 2012 inferring}. As a way of [...] \jenote{Gør denne sætning færdig, potentielt med specifik quote fra dem}
+The pressure is the variance of the local crowd velocity times the local crowd density, and was suggested by \citeauthor{empircalstudy} \citeyearpar{empircalstudy} \cite{empircalstudy} and \citeauthor{videoanalysis} \citeyearpar{videoanalysis} \cite{videoanalysis}. As a way of [...] \jenote{Gør denne sætning færdig, potentielt med specifik quote fra dem}
 
 In high density crowds people are more affected by velocity rather than their own goal of movement. It is therefore variance in velocity combined with the density that pressure tries to capture.
 
