@@ -1,5 +1,8 @@
 \subsection{Crowd Conditions Visualisation Rendering}\label{sec:own_leaflet_plugin}
 \kanote{udvid dette afsnit}
-Up till this point we have used the Leaflet library for visualisation, but this library was not adequately flexible for the data they had to visualise.
 
-Because of this, we decided to create our own Leaflet plug-in based on Leaflet.heat. The goals of this plug-in is to allow us to experiment with different visualisation techniques. By creating our own plug-in, we have complete control of how the data is drawn on the map. Additionally, we can decide what units the weights of the drawn points are.
+Up till this point we have used different Leaflet plug-in libraries for visualisation, but these libraries are not adequately flexible for the data we have to visualise. We therefore create our own Leaflet plug-in, giving us more flexibility in tailoring visualisations to our needs.
+
+Every Leaflet plug-in library we tried has its own assumption on how the data should be visualised, and this assumption does not satisfy our needs. For example, all libraries used a global scaling of densities, meaning the density of a point depends on the density of other points. Additionally, we had no control over the shapes used in the visualisations.
+
+Because of this, we decided to create our own Leaflet plug-in based on Leaflet.heat. The goals of this plug-in is to allow us to experiment with different visualisation techniques. By creating our own plug-in, we have complete control of how the data is drawn on the map. This means that we can render the visualisations in a very specific fashion that suits our needs.

@@ -38,3 +38,11 @@
 % change the algoritm comment style
 \algrenewcommand{\algorithmiccomment}[1]{// #1}
 \algnewcommand{\LineComment}[1]{\State // #1}
+
+
+% caption for algorithm
+\DeclareCaptionFormat{algor}{%
+  \hrulefill\par\offinterlineskip\vskip1pt%
+    \textbf{#1#2}#3\offinterlineskip\hrulefill\vskip10pt}
+\DeclareCaptionStyle{algori}{singlelinecheck=off,format=algor,labelsep=space}
+\captionsetup[algorithm]{style=algori}
