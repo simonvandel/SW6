@@ -1,24 +1,57 @@
 \section{Initial Requirements}\label{sec:s1_requirements}
-In this section we specify the initial requirements for the system, based on our problem statement. As we do not have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. It is assumed that the system will have two different types of users, stationary users and mobile users, who will use the system for different purposes.
+In this section we specify the initial requirements for the system, based on our problem statement. As we do not have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
+
+\subsection{Use Cases}
+In order to identify the initial requirements for our system, we start by identifying some use cases for the system. Before specifying the use cases, we consider who the users of the system are. We assume that the system will have two different types of users, stationary users and mobile users, who will use the system for different purposes. A description of the stationary and mobile users can be seen in \cref{tab:stat_user,tab:mob_user}, respectively.
 
 \begin{table}[h!]
     \centering
-    \begin{tabularx}{250pt}{l}
+    \begin{tabularx}{\textwidth*7/8}{X}
         \toprule
-        \beign{c\textbf{Stationary user} \\ \midrule
-        Description: This user \\
-        dd \\
+        \multicolumn{1}{c}{\textbf{Stationary user}} \\ 
+        \midrule
+        \textbf{Description:} A stationary user of the system, who access the system from a stationary location. Their primary use of the system is maintaining an overview of the state of the crowd, and identifying potentially dangerous crowd situations. \\
+        \\
+        \textbf{Characteristics:} There can be multiple stationary users of the system, with varying experience. \\
         \bottomrule
     \end{tabularx}
-    \caption{Stationary user}
-    \label{tab:sss}
+    \caption{Description of the stationary user}
+    \label{tab:stat_user}
 \end{table}
 
+Stationary users could be personnel in charge of crowd management, whose tasks would include identifying dangerous situations, and take the proper actions if one such situation occurs. This could include dispatching of relevant personnel to an incident location.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth*7/8}{X}
+        \toprule
+        \multicolumn{1}{c}{\textbf{Mobile user}} \\ 
+        \midrule
+        \textbf{Description:} A mobile user of the system. The user moves around the event area, and must access the system from any given position. Their primary use of the system is to get a quick overview of the state of the crowd when moving from one point to another. \\
+        \\
+        \textbf{Characteristics:} There can be multiple mobile users of the system, with varying experience. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Description of the mobile user}
+    \label{tab:mob_user}
+\end{table}
+
+Mobile users include personnel located around the event area, such as guards and medical personnel. Their tasks could include responding to reports of incidents, from both a central dispatcher and from event attendees.
+
+Now we can consider some potential use cases for our system. We assume that the system will have two main use cases. 
 
 \subsection{MoSCoW Mehtod}
-As the requirements are currently only based on our assumptions, they will most likely change during the development of the system. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
+As the requirements are currently only based on our assumed use cases, they will most likely change during the development of the system. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
 
-This method groups the requirements into four categories; Must have, Should have, Could have, and Won't have. The requirements in the Must have category are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. The Should have category contains requirements that are very important to have in the system, but are often not as critical as the Must have requirements. Could have are requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. Won't have cover requirements that the user would like to have, but they are not important to include in this release of the system.
+This method groups the requirements into four categories; Must have, Should have, Could have, and Won't have. 
+
+The requirements in the Must have category are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. 
+
+The Should have category contains requirements that are very important to have in the system, but are often not as critical as the Must have requirements. 
+
+Could have are requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. 
+
+Won't have cover requirements that the user would like to have, but they are not important to include in this release of the system.
 
 \subsection{Requirements specification}
 

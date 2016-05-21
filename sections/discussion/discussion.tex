@@ -6,12 +6,21 @@
 \section{Ethics \& Malicious Usage}
 Since this system is effectively able to display real-time positions of people, ethical issues and potential malicious usage have to be considered before the system should be used. 
 
-If the system is receiving location data using Wi-Fi triangulation, positions of users can be recorder without user's consent. The tracking of users without their knowledge is a big ethical issue.
+If the system is receiving location data using Wi-Fi triangulation, positions of users can be recorded without user's consent. The tracking of users without their knowledge is a big ethical issue.
 
-Malicious usage of the system can expose sensitive information about individuals. Although we do not receive information from the aSTEP project that can directly be used to identify individuals, it is possible to infer the identity of individuals using auxiliary information. For example, by combining knowledge about an individual's music taste, one can cross reference the location of all positions with specific music performances at a festival. Another potential issue in this system is finding individuals who appear to be alone in a area. 
+Malicious usage of the system can expose sensitive information about individuals. Although we do not receive information from the aSTEP project that can directly be used to identify individuals, it is possible to infer the identity of individuals using auxiliary information. For example, by combining knowledge about an individual's music taste, one can cross reference the location of all positions with specific music performances at a festival. Another potential issue in this system is finding individuals who appear to be alone in an area. 
 
 % usefulness of the system
 \section{Usefulness of The System}
-%% data -router requirements (WIFI) OR gps data
-%% accuracy of data
 %% pressure and turbulence was not intuitive. Is it even possible to make it intuitive? Can it get too high level, such that expert users can not use the system efficiently?
+The evaluation of the system as described in \cref{sec:s4_test}, finds that the system is useful at visualising crowd factors, but only the velocity and density overlays were intuitive. One can argue whether the non-intuitiveness of the turbulence and pressure overlays is a fault of the system, or the concepts themselves. The turbulence and pressure concepts are not familiar to users as the density and velocity concepts, but on the other hand, there is room for additional research in other visualisation techniques.
+
+
+%% data - router requirements (WIFI) OR gps data
+The system is designed in a location based service-agnostic way such that multiple methods of capturing positions can be used. The aSTEP project supports positions captured by Wi-Fi triangulation and GPS. Both of these techniques have benefits and drawbacks.
+
+Wi-Fi triangulation is useful as it does not require any user interaction. In order for the triangulation to work, many Wi-Fi access points have to be placed strategically on a premise. If this infrastructure is not already in place, it can be expensive to set up.
+
+Positions gathered from users GPS devices are more difficult to obtain as an application has to be installed on the user's device that continuosly sends position data.
+
+%% accuracy of data

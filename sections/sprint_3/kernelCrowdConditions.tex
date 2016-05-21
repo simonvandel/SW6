@@ -9,6 +9,7 @@ The local crowd velocity is essentially calculated as in \citet{wirz2012inferrin
 \label{eq:}
 \vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
 \end{equation}
+
 The function can be reduced to:
 \begin{equation}
 \label{eq:}
@@ -92,12 +93,16 @@ T_x = 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\
 
 The formula works by summarising the individual heading directions and normalising them, in order to find the average heading direction. With each heading direction having a magnitude of $1$, the normalised summation will have a magnitude between $0$ and $1$ depending on the uniformity, with $1$ being a completely uniform heading direction. We then subtract this from $1$, such that a high uniformity will result in a low turbulence level.
 
+
 \subsubsection{Pressure}
-Pressure is a bit different. The fator were originally intruduced by \citet{empircalstudy} as 
+Pressure is a bit different. The factor was originally introduced by \citet{empircalstudy} as 
+
 \begin{equation}
 D_x \cdot \text{var}(\vv{V_x})
 \end{equation}
-where $D_x$ is the local crowd density and $\text{var}\vv{V_x}$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by \citet{wirz2012inferring}
+
+where $D_x$ is the local crowd density and $\text{var}(\vv{V_x})$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by \citet{wirz2012inferring}
+
 \begin{equation}
 \label{eq:}
 P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
@@ -106,4 +111,15 @@ P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i
 \label{eq:}
 P_x = D_x \cdot \frac{\sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
 \end{equation}
-The main difference from this to Franke et al 2012 is that our density is relative and not probabilitylistic, meaning that the result will also be relative rather than probabilistic. \Citet{empircalstudy} did not only introduce the factor but also recorded data and pressure from an incident at \jenote{find lige ud af hvor og hvornår det uheld skete} in relative values. This means that we can in our system compare the results for specific areas with the limits and high pressure found from real world incidents, this will be used later in \jenote{referer til det sted hvor vi sætter gradienten for pres og potentiel warning layer}.
+
+The main difference between this and the solution from Franke et al. is that our density is relative and not probabilistic, meaning that the result will also be relative rather than probabilistic. \Citet{empircalstudy} did not only introduce the factor, but also recorded data and pressure in relative values from the incident during the Hajj on the 12th of January 2006\cite{website:Wikipedia-Hajj}. This means that we can compare our results for local crowd pressure with the limits and high pressure found from real world incidents, this will be used later in \jenote{referer til det sted hvor vi sætter gradienten for pres og potentiel warning layer}.
+
+
+
+
+
+
+
+
+
+
