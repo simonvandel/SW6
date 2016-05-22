@@ -1,5 +1,5 @@
 \section{Initial Requirements}\label{sec:s1_requirements}
-In this section we specify the initial requirements for the system, based on our problem statement. As we do not have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
+BeIn this section we specify the initial requirements for the system, based on our problem statement. As we do not have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
 
 \subsection{Use Cases}
 In order to identify the initial requirements for our system, we start by identifying some use cases for the system. Before specifying the use cases, we consider who the users of the system are. We assume that the system will have two different types of users, stationary users and mobile users, who will use the system for different purposes. A description of the stationary and mobile users can be seen in \cref{tab:stat_user,tab:mob_user}, respectively.
@@ -38,7 +38,7 @@ Stationary users could be personnel in charge of crowd management, whose tasks w
 
 Mobile users include personnel located around the event area, such as guards and medical personnel. Their tasks could include responding to reports of incidents, from both a central dispatcher and from event attendees.
 
-Now we can consider some potential use cases for our system. We assume that the system will have two main use cases. 
+Now we can consider some potential use cases for our system. We assume that the system will have the two use cases shown in \cref{tab:s1-uc1,tab:s1-uc2}.
 
 \begin{table}[h!]
     \centering
@@ -46,37 +46,80 @@ Now we can consider some potential use cases for our system. We assume that the 
         \hline
         \textbf{Name:}  & Find fastest route \\ \hline
         \textbf{ID:}    & S1-UC1 \\ \hline
-        \textbf{Description:} & A users must find the fastest route to a incident location. \\ \hline
+        \textbf{Description:} & A user must find the fastest route to a incident location. \\ \hline
         \textbf{Actors:} & Mobile users \\ \hline
         \textbf{Success scenario:} & 
         \begin{enumerate}
-            \item The user opens the application
-            \item The users identifies his/her own position on the map
+            \item The user opens the application on a smartphone
+            \item The user identifies own position on the map
+            \item The user identifies the incident location on the map
+            \item The user observes the state of the crowd on the map
+            \item The user identifies a route to the incident location, avoiding crowd congestions
         \end{enumerate}
         \\
         \hline
     \end{tabularx}
-    \caption{Use case}
-    \label{tab:s1_uc1}
+    \caption{Find fastest route use case}
+    \label{tab:s1-uc1}
 \end{table}
 
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Survey crowd \\ \hline
+        \textbf{ID:}    & S1-UC2 \\ \hline
+        \textbf{Description:} & A user surveys the crowd, looking for potentially dangerous situations. \\ \hline
+        \textbf{Actors:} & Stationary users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user has the application open on a desktop pc
+            \item The user observes the state of the crowd on the map
+            \item The user sees no problems with the crowds
+        \end{enumerate}
+        \\ \hline
+        \textbf{Alternative scenario:} & 
+        \begin{enumerate}
+            \item The user has the application open on a desktop pc
+            \item The user observes the state of the crowd on the map
+            \item The user sees a potential problem developing
+            \item The user takes appropiate actions
+        \end{enumerate} 
+        \\ \hline
+    \end{tabularx}
+    \caption{Survey crowd use case}
+    \label{tab:s1-uc2}
+\end{table}
+
+These use cases can be used to identify more specific requirements for our application.
 
 \subsection{MoSCoW Mehtod}
 As the requirements are currently only based on our assumed use cases, they will most likely change during the development of the system. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
 
-This method groups the requirements into four categories; Must have, Should have, Could have, and Won't have. 
+This method groups the requirements into four categories; \emph{Must have}, \emph{Should have}, \emph{Could have}, and \emph{Won't have}. 
 
-The requirements in the Must have category are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. 
+The \emph{Must have} category include requirements that are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. 
 
-The Should have category contains requirements that are very important to have in the system, but are often not as critical as the Must have requirements. 
+The \emph{Should have} category contains requirements that are very important to have in the system, but are often not as critical as the Must have requirements. 
 
-Could have are requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. 
+\emph{Could have} are requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. 
 
-Won't have cover requirements that the user would like to have, but they are not important to include in this release of the system.
+\emph{Won't have} contains requirements that the user would like to have, but they are not important to include in this release of the system.
 
 \subsection{Requirements specification}
+First we consider the \emph{Find fastest route} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a smartphone. From this use case we define the following requirements:
 
-The following requirements have been identified.
+\emph{A detailed map of the area.} The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination. This requirement is essential to the application, and will as such be prioritised as \emph{Must have}.
+
+\emph{An intuitive visual presentation of relevant crowd information.} The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time. This is also an essential part of the application, and is prioritesed as \emph{Must have}.
+
+\emph{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone. This requirement is essential, and is as such prioritised as \emph{Must have}.
+
+If we consider the \emph{Survey crowd} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}, except that this user access the application on a desktop computer. Therefore we only need to add the following requirement.
+
+\emph{A graphical user interface for desktop computers.} For a stationary user it is preferable to access the application on a desktop computer, where the larger screen provides for a better overview of the area. This requirement is also prioritised as \emph{Must have}.
+
+Combining these requirements we get the requirements specification shown in \cref{tab:s1_req}.
 
 \begin{table}[h!]
 	\centering
@@ -85,27 +128,31 @@ The following requirements have been identified.
 		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} \\
 		\midrule 
 		\rowcolor[HTML]{EFEFEF} 
-		S1-FR1 & A highly detailed map of the area & Must have \\
-		S1-FR2 & A visual presentation of relevant crowd information & Must have \\
+		S1-FR1 & A detailed map of the area & Must have \\
+		S1-FR2 & An intuitive visual presentation of relevant crowd information & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
-		S1-FR3 & Present a visualization of relevant information                         & Must have \\
-		
-		S1-3  & Run on multiple platforms                                               & Must have \\
-		S1-4  & dd                                                                      & Must have \\
+		S1-FR3 & A graphical user interface for smartphones & Must have \\
+		S1-FR4 & A graphical user interface for desktop computers & Must have \\
 		\bottomrule
 	\end{tabularx}
-	\caption{MoSCoW prioritized requirements for first sprint}
+	\caption{MoSCoW prioritised functional requirements for the first sprint.}
 	\label{tab:s1_req}
 \end{table}
 
+In addition to these functional requirements, we can also defined some non-functional requirements for our application.
 
-\textbf{Must have}
-\begin{enumerate}
-    \item The system must be able to analyse position data collected from the crowd via mobile technology.
-    \item The system must be able to present a visualisation of relevant information about the state of the crowd.
-    \item The system must be able to run on multiple platforms.
-\end{enumerate}
+\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{ID} & \textbf{Requirement} \\
+		\midrule 
+		\rowcolor[HTML]{EFEFEF} 
+		S1-NR1 & The application must use the aSTEP core functionalities to acquire location data \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Non-functional requirements identified in the first sprint.}
+	\label{tab:s1_nreqs}
+\end{table}
 
-In order to better understand the subject of crowd management, and how the current state of the art analyses and visualises crowds, related work is examined.
-
-%Due to the need of collecting information about the crowd, and using this information to visualise the state of the crowd, some relevant work concerning these problems will be examined.
+As the application must visually present relevant crowd information, we first examine related work, to identify the different kinds of information that should be displayed.
