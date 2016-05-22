@@ -111,7 +111,7 @@ We use the standard concept of velocity, i.e. the direction people are moving an
 \draw node[anchor=south west] {Local Crowd Velocity};
 
 \end{tikzpicture}
-\caption{Nonuniform velocity - The majority of the people move in the same direction with same speed. The rest of the crowd moves in the opposite direction with the same speed as the majority of the crowd. The local crowd velocity is the same direction as the majority, but with a lesser speed in that direction.}
+\caption{Nonuniform velocity - The majority of the people move in the same direction with same speed. The rest of the crowd moves in the opposite direction with the same speed as the majority of the crowd. The local crowd velocity is the same direction as the majority, but with a smaller speed in that direction.}
 \end{subfigure}
 \caption[Local crowd velocity illustration]{An illustration of the local crowd velocity in different situations. Red points symbolises people with a direction and speed. The blue dots symbolises the local crowd velocity in the area.}
 \label{fig:localCrowdVelocity}
@@ -121,18 +121,17 @@ Local crowd velocity can be understood as the general velocity of the crowd in t
 
 Certain conditions of a crowd can have a direct effect on how fast people can pass through it. When navigating in such a crowd the shortest route to your destination may therefore not be the fastest.
 
-The local crowd velocity can then be used to predict where the crowd, or specific parts of the crowd, is heading and to an extension how the crowd conditions will change. For example, if two crowds are moving towards each other and their combined density will exceed the capacity of their collision point, it is reasonable to expect congestion in that point, however there is no guarantee that people will not change direction. 
+The local crowd velocity can be used to predict where the crowd, or specific parts of the crowd, is heading and to an extension how the crowd conditions will change. For example, if two crowds are moving towards each other and their combined density will exceed the capacity of their collision point, it is reasonable to expect congestion in that point, however there is no guarantee that people will not change direction. 
 
 % Crowd’s movement velocity. The local crowd velocity can be seen as the weighted average velocity of each user at a given location by weighting the speed values of each user depending on the distance to that location with a Gaussian weighting scheme. <--- Useful sentence for later, BUT it has been copied, not written ourselves!
 
-The specific pros and cons is summarised in \cref{sec:crowd_conditions_summary}.
+The specific pros and cons of velocity as a crowd condition is summarised in \cref{sec:crowd_conditions_summary}.
 
 \subsubsection{Heading Direction}\label{subsubsec:headingDirection}
-People can change their velocity quickly and drastically. They often have a goal, and the best way to reach that goal is not necessary to set a heading straight for it, due to objects being in the way or other inconvenient obstacles. Because of this, \citet{wirz2012inferring} based on work of \citet{localTrendStatistics} introduced the concept of heading direction of individuals. Instead of expecting people to move according to their velocity we expect them to move according to how they have moved over the last couple of observations. In other words, we expect peoples direction of movement to be the average angle with which they have changed their direction of movement over previous observations. This is called heading direction and is illustrated in \cref{fig:headingvsvelocity}. The illustration shows the movement of a person, currently present in point t. $v$ is the velocity of the person over the last two observations, $t$ and $t-1$, and $h$ the heading direction of the person over all observations in the example, $t-4$ through $t$. In this example we can imagine that the person is moving around a obstacle to reach the other side. In order to reach tho other side of the obstacle the person will have to continue to move around the obstacle, i.e. continue according to their heading direction.
+People can change their velocity quickly and drastically. They often have a goal, and the best way to reach that goal is not necessary to set a heading straight for it, due to objects being in the way or other inconvenient obstacles. Because of this, \citet{wirz2012inferring} based on work of \citet{localTrendStatistics} introduced the concept of heading direction of individuals. Instead of expecting people to move according to their velocity we expect them to move according to how they have moved over the last couple of observations. In other words, we expect peoples' direction of movement to be the average angle with which they have changed their direction of movement over previous observations. This is called heading direction and is illustrated in \cref{fig:headingvsvelocity}. The illustration shows the movement of a person, currently present in point $t$. $v$ is the velocity of the person over the last two observations, $t$ and $t-1$. $h$ is the heading direction of the person over all observations in the example, $t-4$ through $t$. In this example we can imagine that the person is moving around a obstacle to reach the other side. In order to reach tho other side of the obstacle the person will have to continue to move around the obstacle, i.e. continue according to their heading direction.
 
-The heading direction is useful based on the assumption that the person is most likely to continue his or her movement at any given time. Note that the heading direction is not the same as averaging over all vectors in an observation, for example, averaging over all vectors in, $t-4$ through $t$, will only bring the resulting vector further from the heading direction.
-
-\begin{figure}\centering
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}
 \circoord{0}{3}{3}{-90} {A};
 \circoord{0}{3}{3}{-60} {B};
@@ -158,9 +157,13 @@ The heading direction is useful based on the assumption that the person is most 
 \label{fig:headingvsvelocity}
 \end{figure}
 
+The heading direction is useful based on the assumption that the person is most likely to continue his or her movement at any given time. Note that the heading direction is not the same as averaging over all vectors in an observation, for example, averaging over all vectors in, $t-4$ through $t$, will only bring the resulting vector further from the heading direction.
+
+
+
 \subsection{Turbulence}
 \label{sub:crowdFactorTurbulence}
-The concept of local crowd turbulence was first introduced by \citet{videoanalysis} and is the irregularity in the heading direction of the crowd. This means that a point in a crowd where people are moving in a lot of different directions will have a higher turbulence than one where people are more uniform in their movement. It is based on on the heading direction rather than the local crowd velocity, since heading direction is more precise in illustrating where individual people are heading towards. The more variance there is in heading directions of the people in the crowd the more unsettled people get, increasing the risk of people falling and crowd panic. This factor has been found to be good as an early indicator for hazardous situations in a crowd, especially in crowds with a low density\cite{wirz2012inferring}.
+The concept of local crowd turbulence was first introduced by \citet{videoanalysis} and is the irregularity in the heading direction of the crowd. This means that a point in a crowd where people are moving in a lot of different directions will have a higher turbulence than one where people are more uniform in their movement. It is based on the heading direction rather than the local crowd velocity, since heading direction is more precise in illustrating where individual people are heading towards. The more variance there is in heading directions of the people in the crowd the more unsettled people get, increasing the risk of people falling and crowd panic arising. This factor has been found to be good as an early indicator for hazardous situations in a crowd, especially in crowds with a low density~\cite{wirz2012inferring}.
 
 %Turbulence can be hard to infer from visual observations. The severity of the situation is also hard to observe without any form of calculations. Here a mobile based system with specific positions over time for the users, can do this a lot easier, since the velocity is easily observed here and calculations for turbulence can then be done before visualising it for the user.
 
