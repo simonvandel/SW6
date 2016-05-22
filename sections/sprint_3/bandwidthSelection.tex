@@ -15,7 +15,7 @@ The bandwidth is important because it controls how many data samples to include.
 \begin{figure}[htbp]
 \centering
     \includegraphics[width=0.5\textwidth]{bandwidth_selectors.png}
-    \caption{The blue marks at the bottom of the plot shows a random sample from the Gaussian distribution. The grey curve shows the true density. The red curve visualises an undersmoothed estimation. The green curve visualises an oversmoothed estimation. The black curve is estimated using a near optimal bandwidth~\cite{wiki:kernel_density_estimation}.}
+    \caption[Undersmoothing/Oversmoothing explanation]{The blue marks at the bottom of the plot shows a random sample from the Gaussian distribution. The grey curve shows the true density. The red curve visualises an undersmoothed estimation. The green curve visualises an oversmoothed estimation. The black curve is estimated using a near optimal bandwidth~\cite{wiki:kernel_density_estimation}.}
     \label{fig:bandwidth_selectors}
 \end{figure}
 
@@ -59,7 +59,7 @@ We generate test data that takes the pattern of a chess board. This means that p
     }
     \draw (0,0)--(0,8)--(8,8)--(8,0)--cycle;
 \end{tikzpicture}
-    \caption{Chess board pattern with blue squares having a density of 1 person per square meter and turquoise squares having a density of 3 person per square meter.}
+    \caption[Chess board pattern]{Chess board pattern with blue squares having a density of 1 person per square meter and turquoise squares having a density of 3 person per square meter.}
     \label{fig:chessBoard-low1-high3-band5}
 \end{figure}
 
@@ -93,7 +93,7 @@ Using the chess board pattern introduced in the previous section, we will now ge
     \label{fig:chessBoard-low1-high3-band10-cropped}
 \end{subfigure}
 %
-\caption{Cropped chess board pattern with blue squares having a density of 1 and turquoise squares having a density of 3. The bandwidth varies on the different subfigures.}
+\caption[Analysed chess board pattern with different bandwidths]{Cropped chess board pattern with blue squares having a density of 1 and turquoise squares having a density of 3. The bandwidth varies on the different subfigures.}
 \label{fig:chessBoard-different-bandwidths}
 \end{figure}
 
@@ -104,7 +104,7 @@ Every bandwidth in \cref{fig:chessBoard-different-bandwidths} had some problems;
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.32\textwidth]{chessBoard-low1-high3-band1-4-density-subsquares.png}
-\caption{Cropped chess board pattern with blue squares having a density of 1 and turquoise squares having a density of 3. The bandwidth of 1.4 metres is calculated using a SSE method.}
+\caption[Analysed chess board pattern with bandwidth 1.4]{Cropped chess board pattern with blue squares having a density of 1 and turquoise squares having a density of 3. The bandwidth of 1.4 metres is calculated using a SSE method.}
 \label{fig:chessBoard-low1-high3-band1.4-cropped}
 \end{figure}
 
