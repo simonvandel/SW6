@@ -60,9 +60,9 @@
             ([xshift=-1ex]controller.south)    edge  node[sloped, anchor=center, below, text width=2.0cm] { update model } ([xshift=-1ex]model.north)
             ([yshift=1ex]controller.west)    edge  node[sloped, anchor=center, above, text width=2.0cm] { aSTEP request } ([yshift=1ex]astep.east)
             (user)    edge  node[sloped, anchor=center, above, text width=2.0cm] { user request } (controller)
-            (5.2,4)    edge  node[sloped, anchor=center, above, text width=2.0cm] { updated view } (user)
+            (5.2,4)    edge  node[sloped, anchor=center, above, text width=2.0cm] { user respond } (user)
             ([yshift=-1ex]astep.east)    edge  node[sloped, anchor=center, below, text width=2.0cm] { aSTEP reply } ([yshift=-1ex]controller.west)
-            ([xshift=1ex]model.north)    edge  node[sloped, anchor=center, below, text width=2.0cm] { response } ([xshift=1ex]controller.south);
+            ([xshift=1ex]model.north)    edge  node[sloped, anchor=center, below, text width=2.0cm] { model responds } ([xshift=1ex]controller.south);
             
 \end{tikzpicture}
 
