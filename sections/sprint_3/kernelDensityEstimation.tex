@@ -142,13 +142,14 @@ The last kernel density type is probabilistic. This is the absolute densities di
 
 \subsubsection{Bandwidth}
 
+\kanote{Jens
 Kernel functions have an area of 1 beneath them since they denote the probability of finding an observation at certain distances from them. In essence this means that all observations exist in the distribution of the function. In our case, this denotes how much an observed person weighs for the density of the point. The problem is that observations can exist further away than a distance of 1. We assume that all distances are in SI unit meters. We want a way to adjust the limit marking which observations should be considered in the estimation, in order to include all observations of importance, but still have the kernel density functions have an area of 1. 
 
 This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel density function.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
-K(d) = \frac{3}{4 h} \left( 1-\left(\frac{d}{h}\right)^2 \right) \mathbbm{1}_{\{|u| \leq 1\}}
+K(d) = \frac{3}{4 h} \left( 1-\left(\frac{d}{h}\right)^2 \right) \mathbbm{1}_{\{|(\frac{d}{h}| \leq 1\}}
 \end{equation}
 
 Here $d$ is the distance from the center of the kernel function to the observation, and $h$ is the bandwidth.
@@ -194,47 +195,47 @@ So far we have only been looking at the distribution in one dimension. In our do
 
 \subsubsection{Relative Density Form}
 
-As explained earlier, the function is currently on a probability form, and not on the desired relative density form. In order to modify it, we first transform it to an absolute form. People closer to a point will weigh more than people further away from the point. We assume that every person contributes the same density, so the mean value of the function should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the desired volume. The desired volume is that of which the kernel function has a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a circular coordinate set. As defined previously, the distance from point to center is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
+As explained earlier, the function is currently on a probability form, and not on the desired relative density form. In order to modify it, we first transform it to an absolute form. We assume that every person contributes the same density, so the mean value of the function should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the desired volume. The desired volume is that of which the kernel function has a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to center is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
 
 \begin{equation}
 \label{eq:volumeUnder3dEpanechnikov}
-\int_0^{2 \pi} \int_0^h \int_0^1 \frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) \mathrm{d}z\ \mathrm{d}r\ \mathrm{d}\theta\ = \frac{3 \pi h}{8}
+\int_0^{2 \pi} \int_0^h \int_0^1 \frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) \cdot r \mathrm{d}z\ \mathrm{d}r\ \mathrm{d}\theta\ = \frac{3 \pi h}{8}
 \end{equation}
 
-Because we are working in a circular coordinate system, we use three variables to index every point in the coordinate system. $z$ is the height in the circular system. $r$ is the distance from the center of the coordinate system to the point. $\theta$ is the angle in the coordinate system.
+Because we are working in a cylindrical coordinate system, we use three variables to index every point in the coordinate system. $z$ is the height in the cylindrical system. $r$ is the distance from the center of the coordinate system to the point. $\theta$ is the angle in the coordinate system.
 
-We now need to find the desired volume. Since we want a mean height to be 1, the area beneath the desired function is the same as a cylinder spanning over the same area with a height of 1. This cylinder has the area of $h^2 \cdot \pi$ where $h$ is the bandwidth. To find the absolute densities we therefore divide by the actual volume and multiply by the desired volume, as shown in \cref{eq:absoluteDensitiesEpanechnikov}.
+We now need to find the desired volume. Since we want a mean height to be 1, the area beneath the desired function is the same as a cylinder spanning over the same area with a height of 1. This cylinder has the volume of $h^2 \cdot \pi$ where $h$ is the bandwidth. To find the absolute densities we therefore divide by the actual volume and multiply by the desired volume, as shown in \cref{eq:absoluteDensitiesEpanechnikov}.
 
 \begin{equation}
 \label{eq:absoluteDensitiesEpanechnikov}
-\frac{\frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) * \mathbbm{1}_{\{|u| \leq 1\}}}{\frac{3\pi h}{8}} * \left(h^2 \cdot \pi\right)
+\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) * \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}}{\frac{3\pi h}{8}} * \left(h^2 \cdot \pi\right)
 \end{equation}
 
-To go from absolute densities to relative densities we simply divide by the area of the absolute density calculation, which is $h^2 \cdot \pi$. The relative density can then be calculated as shown in \cref{eq:relativeDensitiesEpanechnikov}.
+We here return to denoting the distance to the observation by $d$. To go from this absolute density form to a relative density form, we divide by the area of the absolute density form, which is $h^2 \cdot \pi$. The relative density can then be found as shown by the reduction in \cref{eq:relativeDensitiesEpanechnikov}.
 
 \begin{equation}
 \label{eq:relativeDensitiesEpanechnikov}
 \begin{split}
-&\frac{\frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) \cdot \mathbbm{1}_{\{|u| \leq 1\}}}{\frac{3 \pi h}{8}} \cdot \frac{h^2 \cdot \pi}{h^2 \cdot \pi}\\
-= &\frac{\frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) \cdot  \mathbbm{1}_{\{|u| \leq 1\}}}{\frac{3 \pi h}{8}}\\
-= &\frac{2}{\pi \cdot h^2} * \left(1-\left(\frac{r}{h}\right)^2\right) \cdot \mathbbm{1}_{\{|u| \leq 1\}}
+&\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}}{\frac{3 \pi h}{8}} \cdot \frac{h^2 \cdot \pi}{h^2 \cdot \pi}\\
+= &\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot  \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}}{\frac{3 \pi h}{8}}\\
+= &\frac{2}{\pi \cdot h^2} * \left(1-\left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}
 \end{split}
 \end{equation}
 
-Finally, we simply have to sum up the relative densities for all people.
+Finally, we sum the relative densities for all people, in order to find the estimated kernel density.
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikov}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\} }\right)
 \end{equation}
 
-Here $d_{x,i}$ is the distance from the desired point $x$ to the person $i$, and $N$ is the total amount of people. Since we have used a kernel function with a drop-off distance of h, which is the distance where all larger distances gives the value 0, in practice we only have to sum up densities for people within this radius of the point. This, as already mentioned, gives us some advantageous properties when we later in this chapter have to implement this function.
+Here $d_{x,i}$ is the distance from the desired point $x$ to the person $i$, and $N$ is the total amount of people. Since we have used a kernel function with an indicator function, in practice we only have to sum up densities for people within this of the point. This, as already mentioned, gives us some advantageous properties when we later in this chapter have to implement this function.
 
 We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by introducing an intensity variable $I$. See \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}. This variable will be utilised later in this section.
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\} }\right)
 \end{equation}
 
 

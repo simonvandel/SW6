@@ -1,31 +1,32 @@
 \section{Initial Requirements}\label{sec:s1_requirements}
-Before we can begin the development of the application, we need to have a more well defined  
+\lanote{application vs system her?}
+Before we begin the development of the application, we need to have a more well defined understanding of the concrete functionalities the application should include. In order to indentify these concrete functionalities we first consider potential users of the application. After this we can identify potential use cases for the application, that we can finally use to specify the requirements for the application. As we do not currently have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
 
-In this section we specify the initial requirements for the system, based on our problem statement. As we do not have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
+\subsection{Users}
+Before we consider how the application should be used, we will consider who the potential users of the application are. We assume that the application will have two different types of users, stationary users and mobile users, who will use the application for different purposes. A description of the stationary and mobile users can be seen in \cref{tab:stat_user,tab:mob_user}, respectively.
 
-\subsection{Use Cases}
-In order to identify the initial requirements for our system, we start by identifying some use cases for the system. Before specifying the use cases, we consider who the users of the system are. We assume that the system will have two different types of users, stationary users and mobile users, who will use the system for different purposes. A description of the stationary and mobile users can be seen in \cref{tab:stat_user,tab:mob_user}, respectively.
+Stationary users could be personnel in charge of crowd management. Their tasks would include identifying dangerous situations, and taking the proper actions if one such situation occurs, such as dispatching of relevant personnel to an incident location.
 
 \begin{table}[h!]
     \centering
-    \begin{tabularx}{\textwidth*7/8}{X}
+    \begin{tabularx}{\textwidth*3/4}{X}
         \toprule
         \multicolumn{1}{c}{\textbf{Stationary user}} \\ 
         \midrule
-        \textbf{Description:} A stationary user of the system, who access the system from a stationary location. Their primary use of the system is maintaining an overview of the state of the crowd, and identifying potentially dangerous crowd situations. \\
+        \textbf{Description:} A stationary user who access the application from a stationary location. Their primary use of the system is maintaining an overview of the state of the crowd, and identifying potentially dangerous crowd situations. \\
         \\
-        \textbf{Characteristics:} There can be multiple stationary users of the system, with varying experience. \\
+        \textbf{Characteristics:} There can be multiple stationary users of the application at the same time, with varying experience in using the application. \\
         \bottomrule
     \end{tabularx}
     \caption{Description of the stationary user}
     \label{tab:stat_user}
 \end{table}
 
-Stationary users could be personnel in charge of crowd management, whose tasks would include identifying dangerous situations, and take the proper actions if one such situation occurs. This could include dispatching of relevant personnel to an incident location.
+Mobile users include personnel located around the event area, such as guards and medical personnel. Their tasks could include responding to reports of incidents, from both a central dispatcher and event attendees.
 
 \begin{table}[h!]
     \centering
-    \begin{tabularx}{\textwidth*7/8}{X}
+    \begin{tabularx}{\textwidth*3/4}{X}
         \toprule
         \multicolumn{1}{c}{\textbf{Mobile user}} \\ 
         \midrule
@@ -38,8 +39,10 @@ Stationary users could be personnel in charge of crowd management, whose tasks w
     \label{tab:mob_user}
 \end{table}
 
-Mobile users include personnel located around the event area, such as guards and medical personnel. Their tasks could include responding to reports of incidents, from both a central dispatcher and from event attendees.
+% comment
 
+\subsection{Use Cases}
+Now that we have a better idea of who the users are, we can consider how they wIn order to identify the initial requirements for our system, we start by identifying some use cases for the system. Before specifying the use cases, we consider who the users of the system are. 
 Now we can consider some potential use cases for our system. We assume that the system will have the two use cases shown in \cref{tab:s1-uc1,tab:s1-uc2}.
 
 \begin{table}[h!]

@@ -1,15 +1,17 @@
 \chapter{Future Work}\label{ch:future_work}
 
-This chapter presents improvements to the system that was not implemented by the authors of this report. This list should be of interest to other students who wish to continue work on the aSTEP multi-project and in particular the specific area this project is concerned with.
+This chapter presents improvements to the system that was not implemented by the authors of this report. This list should be of interest to other students who wish to continue work on the aSTEP multi-project and in particular the specific domain this project is concerned with.
 
-\section{Map matching}
-It the project two different types of map matching were found that could be implemented to improve the system, one working with error in the density situation area and one with moving people
+\section{Map Matching}
+In the project two different types of problems appear; one working with errors in the density situation area and one with moving people. Map matching techniques can be used to solve these problems and thereby improve the system,
+
+
 \subsection{Density Situation Area Error}
-With situation area is here meant the area of which we calculate the density for. In \cref{sub:kernelDensityEstimation}
-we calculate the local crowd density considering points that are a maximum of the bandwidth away from the point and assume an area of a circle with a radius the bandwidth. A problem arises with this. In \cref{fig:fenceCrowd} a crowd standing against a fence is illustrated. If a person were standing at the red point, which is the centre of the blue area illustrating the bandwidth, he would only be affected by the people under the fence and not the absence of people above it. If we assume a bandwidth of 5 meters, his perceived density would be around $1 m^{-1}$. If we calculate the density as explained in \cref{sub:kernelDensityEstimation}, with the blue area taken into consideration the density would be around $0.5 m^{-1}$.
+With situation area is here meant the area of which we calculate the density for. In \cref{sub:kernelDensityEstimation} we calculate the local crowd density considering points that are a maximum of the bandwidth away from the point and assume an area of a circle with a radius of the bandwidth. A problem arises with this; In \cref{fig:fenceCrowd} a crowd standing against a fence is illustrated. If a person was standing at the red point, which is the centre of the blue area illustrating the bandwidth, they would only be affected by the people south of the fence and not the absence of people north of it. If we assume a bandwidth of 5 meters, the person's perceived density would be around $1 \text{ people} / m^2$. If we calculate the density as explained in \cref{sub:kernelDensityEstimation}, with the blue area taken into consideration the density would be around $0.5 \text{ people} / m^2$.
 This problem could be solved with some form of map matching that could dynamically change the area considered for each local crowd density, taking obstacles into considerations.
 
-\begin{figure}\centering
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[scale=3]
 \coordinate (A) at (0,-0.1);
 \coordinate (B) at (0.2,-0.1);
