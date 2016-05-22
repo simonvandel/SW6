@@ -78,6 +78,7 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
 \caption{Kernel density function plots}
 \end{figure}
 
+\kanote{hvis alle kernel functions har et areal på 1, så er det her en lidt underlig paragraf}
 Choosing a kernel function is not very important as long as the chosen function has an area of 1 beneath it.\jenote{find source} The area of both functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both Gaussian and Epanechnikov hold this property, Epanechnikov was chosen because it is not defined for every x value, making its performance advantageous. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
 
 \begin{figure}[htbp]
@@ -142,7 +143,7 @@ The last kernel density type is probabilistic. This is the absolute densities di
 
 \subsubsection{Bandwidth}
 
-\kanote{Jens
+\kanote{Jens, omskriv denne paragraf}
 Kernel functions have an area of 1 beneath them since they denote the probability of finding an observation at certain distances from them. In essence this means that all observations exist in the distribution of the function. In our case, this denotes how much an observed person weighs for the density of the point. The problem is that observations can exist further away than a distance of 1. We assume that all distances are in SI unit meters. We want a way to adjust the limit marking which observations should be considered in the estimation, in order to include all observations of importance, but still have the kernel density functions have an area of 1. 
 
 This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel density function.

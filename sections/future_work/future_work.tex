@@ -3,11 +3,10 @@
 This chapter presents improvements to the system that was not implemented by the authors of this report. This list should be of interest to other students who wish to continue work on the aSTEP multi-project and in particular the specific domain this project is concerned with.
 
 \section{Map Matching}
-In the project two different types of problems appear; one working with errors in the density situation area and one with moving people. Map matching techniques can be used to solve these problems and thereby improve the system,
+In the project two different types of problems appear; one working with errors in the density estimation and one with moving people. Map matching techniques can be used to solve these problems and thereby improve the system,
 
-
-\subsection{Density Situation Area Error}
-With situation area is here meant the area of which we calculate the density for. In \cref{sub:kernelDensityEstimation} we calculate the local crowd density considering points that are a maximum of the bandwidth away from the point and assume an area of a circle with a radius of the bandwidth. A problem arises with this; In \cref{fig:fenceCrowd} a crowd standing against a fence is illustrated. If a person was standing at the red point, which is the centre of the blue area illustrating the bandwidth, they would only be affected by the people south of the fence and not the absence of people north of it. If we assume a bandwidth of 5 meters, the person's perceived density would be around $1 \text{ people} / m^2$. If we calculate the density as explained in \cref{sub:kernelDensityEstimation}, with the blue area taken into consideration the density would be around $0.5 \text{ people} / m^2$.
+\subsection{Density Estimation Error With Obstacles}
+In \cref{sub:kernelDensityEstimation} we calculate the local crowd density considering points that are a maximum of the bandwidth away from the point and assume an area of a circle with a radius of the bandwidth. A problem arises with this; In \cref{fig:fenceCrowd} a crowd standing against a fence is illustrated. If a person was standing at the red point, which is the centre of the blue area illustrating the bandwidth, they would only be affected by the people south of the fence and not the absence of people north of it. If we assume a bandwidth of 5 meters, the person's perceived density would be around $1 \text{ people} / m^2$. If we calculate the density as explained in \cref{sub:kernelDensityEstimation}, with the blue area taken into consideration the density would be around $0.5 \text{ people} / m^2$.
 This problem could be solved with some form of map matching that could dynamically change the area considered for each local crowd density, taking obstacles into considerations.
 
 \begin{figure}[htbp]
@@ -80,12 +79,14 @@ This problem could be solved with some form of map matching that could dynamical
 
 \draw[ultra thick, dashed] (-1,0) -- (1,0) node[above left] {Fence};
 \end{tikzpicture}
-\caption{Crowd standing against a fence}
+\caption{Crowd standing against a fence.}
 \label{fig:fenceCrowd}
 \end{figure}
 
 \subsection{Moving people}
-Due to the imprecision of the real world data a person can jump back and forth between two points on a map that are separated by an obstacle when he in reality just standing on one side against the obstacle. Some of the cases could be removed with map matching people moving towards the obstacle. If they reach the obstacle and stop or move along it, any observation received from the opposite side of the obstacle could be projected to the correct side. This behaviour should have some form of distance where this projection should not happen in case of error in the map data.
+Due to the imprecision of the real world data a person can jump back and forth between two points on a map that are separated by an obstacle when they in reality are just standing on one side of the obstacle. 
+
+Some of these issues could be eliminates using map matching techniques. If people moving towards an obstacle reach the obstacle and stop or move along it, any observation received from the opposite side of the obstacle could be projected to the correct side. This behaviour should be defined in terms of have some form of distance where this projection should not happen in case of errors in the map data.
 
 \section{Warning System}
 As Leif Bjørn proposed in \cref{sub:telia_parken_meeting}, a warning system would be desirable. With such an addition in place, the system is able to determine that a crowd situation can  evolve to be of a particular dangerous form, To perform such an analysis, prior incidents could be considered as a form of training data

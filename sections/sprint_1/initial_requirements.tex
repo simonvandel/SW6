@@ -13,12 +13,12 @@ Stationary users could be personnel in charge of crowd management. Their tasks w
         \toprule
         \multicolumn{1}{c}{\textbf{Stationary user}} \\ 
         \midrule
-        \textbf{Description:} A stationary user who access the application from a stationary location. Their primary use of the system is maintaining an overview of the state of the crowd, and identifying potentially dangerous crowd situations. \\
+        \textbf{Description:} A stationary user who access the application from a stationary location. Their primary use of the system is maintaining an overview of the state of the crowd during the event. \\
         \\
         \textbf{Characteristics:} There can be multiple stationary users of the application at the same time, with varying experience in using the application. \\
         \bottomrule
     \end{tabularx}
-    \caption{Description of the stationary user}
+    \caption{Description of the stationary user.}
     \label{tab:stat_user}
 \end{table}
 
@@ -32,25 +32,57 @@ Mobile users include personnel located around the event area, such as guards and
         \midrule
         \textbf{Description:} A mobile user of the system. The user moves around the event area, and must access the system from any given position. Their primary use of the system is to get a quick overview of the state of the crowd when moving from one point to another. \\
         \\
-        \textbf{Characteristics:} There can be multiple mobile users of the system, with varying experience. \\
+        \textbf{Characteristics:} There can be multiple mobile users of the system, with varying experience in using the application, and varying knowledge of the event area. \\
         \bottomrule
     \end{tabularx}
-    \caption{Description of the mobile user}
+    \caption{Description of the mobile user.}
     \label{tab:mob_user}
 \end{table}
 
 % comment
 
 \subsection{Use Cases}
-Now that we have a better idea of who the users are, we can consider how they wIn order to identify the initial requirements for our system, we start by identifying some use cases for the system. Before specifying the use cases, we consider who the users of the system are. 
-Now we can consider some potential use cases for our system. We assume that the system will have the two use cases shown in \cref{tab:s1-uc1,tab:s1-uc2}.
+Now that we have a better idea of who the users are, we can consider how they will use the application. This is done by identifying some potential use cases for the application. These use cases will be the basis of the requirements for the application.
+
+First we consider potential use cases for the stationary users. The application should help the stationary users by providing them with an overview of the entire event area, such that potentially dangerous situations could be identified early, and swift actions can be taken. The primary use case for stationary users is described in \cref{tab:s1-uc1}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Survey crowd \\ \hline
+        \textbf{ID:}    & S1-UC1 \\ \hline
+        \textbf{Description:} & A user surveys the crowd, looking for potentially dangerous situations. \\ \hline
+        \textbf{Actors:} & Stationary users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user opens the application on a desktop computer
+            \item The user observes the state of the crowd on the map
+            \item The user sees a potential problem developing
+            \item The user takes appropriate actions
+        \end{enumerate}
+        \\ \hline
+        \textbf{Extensions:} & 
+        \begin{enumerate}
+            \item The user opens the application on a desktop computer
+            \item The user observes the state of the crowd on the map
+            \item The user sees no problems with the crowds
+            \item No actions are required
+        \end{enumerate} 
+        \\ \hline
+    \end{tabularx}
+    \caption{Survey crowd use case description.}
+    \label{tab:s1-uc1}
+\end{table}
+
+Next we consider the mobile users. They are likely stationed around the events area, and must respond to incident reports from these positions. The application should assist these users in finding a path to the incident location, reducing their response time. This use case is described in \cref{tab:s1-uc2}.
 
 \begin{table}[h!]
     \centering
     \begin{tabularx}{\textwidth}{|l|X|}
         \hline
         \textbf{Name:}  & Find fastest route \\ \hline
-        \textbf{ID:}    & S1-UC1 \\ \hline
+        \textbf{ID:}    & S1-UC2 \\ \hline
         \textbf{Description:} & A user must find the fastest route to a incident location. \\ \hline
         \textbf{Actors:} & Mobile users \\ \hline
         \textbf{Success scenario:} & 
@@ -59,47 +91,20 @@ Now we can consider some potential use cases for our system. We assume that the 
             \item The user identifies own position on the map
             \item The user identifies the incident location on the map
             \item The user observes the state of the crowd on the map
-            \item The user identifies a route to the incident location, avoiding crowd congestions
+            \item The user identifies congested areas
+            \item The user identifies a route to the incident location, avoiding the congested areas
         \end{enumerate}
         \\
         \hline
     \end{tabularx}
-    \caption{Find fastest route use case}
-    \label{tab:s1-uc1}
-\end{table}
-
-\begin{table}[h!]
-    \centering
-    \begin{tabularx}{\textwidth}{|l|X|}
-        \hline
-        \textbf{Name:}  & Survey crowd \\ \hline
-        \textbf{ID:}    & S1-UC2 \\ \hline
-        \textbf{Description:} & A user surveys the crowd, looking for potentially dangerous situations. \\ \hline
-        \textbf{Actors:} & Stationary users \\ \hline
-        \textbf{Success scenario:} & 
-        \begin{enumerate}
-            \item The user has the application open on a desktop pc
-            \item The user observes the state of the crowd on the map
-            \item The user sees no problems with the crowds
-        \end{enumerate}
-        \\ \hline
-        \textbf{Alternative scenario:} & 
-        \begin{enumerate}
-            \item The user has the application open on a desktop pc
-            \item The user observes the state of the crowd on the map
-            \item The user sees a potential problem developing
-            \item The user takes appropiate actions
-        \end{enumerate} 
-        \\ \hline
-    \end{tabularx}
-    \caption{Survey crowd use case}
+    \caption{Find fastest route use case description.}
     \label{tab:s1-uc2}
 \end{table}
 
 These use cases can be used to identify more specific requirements for our application.
 
 \subsection{MoSCoW Mehtod}
-As the requirements are currently only based on our assumed use cases, they will most likely change during the development of the system. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
+As the requirements are currently only based on our assumed use cases, they will most likely change during the development of the application. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
 
 This method groups the requirements into four categories; \emph{Must have}, \emph{Should have}, \emph{Could have}, and \emph{Won't have}. 
 
