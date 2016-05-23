@@ -159,8 +159,6 @@ People can change their velocity quickly and drastically. They often have a goal
 
 The heading direction is useful based on the assumption that the person is most likely to continue his or her movement at any given time. Note that the heading direction is not the same as averaging over all vectors in an observation, for example, averaging over all vectors in, $t-4$ through $t$, will only bring the resulting vector further from the heading direction.
 
-
-
 \subsection{Turbulence}
 \label{sub:crowdFactorTurbulence}
 The concept of local crowd turbulence was first introduced by \citet{videoanalysis} and is the irregularity in the heading direction of the crowd. This means that a point in a crowd where people are moving in a lot of different directions will have a higher turbulence than one where people are more uniform in their movement. It is based on the heading direction rather than the local crowd velocity, since heading direction is more precise in illustrating where individual people are heading towards. The more variance there is in heading directions of the people in the crowd the more unsettled people get, increasing the risk of people falling and crowd panic arising. This factor has been found to be good as an early indicator for hazardous situations in a crowd, especially in crowds with a low density~\cite{wirz2012inferring}.
@@ -168,6 +166,7 @@ The concept of local crowd turbulence was first introduced by \citet{videoanalys
 %Turbulence can be hard to infer from visual observations. The severity of the situation is also hard to observe without any form of calculations. Here a mobile based system with specific positions over time for the users, can do this a lot easier, since the velocity is easily observed here and calculations for turbulence can then be done before visualising it for the user.
 
 \subsection{Pressure}
+\label{subsec:crowdConditionsPressure}
 The pressure is the variance of the local crowd velocity times the local crowd density, and was suggested by \citeauthor{empircalstudy} \citeyearpar{empircalstudy} \cite{empircalstudy} and \citeauthor{videoanalysis} \citeyearpar{videoanalysis} \cite{videoanalysis}. As a way of [...] \jenote{Gør denne sætning færdig, potentielt med specifik quote fra dem}
 
 In high density crowds people are more affected by velocity rather than their own goal of movement. It is therefore variance in velocity combined with the density that pressure tries to capture.

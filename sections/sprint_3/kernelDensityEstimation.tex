@@ -196,7 +196,7 @@ As explained earlier, the function is currently on a probability form, and not o
 
 \begin{equation}
 \label{eq:volumeUnder3dEpanechnikov}
-\int_0^{2 \pi} \int_0^h \int_0^1 \frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) \cdot r \mathrm{d}z\ \mathrm{d}r\ \mathrm{d}\theta\ = \frac{3 \pi h}{8}
+\int_0^{2 \pi} \int_0^h \int_0^1 \frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) r \mathrm{ d}z\ \mathrm{d}r\ \mathrm{d}\theta\ = \frac{3 \pi h}{8}
 \end{equation}
 
 Because we are working in a cylindrical coordinate system, we use three variables to index every point in the coordinate system. $z$ is the height in the cylindrical system. $r$ is the distance from the center of the coordinate system to the point. $\theta$ is the angle in the coordinate system.
@@ -234,8 +234,6 @@ We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by int
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
 \frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
-
-
 
 %\includemovie[
 %	poster,
