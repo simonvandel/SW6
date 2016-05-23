@@ -140,14 +140,8 @@ The last kernel density type is probabilistic. This is the absolute densities di
 
 \subsubsection{Bandwidth}
 
-
-
-\kanote{Jens, omskriv denne paragraf}
 Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the density of the point. For our chosen kernel function, Epanechnikov, this ranges between between -1 and 1. 
-This presents a problem, since we want a way to adjust the limit marking which observations should be considered in the estimation, because we do not know how far away observations affect the density.
-
-
-The problem is that observations should be able to affect the local density from further away. in order to include all observations of importance, but still have the kernel density functions have an area of 1. 
+This constant range presents a problem, since we do not know how far away observations affect the density. Therefore we want a way to adjust the limit marking which observations should be considered in the estimation.
 
 This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel density function.
 
