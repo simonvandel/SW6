@@ -2,7 +2,7 @@
 Using what we now know about kernel density estimation, we can now expand this to the four crowd factors presented in \cref{sec:related_work}. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure, which we will explain further.
 
 \subsubsection{Density}
-When calculating the crowd densities, using kernel density estimation, we insert the \enquote{intensity} of a person into the formula. The intensity, in this case, is be the amount which a given person contributes to the density, which is his physical size. However, since we have no way of deducting a persons size based on his position data, we assume that every person is the same size, which would be \enquote{1 person}. This gives us the formula:
+When calculating the crowd densities, using kernel density estimation, we insert the \enquote{intensity} of a person into the formula. The intensity, in this case, is the amount which a given person contributes to the density, which is his physical size. However, since we have no way of deducing a persons size based on his position data, we assume that every person is the same size, which would be \enquote{1 person}. This gives us the formula:
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
@@ -25,10 +25,11 @@ The function can be reduced to:
 \end{equation}
 
 \subsubsection{Turbulence}
-Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. In order to do this, we require a way to represent a direction. Following the method of \citet{localTrendStatistics}, we choose to represent direction as an angle, since direction in inherently cyclic. However the cyclic nature of angles provides an obstacle when we wish to find the average direction. In \cref{fig:radiansHeadingdirection} the problem is illustrated.
+Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. In order to do this, we require a way to represent a direction. Following the method of \citet{localTrendStatistics}, we choose to represent direction as an angle, since direction is inherently cyclic. However the cyclic nature of angles provides an obstacle when we wish to find the average direction. This problem isillustrated in \cref{fig:radiansHeadingdirection}.
 
 
-\begin{figure}\centering
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[scale=3]
 \draw[->] (-1.2,0) to (1.2,0) node[anchor=west] {$x$};
 \draw[->] (0,-1.2) to (0,1.2) node[anchor=south] {$y$};
@@ -75,17 +76,17 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 \label{fig:radiansHeadingdirection}
 \end{figure}
 
-If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. While this could have also been done with a two dimensional vector, we chose to keep with the complex numbers of the original solution, partly in order to better differentiate from velocity and also since the a vector would have implied not only direction but also speed.
+If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. While this could have also been done with a two dimensional vector, we chose to keep with the complex numbers of the original solution, partly in order to better differentiate from velocity and also since a vector would have implied not only direction but also speed.
 
-Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ Where $z_i$ is the heading direction for person $i$.
+Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ where $z_i$ is the heading direction for person $i$ \sinote{hvad er N?}.
 
-In order to apply this in our system, we need to adjust the heading directions according to their kernel values. But before we do this, we have to consider a special case. Recalling our definition from \cref{subsubsec:headingDirection}, a persons heading direction is the average angle across his previous observed positions. Since we can not possibly observe infinitely many previous positions, it is possible that a person, who have been standing still for a while, has no defined heading direction.In order to best account for this, we must consider a still standing persons influence on the turbulence of an area.
+In order to apply this in our system, we need to adjust the heading directions according to their kernel values. But before we do this, we have to consider a special case. Recalling our definition from \cref{subsubsec:headingDirection}, a person's heading direction is the average angle across his previous observed positions. Since we can not possibly observe infinitely many previous positions, it is possible that a person, who have been standing still for a while, has no defined heading direction. In order to account for this the best, we must consider a still standing person's influence on the turbulence of an area.
 
-Consider an area where everybody are standing still. This should be considered the opposite of a turbulent area, suggesting that a still standing person should contribute to less turbulence in an area.
+Consider an area where everybody is standing still. This should be considered the opposite of a turbulent area, suggesting that a still standing person should contribute to less turbulence in an area.
 
 However, an area where everybody is moving in a uniform direction, the introduction of still standing people would surely increase the turbulence of that area.
 
-These two conflicting observations makes it impossible to perfectly evaluate a still standing persons influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining peoples heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
+These two conflicting observations makes it impossible to perfectly evaluate a still standing person's influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining people's heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
 
 All these considerations leaves us with this formula for calculating turbulence, where $N'$ is the number of people with a heading direction:
 

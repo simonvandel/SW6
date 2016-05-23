@@ -7,44 +7,49 @@ In order to fully understand the need for a good implementation of the analyser,
 \begin{algorithmic}[1]
 
 \Function{Analyser}{List points, List people, Bandwidth h}
+\State Densities $\gets empty List$
+\State Velocities $\gets empty List$
+\State Turbulence $\gets empty List$
+\State Pressure $\gets empty List$
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \ForAll{people, P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State LocalDensity $\gets$ KernelSum $\cdot ( 2 / (\pi \cdot h^2))$
+    \State \Call{Densities.Add}{KernelSum $\cdot\; 2 / (\pi \cdot h^2)$}
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State VelocitySum $\gets 0$
     \ForAll{people, P}
-        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{|x - P|}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State x.LocalVelocity $\gets$ VelocitySum $/$ KernelSum
+    \State \Call{Velocities.Add}{VelocitySum $/$ KernelSum}
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State TurbuSum $\gets 0$
     \ForAll{People, P}%
-        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{|x - P|}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State LocalTurbulence $\gets$ TurbuSum $/$ KernelSum
+    \State \Call{Turbulence.Add}{TurbuSum $/$ KernelSum}
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State PressSum $\gets 0$
     \ForAll{People, P}
-        \State VelocityDif $\gets$ (\Call{VelocityOf}{P} $-$ x.LocalVelocity)
-        \State PressSum $\gets$ PressSum $+$ \Call{Abs}{VelocityDif}$^2$ $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State VelocityDiff $\gets$ |\Call{VelocityOf}{P} $-$ x.LocalVelocity|
+        \State PressSum $\gets$ PressSum $+$ (VelocityDiff)$^2$ $\cdot$ \Call{Kernel}{|x - P|}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State LocalPressure $\gets$ x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)
+    \State \Call{Pressure.Add}{x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)}
 \EndFor
+\State\textbf{Return} (Densities, Velocities, Turbulence, Pressure)
 \EndFunction
 \end{algorithmic}
 \end{center}
@@ -84,7 +89,7 @@ Having reduced the complexity, we still need to reduce the amount of constants i
     \State CulledPeople $\gets$ \Call{t.inRange}{h,p} 
     \State Result $\gets$ Result + \Call{analysePoint}{p,CulledPeople}
 \EndFor
-\State \return Result
+\State \textbf{Return} Result
 
 \EndFunction
 
@@ -110,42 +115,6 @@ Having reduced the complexity, we still need to reduce the amount of constants i
         \State TurbulenceKernelValueSum $\gets$ TurbulenceKernelValueSum + TempKernelValue
     \EndIf
 \EndFor
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ForAll{points, x}
-    \State KernelSum $\gets 0$
-    \State VelocitySum $\gets 0$
-    \ForAll{People, P}
-        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
-    \EndFor
-    \State x.LocalVelocity $\gets$ VelocitySum $/$ KernelSum
-\EndFor
-
-\ForAll{points, x}
-    \State KernelSum $\gets 0$
-    \State TurbuSum $\gets 0$
-    \ForAll{People, P}%
-        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
-    \EndFor
-    \State LocalTurbulence $\gets$ TurbuSum $/$ KernelSum
-\EndFor
-
-\ForAll{points, x}
-    \State KernelSum $\gets 0$
-    \State PressSum $\gets 0$
-    \ForAll{People, P}
-        \State VelocityDif $\gets$ (\Call{VelocityOf}{P} $-$ x.LocalVelocity)
-        \State PressSum $\gets$ PressSum $+$ \Call{Abs}{VelocityDif}$^2$ $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
-    \EndFor
-    \State LocalPressure $\gets$ x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)
-\EndFor
 \EndFunction
-
-
 \end{algorithmic}
-
 \end{center}
