@@ -1,10 +1,10 @@
 \subsection{Kernel Density Estimation}
 \label{sub:kernelDensityEstimation}
 
-Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire area. These counts could then be displayed in histograms for a better overview. The problem with this approach is the definition of the local areas. Whatever way you decide to define the areas will affect the outcome of the count, which in turn will affect the histograms, giving a possibly skewed overview\kanote{jens, insert article reference here}. Since we do not want this, we need to use a different method.
+Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire area. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
 
-%--- Jens' formulering --- %
-%To calculate the local crowd density, one could place a grid over the area, count the number of people in each square and divide by the area of the square. This can be done with histograms. The problem with this method is its sensitivity to the grid, and that inaccuracies in the measured positions are not accounted for.\jenote{Complete the argumentation for why we should use kernel density estimation rather than histograms}
+Another method is to use kernel functions to estimate local density. with this approach we use a kernel function to 
+
 
 \kanote{mangler en overgang fra problemet med histogrammer til kernel density estimation}
 
