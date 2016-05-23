@@ -5,7 +5,7 @@ Finding a local crowd density can be a simple task. Simply define the local area
 
 Another method is to use kernel density estimation. With this approach we estimate the density contentious across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any the point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
 
-\subsubsection{Choosing a Kernel Function}
+\subsubsection{Finding Local Crowd Densities}
 There exists multiple kernel functions that can be used in the kernel density estimation. The most commonly used is the Gaussian distribution, also known as the normal distribution, given by the function in \cref{eq:1dGaussianDistribution}. The function, given the distance $d$ from an observation to the center of the kernel, returns the probability of the observation. An observation in this context, is a sample drawn from the distribution. The Gaussian distribution is commonly used as a kernel function because it arises naturally, both in theory and in experiments.
 
 \begin{equation}
@@ -23,7 +23,6 @@ K(d) = \frac{3}{4} \left( 1-d^2 \right) \mathbbm{1}_{\{\left| d \right| \leq 1\}
 \end{equation}
 
 Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that if $|d|$ has a value less than or equal to 1, the function returns $1$, otherwise $0$. This means that any person placed outside this range in our data set can be ignored. This property can be seen in the plot of the function in \cref{fig:1dEpanechnikovDistributionPlot}, where one can also see that the function converges with the x axis at $-1$ and $1$.
-\lanote{Maybe remove this graph and use the one with the area marked instead}
 
 \begin{figure}[htbp]
 \begin{subfigure}[c]{.49\linewidth}
@@ -224,7 +223,7 @@ Finally, we sum the relative densities for all people, in order to find the esti
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikov}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\} }\right)
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
 Here $d_{x,i}$ is the distance from the desired point $x$ to the person $i$, and $N$ is the total amount of people. Since we have used a kernel function with an indicator function, in practice we only have to sum up densities for people within this of the point. This, as already mentioned, gives us some advantageous properties when we later in this chapter have to implement this function.
@@ -233,7 +232,7 @@ We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by int
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\} }\right)
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
 
@@ -261,5 +260,3 @@ We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by int
 %\addplot3[surf, patch type=rectangle, samples=40, restrict z to domain=0:0.2] {epanechnikov3d(5)};
 %\end{axis}
 %\end{tikzpicture}
-
-\sinote*{brug det her et sted}{We assume that each person has the same density. This is done since we do not currently have a way to find the area each person takes up. This is also a reasonable assumption, and one that most crowd safety literature makes. As long as we keep the densities on 1 for the general formulas, any deviating values for the factor can simply be multiplied on the function.}

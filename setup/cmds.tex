@@ -46,3 +46,14 @@
     \textbf{#1#2}#3\offinterlineskip\hrulefill\vskip10pt}
 \DeclareCaptionStyle{algori}{singlelinecheck=off,format=algor,labelsep=space}
 \captionsetup[algorithm]{style=algori}
+
+% kernel math
+\pgfmathdeclarefunction{epanechnikov2d}{1}{%
+  \pgfmathparse{3.0/(4.0 * #1) * (1.0 - (x/#1)^2))}%
+  }
+\pgfmathdeclarefunction{gaussian2d}{1}{%
+  \pgfmathparse{1.0/(sqrt(2 * pi) * #1) * e ^ (-1.0 / 2.0 * (x/#1)^2))}%
+}
+\pgfmathdeclarefunction{epanechnikov3d}{1}{%
+  \pgfmathparse{3.0/(4.0 * #1) * (1.0 - (sqrt(y^2 + x^2)/#1)^2))}%
+}
