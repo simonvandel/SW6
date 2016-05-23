@@ -1,10 +1,10 @@
 \subsection{Kernel Density Estimation}
 \label{sub:kernelDensityEstimation}
 
-Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire area. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
+Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
 
-Another method is to use kernel functions to estimate local density. with this approach we use a kernel function to 
-
+Another method is to use kernel density estimation. With this approach we estimate the density contentious across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We denfine this influence through a kernel function, which gives a probability dis
+With this approach we can again place local density estimations in a grid across the map, but this time the result being un
 
 \kanote{mangler en overgang fra problemet med histogrammer til kernel density estimation}
 
