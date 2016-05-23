@@ -1,7 +1,7 @@
 \subsection{Kernel Density Estimation}
 \label{sub:kernelDensityEstimation}
 
-Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
+Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result~\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
 
 Another method is to use kernel density estimation. With this approach we estimate the density contentious across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any the point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
 
@@ -153,7 +153,7 @@ This is done using a bandwidth variable. The Epanechnikov function with the band
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
-K(d) = \frac{3}{4 h} \left( 1-\left(\frac{d}{h}\right)^2 \right) \mathbbm{1}_{\{|(\frac{d}{h}| \leq 1\}}
+K(d) = \frac{3}{4 h} \left( 1-\left(\frac{d}{h}\right)^2 \right) \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}
 \end{equation}
 
 Here $d$ is the distance from the center of the kernel function to the observation, and $h$ is the bandwidth.
@@ -212,7 +212,7 @@ We now need to find the desired volume. Since we want a mean height to be 1, the
 
 \begin{equation}
 \label{eq:absoluteDensitiesEpanechnikov}
-\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) * \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}}{\frac{3\pi h}{8}} * \left(h^2 \cdot \pi\right)
+\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}}{\frac{3\pi h}{8}} \cdot \left(h^2 \cdot \pi\right)
 \end{equation}
 
 We here return to denoting the distance to the observation by $d$. To go from this absolute density form to a relative density form, we divide by the area of the absolute density form, which is $h^2 \cdot \pi$. The relative density can then be found as shown by the reduction in \cref{eq:relativeDensitiesEpanechnikov}.
@@ -220,9 +220,9 @@ We here return to denoting the distance to the observation by $d$. To go from th
 \begin{equation}
 \label{eq:relativeDensitiesEpanechnikov}
 \begin{split}
-&\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}}{\frac{3 \pi h}{8}} \cdot \frac{h^2 \cdot \pi}{h^2 \cdot \pi}\\
-= &\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot  \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}}{\frac{3 \pi h}{8}}\\
-= &\frac{2}{\pi \cdot h^2} * \left(1-\left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\}}
+&\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}}{\frac{3 \pi h}{8}} \cdot \frac{h^2 \cdot \pi}{h^2 \cdot \pi}\\
+= &\frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}}{\frac{3 \pi h}{8}}\\
+= &\frac{2}{\pi \cdot h^2} \cdot \left(1-\left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}
 \end{split}
 \end{equation}
 
