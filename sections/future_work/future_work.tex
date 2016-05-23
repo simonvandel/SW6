@@ -115,4 +115,4 @@ The system currently uses MapBox.js as a basis for it's mapping functionality. A
 \section{Better Selection of Points to Analyse}
 As described in \cref{s3:select_points} the analyser divides the area to analyse into a grid of hexagons. This means that the number of points increases quadratically in the area to analyse. This approach does not scale well as the area to analyse increases. By naively selecting all points in a grid to analyse, many wasteful computations are made, since most of the time there are no people in the area of the hexagons.
 
-This problem can be solved by only selecting points to analyse that have people within the bandwidth. With this change, the data sent to the clients 
+This problem can be solved by only selecting points to analyse that have people within the bandwidth. With this change, the data sent to the clients would have to be structured in another way.
