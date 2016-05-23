@@ -3,6 +3,7 @@
 The analysis of the crowd conditions of large events require a great amount of calculations. From the interviews with SmukFest we can expect numbers upwards of 50000 people during peek hours, and there are many events dealing with much larger numbers of people, such as the Hajj \cite{website:Wikipedia-Hajj2}. If the application is to work on large scales, we need to consider the design of the analyser module, in order to keep the amount of calculations, network communication, and memory use to a minimum.
 
 \subsection{Asynchronous Analysis}
+\label{sub:Asynchronous_Analysis}
 
 The first way we reduce the amount of calculations, is to do the analysis asynchronously from user requests. If we were to do a new analysis every time a user wants to see the crowd conditions for a given time period, multiple users requesting real-time analysis would quickly cripple the system. Instead we have a request-handler module, that handles the incoming requests and prepares them for the analyser. In order to fully benefit from this we also have to store completed analyses, such that identical requests can utilise the same results. This prompts the need for a storage module, which stores and catalogues completed analyses. This way the request-handler can bypass the analyser if the requested data is already available in storage, saving computation time.
 
