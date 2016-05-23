@@ -105,12 +105,12 @@ The system can currently only estimate crowd conditions going back in time. It w
 This feature can be implemented by analysing the current crowd condition trend, and possibly also teach the system which factors caused prior incidents to happen.
 
 \section{User Placeable Markers}
-At the moment at SmukFest, patrolling guards are reporting their findings using telephone systems.  The guards have to r
+At the moment at SmukFest, patrolling guards are reporting their findings using telephone systems. In cases where additional backup personnel is needed, the guards have to report the position of the incident to a crowd management team. As the location has to be reported using voice, the accuracy of the position can be reduced.
 
-The idea is for guards to be able to place markers on the map using their smartphones. A marker could have a note saying \enquote{Fight here}. The operators of the system would then be able to see this marker and its location, and take appropriate action.
+The idea of this improvement is that guards are able to place markers on the map using their smartphones. A marker could have a note saying \enquote{Fight here}. The operators of the system would then be able to see this marker and its location, and take appropriate action.
 
 \section{Switch From Mapbox.js to Leaflet}
-Although Mapbox.js is an open-source library, it needs an access token issued from Mapbox in order to function. There is no particular reason that Leaflet can not be used directly, instead of Mapbox.js, other than Mapbox.js having more features. This would make the mapping functionality independent on the commercial company Mapbox.
+The system currently uses MapBox.js as a basis for it's mapping functionality. Although Mapbox.js is an open-source library, it needs an access token issued from the commercial company Mapbox in order to function. There is no particular reason that Leaflet can not be used directly, instead of Mapbox.js, other than Mapbox.js having more features. This would make the mapping functionality independent on the commercial company Mapbox.
 
 \section{Better Selection of Points to Analyse}
 As described in \cref{s3:select_points} the analyser divides the area to analyse into a grid of hexagons. This means that the number of points increases quadratically in the area to analyse.  This approach does obviously not scale well as the area to analyse increases. By naively selecting all points in a grid to analyse, many wasteful computations are made, since most of the time there are no people in the area of the hexagons.
