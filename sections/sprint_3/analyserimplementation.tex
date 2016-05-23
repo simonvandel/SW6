@@ -6,19 +6,19 @@ In order to fully understand the need for a good implementation of the analyser,
 \captionof{algorithm}{Unoptimised algorithm}\label{alg:unoptimised_algorithm}
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List[Point] points, List[person] People, Bandwidth}
+\Function{Analyser}{List points, List people, Bandwidth h}
 \ForAll{points, x}
     \State KernelSum $\gets 0$
-    \ForAll{People, P}
+    \ForAll{people, P}
         \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
     \EndFor
-    \State LocalDensity $\gets$ KernelSum $/$ (\Call{Count}{P} $\cdot$ Bandwidth)
+    \State LocalDensity $\gets$ KernelSum $\cdot ( 2 / (\pi \cdot h^2))$
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State VelocitySum $\gets 0$
-    \ForAll{People, P}
+    \ForAll{people, P}
         \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{P}
         \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
     \EndFor
@@ -76,23 +76,28 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 \captionof{algorithm}{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
+\Function{Analyser}{List points, rTree t, Bandwidth h}
+
+\State Result $\gets$ empty List
 \ForAll{points, p}
     \LineComment{We reduce the amount of people using a range search}
-    \State CulledPeople $\gets$ \Call{rTree.inRange}{Bandwidth,p} 
-    \State \Call{analysePoint}{p,CulledPeople}
+    \State CulledPeople $\gets$ \Call{t.inRange}{h,p} 
+    \State Result $\gets$ Result + \Call{analysePoint}{p,CulledPeople}
 \EndFor
+\State \return Result
+
 \EndFunction
 
 \Function{analysePoint}{Point x, List[person] people}
 
-%kernelValSum, kernelValForPerson, nonNormVel, nonNormTur, turKernelValSum
 
 \State KernelValueSum $\gets 0$
-\State KernelValForPerson $\gets List[(0,vector(0.0,0.0))]$ \Comment{List of tuples containing individual Kernel values and velocity}
+\LineComment{List of tuples containing individual Kernel values and velocity}
+\State KernelValForPerson $\gets List[(0,vector(0.0,0.0))]$ 
 \State NonNormalisedVelocitySum $\gets vector(0.0,0.0)$
 \State NonNormalisedTurbulenceSum $\gets 0$
-\State TurbulenceKernelValueSum $\gets 0$ \Comment{Summarised Kernel variable adjusted for turbulence}
+\LineComment{Summarised Kernel variable adjusted for turbulence}
+\State TurbulenceKernelValueSum $\gets 0$ 
 
 
 \ForAll{People, P}

@@ -44,7 +44,7 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
     \addplot[mark=none, thick, samples=100, smooth] {gaussian2d(1)};
     \end{axis}
     \end{tikzpicture}
-    \caption{Gaussion/normal distribution}
+    \caption{Gaussion/normal distribution.}
     \label{fig:1dGaussianDistributionPlot}
 \end{subfigure}
 %
@@ -69,13 +69,13 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
     \addplot[mark=none, thick, samples=100, smooth, domain=-1:-3] {0};
     \end{axis}
     \end{tikzpicture}
-    \caption{Epanechnikov distribution}
+    \caption{Epanechnikov distribution.}
     \label{fig:1dEpanechnikovDistributionPlot}
 \end{subfigure}
-\caption{Kernel density function plots}
+\caption{Kernel density function plots.}
 \end{figure}
 
-For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are area bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which makes the performance of an implementation better. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
+For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance~\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which makes the performance of an implementation faster. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
 
 \begin{figure}[htbp]
 \begin{subfigure}[c]{.49\linewidth}
@@ -98,7 +98,7 @@ For a function to be a kernel function it must have an area of 1 beneath it and 
     \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, restrict y to domain=0:1] {gaussian2d(1)};
     \end{axis}
     \end{tikzpicture}
-    \caption{Gaussian/normal distribution}
+    \caption{Gaussian/normal distribution.}
     \label{fig:1dGaussianAreaPlot}
 \end{subfigure}
 %
@@ -124,10 +124,10 @@ For a function to be a kernel function it must have an area of 1 beneath it and 
     \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, domain=-1:1] {epanechnikov2d(1)};
     \end{axis}
     \end{tikzpicture}
-    \caption{Epanechnikov distribution}
+    \caption{Epanechnikov distribution.}
     \label{fig:1dEpanechnikovAreaPlot}
 \end{subfigure}
-\caption{The area beneath both Epanechnikov and the Gaussian distribution}
+\caption{The area beneath both Epanechnikov and the Gaussian distribution.}
 \label{fig:1dGaussianEpanechnikovAreaPlot}
 \end{figure}
 
@@ -142,7 +142,7 @@ The last kernel density type is probabilistic. This is the absolute densities di
 Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the density of the point. For our chosen kernel function, Epanechnikov, this ranges between between -1 and 1. 
 This constant range presents a problem, since we do not know how far away observations affect the density. Therefore we want a way to adjust the limit marking which observations should be considered in the estimation.
 
-This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel density function.
+This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a \sinote*{kernel function?}{kernel density function}.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
@@ -151,7 +151,7 @@ K(d) = \frac{3}{4 h} \left( 1-\left(\frac{d}{h}\right)^2 \right) \mathbbm{1}_{\l
 
 Here $d$ is the distance from the center of the kernel function to the observation, and $h$ is the bandwidth.
 
-\begin{figure}
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[baseline]
 \begin{axis}[
@@ -173,7 +173,7 @@ anchor=center]
 \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, domain=-5:5] {epanechnikov2d(5)};
 \end{axis}
 \end{tikzpicture}
-\caption{The area beneath the Epanechnikov function with bandwidth 5}
+\caption{The area beneath the Epanechnikov function with bandwidth 5.}
 \label{fig:1dEpanechnikovDistributionWithHPlot}
 \end{figure}
 
