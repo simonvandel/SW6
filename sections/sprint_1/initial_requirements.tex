@@ -1,5 +1,5 @@
 \section{Initial Requirements}\label{sec:s1_requirements}
-\lanote{Ret igennem for application vs system.. + our/the application? + Overvej rename af usecases}
+\lanote{Ret igennem for application vs system.. + our/the application? + Overvej rename af usecases + smartphone/phone/etc.? + skal vi have maintainability of extensibility på som non-funktionelle krav? + evt. fjern prioritering af non-funcktionelle krav}
 Before we begin the development of the application, we need to have a more well defined understanding of the concrete functionalities the application should include. In order to identify these concrete functionalities we first consider potential users of the application. After this we can identify potential use cases for the application, that we can finally use to specify the requirements for the application. As we do not currently have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
 
 \subsection{Users}
@@ -152,8 +152,8 @@ Combining these requirements we get the requirements specification shown in \cre
 		S1-FR1 & A detailed map of the area & Must have \\
 		S1-FR2 & An intuitive visual presentation of relevant crowd information & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
-		S1-FR3 & A graphical user interface for smartphones & Must have \\
-		S1-FR4 & A graphical user interface for desktop computers & Must have \\
+		S1-FR3 & A graphical user interface for desktop computers & Must have \\
+		S1-FR4 & A graphical user interface for smartphones & Must have \\
 		\bottomrule
 	\end{tabularx}
 	\caption{MoSCoW prioritised functional requirements for the first sprint.}
@@ -163,24 +163,39 @@ Combining these requirements we get the requirements specification shown in \cre
 \subsection{Non-functional requirements}
 In addition to the functional requirements, we can also defined some non-functional requirements for our application. Where the functional requirements specify the features that should be available to the users of the application, the non-functional requirements specify constraints for how the application should provide these features.
 
-As the crowds are constantly moving, it is necessary to visualise the crowds in real-time.
+To improve the usability of the application, we add the following non-functional requirement:
 
-it is necessary for our application to frequently update the visualisation.
+\begin{enumerate}
+    \item \textbf{The visualisation must be updated in real-time.} In order to correctly represent the current state of a constantly moving crowd, the visualisation must be updated with a high frequency. This places requirements on the frequency at which location data can be acquired, and the time required to analyse the data and update the visualisation.
+\end{enumerate}
 
-As the application is developed as a part of the aSTEP multi-project, the application should utilise the aSTEP core to provide the needed location data. Additionally we assume that the aSTEP project will continue on future semesters, and future students might continue the development of our application.
+As the application is developed as a part of the aSTEP multi-project, the application should utilise the aSTEP core to provide the needed location data. Additionally we assume that the aSTEP project will continue on future semesters, and future students might continue the development of our application. Therefore we add the following non-functional requirements:
+
+\begin{enumerate}[resume]
+    \item \textbf{Location data must be acquired using the aSTEP core.} Our application must use the aSTEP core functionalities to acquire the location data used to visualise the behaviour of the crowds.
+    \item \textbf{The application must be maintainable.} During the development of the application, maintainability should be prioritised. This facilitates development of the application in subsequent sprints and on future semesters.
+    \item \textbf{The application must be extensible.} Extensibility should also be a priority during the development, ensuring that features can be added in later development stages. This also facilitates future development on the application.
+\end{enumerate}
+
+Combining these requirements we get the specification for non-functional requirements shown in \cref{tab:s1_nreqs}.
 
 \begin{table}[h!]
 	\centering
-	\begin{tabularx}{\textwidth}{lX}
+	\begin{tabularx}{\textwidth}{lXl}
 		\toprule
-		\textbf{ID} & \textbf{Requirement} \\
+		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} \\
 		\midrule 
 		\rowcolor[HTML]{EFEFEF} 
-		S1-NR1 & The application must use the aSTEP core functionalities to acquire location data \\
+		S1-NR1 & The visualisation must be updated in real-time & Must have \\
+		S1-NR2 & Location data must be acquired using the aSTEP core & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S1-NR3 & The application must be maintainable & Should have \\
+		S1-NR4 & The application must be extensible & Should have \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Non-functional requirements identified in the first sprint.}
 	\label{tab:s1_nreqs}
 \end{table}
 
-As the application must visually present relevant crowd information, we first examine related work, to identify the different kinds of information that should be displayed.
+\lanote{Mangler nok en overgang til næste section...}
+%As the application must visually present relevant crowd information, we first examine related work, to identify the different kinds of information that should be displayed.
