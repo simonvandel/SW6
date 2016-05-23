@@ -95,15 +95,14 @@ As Leif Bjørn proposed in \cref{sub:telia_parken_meeting}, a warning system wou
 Being able to monitor different statistics such as a person count, would help the user determine how much they can rely on the system at the moment. A person count in this context refers to the amount of people that the system is able to locate at the moment. If the system is only keeping track of 5000 people at a festival, but the total number of visitors is 50000, the system is only able to provide estimates on crowd condtitions based on 10\% of the visitors. It could also be interesting to be able to see historical statistics on for example the person count to be able to analyse the cause of specific incidents.
 
 \section{Navigation}
-The requirements of the second sprint, 
+The requirements of the second sprint, presented in \cref{sec:s2_reqs}, describes the feature of user navigation. The feature was priorities as \enquote{could have} at the time, as it did not fit the direction of the project.
 
+The feature is similar to existing navigation systems for cars. These systems take traffic into consideration when guiding the user to their destination using the optimal route. In the context of events, the traffic is often large groups of people blocking pathways. The system should be able to guide users through event areas using the fastest route. This can be critical for navigating medical personnel to injured people as fast and accurate as possible.
 
+\section{Prediction of Crowd Conditions}
+The system can currently only estimate crowd conditions going back in time. It would be useful for crowd safety/management personnel to be able to also see what the crowd conditions will be like in the near future. This could be used to significantly mitigate the risk of crowd disasters by allowing crowd safety personnel to actively take preventive action.
 
-
-\sinote{Is already described a little in \cref{sec:s2_reqs}}
-
-\section{Prediction of Crowd Movement}
-Being able to predict the movement of a crowd, would greatly enhance the system's ability to function as a toolbox for crowd movement.
+This feature can be implemented by analysing the current crowd condition trend, and possibly also teach the system which factors caused prior incidents to happen.
 
 \section{User Placeable Markers}
 The idea is for guards to be able to place markers on the map using their smartphones. A marker could have a note saying \enquote{Fight here}. The operators of the system would then be able to see this marker and its location, and take appropriate action.
