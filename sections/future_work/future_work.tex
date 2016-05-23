@@ -113,6 +113,6 @@ The idea of this improvement is that guards are able to place markers on the map
 The system currently uses MapBox.js as a basis for it's mapping functionality. Although Mapbox.js is an open-source library, it needs an access token issued from the commercial company Mapbox in order to function. There is no particular reason that Leaflet can not be used directly, instead of Mapbox.js, other than Mapbox.js having more features. This would make the mapping functionality independent on the commercial company Mapbox.
 
 \section{Better Selection of Points to Analyse}
-As described in \cref{s3:select_points} the analyser divides the area to analyse into a grid of hexagons. This means that the number of points increases quadratically in the area to analyse.  This approach does obviously not scale well as the area to analyse increases. By naively selecting all points in a grid to analyse, many wasteful computations are made, since most of the time there are no people in the area of the hexagons.
+As described in \cref{s3:select_points} the analyser divides the area to analyse into a grid of hexagons. This means that the number of points increases quadratically in the area to analyse. This approach does not scale well as the area to analyse increases. By naively selecting all points in a grid to analyse, many wasteful computations are made, since most of the time there are no people in the area of the hexagons.
 
-This problem can be solved by only selecting points to analyse that have people within the bandwidth.
+This problem can be solved by only selecting points to analyse that have people within the bandwidth. With this change, the data sent to the clients 
