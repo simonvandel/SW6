@@ -1,12 +1,10 @@
 \section{Requirements} \label{sec:s2_reqs}
-%% Describes requirements identified at the beginning of the first sprint
-%% Intro
-Based on the meeting with the operational coordinators of Alarm HS, we confirmed the two types of users identified in \cref{sec:s1_requirements}. We also identified additional use cases for the system.
+In this section we revise the initial requirements identified in \cref{sec:s1_requirements}, based on the feedback we received on our system. The meeting with Alarm HS confirmed the two types of users identified in \cref{ss:s1_users}, but presented several additional use cases.
 
-\subsection{Use Cases}
-In addition to use cases defined in \cref{ss:s1_uc}, from the interview we identified six new 
+\subsection{Use Cases} \label{ss:s1_uc}
+Here we describe the additional use cases identified during the meeting with Alarm HS. In addition to the assumed use cases described in \cref{ss:s1_uc}, seven additional use cases were identified from the meeting. These additional requirements are described in \cref{tab:s2-uc1,tab:s2-uc2,tab:s2-uc3,tab:s2-uc4,tab:s2-uc5,tab:s2-uc6,tab:s2-uc7}.
 
-\lanote{Flyt use cases til bilag}
+\lanote{Flyt use cases til bilag og skriv kun deres navn her?}
 \begin{table}[h!]
     \centering
     \begin{tabularx}{\textwidth}{|l|X|}
@@ -24,7 +22,7 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
             \item The user has access to the application's features
         \end{enumerate}
         \\ \hline
-        \textbf{Extensions:} & 
+        \textbf{Extensions:} & Invalid login information \newline
         \begin{enumerate}
             \item The user opens the application on any device
             \item The application presents a login screen
@@ -52,7 +50,7 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
             \item This information layer is shown in the map
         \end{enumerate}
         \\ \hline
-        \textbf{Extensions:} & 
+        \textbf{Extensions:} & Disable layer \newline
         \begin{enumerate}
             \item The user disables a map layer
             \item This information layer is hidden on the map
@@ -78,12 +76,6 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
             \item The map pans to the location of the search result
         \end{enumerate}
         \\ \hline
-        \textbf{Extensions:} & 
-        \begin{enumerate}
-            \item The user enters a search term
-            \item The system does not find a result
-        \end{enumerate}
-        \\ \hline
     \end{tabularx}
     \caption{Search use case description.}
     \label{tab:s2-uc3}
@@ -99,7 +91,7 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
         \textbf{Actors:} & Mobile users \\ \hline
         \textbf{Success scenario:} & 
         \begin{enumerate}
-            \item The user marks a destination point
+            \item The user marks a destination
             \item The system proposes a route from the user's current location to the destination
         \end{enumerate}
         \\ \hline
@@ -114,11 +106,11 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
         \hline
         \textbf{Name:}  & Automatic warning \\ \hline
         \textbf{ID:}    & S2-UC5 \\ \hline
-        \textbf{Description:} & The system automatically warn the user of a potentially dangerous situation. \\ \hline
+        \textbf{Description:} & The system automatically warns the user of a potentially dangerous situation. \\ \hline
         \textbf{Actors:} & Stationary users \\ \hline
         \textbf{Success scenario:} & 
         \begin{enumerate}
-            \item The user is logged into the system
+            \item The user activates an automatic warning system
             \item The system predicts a potentially dangerous situation
             \item The system shows a warning on the map
         \end{enumerate}
@@ -138,7 +130,7 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
         \textbf{Actors:} & Stationary users \\ \hline
         \textbf{Success scenario:} & 
         \begin{enumerate}
-            \item The users enables a personnel layer
+            \item The user enables a personnel layer
             \item The system marks the locations of the personnel on the map
         \end{enumerate}
         \\ \hline
@@ -147,7 +139,28 @@ In addition to use cases defined in \cref{ss:s1_uc}, from the interview we ident
     \label{tab:s2-uc6}
 \end{table}
 
-\lanote{Projection onto camera images requirement missing..}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Project onto camera \\ \hline
+        \textbf{ID:}    & S2-UC7 \\ \hline
+        \textbf{Description:} & The crowd information shoudle be projected onto camera footage. \\ \hline
+        \textbf{Actors:} & Stationary users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user switches to a camera view of an area
+            \item The user enables a layer of information
+            \item The information is projected onto the camera image
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Project onto camera use case description.}
+    \label{tab:s2-uc7}
+\end{table}
+
+
 
 new requirements were identified. These requirements will be added to the requirement specification presented in \cref{sec:s1_requirements}. This gives the following requirement specification, where the requirements added for this sprint are written in italic font\lanote{or denoted in some other form, haven't decided yet}.
 
