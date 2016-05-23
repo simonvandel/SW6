@@ -16,7 +16,7 @@ Mobile users include personnel located around the event area, such as guards and
 \subsection{Use Cases} \label{ss:s1_uc}
 To define the usage of the system, we identify potential use cases. Each of these use cases describe an interaction between an actor and the system. These use cases will be the basis of the functional requirements for the application.
 
-First we consider potential use cases for the stationary users. The application should help the stationary users by providing them with an overview of the entire event area, such that potentially dangerous situations could be identified early, and swift actions can be taken. The primary use case for stationary users is described in \cref{tab:s1-uc1}.
+First we consider potential use cases for the stationary users. The application should help the stationary users by providing them with an overview of the entire event area, such that potentially dangerous situations could be identified early, and swift actions can be taken. The primary use case for stationary users is described in \cref{tab:s1-uc1}.\sinote{vi kan måske lave tabellerne pænere med booktabs ligesom stationary og mobile users}
 
 \input{tables/s1-uc1.tex}
 
@@ -47,7 +47,7 @@ This method groups the requirements into four prioritisation categories; \emph{M
 	\label{tab:moscow}
 \end{table}
 
-\subsection{Functional requirements} \label{ss:s1_freqs}
+\subsection{Functional Requirements} \label{ss:s1_freqs}
 Here we identify the functional requirements for our application, based on the two use cases in \cref{tab:s1-uc1,tab:s1-uc2}. 
 
 First we consider the \emph{Survey crowd} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a desktop computer. From this use case we define the following requirements:
@@ -61,7 +61,7 @@ First we consider the \emph{Survey crowd} use case shown in \cref{tab:s1-uc1}. W
 If we consider the \emph{Find fastest route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a smartphone. Therefore we add the following requirement.
 
 \begin{enumerate}[resume]
-    \item \emph{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone.
+    \item \emph{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the user's smartphone.
 
 \end{enumerate}
 
@@ -85,10 +85,10 @@ These requirements are all essential to the application, and will as such be pri
 	\label{tab:s1_req}
 \end{table}
 
-\subsection{Non-functional requirements} \label{ss:s1_nfreqs}
-In addition to the functional requirements, we can also defined some non-functional requirements for our application. Where the functional requirements specify the features that should be available to the users of the application, the non-functional requirements specify constraints for how the application should provide these features. 
+\subsection{Non-functional Requirements} \label{ss:s1_nfreqs}
+In addition to the functional requirements, we can also define some non-functional requirements for our application. Where the functional requirements specify the features that should be available to the users of the application, the non-functional requirements specify constraints for how the application should provide these features. 
 
-Non-functional requirements can also be requirements for the development process, and will as such be ongoing throughout the development. Due to this the non-functional requirements will be assigned a priority of \emph{High}, \emph{Medium}, or \emph{Low}, depending on the amount of focus that requirement warrants. 
+Non-functional requirements can also be requirements for the development process, and will as such be ongoing throughout the development. Due to this, the non-functional requirements will be assigned a priority of \emph{High}, \emph{Medium}, or \emph{Low}, depending on the amount of focus that requirement warrants. 
 
 To improve the usability of the application, we add the following non-functional requirement:
 
