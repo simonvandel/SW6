@@ -2,9 +2,13 @@
 Using what we now know about kernel density estimation, we can now expand this to the four crowd factors presented in \cref{sec:related_work}. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure, which we will explain further.
 
 \subsubsection{Density}
-Since the kernel 
+When calculating the crowd densities, using kernel density estimation, we insert the \enquote{intensity} of a person into the formula. The intensity, in this case, is be the amount which a given person contributes to the density, which is his physical size. However, since we have no way of deducting a persons size based on his position data, we assume that every person is the same size, which would be \enquote{1 person}. This gives us the formula:
 
-\sinote*{brug det her et sted}{We assume that each person has the same density. This is done since we do not currently have a way to find the area each person takes up. This is also a reasonable assumption, and one that most crowd safety literature makes. As long as we keep the densities on 1 for the general formulas, any deviating values for the factor can simply be multiplied on the function.}
+\begin{equation}
+\label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N 1 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
+\end{equation}
+
 
 \subsubsection{Velocity}
 The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al. by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum.
