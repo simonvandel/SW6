@@ -53,19 +53,19 @@ Here we identify the functional requirements for our application, based on the t
 First we consider the \emph{Survey crowd} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a desktop computer. From this use case we define the following requirements:
 
 \begin{enumerate}
-    \item \textbf{A detailed map of the area.} The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination. This requirement is essential to the application, and will as such be prioritised as \emph{Must have}.
-    \item \textbf{An intuitive visual presentation of relevant crowd information.} The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time. This is also an essential part of the application, and is prioritised as \emph{Must have}.
-    \item \textbf{A graphical user interface for desktop computers.} The stationary users primarily use the system to maintain an overview of the event area from a stationary position. For this purpose the application should be running constantly during the event, and a large screen is preferable for giving a better overview. Therefore it is preferable for these users to access the application on a desktop computer. This requirement is also prioritised as \emph{Must have}.
+    \item \emph{A detailed map of the area.} The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination.
+    \item \emph{An intuitive visual presentation of relevant crowd information.} The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time.
+    \item \emph{A graphical user interface for desktop computers.} The stationary users primarily use the system to maintain an overview of the event area from a stationary position. For this purpose the application should be running constantly during the event, and a large screen is preferable for giving a better overview. Therefore it is preferable for these users to access the application on a desktop computer.
 \end{enumerate}
 
 If we consider the \emph{Find fastest route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a smartphone. Therefore we add the following requirement.
 
 \begin{enumerate}[resume]
-    \item \textbf{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone. This requirement is essential, and is as such prioritised as \emph{Must have}.
+    \item \emph{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone.
 
 \end{enumerate}
 
-Combining these requirements we get the requirements specification shown in \cref{tab:s1_req}.
+These requirements are all essential to the application, and will as such be prioritised as must have. Combining these requirements we get the requirements specification shown in \cref{tab:s1_req}.
 
 \begin{table}[h!]
 	\centering
@@ -93,15 +93,15 @@ Non-functional requirements can also be requirements for the development process
 To improve the usability of the application, we add the following non-functional requirement:
 
 \begin{enumerate}
-    \item \textbf{The visualisation must be updated in real-time.} In order to correctly represent the current state of a constantly moving crowd, the visualisation must be updated with a high frequency. This places requirements on the frequency at which location data can be acquired, and the time required to analyse the data and update the visualisation. This requirement is important for the usability of the application, and will have a high priority.
+    \item \emph{The visualisation must be updated in real-time.} In order to correctly represent the current state of a constantly moving crowd, the visualisation must be updated with a high frequency. This places requirements on the frequency at which location data can be acquired, and the time required to analyse the data and update the visualisation. This requirement is important for the usability of the application, and will have a high priority.
 \end{enumerate}
 
 As the application is developed as a part of the aSTEP multi-project, the application should utilise the aSTEP core to provide the needed location data. Additionally we assume that the aSTEP project will continue on future semesters, and future students might continue the development of our application. Therefore we add the following non-functional requirements:
 
 \begin{enumerate}[resume]
-    \item \textbf{Location data must be acquired using the aSTEP core.} Our application must use the aSTEP core functionalities to acquire the location data used to visualise the behaviour of the crowds. This requirement is given a high priority.
-    \item \textbf{The application must be maintainable.} During the development of the application, maintainability should be prioritised. This facilitates development of the application in subsequent sprints and on future semesters. This requirement is given a medium priority, as it is does not directly impact the usability of the application.
-    \item \textbf{The application must be extensible.} Extensibility should also be a priority during the development, ensuring that features can be added in later development stages. This also facilitates future development on the application. This requirement is also given a medium priority.
+    \item \emph{Location data must be acquired using the aSTEP core.} Our application must use the aSTEP core functionalities to acquire the location data used to visualise the behaviour of the crowds. This requirement is given a high priority.
+    \item \emph{The application must be maintainable.} During the development of the application, maintainability should be prioritised. This facilitates development of the application in subsequent sprints and on future semesters. This requirement is given a medium priority, as it is does not directly impact the usability of the application.
+    \item \emph{The application must be extensible.} Extensibility should also be a priority during the development, ensuring that features can be added in later development stages. This also facilitates future development on the application. This requirement is also given a medium priority.
 \end{enumerate}
 
 Combining these requirements we get the specification for non-functional requirements shown in \cref{tab:s1_nreqs}.

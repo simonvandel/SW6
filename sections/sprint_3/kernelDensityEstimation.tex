@@ -142,7 +142,7 @@ The last kernel density type is probabilistic. This is the absolute densities di
 Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the density of the point. For our chosen kernel function, Epanechnikov, this ranges between between -1 and 1. 
 This constant range presents a problem, since we do not know how far away observations affect the density. Therefore we want a way to adjust the limit marking which observations should be considered in the estimation.
 
-This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a \sinote*{kernel function?}{kernel density function}.
+This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel function.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
@@ -184,15 +184,14 @@ So far we have only been looking at the distribution in one dimension. In our do
 \begin{figure}[htbp]
 \centering
     \includegraphics[width=0.5\textwidth]{3dEpanechnikov.eps}
-    \caption{Epanechnikov over an area shown in 3 dimensions.}
+    \caption{This illustration represents the distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weights.}
     \label{fig:3dEpanechnikov}
 \end{figure}
 
-\sinote*{Kan vi ikke bare flytte dette ind i caption?}{\Cref{fig:3dEpanechnikov} represents the distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weights.}
-
 \subsubsection{Relative Density Form}
 
-As explained earlier, the function is currently on a probability form, and not on the desired relative density form. In order to modify it, we first transform it to an absolute form. We assume that every person contributes the same density, so the mean value of the function should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the desired volume. \sinote*{mærkelig sætning}{The desired volume is that of which the kernel function has a mean value of 1.} We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to center is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
+As explained earlier, the function is currently on a probability form, and not on the desired relative density form. In order to modify it, we first transform it to an absolute form. We assume that every person contributes the same density, so the mean value of the function should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the volume beneath the kernel function with a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to center is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
+
 
 \begin{equation}
 \label{eq:volumeUnder3dEpanechnikov}

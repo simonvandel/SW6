@@ -6,7 +6,7 @@ When calculating the crowd densities, using kernel density estimation, we insert
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N 1 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
+D_x = \frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N 1 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
 
@@ -78,7 +78,7 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 
 If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. While this could have also been done with a two dimensional vector, we chose to keep with the complex numbers of the original solution, partly in order to better differentiate from velocity and also since a vector would have implied not only direction but also speed.
 
-Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ where $z_i$ is the heading direction for person $i$ \sinote{hvad er N?}.
+Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ where $z_i$ is the heading direction for person $i$ and $N$ is the total amount of people.
 
 In order to apply this in our system, we need to adjust the heading directions according to their kernel values. But before we do this, we have to consider a special case. Recalling our definition from \cref{subsubsec:headingDirection}, a person's heading direction is the average angle across his previous observed positions. Since we can not possibly observe infinitely many previous positions, it is possible that a person, who have been standing still for a while, has no defined heading direction. In order to account for this the best, we must consider a still standing person's influence on the turbulence of an area.
 
@@ -88,16 +88,16 @@ However, an area where everybody is moving in a uniform direction, the introduct
 
 These two conflicting observations makes it impossible to perfectly evaluate a still standing person's influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining people's heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
 
-All these considerations leaves us with this formula for calculating turbulence, where $N'$ is the number of people with a heading direction:
+All these considerations leaves us with \cref{eq:turbulence_final} for calculating turbulence, where $N'$ is the number of people with a heading direction:
 
 \begin{equation}
-\label{eq:}
-T_x = 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
-\end{equation}
-
-\begin{equation}
-\label{eq:}
-T_x = 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
+\label{eq:turbulence_final}
+\begin{split}
+T_x &= 1 - \left|\frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right| \\
+%
+%
+T_x &= 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N'} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\right|
+\end{split}
 \end{equation}
 
 The formula works by summarising the individual heading directions and normalising them, in order to find the average heading direction. With each heading direction having a magnitude of $1$, the normalised summation will have a magnitude between $0$ and $1$ depending on the uniformity, with $1$ being a completely uniform heading direction. We then subtract this from $1$, such that a high uniformity will result in a low turbulence level.
@@ -110,15 +110,16 @@ Pressure is a bit different. The factor was originally introduced by \citet{empi
 D_x \cdot \text{var}(\vv{V_x})
 \end{equation}
 
-where $D_x$ is the local crowd density and $\text{var}(\vv{V_x})$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by \citet{wirz2012inferring}
+where $D_x$ is the local crowd density and $\text{var}(\vv{V_x})$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by \citet{wirz2012inferring}, as seen in \cref{eq:pressure_final}.
 
 \begin{equation}
-\label{eq:}
-P_x = D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
-\end{equation}
-\begin{equation}
-\label{eq:}
-P_x = D_x \cdot \frac{\sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
+\label{eq:pressure_final}
+\begin{split}
+P_x &= D_x \cdot \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}\\
+%
+%
+P_x &= D_x \cdot \frac{\sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^{N} \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
+\end{split}
 \end{equation}
 
 The main difference between this and the solution from Franke et al. is that our density is relative and not probabilistic, meaning that the result will also be relative rather than probabilistic. As explained in \cref{subsec:crowdConditionsPressure} \citet{empircalstudy} did not only introduce the factor, but also recorded data and pressure in relative values from the incident during the Hajj on the 12th of January 2006\cite{website:Wikipedia-Hajj}. This means that we can compare our results for local crowd pressure with the limits and high pressure found from real world incidents.
