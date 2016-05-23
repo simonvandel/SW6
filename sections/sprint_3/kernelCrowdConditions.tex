@@ -11,7 +11,7 @@ When calculating the crowd densities, using kernel density estimation, we insert
 
 
 \subsubsection{Velocity}
-The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al. by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum.
+The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity, $\vv{v_i}$, as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from Franke et al. by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) both the relative and probabilistic kernel density function will give a relative local crowd velocity. This is because we divide with the kernel density sum.
 \begin{equation}
 \label{eq:}
 \vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
