@@ -3,11 +3,9 @@
 
 Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
 
-Another method is to use kernel density estimation. With this approach we estimate the density contentious across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We denfine this influence through a kernel function, which gives a probability dis
-With this approach we can again place local density estimations in a grid across the map, but this time the result being un
+Another method is to use kernel density estimation. With this approach we estimate the density contentious across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any the point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
 
-\kanote{mangler en overgang fra problemet med histogrammer til kernel density estimation}
-
+\subsubsection{Choosing a Kernel Function}
 There exists multiple kernel functions that can be used in the kernel density estimation. The most commonly used is the Gaussian distribution, also known as the normal distribution, given by the function in \cref{eq:1dGaussianDistribution}. The function, given the distance $d$ from an observation to the center of the kernel, returns the probability of the observation. An observation in this context, is a sample drawn from the distribution. The Gaussian distribution is commonly used as a kernel function because it arises naturally, both in theory and in experiments.
 
 \begin{equation}
@@ -15,7 +13,7 @@ There exists multiple kernel functions that can be used in the kernel density es
 K(d) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} d^2}
 \end{equation}
 
-The plot of the function is shown in \cref{fig:1dGaussianDistributionPlot}. Notice that the function only converges with the x axis in $-\infty$ and $\infty$. This means that if we were to use this function for calculating the local crowd density, we would have to consider every person in the data set, because the function is defined for every x value. For performance reasons, this is not preferable.
+The plot of the function is shown in \cref{fig:1dGaussianDistributionPlot}. Notice that the function converges with the x axis in $-\infty$ and $\infty$. This means that if we were to use this function for calculating the local crowd density, we would have to consider every person in the data set, because the function is defined for every x value. For performance reasons, this is not preferable.
 
 Another kernel function is the Epanechnikov kernel, given by the function in \cref{eq:1dEpanechnikovDistribution}.
 
@@ -79,7 +77,7 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
 \end{figure}
 
 \kanote{hvis alle kernel functions har et areal på 1, så er det her en lidt underlig paragraf}
-Choosing a kernel function is not very important as long as the chosen function has an area of 1 beneath it.\jenote{find source} The area of both functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both Gaussian and Epanechnikov hold this property, Epanechnikov was chosen because it is not defined for every x value, making its performance advantageous. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
+For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance \jenote{Kilde}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are area bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which makes the performance of an implementation better. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
 
 \begin{figure}[htbp]
 \begin{subfigure}[c]{.49\linewidth}

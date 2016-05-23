@@ -1,6 +1,6 @@
 \section{Initial Requirements}\label{sec:s1_requirements}
-\lanote{application vs system her?}
-Before we begin the development of the application, we need to have a more well defined understanding of the concrete functionalities the application should include. In order to indentify these concrete functionalities we first consider potential users of the application. After this we can identify potential use cases for the application, that we can finally use to specify the requirements for the application. As we do not currently have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
+\lanote{Ret igennem for application vs system.. + Overvej rename af usecases}
+Before we begin the development of the application, we need to have a more well defined understanding of the concrete functionalities the application should include. In order to identify these concrete functionalities we first consider potential users of the application. After this we can identify potential use cases for the application, that we can finally use to specify the requirements for the application. As we do not currently have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
 
 \subsection{Users}
 Before we consider how the application should be used, we will consider who the potential users of the application are. We assume that the application will have two different types of users, stationary users and mobile users, who will use the application for different purposes. A description of the stationary and mobile users can be seen in \cref{tab:stat_user,tab:mob_user}, respectively.
@@ -39,10 +39,10 @@ Mobile users include personnel located around the event area, such as guards and
     \label{tab:mob_user}
 \end{table}
 
-% comment
+Now that we have a better idea of who the users are, we can consider how they will use the application.
 
 \subsection{Use Cases} \label{ss:s1_uc}
-Now that we have a better idea of who the users are, we can consider how they will use the application. This is done by identifying some potential use cases for the application. These use cases will be the basis of the requirements for the application.
+To define the usage of the system, we identify potential use cases. Each of these use cases describe an interaction between an actor and the system. These use cases will be the basis of the functional requirements for the application.
 
 First we consider potential use cases for the stationary users. The application should help the stationary users by providing them with an overview of the entire event area, such that potentially dangerous situations could be identified early, and swift actions can be taken. The primary use case for stationary users is described in \cref{tab:s1-uc1}.
 
@@ -82,7 +82,7 @@ Next we consider the mobile users. They are likely stationed around the events a
     \begin{tabularx}{\textwidth}{|l|X|}
         \hline
         \textbf{Name:}  & Find fastest route \\ \hline
-        \textbf{ID:}    & S1-UC2 \\ \hline
+        \textbf{ID:}    & S1-UC2\\ \hline
         \textbf{Description:} & A user must find the fastest route to a incident location. \\ \hline
         \textbf{Actors:} & Mobile users \\ \hline
         \textbf{Success scenario:} & 
@@ -106,7 +106,26 @@ These use cases can be used to identify more specific requirements for our appli
 \subsection{MoSCoW Mehtod}
 As the requirements are currently only based on our assumed use cases, they will most likely change during the development of the application. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
 
-This method groups the requirements into four categories; \emph{Must have}, \emph{Should have}, \emph{Could have}, and \emph{Won't have}. 
+This method groups the requirements into four categories; \emph{Must have}, \emph{Should have}, \emph{Could have}, and \emph{Won't have}. described in \cref{}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{Priority} & \textbf{Description} \\
+		\midrule
+		\rowcolor[HTML]{EFEFEF} 
+		\textbf{M}ust have & Requirements that are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. \\
+		\textbf{S}hould have & Requirements that are very important to have in the system, but are often not as critical as the Must have requirements. \\
+		\rowcolor[HTML]{EFEFEF} 
+		\textbf{C}ould have & Requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. \\
+		\textbf{W}on't have & Requirements that the user would like to have, but they are not important to include in this release of the system. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Description of the four MoSCoW categories~\cite{moscow}.}
+	\label{tab:moscow}
+\end{table}
+
 
 The \emph{Must have} category include requirements that are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. 
 
@@ -154,8 +173,7 @@ Combining these requirements we get the requirements specification shown in \cre
 
 In addition to these functional requirements, we can also defined some non-functional requirements for our application. Where the functional requirements specify the features that should be available to the users of the application, the non-functional requirements specify constraints for how the application should provide these features.
 
-\lanote{non-functional er ikke færdigt...}
-As the application is developed as a part of the aSTEP multi-project, we assume that future students might have to continue the development of the application.
+As the application is developed as a part of the aSTEP multi-project, the application shouldwe assume that future students might have to continue the development of the application.
 
 \begin{table}[h!]
 	\centering
