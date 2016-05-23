@@ -224,7 +224,7 @@ Finally, we sum the relative densities for all people, in order to find the esti
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikov}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\} }\right)
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
 Here $d_{x,i}$ is the distance from the desired point $x$ to the person $i$, and $N$ is the total amount of people. Since we have used a kernel function with an indicator function, in practice we only have to sum up densities for people within this of the point. This, as already mentioned, gives us some advantageous properties when we later in this chapter have to implement this function.
@@ -233,7 +233,7 @@ We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by int
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
-\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|\frac{d}{h}| \leq 1\} }\right)
+\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
 
