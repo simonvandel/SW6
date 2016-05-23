@@ -1,11 +1,8 @@
-\sinote{mangler at beskrive hvordan vi bruger intensitet variablen i density og velocity, pressure og turbulens. Der mangler måske også en extension til velocity, pressure og turbulens}
-
-\subsection{Estimating Velocity, Turbulence and Pressure}
-Using what we now know about kernel density estimation, we can now expand 
-
-This section will expand the function for kernel density estimation, found in the previous section, to functions for calculating the local crowd velocity, turbulence and pressure, the three other factors for detecting the local crowd conditions presented in \cref{}. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure.
+\subsection{Estimating Crowd Factors}
+Using what we now know about kernel density estimation, we can now expand this to the four crowd factors presented in \cref{sec:related_work}. The calculations for these crowd factors have been developed by \citet{wirz2012inferring}. The main difference between the calculations done in their paper and this project is for pressure, which we will explain further.
 
 \subsubsection{Density}
+Since the kernel 
 
 \sinote*{brug det her et sted}{We assume that each person has the same density. This is done since we do not currently have a way to find the area each person takes up. This is also a reasonable assumption, and one that most crowd safety literature makes. As long as we keep the densities on 1 for the general formulas, any deviating values for the factor can simply be multiplied on the function.}
 
