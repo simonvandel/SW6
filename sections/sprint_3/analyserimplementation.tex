@@ -7,10 +7,10 @@ In order to fully understand the need for a good implementation of the analyser,
 \begin{algorithmic}[1]
 
 \Function{Analyser}{List points, List people, Bandwidth h}
-\State Densities $\gets empty List$
-\State Velocities $\gets empty List$
-\State Turbulence $\gets empty List$
-\State Pressure $\gets empty List$
+\State Densities $\gets$ empty List
+\State Velocities $\gets$ empty List
+\State Turbulence $\gets$ empty List
+\State Pressure $\gets$ empty List
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \ForAll{people, P}
@@ -77,15 +77,18 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 %% Hvorfor det er nice
 
 \kanote{kommentér koden}
+
+%\LineComment{We reduce the amount of people using a range search}
+%\LineComment{List of tuples containing individual Kernel values and velocity}
+%\LineComment{Summarised Kernel variable adjusted for turbulence}
+
 \begin{center}
 \captionof{algorithm}{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
 \begin{algorithmic}[1]
 
 \Function{Analyser}{List points, rTree t, Bandwidth h}
-
-\State Result $\gets$ empty List
+\State Result $\gets$ Empty List 
 \ForAll{points, p}
-    \LineComment{We reduce the amount of people using a range search}
     \State CulledPeople $\gets$ \Call{t.inRange}{h,p} 
     \State Result $\gets$ Result + \Call{analysePoint}{p,CulledPeople}
 \EndFor
@@ -96,25 +99,41 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 \Function{analysePoint}{Point x, List[person] people}
 
 
-\State KernelValueSum $\gets 0$
-\LineComment{List of tuples containing individual Kernel values and velocity}
+\State KernelValSum $\gets 0$
 \State KernelValForPerson $\gets List[(0,vector(0.0,0.0))]$ 
 \State NonNormalisedVelocitySum $\gets vector(0.0,0.0)$
 \State NonNormalisedTurbulenceSum $\gets 0$
-\LineComment{Summarised Kernel variable adjusted for turbulence}
-\State TurbulenceKernelValueSum $\gets 0$ 
+\State TurbulenceKernelValSum $\gets 0$ 
 
 
 \ForAll{People, P}
-    \State TempKernelValue $\gets$ \Call{Kernel}{P}
-    \State KernelValueSum $\gets$ KernelValueSum + TempKernelValue
-    \State KernelValForPerson $\gets$ \Call{Concat}{(P.Velocity,TempKernelValue),NonNormalisedVelocitySum}
-    \State NonNormalisedVelocitySum $\gets$ NonNormalisedVelocitySum + Velocity * TempKernelValue
+    \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}
+    \State KernelValSum $\gets$ KernelValSum + TmpKernelVal
+    \State KernelValForPerson $\gets$ ((P.Velocity,TmpKernelVal),NonNormalisedVelocitySum)
+    \State NonNormalisedVelocitySum $\gets$ NonNormalisedVelocitySum + Velocity * TmpKernelVal
     \If{P.HeadingDirection is valid}
-        \State NonNormalisedTurbulenceSum $\gets$ NonNormalisedTurbulenceSum + P.HeadingDirection * TempKernelValue
-        \State TurbulenceKernelValueSum $\gets$ TurbulenceKernelValueSum + TempKernelValue
+        \State NonNormalisedTurbulenceSum $\gets$ NonNormalisedTurbulenceSum + P.HeadingDirection * TmpKernelVal
+        \State TurbulenceKernelValSum $\gets$ TurbulenceKernelValSum + TmpKernelVal
     \EndIf
 \EndFor
+
+\If{KernelValSum is 0}
+    \state \textbf{Return} (0,(0,0),0,0)
+\EndIf
+
+\State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$
+\State Velocity $\gets$ NonNormalisedVelocitySum / KernelValSum
+\State Turbulence $\gets$ 1 - ( NonNormalisedTurbulenceSum / TurbulenceKernelValSum)
+\State
+
+\State \textbf{Return} (Density, Velocity, Turbulence, Pressure) 
+
 \EndFunction
 \end{algorithmic}
 \end{center}
+
+
+
+
+
+
