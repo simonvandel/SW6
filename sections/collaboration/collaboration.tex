@@ -2,14 +2,19 @@
 
 This chapter describes particular cases of collaborations we have made with other groups of the aSTEP multi-project.
 
-\section{Discussions on the aSTEP Architecture}
-%sprint 1
-During the first sprint, the main collaboration within the aSTEP multi-project was agreeing on a common architecture for the aSTEP core.
+\section{Discussions On aSTEP}
+We decided in the aSTEP multi-project to have weekly meetings. The purpose of the meetings was to have a forum for voicing concerns and requests suitable for all aSTEP groups. At the start of the semester, during the first and second sprints, the agenda for each meeting mostly consisted of how to handle data privacy in aSTEP and specific API requirements.
 
-Before agreeing on a common architecture, we had to first agree on the primary focus on the 
+\subsection{Data Privacy}
 
-\section{Discussions on aSTEP Core API Requirements}
-In Sprint 2, after we had elicited our initial program requirements, we had to inform the aSTEP core groups about our requirements of the aSTEP service.\sinote{Jeg ved ikke helt hvor spændende det er at skrive om det her? Ellers må en anden gerne tage over.}
+During the first sprint, the main collaboration within the aSTEP multi-project was agreeing on the data privacy policy in aSTEP. There was two dominating opinions; Make the aSTEP platform as open as possible, meaning data uploaded to the aSTEP platform is available to everyone, or make the aSTEP platform access controlled, meaning data uploaded to the aSTEP platform is only available for a controlled number of users.
+
+In the meetings we have had with SmukFest personnel during this project, a major concern was that the location data should not be publicly available. Because of this concern, we agreed in the aSTEP project to make the aSTEP platform access controlled.
+
+\subsection{API Requirements}
+In Sprint 2, after we had elicited our initial system requirements, we had to inform the aSTEP core groups about our requirements of the aSTEP platform. For example, we required that all position data available through aSTEP is assigned a specific ID corresponding to a person, however the ID should not be possible to identify this person.
+
+
 
 \section{Continuous Integration Maintenance}
 To increase the overall quality of the software by the aSTEP groups, all aSTEP groups decided to use a continuous integration service to make sure that all software committed to the aSTEP projects pass a build test and unit tests.
@@ -19,7 +24,7 @@ The authors of this report volunteered to setup and maintain the continuous inte
 \section{HTTPS Server Configuration}
 Due to the relative sensitive location data being handled by the aSTEP platform and in particular this project, we and the other members of the aSTEP project wanted to secure the network communication by encryption. As encryption algorithms are notoriously hard to get right, no non-expert should ever implement them themselves. We therefore decided to use HTTPS for all connections to and from the aSTEP platform. This ensures that no one can eavesdrop on sensitive data.
 
-The HTTPS support was added to the aSTEP core platform by the authors of this report, as we had prior experience setting this up.\sinote{jeg giver os ikke så meget credit, skal der fyldes mere på?}
+The HTTPS support was added to the aSTEP core platform by the authors of this report, as we had prior experience setting this up.
 
 
 

@@ -1,6 +1,6 @@
 \section{Initial Requirements}\label{sec:s1_requirements}
-\lanote{application vs system her?}
-Before we begin the development of the application, we need to have a more well defined understanding of the concrete functionalities the application should include. In order to indentify these concrete functionalities we first consider potential users of the application. After this we can identify potential use cases for the application, that we can finally use to specify the requirements for the application. As we do not currently have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
+\lanote{Ret igennem for application vs system.. + Overvej rename af usecases}
+Before we begin the development of the application, we need to have a more well defined understanding of the concrete functionalities the application should include. In order to identify these concrete functionalities we first consider potential users of the application. After this we can identify potential use cases for the application, that we can finally use to specify the requirements for the application. As we do not currently have a concrete user for the system, the initial requirements will be based on our assumptions about the problem domain. 
 
 \subsection{Users}
 Before we consider how the application should be used, we will consider who the potential users of the application are. We assume that the application will have two different types of users, stationary users and mobile users, who will use the application for different purposes. A description of the stationary and mobile users can be seen in \cref{tab:stat_user,tab:mob_user}, respectively.
@@ -39,10 +39,10 @@ Mobile users include personnel located around the event area, such as guards and
     \label{tab:mob_user}
 \end{table}
 
-% comment
+Now that we have a better idea of who the users are, we can consider how they will use the application.
 
 \subsection{Use Cases} \label{ss:s1_uc}
-Now that we have a better idea of who the users are, we can consider how they will use the application. This is done by identifying some potential use cases for the application. These use cases will be the basis of the requirements for the application.
+To define the usage of the system, we identify potential use cases. Each of these use cases describe an interaction between an actor and the system. These use cases will be the basis of the functional requirements for the application.
 
 First we consider potential use cases for the stationary users. The application should help the stationary users by providing them with an overview of the entire event area, such that potentially dangerous situations could be identified early, and swift actions can be taken. The primary use case for stationary users is described in \cref{tab:s1-uc1}.
 
@@ -57,15 +57,15 @@ First we consider potential use cases for the stationary users. The application 
         \textbf{Success scenario:} & 
         \begin{enumerate}
             \item The user opens the application on a desktop computer
-            \item The user observes the state of the crowd on the map
+            \item The system presents a visualization of the crowd's state on a map
             \item The user sees a potential problem developing
             \item The user takes appropriate actions
         \end{enumerate}
         \\ \hline
-        \textbf{Extensions:} & 
+        \textbf{Extensions:} & No issues visible
         \begin{enumerate}
             \item The user opens the application on a desktop computer
-            \item The user observes the state of the crowd on the map
+            \item The system presents a visualization of the crowd's state on a map
             \item The user sees no problems with the crowds
             \item No actions are required
         \end{enumerate} 
@@ -82,7 +82,7 @@ Next we consider the mobile users. They are likely stationed around the events a
     \begin{tabularx}{\textwidth}{|l|X|}
         \hline
         \textbf{Name:}  & Find fastest route \\ \hline
-        \textbf{ID:}    & S1-UC2 \\ \hline
+        \textbf{ID:}    & S1-UC2\\ \hline
         \textbf{Description:} & A user must find the fastest route to a incident location. \\ \hline
         \textbf{Actors:} & Mobile users \\ \hline
         \textbf{Success scenario:} & 
@@ -101,34 +101,47 @@ Next we consider the mobile users. They are likely stationed around the events a
     \label{tab:s1-uc2}
 \end{table}
 
-These use cases can be used to identify more specific requirements for our application.
+These use cases can be used to identify specific functional requirements for our application. Before we specify the functional requirements, we will consider how the requirements will be prioritised.
 
 \subsection{MoSCoW Mehtod}
 As the requirements are currently only based on our assumed use cases, they will most likely change during the development of the application. In order to better incorporate changes into the requirements, and to better suit the agile development method used, we prioritize the requirements using the MoSCoW method~\cite{moscow}.
 
-This method groups the requirements into four categories; \emph{Must have}, \emph{Should have}, \emph{Could have}, and \emph{Won't have}. 
+This method groups the requirements into four prioritisation categories; \emph{Must have}, \emph{Should have}, \emph{Could have}, and \emph{Won't have}. These categories are described in \cref{tab:moscow}.
 
-The \emph{Must have} category include requirements that are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. 
+\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\textwidth}{lX}
+		\toprule
+		\textbf{Priority} & \textbf{Description} \\
+		\midrule
+		\rowcolor[HTML]{EFEFEF} 
+		\textbf{M}ust have & Requirements that are considered essential to the system. If these requirements are not met by the system, the system can not be considered a success. \\
+		\textbf{S}hould have & Requirements that are very important to have in the system, but are often not as critical as the Must have requirements. \\
+		\rowcolor[HTML]{EFEFEF} 
+		\textbf{C}ould have & Requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. \\
+		\textbf{W}on't have & Requirements that the user would like to have, but they are not important to include in this release of the system. \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Description of the four MoSCoW categories~\cite{moscow}.}
+	\label{tab:moscow}
+\end{table}
 
-The \emph{Should have} category contains requirements that are very important to have in the system, but are often not as critical as the Must have requirements. 
+\subsection{Functional requirements}
 
-\emph{Could have} are requirements that are desirable, but not essential to the functionality of the system, though they may improve the usability of the system. 
-
-\emph{Won't have} contains requirements that the user would like to have, but they are not important to include in this release of the system.
-
-\subsection{Requirements specification}
 First we consider the \emph{Survey crowd} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a desktop computer. From this use case we define the following requirements:
 
 \begin{enumerate}
-    \item A detailed map of the area. The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination. This requirement is essential to the application, and will as such be prioritised as \emph{Must have}.
-    \item An intuitive visual presentation of relevant crowd information. The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time. This is also an essential part of the application, and is prioritised as \emph{Must have}.
-    \item A graphical user interface for desktop computers. The stationary users primarily use the system to maintain an overview of the event area from a stationary position. For this purpose the application should be running constantly during the event, and a large screen is preferable for giving a better overview. Therefore it is preferable for these users to access the application on a desktop computer. This requirement is also prioritised as \emph{Must have}.
+    \item \textbf{A detailed map of the area.} The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination. This requirement is essential to the application, and will as such be prioritised as \emph{Must have}.
+    \item \textbf{An intuitive visual presentation of relevant crowd information.} The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time. This is also an essential part of the application, and is prioritised as \emph{Must have}.
+    \item \textbf{A graphical user interface for desktop computers.} The stationary users primarily use the system to maintain an overview of the event area from a stationary position. For this purpose the application should be running constantly during the event, and a large screen is preferable for giving a better overview. Therefore it is preferable for these users to access the application on a desktop computer. This requirement is also prioritised as \emph{Must have}.
 \end{enumerate}
 
-If we consider the \emph{Find fasted route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a smartphone. Therefore we add the following requirement.
+If we consider the \emph{Find fastest route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a smartphone. Therefore we add the following requirement.
 
-\subsubsection*{A graphical user interface for smartphones}
-As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone. This requirement is essential, and is as such prioritised as \emph{Must have}.
+\begin{enumerate}[resume]
+    \item \textbf{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone. This requirement is essential, and is as such prioritised as \emph{Must have}.
+
+\end{enumerate}
 
 Combining these requirements we get the requirements specification shown in \cref{tab:s1_req}.
 
@@ -152,8 +165,7 @@ Combining these requirements we get the requirements specification shown in \cre
 
 In addition to these functional requirements, we can also defined some non-functional requirements for our application. Where the functional requirements specify the features that should be available to the users of the application, the non-functional requirements specify constraints for how the application should provide these features.
 
-\lanote{non-functional er ikke færdigt...}
-As the application is developed as a part of the aSTEP multi-project, we assume that future students might have to continue the development of the application.
+As the application is developed as a part of the aSTEP multi-project, the application shouldwe assume that future students might have to continue the development of the application.
 
 \begin{table}[h!]
 	\centering
