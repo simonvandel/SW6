@@ -41,7 +41,7 @@ Mobile users include personnel located around the event area, such as guards and
 
 % comment
 
-\subsection{Use Cases}
+\subsection{Use Cases} \label{ss:s1_uc}
 Now that we have a better idea of who the users are, we can consider how they will use the application. This is done by identifying some potential use cases for the application. These use cases will be the basis of the requirements for the application.
 
 First we consider potential use cases for the stationary users. The application should help the stationary users by providing them with an overview of the entire event area, such that potentially dangerous situations could be identified early, and swift actions can be taken. The primary use case for stationary users is described in \cref{tab:s1-uc1}.
@@ -75,7 +75,7 @@ First we consider potential use cases for the stationary users. The application 
     \label{tab:s1-uc1}
 \end{table}
 
-Next we consider the mobile users. They are likely stationed around the events area, and must respond to incident reports from these positions. The application should assist these users in finding a path to the incident location, reducing their response time. This use case is described in \cref{tab:s1-uc2}.
+Next we consider the mobile users. They are likely stationed around the events area, and must respond to incident reports from these positions. The application should assist these users in finding a path to the incident location, avoiding congested areas thus reducing their response time. This use case is described in \cref{tab:s1-uc2}.
 
 \begin{table}[h!]
     \centering
@@ -117,17 +117,18 @@ The \emph{Should have} category contains requirements that are very important to
 \emph{Won't have} contains requirements that the user would like to have, but they are not important to include in this release of the system.
 
 \subsection{Requirements specification}
-First we consider the \emph{Find fastest route} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a smartphone. From this use case we define the following requirements:
+First we consider the \emph{Survey crowd} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a desktop computer. From this use case we define the following requirements:
 
-\emph{A detailed map of the area.} The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination. This requirement is essential to the application, and will as such be prioritised as \emph{Must have}.
+\begin{enumerate}
+    \item A detailed map of the area. The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan their route to their destination. This requirement is essential to the application, and will as such be prioritised as \emph{Must have}.
+    \item An intuitive visual presentation of relevant crowd information. The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time. This is also an essential part of the application, and is prioritised as \emph{Must have}.
+    \item A graphical user interface for desktop computers. The stationary users primarily use the system to maintain an overview of the event area from a stationary position. For this purpose the application should be running constantly during the event, and a large screen is preferable for giving a better overview. Therefore it is preferable for these users to access the application on a desktop computer. This requirement is also prioritised as \emph{Must have}.
+\end{enumerate}
 
-\emph{An intuitive visual presentation of relevant crowd information.} The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time. This is also an essential part of the application, and is prioritesed as \emph{Must have}.
+If we consider the \emph{Find fasted route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a smartphone. Therefore we add the following requirement.
 
-\emph{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone. This requirement is essential, and is as such prioritised as \emph{Must have}.
-
-If we consider the \emph{Survey crowd} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}, except that this user access the application on a desktop computer. Therefore we only need to add the following requirement.
-
-\emph{A graphical user interface for desktop computers.} For a stationary user it is preferable to access the application on a desktop computer, where the larger screen provides for a better overview of the area. This requirement is also prioritised as \emph{Must have}.
+\subsubsection*{A graphical user interface for smartphones}
+As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the users smartphone. This requirement is essential, and is as such prioritised as \emph{Must have}.
 
 Combining these requirements we get the requirements specification shown in \cref{tab:s1_req}.
 
@@ -149,7 +150,10 @@ Combining these requirements we get the requirements specification shown in \cre
 	\label{tab:s1_req}
 \end{table}
 
-In addition to these functional requirements, we can also defined some non-functional requirements for our application.
+In addition to these functional requirements, we can also defined some non-functional requirements for our application. Where the functional requirements specify the features that should be available to the users of the application, the non-functional requirements specify constraints for how the application should provide these features.
+
+\lanote{non-functional er ikke færdigt...}
+As the application is developed as a part of the aSTEP multi-project, we assume that future students might have to continue the development of the application.
 
 \begin{table}[h!]
 	\centering

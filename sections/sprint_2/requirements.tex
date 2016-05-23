@@ -1,7 +1,155 @@
 \section{Requirements} \label{sec:s2_reqs}
 %% Describes requirements identified at the beginning of the first sprint
 %% Intro
-Based on the meeting with the operational coordinators of Alarm HS, new requirements were identified. These requirements will be added to the requirement specification presented in \cref{sec:s1_requirements}. This gives the following requirement specification, where the requirements added for this sprint are written in italic font\lanote{or denoted in some other form, haven't decided yet}.
+Based on the meeting with the operational coordinators of Alarm HS, we confirmed the two types of users identified in \cref{sec:s1_requirements}. We also identified additional use cases for the system.
+
+\subsection{Use Cases}
+In addition to use cases defined in \cref{ss:s1_uc}, from the interview we identified six new 
+
+\lanote{Flyt use cases til bilag}
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Login \\ \hline
+        \textbf{ID:}    & S2-UC1 \\ \hline
+        \textbf{Description:} & A user logs into the application. \\ \hline
+        \textbf{Actors:} & Stationary users, mobile users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user opens the application on any device
+            \item The application presents a login screen
+            \item The user enters his/her username and password
+            \item The login information is validated
+            \item The user has access to the application's features
+        \end{enumerate}
+        \\ \hline
+        \textbf{Extensions:} & 
+        \begin{enumerate}
+            \item The user opens the application on any device
+            \item The application presents a login screen
+            \item The user enters his/her username and password
+            \item The login informations are invalid
+            \item The user is prompted to re-enter username and password
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Login use case description.}
+    \label{tab:s2-uc1}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Show/hide layer \\ \hline
+        \textbf{ID:}    & S2-UC2 \\ \hline
+        \textbf{Description:} & A user enables or disables a layer on the map \\ \hline
+        \textbf{Actors:} & Stationary users, mobile users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enables a map layer
+            \item This information layer is shown in the map
+        \end{enumerate}
+        \\ \hline
+        \textbf{Extensions:} & 
+        \begin{enumerate}
+            \item The user disables a map layer
+            \item This information layer is hidden on the map
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Show/hide layer use case description.}
+    \label{tab:s2-uc2}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Search for point of interest \\ \hline
+        \textbf{ID:}    & S2-UC3 \\ \hline
+        \textbf{Description:} & A user search for a specific points of interest \\ \hline
+        \textbf{Actors:} & Stationary users, mobile users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enters a search term
+            \item The system finds a result
+            \item The map pans to the location of the search result
+        \end{enumerate}
+        \\ \hline
+        \textbf{Extensions:} & 
+        \begin{enumerate}
+            \item The user enters a search term
+            \item The system does not find a result
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Search use case description.}
+    \label{tab:s2-uc3}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Navigate to location \\ \hline
+        \textbf{ID:}    & S2-UC4 \\ \hline
+        \textbf{Description:} & A user prompts for navigation to a specified location \\ \hline
+        \textbf{Actors:} & Mobile users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user marks a destination point
+            \item The system proposes a route from the user's current location to the destination
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Navigate to location use case description.}
+    \label{tab:s2-uc4}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Automatic warning \\ \hline
+        \textbf{ID:}    & S2-UC5 \\ \hline
+        \textbf{Description:} & The system automatically warn the user of a potentially dangerous situation. \\ \hline
+        \textbf{Actors:} & Stationary users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user is logged into the system
+            \item The system predicts a potentially dangerous situation
+            \item The system shows a warning on the map
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Automatic warning use case description.}
+    \label{tab:s2-uc5}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Show available personnel \\ \hline
+        \textbf{ID:}    & S2-UC6 \\ \hline
+        \textbf{Description:} & The user should be able to see the locations of available personnel on the map. \\ \hline
+        \textbf{Actors:} & Stationary users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The users enables a personnel layer
+            \item The system marks the locations of the personnel on the map
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Show available personnel use case description.}
+    \label{tab:s2-uc6}
+\end{table}
+
+\lanote{Projection onto camera images requirement missing..}
+
+new requirements were identified. These requirements will be added to the requirement specification presented in \cref{sec:s1_requirements}. This gives the following requirement specification, where the requirements added for this sprint are written in italic font\lanote{or denoted in some other form, haven't decided yet}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WIP
 \begin{table}[htbp]
@@ -41,14 +189,6 @@ Based on the meeting with the operational coordinators of Alarm HS, new requirem
 \end{table}
 
 
-Present the crowds density
-Present the crowds velocity
-Present the crowds turbulence
-Present the crowds pressure
-Show a detailed interactive map of the area
-Request/recieve location data from the aSTEP core
-Toggleable map details
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
