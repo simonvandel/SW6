@@ -49,7 +49,9 @@ In order to fully understand the need for a good implementation of the analyser,
 \end{algorithmic}
 \end{center}
 
-This algorithm has an asymptotic time complexity of $$O(\text{points} \cdot \text{people})$$ which might seem decent, but considering the amount of points and people we can expect to analyse, we want to reduce this as much as possible.
+This algorithm has an asymptotic time complexity of $$O(\text{points} \cdot \text{people})$$
+This might seem decent, but using this algorithm one will not scale the amount of points, but rather the size of the area requested for analysis. Assuming a square area, the amount of points would be quadratic in the size of the side of the area.
+%Because of this and the requirement for real time analysis \cref{} we want to reduce this as much as possible.
 
 \subsubsection{Reducing Complexity}
 
