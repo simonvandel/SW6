@@ -1,10 +1,6 @@
 \subsection{Bandwidth Selection}
 
-The previous section describes how we use the kernel density estimation method to calculate local crowd factors. The section mentions that the choice of bandwidth is crucial to the calculation.
-
-%As kernel density estimation is not a new technique, much research has gone into bandwidth selection. This has resulted in many sophisticated approaches. \kanote*{forklar hvorfor vi ikke har det her focus, eller også vent med at fraskrive det, indtil det bliver forklaret i teksten}{We will in this project not focus on finding an optimal bandwidth using the best techniques known to research. Instead, we will do a simple bandwidth selection experiment that illustrates how different bandwidths affect the results of the kernel density estimation utilised in this project.}
-
-We will in this section do a simple bandwidth selection experiment that illustrates how different bandwidths affect the results of the kernel density estimation utilised in this project.
+The previous parts of this section describes how we use the kernel density estimation method to calculate local crowd factors. We will now discuss the crucial part of choosing a bandwidth. We do this with a simple bandwidth selection experiment that illustrates how different bandwidths affect the results of the kernel density estimation utilised in this project.
 
 \subsubsection{Undersmoothing and Oversmoothing}
 
@@ -108,6 +104,6 @@ Every bandwidth in \cref{fig:chessBoard-different-bandwidths} had some problems;
 \label{fig:chessBoard-low1-high3-band1.4-cropped}
 \end{figure}
 
-\subsubsection{Summary}
+\subsubsection{Bandwidth Summary}
 
 The above sample data is useful for giving an intuition of the effect of different bandwidths, but in order for the bandwidth selection to be useful in practice, one would have to do the bandwidth selection on data that represents the crowd to be analysed.
