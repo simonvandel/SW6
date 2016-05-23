@@ -1,7 +1,7 @@
 \section{Requirements} \label{sec:s2_reqs}
 In this section we revise the initial requirements identified in \cref{sec:s1_requirements}, based on additional knowledge acquired during the first sprint, and feedback received on our system. The meeting with Alarm HS confirmed the two types of users identified in \cref{ss:s1_users}, but presented several additional use cases.
 
-\subsection{Use Cases} \label{ss:s2_uc}
+\subsection{Additional Use Cases} \label{ss:s2_uc}
 Here we describe the additional use cases identified during the meeting with Alarm HS. In addition to the assumed use cases described in \cref{ss:s1_uc}, seven additional use cases were identified from the meeting. These additional requirements are described in \cref{tab:s2-uc1,tab:s2-uc2,tab:s2-uc3,tab:s2-uc4,tab:s2-uc5,tab:s2-uc6,tab:s2-uc7}.
 
 \lanote{Flyt use cases til bilag og skriv kun deres navn her?}
@@ -9,8 +9,8 @@ Here we describe the additional use cases identified during the meeting with Ala
 \input{tables/s2-usecases.tex}
 
 
-\subsection{Revised requirements} \label{ss:s2_update_reqs}
-In \cref{sec:related_work} we identified density, velocity, turbulence, and pressure as important crowd characteristics for determining problematic crowd scenarios. To reflect this in the requirement specification, we replace requirement S1-FR2: \enquote{\emph{An intuitive visual presentation of relevant crowd information}}, shown in \cref{tab:s1_req}, with the following four requirements:
+\subsection{Revised Requirements} \label{ss:s2_update_reqs}
+In \cref{sec:related_work} we identified density, velocity, turbulence, and pressure as important crowd characteristics for determining problematic crowd scenarios. To reflect this in the requirement specification, we replace requirement S1-FR2: \enquote{\emph{An intuitive visual presentation of relevant crowd information}}, shown in \cref{tab:s1_req}, with the following four requirements, all prioritised as must have:
 
 \begin{enumerate}
     \item \emph{A map overlay that intuitively visualises crowd density.} 
@@ -19,78 +19,19 @@ In \cref{sec:related_work} we identified density, velocity, turbulence, and pres
     \item \emph{A map overlay that intuitively visualises crowd pressure.}
 \end{enumerate}
 
-Similar to the requirement they replace, these four requirements are considered essential to the application, and will be prioritised as must have.
-
 To include the features described in the added use cases, several additional functional requirements needs to be added as well. From the use cases we identify the following requirements:
 
 \begin{enumerate}[resume]
-    \item \emph{Different layers of details that can be toggled on and off.} The map must be highly detailed, but the details must be in layers that can be toggled on and off separately. This allows users to only activate the necessary layers, avoiding information overflow. This is an important requirement, and is prioritised as must have.
+    \item \emph{Layers of details that can be toggled on and off.} The map must be highly detailed, but the details must be in layers that can be toggled on and off separately. This allows users to only activate the necessary layers, avoiding information overflow. This is an important requirement, and is prioritised as must have.
     \item \emph{User authentication.} Access to the system must be restricted to users with a valid login. This requirement is prioritised as must have.
     \item \emph{A search function.} Specific points of interest should be searchable, allowing for faster orientation on the map. This requirement could improve the usability of the application, though it is not essential, warranting a should have priority.
     \item \emph{Navigation assistance.} Instead of the user having to identify a path manually from the map, the system could calculate the fastest route for the user. While this might improve the usability of the application, it is not within the primary scope of the system, and will thus be prioritised as could have.
-    \item \emph{Automatic warning system.} Instead of 
-    \item \textbf{.}
-    \item \textbf{.}
+    \item \emph{Automatic warning system.} Instead of requiring the users to manually identify dangerous situations, the system could detect these automatically, warning the user. Similar to the previous requirement, this is prioritised as could have.
+    \item \emph{A visualisation of available personnel.} The system could have an overlay that displays the positions of the available personnel, affording the stationary users a better overview. This also prioritised as could have.
+    \item \emph{Projection onto camera images.} Projecting the crowd information overlay onto camera images. This requirement is not considered within the current scope of the system, and will be prioritised as won't have.
 \end{enumerate}
 
-\begin{enumerate}
-    \item \textbf{[Added]} Preservation of privacy. It must not be possible to infer specific information of the individual festival attendees. This is in accordance with the values of the festival, as well as danish law.
-\end{enumerate}
-
-\textbf{Could have}
-\begin{enumerate}[resume]
-    \item \textbf{[Added]} Navigation assistance for use in crowds. Should serve to enable faster reaction times, by supplying a route to personnel having to traverse the festival.
-    \item \textbf{[Added]} An automated reaction to problematic situations. This would entail having the system analysing current situations and notifying the operators of possible problems that may have occurred, such as crowd congestion.
-    \item \textbf{[Added]} A display of available personnel. In order to better judge the coverage of personnel, real-time tracking could provide a better overview for the control room operators. Matters of personal privacy for the personnel also has to be considered.
-\end{enumerate}
-
-\textbf{Won't have}
-\begin{enumerate}[resume]
-    \item \textbf{[Added]} Projection onto camera images. Such a functionality would require a system by itself, and is considered out of scope.
-\end{enumerate}
-
-
-
-From
-
-new requirements were identified. These requirements will be added to the requirement specification presented in \cref{sec:s1_requirements}. This gives the following requirement specification, where the requirements added for this sprint are written in italic font\lanote{or denoted in some other form, haven't decided yet}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WIP
-\begin{table}[htbp]
-	\centering
-	\begin{tabularx}{\textwidth}{lXl}
-		\toprule
-		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} \\
-		\toprule 
-		
-		\rowcolor[HTML]{EFEFEF} 
-		S1-1  & Analyze position data collected from the crowd via mobile technology    & Must have \\
-		S1-2  & Present a visualization of relevant information                         & Must have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S1-3  & Run on multiple platforms                                               & Must have \\  
-		S2-1  & A highly detailed map, showing fences, building, etc.                   & Must have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S2-2  & A real-time representation of position data                                & Must have \\
-		S2-3  & Layers that can be toggled                                                 & Must have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S2-4  & It must not be possible to infer information about individuals             & Must have \\ 
-		S2-5  & A graphical user interface for desktop computer & Must have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S2-6  & A search function & Should have \\
-		S2-7  & A graphical user interface for mobile phones & Should have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S2-8  & Navigation assistance & Could have \\ 
-		S2-9  & An automated reaction to problematic situations & Could have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S2-10 & A display of availabe personnel & Could have \\
-		S2-11 & A publicly availabe interface & Won't have \\
-		\rowcolor[HTML]{EFEFEF} 
-		S2-12 & Projection onto camera images & Won't have \\       
-		\bottomrule
-	\end{tabularx}
-	\caption{MoSCoW prioritized requirements for second sprint}
-	\label{tab:s2_req}
-\end{table}
+Applying these changes gives the functional requirement specification shown in \cref{tab:s2_req}.
 
 \begin{table}[h!]
 	\centering
@@ -100,50 +41,55 @@ new requirements were identified. These requirements will be added to the requir
 		\midrule 
 		\rowcolor[HTML]{EFEFEF} 
 		S1-FR1 & A detailed map of the area & Must have \\
-		S1-FR2 & An intuitive visual presentation of relevant crowd information & Must have \\
+		S2-FR1 & A map overlay that intuitively visualises crowd density & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
+		S2-FR2 & A map overlay that intuitively visualises crowd velocity & Must have \\
+		S2-FR3 & A map overlay that intuitively visualises crowd turbulence & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR4 & A map overlay that intuitively visualises crowd pressure & Must have \\
 		S1-FR3 & A graphical user interface for desktop computers & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
 		S1-FR4 & A graphical user interface for smartphones & Must have \\
+		S2-FR5 & Layers of details that can be toggled on and off & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR6 & User authentication & Must have \\
+		S2-FR7 & A search function & Should have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR8 & Navigation assistance & Could have \\
+		S2-FR9 & Automatic warning system & Could have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR10 & A visualisation of available personnel & Could have \\
+		S2-FR11 & Projection onto camera images & Won't have \\
 		\bottomrule
 	\end{tabularx}
-	\caption{MoSCoW prioritised functional requirements for the first sprint.}
-	\label{tab:s1_req}
+	\caption{Functional requirements for the second sprint.}
+	\label{tab:s2_req}
 \end{table}
 
+In addition to the functional requirement changes, the following non-functional requirement is added.
 
-  
-
-%% Commented out if we want to change how we emphasize..
-\iffalse
-\textbf{Must have}
 \begin{enumerate}
-    \item The system must be able to analyse position data collected from the crowd via mobile technology.
-    \item The system must be able to present a visualisation of relevant information about the state of the crowd.
-    \item The system must be able to run on multiple platforms.
-    \item A highly detailed map that enables a detailed overview of the festival. This entails the inclusion of points of interest on the map, such as toilets, bars, or fixpoints. The map should also include geographical structures such as buildings, fences and pedestrian paths.
-    \item A real-time representation displaying position data of the people present in the festival areas. This includes estimation of position data, where the actual readings are not available.
-    \item Toggleable levels of detail. The different information available must be possible to disable, so that cluttering and information overflow can be avoided.
-    \item Preservation of privacy. It must not be possible to infer specific information of the individual festival attendees. This is in accordance with the values of the festival, as well as danish law.
-    \item An interface for computers. Since the main use will be in a control room, the application must be able to run on a desktop computer.
-    \item User authorization, so the system is only available to employees with a valid login.
+    \item \emph{Preservation of privacy.} The privacy of the users must be preserved. It should not be possible to identify a specific person using the system. This is very important, both in accordance with the values of the festival and danish law, and will receive a high priority.
 \end{enumerate}
 
-\textbf{Should have}
-\begin{enumerate}[resume]
-    \item A search function. Specific places of interest should be possible to find through search, in order to enable faster orientation on the map.
-    \item A mobile interface for use outside the control room. This is oriented towards field personnel, such as paramedics and security guards.
-\end{enumerate}
+Adding this to the existing non-functional requirements from \cref{tab:s1_nreqs} gives us the specification shown in \cref{tab:s2_nreq}
 
-\textbf{Could have}
-\begin{enumerate}[resume]
-    \item Navigation assistance for use in crowds. Should serve to enable faster reaction times, by supplying a route to personnel having to traverse the festival.
-    \item An automated reaction to problematic situations. This would entail having the system analysing current situations and notifying the operators of possible problems that may have occurred, such as crowd congestion.
-    \item A display of available personnel. In order to better judge the coverage of personnel, real-time tracking could provide a better overview for the control room operators. Matters of personal privacy for the personnel also has to be considered.
-\end{enumerate}
-
-\textbf{Won't have}
-\begin{enumerate}[resume]
-    \item Projection onto camera images. Such a functionality would require a system by itself, and is considered out of scope.
-\end{enumerate}
-\fi
-
+\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\textwidth}{lXl}
+		\toprule
+		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} \\
+		\midrule 
+		\rowcolor[HTML]{EFEFEF} 
+		S1-NR1 & The visualisation must be updated in real-time & High \\
+		S1-NR2 & Location data must be acquired using the aSTEP core & High \\
+		\rowcolor[HTML]{EFEFEF} 
+		S1-NR3 & The application must be maintainable & Medium \\
+		S1-NR4 & The application must be extensible & Medium \\
+		\rowcolor[HTML]{EFEFEF}
+		S2-NR1 & Preservation of privacy & High \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Non-functional requirements for the second sprint.}
+	\label{tab:s2_nreqs}
+\end{table}

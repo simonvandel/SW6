@@ -49,7 +49,7 @@ In order to fully understand the need for a good implementation of the analyser,
     \EndFor
     \State \Call{Pressure.Add}{x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)}
 \EndFor
-\State\textbf{Return} (Densities, Velocities, Turbulence, Pressure)
+\State\textbf{Return} (points, Densities, Velocities, Turbulence, Pressure)
 \EndFunction
 \end{algorithmic}
 \end{center}
@@ -100,7 +100,6 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 
 
 \State KernelValSum $\gets 0$
-\State KernelValForPerson $\gets List[(0,vector(0.0,0.0))]$ 
 \State NonNormalisedVelocitySum $\gets vector(0.0,0.0)$
 \State NonNormalisedTurbulenceSum $\gets 0$
 \State TurbulenceKernelValSum $\gets 0$ 
@@ -109,7 +108,6 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 \ForAll{People, P}
     \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}
     \State KernelValSum $\gets$ KernelValSum + TmpKernelVal
-    \State KernelValForPerson $\gets$ ((P.Velocity,TmpKernelVal),NonNormalisedVelocitySum)
     \State NonNormalisedVelocitySum $\gets$ NonNormalisedVelocitySum + Velocity * TmpKernelVal
     \If{P.HeadingDirection is valid}
         \State NonNormalisedTurbulenceSum $\gets$ NonNormalisedTurbulenceSum + P.HeadingDirection * TmpKernelVal
@@ -119,14 +117,21 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 
 \If{KernelValSum is 0}
     \State \textbf{Return} (0,(0,0),0,0)
+\Else
+    \State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$
+    \State Velocity $\gets$ NonNormalisedVelocitySum / KernelValSum
+    \State Turbulence $\gets$ 1 - ( NonNormalisedTurbulenceSum / TurbulenceKernelValSum )
+    \State VelocityDiffSum $\gets$ 0
+    \ForAll{People, P}
+        \State VelocityDiff $\gets$ |P.velocity - Velocity|$^2 \cdot$ \Call{Kernel}{|x - P|}
+        \State VelocityDiffSum $\gets$ VelocityDiffSum $+$ VelocityDiff
+    \EndFor
+    \State Pressure $\gets$ Density $\cdot$ ( VelocityDiffSum / KernelValSum )
+
+
+
+\State \textbf{Return} (x, Density, Velocity, Turbulence, Pressure)
 \EndIf
-
-\State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$
-\State Velocity $\gets$ NonNormalisedVelocitySum / KernelValSum
-\State Turbulence $\gets$ 1 - ( NonNormalisedTurbulenceSum / TurbulenceKernelValSum)
-
-\State \textbf{Return} (Density, Velocity, Turbulence, Pressure) 
-
 \EndFunction
 \end{algorithmic}
 \end{center}
