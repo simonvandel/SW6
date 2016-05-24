@@ -71,11 +71,17 @@ Considering that there is a physical limit as too how dense people can be packed
 
 Another way to increase the calculation of the analysis, is to take advantage of the embarrassingly parallel problem of calculating point. Since none of the calculations done for any individual point affect the the other points, we can calculate their values in parallel.
 
-\subsubsection{Reducing Constants}
+\subsubsection{An Optimised Algorithm}
 
-Having reduced the complexity, we still need to reduce the amount of constants in our algorithm's run time. We wish to reduce the amount of iterations on the points, as well repeated calculations such as the Kernel values.
+All these considerations leads us to the pseudo-code for the optimised analyser algorithm. The algorithm is split into two functions and can be seen in \cref{alg:revised_algorithm}. The first function on line 1 is the analyser function. This is basically a for-loop with to objectives: Find the relevant people through an R-tree, and call the \emph{analysePoint} function. This for-loop represents the embarrassingly parallel part of the problem. It should be noted that while the same R-tree is used for multiple points, only read actions are done, and as such there are no race conditions.
 
-%% Hvorfor det er nice
+The second function on line 9 of the algorithm, is the part where the local crowd densities are calculated. The primary change here, is the reduction of four for-loops, down to two. The primary reason for this reduction is the repeated calls to the \emph{Kernel} function, which calculates a given persons Kernel value. Since this is a rather costly calculation, we store the result of the calculation on line 15, and use this value for each factor. Note that on line 31, another call is made to the \emph{Kernel} function. In the actual implementation this is avoided through a technical workaround in the first for-loop. However we have omitted that detail in order to keep the pseudo-code less complicated.
+
+On line 10 to 13 we introduce summation variables, which will store the non-normalised values. Note that the value for velocity on line 11 is a vector. We then reach the first for-loop, which will iterate through every person in the reduced list, and add that persons value to the accumulators after it has been adjusted by the kernel value.
+
+At line 18 we have an \emph{if} statement, which makes sure that the heading direction is not invalid, in accordance with the solution presented in \cref{subsub:turbu}, to the problem of stilling standing people. If the heading direction is valid, the accumulator is updated along with the separate Kernel value summation.
+
+
 
 \kanote{kommentér koden}
 
@@ -97,22 +103,23 @@ Having reduced the complexity, we still need to reduce the amount of constants i
 
 \EndFunction
 
-\Function{analysePoint}{Point x, List[person] people}
+\Function{analysePoint}{Point x, List people}
 
 
 \State KernelValSum $\gets 0$
-\State NonNormalisedVelocitySum $\gets vector(0.0,0.0)$
-\State NonNormalisedTurbulenceSum $\gets 0$
-\State TurbulenceKernelValSum $\gets 0$ 
+\State NonNormVeloSum $\gets vector(0.0,0.0)$
+\State NonNormTurbuSum $\gets 0$
+\State TurbuKernelValSum $\gets 0$ 
 
 
 \ForAll{People, P}
     \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}
     \State KernelValSum $\gets$ KernelValSum + TmpKernelVal
-    \State NonNormalisedVelocitySum $\gets$ NonNormalisedVelocitySum + Velocity * TmpKernelVal
-    \If{P.HeadingDirection is valid}
-        \State NonNormalisedTurbulenceSum $\gets$ NonNormalisedTurbulenceSum + P.HeadingDirection * TmpKernelVal
-        \State TurbulenceKernelValSum $\gets$ TurbulenceKernelValSum + TmpKernelVal
+    \State NonNormVeloSum $\gets$ NonNormVeloSum + Velocity * TmpKernelVal
+    \If{P.H-Direction is valid}
+        \State AdjustedTurbu $\gets$ P.H-Direction $\cdot$ TmpKernelVal
+        \State NonNormTurbuSum $\gets$ NonNormTurbuSum $+$ Adjusted Turbu 
+        \State TurbuKernelValSum $\gets$ TurbuKernelValSum + TmpKernelVal
     \EndIf
 \EndFor
 
@@ -120,8 +127,8 @@ Having reduced the complexity, we still need to reduce the amount of constants i
     \State \textbf{Return} (0,(0,0),0,0)
 \Else
     \State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$
-    \State Velocity $\gets$ NonNormalisedVelocitySum / KernelValSum
-    \State Turbulence $\gets$ 1 - ( NonNormalisedTurbulenceSum / TurbulenceKernelValSum )
+    \State Velocity $\gets$ NonNormVelocitySum / KernelValSum
+    \State Turbulence $\gets$ 1 - ( NonNormTurbuSum / TurbuKernelValSum )
     \State VelocityDiffSum $\gets$ 0
     \ForAll{People, P}
         \State VelocityDiff $\gets$ |P.velocity - Velocity|$^2 \cdot$ \Call{Kernel}{|x - P|}

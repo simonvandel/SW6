@@ -24,7 +24,7 @@ The function can be reduced to:
 \vv{V_x} = \frac{\sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
 \end{equation}
 
-\subsubsection{Turbulence}
+\subsubsection{Turbulence}\label{subsub:turbu}
 Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. In order to do this, we require a way to represent a direction. Following the method of \citet{localTrendStatistics}, we choose to represent direction as an angle, since direction is inherently cyclic. However the cyclic nature of angles provides an obstacle when we wish to find the average direction. This problem isillustrated in \cref{fig:radiansHeadingdirection}.
 
 
