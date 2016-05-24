@@ -1,11 +1,10 @@
 \section{Implementation of Asynchronous Analysis}
 \label{sub:implementation_of_asynchronous_analysis}
+As described in \cref{sub:Asynchronous_Analysis} the amount of calculations required can be reduced by analysing location data asynchronously from user requests, storing completed analyses for later use. We will in this section describe the policies that were implemented. 
 
-As described in \cref{sub:Asynchronous_Analysis} the amount of calculations required can be reduced by analysing location data asynchronously from user requests, storing completed analyses. We assume that users will primarily monitor real-time crowd factors, therefore we will focus on optimising the real-time analysis.
+We assume that users will primarily monitor real-time crowd factors, therefore we will focus on optimising the real-time analysis. This was implemented using an infinite loop running on another thread. This thread fetches and analyses position data from the aSTEP core. All completed analyses from this thread are stored in a global variable. When a user requests crowd factors the request handler will respond with data obtained from this global variable.
 
-This was implemented using an infinite loop running on another thread. This thread fetches and analyses position data from the aSTEP core. Completed analyses from this thread are stored in a global variable. When a user requests crowd factors the request handler will respond with data obtained from this global variable. 
-
-There is one thread which writes data to the global variable, and potentially one thread per user reading data from this global variable. The global variable is a pointer to the result of the latest completed analysis. When the analysis of new data is completed, this pointer is changed atomically, in order to prevent race conditions. 
+There is one thread which writes data to the global variable, and potentially one thread per user reading data from this global variable. The global variable is a pointer to the result of the latest completed analysis. When the analysis of new data is completed the pointer is changed atomically, in order to prevent race conditions.
 
 The infinite loop is repeated at most once per 5 seconds. In the case that an iteration of the loop takes longer than 5 seconds to complete, the next iteration will not start until the current iteration has completed. A new iteration will always start on the latest data, meaning that if it gets behind the core, it will \enquote{skip} a dataset rather then getting increasingly out of sync. The 5 second limitation corresponds to the frequency at which the aSTEP core can supply updated data. One iteration of the loop consists of the following six stages: 
 
@@ -18,4 +17,4 @@ The infinite loop is repeated at most once per 5 seconds. In the case that an it
     \item \textbf{JSON Conversion:} At the last stage the result of the analysis is converted into JSON format, which is then stored in the global variable used for user requests. 
 \end{enumerate}
 
-In summary, this implementation ensures that the data analysis is not performed for all users requesting real-time information, which improves the performance of the server. It also improves client side performance, as handling requests of analysed data takes less time. Another advantage of this implementation is that multiple users monitoring real-time crowd conditions will be shown the exact same information.
+In summation, this implementation ensures that the data analysis is not performed for all users requesting real-time information, which improves the performance of the server. It also improves client side performance, as handling requests of analysed data takes less time. Another advantage of this implementation is that multiple users monitoring real-time crowd conditions will be shown the same information.
