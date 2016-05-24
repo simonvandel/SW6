@@ -27,7 +27,7 @@ In scala type aliases of mixin types are used to denoted a class or trait with a
 \subsection{Implementation of Asynchronous Analysis}
 \label{sub:implementation_of_asynchronous_analysis}
 
-As described in \cref{sub:Asynchronous_Analysis} the amount of calculations, can be reduced by analyzing asynchronously from user requests, and store completed analyses. We assume that mostly users will monitor real-time crowd factors, therefor we will focus on optimizing real-time analyzing.
+As described in \cref{sub:Asynchronous_Analysis} the amount of calculations done can be reduced by analysing asynchronously from user requests, and store completed analyses. We assume that mostly users will monitor real-time crowd factors, therefor we will focus on optimizing real-time analyzing.
 
 This was implemented using a infinite loop running on another thread, which fetches and analyses position data from the astep core. Completed Analysis's from this thread are stored in a global variable. When a user requests crowd factors the request handler will respond with data obtained from this global variable. There are one thread which writes data to the global variable, and potentially one thread per user reading data from this global variable. The global variable is a pointer to the result of the latest completed Analysis, and when new data is completely analyzed this pointer is changed atomically to prevent race conditions. 
 
