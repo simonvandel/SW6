@@ -1,9 +1,11 @@
 \section{Conclusion} \label{sec:s4_conclusion}
 The fourth sprint started on April 22, and ended on May 20. In the sprint we continued the development of our application with the existing functional requirements, focusing on the overlays for visualisation of the four crowd factors. Non-functional requirements  regarding maintainability and performance were also prioritised in this sprint.
 
-To improve the maintainability of the system, much of the existing model component was refactored. The refactored design was described, giving an overview of the current structure of the m
+To improve the maintainability of the system, much of the existing model component was refactored. The refactored design was described, giving an overview of the current structure of the model component. The focus on performance is expressed by the implementation of asynchronous analysis.
 
-We refactored most of the 
+To finalise the crowd factor overlays we considered how to visually represent the analysed data. Crowd density, turbulence, and pressure are visualised similarly, using colours to represent the value of the crowd factor, and opacity to represent the density. Velocity is visualised using arrows, marking the direction of the movement, where the colour of the arrow represents the speed of the movement. Contrary to the other overlays, the opacity of the arrows does not depend on the density, but the arrow is hidden in low density areas.
 
-The sprint was concluded with a user acceptance test of the application. 
+The sprint was concluded with a user acceptance test of the application, where the focus was on the usability of the overlays. The test was only performed with a single user, and should as such not be considered definitive. The pressure overlay was not tested, as it was not yet fully implemented.
+
+While the overall feedback on the application was positive, it also presented some weaknesses of the application. Most notable of these were the lack of an intuitive understanding of the turbulence overlay, and the velocity design.
 
