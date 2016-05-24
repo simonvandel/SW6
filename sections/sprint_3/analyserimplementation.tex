@@ -73,27 +73,24 @@ Another way to increase the calculation of the analysis, is to take advantage of
 
 \subsubsection{An Optimised Algorithm}
 
-All these considerations leads us to the pseudo-code for the optimised analyser algorithm. The algorithm is split into two functions and can be seen in \cref{alg:revised_algorithm}. The first function on line 1 is the analyser function. This is basically a for-loop with to objectives: Find the relevant people through an R-tree, and call the \emph{analysePoint} function. This for-loop represents the embarrassingly parallel part of the problem. It should be noted that while the same R-tree is used for multiple points, only read actions are done, and as such there are no race conditions.
+All these considerations leads us to the pseudo-code for the optimised analyser algorithm. The algorithm is split into two functions and can be seen in \cref{alg:revised_algorithm}. The first function on \cref{firstfunc} is the analyser function. This is basically a for-loop with to objectives: Find the relevant people through an R-tree, and call the \emph{analysePoint} function. This for-loop represents the embarrassingly parallel part of the problem. It should be noted that while the same R-tree is used for multiple points, only read actions are done, and as such there are no race conditions.
 
-The second function on line 9 of the algorithm, is the part where the local crowd densities are calculated. The primary change here, is the reduction of four for-loops, down to two. The primary reason for this reduction is the repeated calls to the \emph{Kernel} function, which calculates a given persons Kernel value. Since this is a rather costly calculation, we store the result of the calculation on line 15, and use this value for each factor. Note that on line 31, another call is made to the \emph{Kernel} function. In the actual implementation this is avoided through a technical workaround in the first for-loop. However we have omitted that detail in order to keep the pseudo-code less complicated.
+The second function on \cref{secondfunc} of the algorithm, is the part where the local crowd densities are calculated. The primary change here, is the reduction of four for-loops, down to two. The primary reason for this reduction is the repeated calls to the \emph{Kernel} function, which calculates a given persons Kernel value. Since this is a rather costly calculation, we store the result of the calculation on \cref{tmpkernel}, and use this value for each factor. Note that on \cref{secondkernel}, another call is made to the \emph{Kernel} function. In the actual implementation this is avoided through a technical workaround in the first for-loop. However we have omitted that detail in order to keep the pseudo-code less complicated.
 
-On line 10 to 13 we introduce summation variables, which will store the non-normalised values. Note that the value for velocity on line 11 is a vector. We then reach the first for-loop, which will iterate through every person in the reduced list, and add that persons value to the accumulators after it has been adjusted by the kernel value.
+On line \cref{firstval} through \ref{lastval} we introduce summation variables, which will store the non-normalised values. Note that the value for velocity on \cref{veloval} is a vector. We then reach the first for-loop, which will iterate through every person in the reduced list, and add that persons value to the accumulators after it has been adjusted by the kernel value.
 
-At line 18 we have an \emph{if} statement, which makes sure that the heading direction is not invalid, in accordance with the solution presented in \cref{subsub:turbu}, to the problem of stilling standing people. If the heading direction is valid, the accumulator is updated along with the separate Kernel value summation.
+At \cref{validhead} we have an \emph{if} statement, which makes sure that the heading direction is not invalid, in accordance with the solution presented in \cref{subsub:turbu}, to the problem of stilling standing people. If the heading direction is valid, the accumulator is updated on \cref{adjustturbu} and \ref{turbusum}, along with the separate Kernel value summation on \cref{turbukernel}.
 
+On \cref{nullcheck} we have an \emph{if} statement, which checks if the point has a Kernel value of $0$, which would cause a division error in \cref{secondres}.
+Then at \cref{firstres} through \ref{thirdres} the first three factors are normalised, and on \cref{firstpres} through \ref{lastpres} we calculate the local crowd pressure. We finally return the result on \cref{return}.
 
-
-\kanote{kommentér koden}
-
-%\LineComment{We reduce the amount of people using a range search}
-%\LineComment{List of tuples containing individual Kernel values and velocity}
-%\LineComment{Summarised Kernel variable adjusted for turbulence}
+This algorithm holds the desired complexity of $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$.
 
 \begin{center}
 \captionof{algorithm}{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List points, rTree t, Bandwidth h}
+\Function{Analyser}{List points, rTree t, Bandwidth h}\label{firstfunc}
 \State Result $\gets$ Empty List 
 \ForAll{points, p}
     \State CulledPeople $\gets$ \Call{t.inRange}{h,p} 
@@ -103,42 +100,39 @@ At line 18 we have an \emph{if} statement, which makes sure that the heading dir
 
 \EndFunction
 
-\Function{analysePoint}{Point x, List people}
+\Function{analysePoint}{Point x, List people}\label{secondfunc}
 
 
-\State KernelValSum $\gets 0$
-\State NonNormVeloSum $\gets vector(0.0,0.0)$
+\State KernelValSum $\gets 0$\label{firstval}
+\State NonNormVeloSum $\gets vector(0.0,0.0)$\label{veloval}
 \State NonNormTurbuSum $\gets 0$
-\State TurbuKernelValSum $\gets 0$ 
+\State TurbuKernelValSum $\gets 0$\label{lastval}
 
 
 \ForAll{People, P}
-    \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}
+    \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}\label{tmpkernel}
     \State KernelValSum $\gets$ KernelValSum + TmpKernelVal
     \State NonNormVeloSum $\gets$ NonNormVeloSum + Velocity * TmpKernelVal
-    \If{P.H-Direction is valid}
-        \State AdjustedTurbu $\gets$ P.H-Direction $\cdot$ TmpKernelVal
-        \State NonNormTurbuSum $\gets$ NonNormTurbuSum $+$ Adjusted Turbu 
-        \State TurbuKernelValSum $\gets$ TurbuKernelValSum + TmpKernelVal
+    \If{P.H-Direction is valid}\label{validhead}
+        \State AdjustedTurbu $\gets$ P.H-Direction $\cdot$ TmpKernelVal\label{adjustturbu}
+        \State NonNormTurbuSum $\gets$ NonNormTurbuSum $+$ Adjusted Turbu \label{turbusum}
+        \State TurbuKernelValSum $\gets$ TurbuKernelValSum + TmpKernelVal\label{turbukernel}
     \EndIf
 \EndFor
 
-\If{KernelValSum is 0}
+\If{KernelValSum is 0}\label{nullcheck}
     \State \textbf{Return} (0,(0,0),0,0)
 \Else
-    \State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$
-    \State Velocity $\gets$ NonNormVelocitySum / KernelValSum
-    \State Turbulence $\gets$ 1 - ( NonNormTurbuSum / TurbuKernelValSum )
-    \State VelocityDiffSum $\gets$ 0
+    \State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$\label{firstres}
+    \State Velocity $\gets$ NonNormVelocitySum / KernelValSum \label{secondres}
+    \State Turbulence $\gets$ 1 - ( NonNormTurbuSum / TurbuKernelValSum )\label{thirdres}
+    \State VelocityDiffSum $\gets$ \label{firstpres}
     \ForAll{People, P}
-        \State VelocityDiff $\gets$ |P.velocity - Velocity|$^2 \cdot$ \Call{Kernel}{|x - P|}
+        \State VelocityDiff $\gets$ |P.velocity - Velocity|$^2 \cdot$ \Call{Kernel}{|x - P|}\label{secondkernel}
         \State VelocityDiffSum $\gets$ VelocityDiffSum $+$ VelocityDiff
     \EndFor
-    \State Pressure $\gets$ Density $\cdot$ ( VelocityDiffSum / KernelValSum )
-
-
-
-\State \textbf{Return} (x, Density, Velocity, Turbulence, Pressure)
+    \State Pressure $\gets$ Density $\cdot$ ( VelocityDiffSum / KernelValSum )\label{lastpres}
+\State \textbf{Return} (x, Density, Velocity, Turbulence, Pressure)\label{return}
 \EndIf
 \EndFunction
 \end{algorithmic}
