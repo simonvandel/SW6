@@ -68,7 +68,14 @@ But before we can utilise this, we need a way to check if a person is further aw
 Considering that there is a physical limit as too how dense people can be packed, the function $PeopleWithinBandwidth(h) = h^2 * \pi * maxDensity$. Since we at runtime will have a constant bandwidth, $h$, the final complexity will be $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$.
 
 \subsubsection{Parallel Computation}
-The algorithm described in \cref{alg:revised_algorithm} is embarrassingly parallel, each point in the algorithm can be calculated independently of one another. The calculation can be sped up by computing the calls to \emph{analysePoint} on multiple computational units.
+
+Another way to increase the calculation of the analysis, is to take advantage of the embarrassingly parallel problem of calculating point. Since none of the calculations done for any individual point affect the the other points, we can calculate their values in parallel.
+
+The problem  is embarrassingly parallel. Each point in the algorithm can be calculated independently of one another, allowing for a much wider  The calculation can be sped up by computing the calls to \emph{analysePoint} on multiple computational units.
+
+
+
+
 
 \subsubsection{Reducing Constants}
 
