@@ -11,7 +11,7 @@ The medical and guard users are specialisations of the previously defined mobile
 \input{tables/s3-users.tex}
 
 \subsection{Additional Use Cases \label{ss:s3_uc}}
-In addition to the previously identified use cases, during the user test some additional potential uses of the system were discussed. Based on the discussion we identified five additional use cases, described in \cref{tab:s3-uc1,tab:s3-uc2,tab:s3-uc3,tab:s3-uc4}.
+In addition to the previously identified use cases, during the user test some additional potential uses of the system were discussed. Based on the discussion we identified five additional use cases, described in \cref{tab:s3-uc1,tab:s3-uc2,tab:s3-uc3,tab:s3-uc4,tab:s3-uc5}.
 
 \input{tables/s3-usecases.tex}
 
@@ -26,6 +26,7 @@ Based on the new use cases, and the general feedback from the user test, several
     \item \emph{Send notification to other users.} It could be possible for some users with a sufficient access level to send notification to other users. This is prioritised as could have.
     \item \emph{A menu with searchable contact information.} A menu containing the contact information of the festival employees. It should be possible to search through the contacts. This is prioritised as won't have, as it is not important for the usability of the application.
     \item \emph{Reporting of incidents by festival guests.} It could be possible for festival guests to access the application, and report an incident on the map. This requirement is not in the scope of the project, and is prioritised as won't have.
+    \item \emph{Visualisation of historical data.} It could be possible to requrest historical data, and have this data visualised on the map. This would allow users to analyse prior incidents, possibly improving their ability to handle similar future situations. The real-time representation is the primary focus in the application, so this requirement is prioritised as won't have.
 \end{enumerate}
 
 Updating the previous requirements specification from \cref{tab:s2_req} gives us the requirement specification shown in \cref{tab:s3_req}.
@@ -68,6 +69,7 @@ Updating the previous requirements specification from \cref{tab:s2_req} gives us
 		S3-FR6 & A menu with searchable contact information & Won't have \\
 		\rowcolor[HTML]{EFEFEF}
 		S3-FR7 & Reporting of incidents by festival guests & Won't have \\
+		S3-FR8 & Visualisation of historical data & Won't have \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Functional requirements for the third sprint.}
@@ -75,12 +77,3 @@ Updating the previous requirements specification from \cref{tab:s2_req} gives us
 \end{table}
 
 No non-functional requirements are added in this sprint, so the non-functional requirements are still given by \cref{tab:s2_nreqs}.
-
-\lanote{har ikke lige fundet ud af hvad jeg gør med det her krav endnu}
-% Or is this a non-functional requirement?? TBD
-\textbf{Should have}
-\begin{enumerate}[resume]
-    
-    \item \textbf{[Added]} All data displayed to the user could also be stored for later retrieval, allowing for analysis of a problematic situation, which could improve the ability to handle similar future situations.
-    
-\end{enumerate}
