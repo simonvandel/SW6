@@ -36,8 +36,8 @@ There is one thread which writes data to the global variable, and potentially on
 The infinite loop is repeated at most once per 5 seconds. In the case that an iteration of the loop takes longer than 5 seconds to complete, the next iteration will not start until the current iteration has completed. The 5 second limitation corresponds to the frequency at which the aSTEP core can supply updated data. One iteration of the loop consists of the following five stages: 
 
 \begin{enumerate}
-    \item \textbf{Fetch position data:} This stage fetches position data from the aSTEP core.
     \item \textbf{Process the position data:} At this stage all the fetched positions are associated with the corresponding person, based on a id received together with every position. This id identifies a single Wi-Fi device. Afterwards the method $movePerson$ is called for every instance of the class Person, with the corresponding new position as parameter, in order to add this position to a persons history.
+    \item \textbf{Fetch position data:} This stage fetches position data from the aSTEP core.
     \item \textbf{Calculate analysis data:} The purpose of this stage is to calculate the list of $AnalyserData$ for each $Area$. This involves calculating all peoples heading direction and velocity, and encapsulate this in an instance of the class $AnalyserData$.
     \item \textbf{Analysis:} This stages analyses the data from the last stage, estimating the crowd factors of each $Area$.
     \item \textbf{JSON Conversion:} At the last stage the result of the analysis is converted into JSON format, which is then stored in the global variable used for user requests. 
