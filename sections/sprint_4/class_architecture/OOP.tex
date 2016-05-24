@@ -1,10 +1,10 @@
-\subsection{OOP in Scala}
-In this section we will describe some scala features which is on the edge of the object oriented paradigm, which is essential to know about in order to understand the class diagram in \cref{fig:class};
+\subsection{Object Oriented Programming in Scala}
+Before we move on, we will describe some Scala features on the edge of the object oriented paradigm, that warrant an explanation before we can fully understand the class diagram in \cref{fig:class}.
 
 \subsubsection{Traits}
-Scala does not have interfaces, but instead uses traits. These are similar but allow for default implementation of methods within the trait. When concrete classes extends traits, it is called a realisation of that trait. In Scala, traits can also be instantiated if all of its instance variables and methods have default implementations. Scala only allows traits to be mixed into classes or other traits.
+Scala does not have interfaces, but instead uses traits. These are similar but allow for default implementation of methods within the trait. When concrete classes extend traits, it is called a realisation of that trait. In Scala, traits can also be instantiated if all of its instance variables and methods have default implementations. Scala only allows traits to be mixed into classes or other traits.
 
 \subsubsection{Mixin}
-Mixin is a language dependent functionality that we use in our application, which allows a class \emph{A} to contain methods from other classes or interfaces without having \emph{A} be a specialisation of these other classes or traits. How class \emph{A} gain access to those methods through mixin is defined by the language. 
+Mixin is a language dependent functionality we use in our application, that allows a class \emph{A} to contain methods from other classes or interfaces without having \emph{A} be a specialisation of these other classes or traits. How class \emph{A} gain access to those methods through mixin is defined by the language. 
 
 In Scala, type aliases of mixin types are used to denote a class or trait with a trait mixed into it. As an example of this we have on \cref{fig:class} that type \emph{Point} is an alias for any type which realises the trait \emph{Coordinate} mixed with the trait \emph{Weight}
