@@ -4,23 +4,23 @@ During the user test with Alarm HS, several new use cases were identified. For t
 \subsection{Revised Users} \label{ss:s3_users}
 Along with the additional use cases, we also identified new users for the system. These users include guest users, medical users, and guard users.
 
-We added a new user type for festival guests, called guest users. These users are briefly described in \cref{tab:guest_user}. While festival guests share some characteristics with the mobile users described in \cref{tab:mob_user}
-Guest users are festival guest that use the system, Festival guests are as potential users of the system, The guest user, described in \cref{tab:guest_user}
+The guest users are briefly described in \cref{tab:guest_user}. While guests users share some characteristics with the mobile users described in \cref{tab:mob_user}, they are specified as a separate user, as they should only have very limited access to the features of the system.
 
-
-
-The medical and guard users are specialisations of the 
-% Users: festical guest, guards, medical personnel
+The medical and guard users are specialisations of the previously defined mobile user, and so references to mobile users will include both medical and guard users. A description of these users can be seen in \cref{tab:med_user,tab:guard_user}. These specific users are added in order to support targeted information in the system. This could be beneficial if there are incidents that only require the attention of one specific group.
 
 \input{tables/s3-users.tex}
 
 \subsection{Additional Use Cases \label{ss:s3_uc}}
-% add use cases
+In addition to the privously identified use cases, during the user test some additio
+
+
+Here we describe the additional use cases identified during the meeting with Alarm HS. In addition to the assumed use cases described in \cref{ss:s1_uc}, seven additional use cases were identified from the meeting. These additional requirements are described in \cref{tab:s2-uc1,tab:s2-uc2,tab:s2-uc3,tab:s2-uc4,tab:s2-uc5,tab:s2-uc6,tab:s2-uc7}.
+
 
 \input{tables/s3-usecases.tex}
 
 \subsection{Revised Requirements} \label{ss:s2_reqs}
-Based on the new use cases several additional functional requirements have been identified, which must be added to the requirements previously identified in \cref{ss:s2_update_reqs}. The following requirements will be added:
+Based on the new use cases, and the general feedback from the user test, several additional functional requirements have been identified, which must be added to the requirements previously identified in \cref{ss:s2_update_reqs}. The following requirements will be added:
 
 \begin{enumerate}
     \item \emph{A map legend.} In order to make the crowd information overlays more intuitive, a map legend explaining the overlays must be added. This is very important for a usable system, and will be prioritised as must have.
