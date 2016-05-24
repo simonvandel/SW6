@@ -71,12 +71,6 @@ Considering that there is a physical limit as too how dense people can be packed
 
 Another way to increase the calculation of the analysis, is to take advantage of the embarrassingly parallel problem of calculating point. Since none of the calculations done for any individual point affect the the other points, we can calculate their values in parallel.
 
-The problem  is embarrassingly parallel. Each point in the algorithm can be calculated independently of one another, allowing for a much wider  The calculation can be sped up by computing the calls to \emph{analysePoint} on multiple computational units.
-
-
-
-
-
 \subsubsection{Reducing Constants}
 
 Having reduced the complexity, we still need to reduce the amount of constants in our algorithm's run time. We wish to reduce the amount of iterations on the points, as well repeated calculations such as the Kernel values.
