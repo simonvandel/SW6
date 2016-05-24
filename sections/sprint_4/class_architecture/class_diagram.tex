@@ -1,6 +1,14 @@
 \subsection{Class Diagram}
 This section will explain the most notable classes illustrated in \cref{fig:class}, their relations and their motivation and responsibilities.
 
+\alnote{Person[Position] og Person[ConfidencePosition] skal være abstract, og generalt check diagram}
+\begin{sidewaysfigure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/class.eps}
+\caption{Class diagram.}
+\label{fig:class}
+\end{sidewaysfigure}
+
 \subsubsection{Coordinate}
 The \emph{Coordinate} trait models a geographic location on the earth. Because many functions are dealing with objects that can have coordinates, we can let these objects implement the \emph{Coordinate} trait, and thereby write these functions in a polymorphic way. One such object is the \emph{Position} class, which is essentially a coordinate for a person at a given time.
 
@@ -29,10 +37,4 @@ When positions from the aSTEP core are used we keep confidence information in ca
 \subsubsection{Weight and Point}
 After the analyser have calculated the local crowd factors it creates the class \emph{Weight} to store them in. The \emph{Weight}s are specific local crowd factors. Together with a \emph{coordinate} for the position of these local crowd factors we get a \emph{Point}. A \emph{Point} is what the client need to represent the local crowd factors to the user. As explained in \cref{subsec:lightweightResults} we do not need to send all local crowd factors as \emph{point}s, but only the top left one as a reference, the resolution, width and hight of the grid and the rest as weights. This way the client can recalculate the positions for the local crowd factors and plot them from the values given in the weights.
 
-\alnote{Person[Position] og Person[ConfidencePosition] skal være abstract, og generalt check diagram}
-\begin{sidewaysfigure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{figures/class.eps}
-\caption{Class diagram.}
-\label{fig:class}
-\end{sidewaysfigure}
+
