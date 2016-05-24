@@ -15,10 +15,22 @@ Scala does not have interfaces, but instead uses traits. These are similar but a
 
 In Scala, type aliases of mixin types are used to denote a class or trait with a trait mixed into it. As an example of this we have on \cref{fig:class} that type \emph{Point} is an alias for any type which realises the trait \emph{Coordinate} mixed with the trait \emph{Weight}. UML cannot represent mixin, so it was chosen to show this by drawing a realisation arrow with a mixin stereotype from the alias to the mixed type. Stereotypes are denoted by some text surrounded with \emph{<<} and \emph{>>} above the arrow.
 
+\subsubsection{Class Diagram}
+
+This section will explain the most notable classes illustrated in \cref{fig:class} and its relations.
+
+% Coordinate
+%% Pos
+%% Confidence pos
+The \emph{Coordinate} trait models a geographic location on the earth. Because many functions are dealing with objects that can have coordinates, we can let these objects implement the \emph{Coordinate} trait, and thereby write these functions in a polymorphic way. One such object is the \emph{Position} class, which is essentially a coordinate for a person at a specific time.
+
+% Person
+%% 
+
 \begin{sidewaysfigure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{figures/class.eps}
-\caption{Class diagram}
+\caption{Class diagram.}
 \label{fig:class}
 \end{sidewaysfigure}
 
