@@ -13,6 +13,10 @@ The generic type parameter \emph{T} is bounded to be a class implementing \emph{
 
 The most important method in the \emph{Person} class is \emph{movePerson}, which takes a \emph{T} and a \emph{DateTime} as parameters. Here the parameter of type \emph{T} is the location the person should be moved to, and the DateTime parameter is the time where the person arrived at the location. This method updates a person's history of positions to include the new position. Upon updating a person's history of positions, positions older than \emph{x} is removed from the person, where \emph{x} is a constant defined for all persons. To calculate a person's velocity and heading direction this history of positions is essential.
 
+\emph{FakePerson} is a concrete class inhering from \emph{Person[Position]}, which has a iterateable collection of \emph{Position}s. \emph{FakePerson}s are used for simulations with generated position data. When dealing with \emph{FakePerson} we found it necessary to have an id in the \emph{Position} class in order to implement the \emph{movePerson} method for \emph{FakePerson}, which is why a \emph{Coordinate} were insufficient. 
+
+When positions from the aSTEP core are used we keep confidence information in case it would be useful at some point. This is why a \emph{RealPerson} inherits from \emph{Person[ConfidencePosition]}.
+
 \subsubsection{Area}
 
 \emph{Area} is the class representing a geographical area on a map. The most important method such a class should implement is the function \emph{isWithinArea} which taskes an input of type p:Coordinate):Bool
