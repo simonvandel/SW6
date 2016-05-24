@@ -4,7 +4,7 @@ This section will explain the most notable classes illustrated in \cref{fig:clas
 \subsubsection{Coordinate}
 The \emph{Coordinate} trait models a geographic location on the earth. Because many functions are dealing with objects that can have coordinates, we can let these objects implement the \emph{Coordinate} trait, and thereby write these functions in a polymorphic way. One such object is the \emph{Position} class, which is essentially a coordinate for a person at a given time.
 
-\emph{ConfidencePosition} is designed to have the same structure as positions received from the aSTEP server, so when our application requests position data, a list of \emph{ConfidencePosition} will be returned. A \emph{ConfidencePosition} therefore also includes information about the certainty of a position, called \emph{Confidence} as shown on \cref{fig:class}. This confidence 
+\emph{ConfidencePosition} is designed to have the same structure as positions received from the aSTEP server, so when our application requests position data, a list of \emph{ConfidencePosition} will be returned. A \emph{ConfidencePosition} therefore also includes information about the certainty of a position, called \emph{Confidence} as shown on \cref{fig:class}. This confidence marks a sqaure around
 
 is the maximum distance a reading can be offset from the actual position of the device. \emph{ConfidencePosition} also has a \emph{lastLocatedTime} which is a time stamp for when the position was recorded by the aSTEP server.
 
