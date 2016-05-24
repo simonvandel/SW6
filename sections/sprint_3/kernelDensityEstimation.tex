@@ -72,7 +72,7 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
     \caption{Epanechnikov distribution.}
     \label{fig:1dEpanechnikovDistributionPlot}
 \end{subfigure}
-\caption{Kernel density function plots.}
+\caption{Kernel function plots.}
 \end{figure}
 
 For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance~\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which makes the performance of an implementation faster. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
