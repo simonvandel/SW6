@@ -1,6 +1,6 @@
-\subsection{Implementation of the Analyser}\label{sec:kernelDensityEstimation}
+\subsection{Implementation of the Analyser}\label{s3:analyser_implementation}
 
-In order to fully understand the need for a good implementation of the analyser, we start with a quick rundown of the complexity of the unoptimized direct analysis algorithm seen in \cref{alg:unoptimised_algorithm}, which follows the mathematical formulas in \cref{sub:kernelDensityEstimation}.
+In order to fully understand the need for a good implementation of the analyser, we start with a quick rundown of the complexity of the unoptimised direct analysis algorithm seen in \cref{alg:unoptimised_algorithm}, which follows the mathematical formulae in \cref{sub:kernelDensityEstimation}.
 
 \begin{center}
 \captionof{algorithm}{Unoptimised algorithm}\label{alg:unoptimised_algorithm}
@@ -54,7 +54,7 @@ In order to fully understand the need for a good implementation of the analyser,
 \end{algorithmic}
 \end{center}
 
-This algorithm has an asymptotic time complexity of $$\mathcal{O}(\text{points} \cdot \text{people})$$ which at first might seem decent. However, recall that the amount of points is related to the resolution, meaning that a point for every square meter at SmukFest, will result in 230.000 points\cite{smukFacts}. Combining this with potentially 50,000 festival guests\cite{smukFacts}, we reach an amount of potential calculation, for each analysis, that a regular server will struggle to evaluate within the real-time requirement of \cref{sec:s3_reqs}. We therefore want to reduce the complexity as much as possible.
+This algorithm has an asymptotic time complexity of $$\mathcal{O}(\text{points} \cdot \text{people})$$ which at first might seem decent. However, recall that the amount of points is related to the resolution, meaning that a point for every square meter at SmukFest, will result in 230.000 points\cite{smukFacts}. Combining this with potentially 50,000 festival guests\cite{smukFacts}, we reach an amount of potential calculation, for each analysis, that a regular server will struggle to evaluate within the real-time requirement of \cref{sec:s3_requirements}. We therefore want to reduce the complexity as much as possible.
 
 
 \subsubsection{Reducing Complexity}
