@@ -9,7 +9,8 @@
 In order to describe the structure design of the HotMap server, the UML v2.5 standard is used to express how the class hierarchy was designed. UML is a well known modelling language, for visualising software system designs in order to more easily describe the static structure of a software system.
 Therefore a UML class diagram is used for describing the model layer of the HotMap server.
 
-Mixin is a language dependent functionality, which allows a class \emph{A} to contain methods from other classes or interfaces without having \emph{A} be a specialisation of these other classes or traits. How class \emph{A} gain access to those methods through mixin is defined by the language. 
+\jenote{Flyt det her op til sin egen subsection under refactoring}
+Mixin is a language dependent functionality that we use in our application, which allows a class \emph{A} to contain methods from other classes or interfaces without having \emph{A} be a specialisation of these other classes or traits. How class \emph{A} gain access to those methods through mixin is defined by the language. 
 
 Scala does not have interfaces, but instead uses traits. These are similar but allow for default implementation of methods within the trait. When a concrete classes extends traits, it is called a realisation of that trait, which in UML is indicated by a dashed arrow from the class to the interfaces. In Scala, traits can also be instantiated if all of its instance variables and methods have default implementations. Scala only allows traits to be mixed into classes or other traits.
 
