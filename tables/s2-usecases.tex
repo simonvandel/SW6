@@ -1,0 +1,154 @@
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Login \\ \midrule
+        \textbf{ID:}    & S2-UC1 \\ \midrule
+        \textbf{Description:} & A user logs into the application. \\ \midrule
+        \textbf{Actors:} & Stationary users, mobile users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user opens the application on any device
+            \item The application presents a login screen
+            \item The user enters their username and password
+            \item The login information is validated
+            \item The user has access to the application's features
+        \end{enumerate}
+        \\ \midrule
+        \textbf{Extensions:} & Invalid login information 
+        \begin{enumerate}
+            \item The user opens the application on any device
+            \item The application presents a login screen
+            \item The user enters their username and password
+            \item The login information is invalid
+            \item The user is prompted to re-enter username and password
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Login use case description.}
+    \label{tab:s2-uc1}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Show/hide layer \\ \midrule
+        \textbf{ID:}    & S2-UC2 \\ \midrule
+        \textbf{Description:} & A user enables or disables a layer of map details or crowd information on the map. \\ \midrule
+        \textbf{Actors:} & Stationary users, mobile users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enables a map layer
+            \item This information layer is shown in the map
+        \end{enumerate}
+        \\ \midrule
+        \textbf{Extensions:} & Disable layer 
+        \begin{enumerate}
+            \item The user disables a map layer
+            \item This information layer is hidden on the map
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Show/hide layer use case description.}
+    \label{tab:s2-uc2}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Search for point of interest \\ \midrule
+        \textbf{ID:}    & S2-UC3 \\ \midrule
+        \textbf{Description:} & A user search for a specific points of interest. \\ \midrule
+        \textbf{Actors:} & Stationary users, mobile users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enters a search term
+            \item The system finds a result
+            \item The map pans to the location of the search result
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Search for point of interest use case description.}
+    \label{tab:s2-uc3}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Navigate to location \\ \midrule
+        \textbf{ID:}    & S2-UC4 \\ \midrule
+        \textbf{Description:} & A user prompts for navigation to a specified location. \\ \midrule
+        \textbf{Actors:} & Mobile users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user marks a destination
+            \item The system proposes a route from the user's current location to the destination
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Navigate to location use case description.}
+    \label{tab:s2-uc4}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Automatic warning \\ \midrule
+        \textbf{ID:}    & S2-UC5 \\ \midrule
+        \textbf{Description:} & The system automatically warns the user of a potentially dangerous situation. \\ \midrule
+        \textbf{Actors:} & Stationary users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user activates an automatic warning system
+            \item The system predicts a potentially dangerous situation
+            \item The system shows a warning on the map
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Automatic warning use case description.}
+    \label{tab:s2-uc5}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Show available personnel \\ \midrule
+        \textbf{ID:}    & S2-UC6 \\ \midrule
+        \textbf{Description:} & The user should be able to see the locations of available personnel on the map. \\ \midrule
+        \textbf{Actors:} & Stationary users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enables a personnel layer
+            \item The system marks the locations of the personnel on the map
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Show available personnel use case description.}
+    \label{tab:s2-uc6}
+\end{table}
+
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Project onto camera \\ \midrule
+        \textbf{ID:}    & S2-UC7 \\ \midrule
+        \textbf{Description:} & The crowd information shoudle be projected onto camera footage. \\ \midrule
+        \textbf{Actors:} & Stationary users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user switches to a camera view of an area
+            \item The user enables a layer of information
+            \item The information is projected onto the camera image
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Project onto camera use case description.}
+    \label{tab:s2-uc7}
+\end{table}

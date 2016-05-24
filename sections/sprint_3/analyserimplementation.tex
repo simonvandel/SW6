@@ -1,4 +1,4 @@
-\subsection{Implementation of the Analyser}\label{s3:analyser_implementation}
+\subsection{Implementation of the Analyser}\label{sec:kernelDensityEstimation}
 
 In order to fully understand the need for a good implementation of the analyser, we start with a quick rundown of the complexity of the unoptimized direct analysis algorithm seen in \cref{alg:unoptimised_algorithm}, which follows the mathematical formulas in \cref{sub:kernelDensityEstimation}.
 
@@ -6,50 +6,56 @@ In order to fully understand the need for a good implementation of the analyser,
 \captionof{algorithm}{Unoptimised algorithm}\label{alg:unoptimised_algorithm}
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List[Point] points, List[person] People, Bandwidth}
+\Function{Analyser}{List points, List people, Bandwidth h}
+\State Densities $\gets$ empty List
+\State Velocities $\gets$ empty List
+\State Turbulence $\gets$ empty List
+\State Pressure $\gets$ empty List
 \ForAll{points, x}
     \State KernelSum $\gets 0$
-    \ForAll{People, P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+    \ForAll{people, P}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State LocalDensity $\gets$ KernelSum $/$ (\Call{Count}{P} $\cdot$ Bandwidth)
+    \State \Call{Densities.Add}{KernelSum $\cdot\; 2 / (\pi \cdot h^2)$}
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State VelocitySum $\gets 0$
-    \ForAll{People, P}
-        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+    \ForAll{people, P}
+        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{|x - P|}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State x.LocalVelocity $\gets$ VelocitySum $/$ KernelSum
+    \State \Call{Velocities.Add}{VelocitySum $/$ KernelSum}
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State TurbuSum $\gets 0$
     \ForAll{People, P}%
-        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{|x - P|}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State LocalTurbulence $\gets$ TurbuSum $/$ KernelSum
+    \State \Call{Turbulence.Add}{TurbuSum $/$ KernelSum}
 \EndFor
 
 \ForAll{points, x}
     \State KernelSum $\gets 0$
     \State PressSum $\gets 0$
     \ForAll{People, P}
-        \State VelocityDif $\gets$ (\Call{VelocityOf}{P} $-$ x.LocalVelocity)
-        \State PressSum $\gets$ PressSum $+$ \Call{Abs}{VelocityDif}$^2$ $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State VelocityDiff $\gets$ |\Call{VelocityOf}{P} $-$ x.LocalVelocity|
+        \State PressSum $\gets$ PressSum $+$ (VelocityDiff)$^2$ $\cdot$ \Call{Kernel}{|x - P|}
+        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{|x - P|}
     \EndFor
-    \State LocalPressure $\gets$ x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)
+    \State \Call{Pressure.Add}{x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)}
 \EndFor
+\State\textbf{Return} (points, Densities, Velocities, Turbulence, Pressure)
 \EndFunction
 \end{algorithmic}
 \end{center}
 
-This algorithm has an asymptotic time complexity of $$O(\text{points} \cdot \text{people})$$ which might seem decent, but considering the amount of points and people we can expect to analyse, we want to reduce this as much as possible.
+This algorithm has an asymptotic time complexity of $$\mathcal{O}(\text{points} \cdot \text{people})$$ which at first might seem decent. However, recall that the amount of points is related to the resolution, meaning that a point for every square meter at SmukFest, will result in 230.000 points\cite{smukFacts}. Combining this with potentially 50,000 festival guests\cite{smukFacts}, we reach an amount of potential calculation, for each analysis, that a regular server will struggle to evaluate within the real-time requirement of \cref{sec:s3_reqs}. We therefore want to reduce the complexity as much as possible.
+
 
 \subsubsection{Reducing Complexity}
 
@@ -57,89 +63,83 @@ The first thing we need to reduce is the complexity. This would mean either the 
 
 Points can obviously be reduced, but not without also reducing the granularity of the result. But even if we reduce the number of points, we are not able to reduce the complexity. So if we want to reduce the complexity we need to reduce the amount of people iterated through. Considering that the kernel function will return zero for any person further away from the point than the bandwidth, we can reduce the complexity given that a reasonable bandwidth is used. This also relies on the reasonable assumption that people take up space, and that therefore we can only have a certain amount people inside a given bandwidth.
 
-But before we can utilize this, we need a way to check if a person is further away than the bandwidth, without having to iterate through all the people. Luckily such a way exists in the form of R-trees. An R-tree is a data structure that takes $O(n)$ to build, and allows us to do range searches in $O(log(n))$ \cite{rtree}. If we start the analysis with building an r-tree of the people, each point would only have to query $O(log(n)$ people, giving us the complexity of $$O(\text{people} + \text{points} \cdot log(\text{people}))$$ which reduces to $$O(\text{points} \cdot log(\text{people}))$$.
+But before we can utilise this, we need a way to check if a person is further away than the bandwidth, without having to iterate through all the people. Luckily such a way exists in the form of R-trees. An R-tree is a data structure that takes $\mathcal{O}(n)$ to build, and allows us to do range searches in $\mathcal{O}(log(n))$ \cite{rtree}. If we start the analysis with building an r-tree of the people, each point would only have to query $\mathcal{O}(log(n)$ people, giving us the complexity of $$\mathcal{O}(\text{people} + \text{points} \cdot log(\text{people}) * PeopleWithinBandwidth(h))$$
 
-\kanote{hvad er faktisk kompleksiteten af range search?}
+Considering that there is a physical limit as too how dense people can be packed, the function $PeopleWithinBandwidth(h) = h^2 * \pi * maxDensity$. Since we at runtime will have a constant bandwidth, $h$, the final complexity will be $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$.
 
 \subsubsection{Parallel Computation}
-The algorithm described in \cref{alg:revised_algorithm} is embarrassingly parallel, each point in the algorithm can be calculated independently of one another. The calculation can be sped up by computing the calls to \emph{analysePoint} on multiple computational units.
 
-\subsubsection{Reducing Constants}
+Another way to increase the calculation of the analysis, is to take advantage of the embarrassingly parallel problem of calculating point. Since none of the calculations done for any individual point affect the the other points, we can calculate their values in parallel.
 
-Having reduced the complexity, we still need to reduce the amount of constants in our algorithm's run time. We wish to reduce the amount of iterations on the points, as well repeated calculations such as the Kernel values.
+\subsubsection{An Optimised Algorithm}
 
-%% Hvorfor det er nice
+All these considerations leads us to the pseudo-code for the optimised analyser algorithm. The algorithm is split into two functions and can be seen in \cref{alg:revised_algorithm}. The first function on \cref{firstfunc} is the analyser function. This is basically a for-loop with to objectives: Find the relevant people through an R-tree, and call the \emph{analysePoint} function. This for-loop represents the embarrassingly parallel part of the problem. It should be noted that while the same R-tree is used for multiple points, only read actions are done, and as such there are no race conditions.
 
-\kanote{kommentér koden}
+The second function on \cref{secondfunc} of the algorithm, is the part where the local crowd densities are calculated. The primary change here, is the reduction of four for-loops, down to two. The primary reason for this reduction is the repeated calls to the \emph{Kernel} function, which calculates a given persons Kernel value. Since this is a rather costly calculation, we store the result of the calculation on \cref{tmpkernel}, and use this value for each factor. Note that on \cref{secondkernel}, another call is made to the \emph{Kernel} function. In the actual implementation this is avoided through a technical workaround in the first for-loop. However we have omitted that detail in order to keep the pseudo-code less complicated.
+
+On line \cref{firstval} through \ref{lastval} we introduce summation variables, which will store the non-normalised values. Note that the value for velocity on \cref{veloval} is a vector. We then reach the first for-loop, which will iterate through every person in the reduced list, and add that persons value to the accumulators after it has been adjusted by the kernel value.
+
+At \cref{validhead} we have an \emph{if} statement, which makes sure that the heading direction is not invalid, in accordance with the solution presented in \cref{subsub:turbu}, to the problem of stilling standing people. If the heading direction is valid, the accumulator is updated on \cref{adjustturbu} and \ref{turbusum}, along with the separate Kernel value summation on \cref{turbukernel}.
+
+On \cref{nullcheck} we have an \emph{if} statement, which checks if the point has a Kernel value of $0$, which would cause a division error in \cref{secondres}.
+Then at \cref{firstres} through \ref{thirdres} the first three factors are normalised, and on \cref{firstpres} through \ref{lastpres} we calculate the local crowd pressure. We finally return the result on \cref{return}.
+
+This algorithm holds the desired complexity of $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$.
+
 \begin{center}
 \captionof{algorithm}{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
 \begin{algorithmic}[1]
 
-\Function{Analyser}{List[Point] points, rTree[person] rTree, Bandwidth}
+\Function{Analyser}{List points, rTree t, Bandwidth h}\label{firstfunc}
+\State Result $\gets$ Empty List 
 \ForAll{points, p}
-    \LineComment{We reduce the amount of people using a range search}
-    \State CulledPeople $\gets$ \Call{rTree.inRange}{Bandwidth,p} 
-    \State \Call{analysePoint}{p,CulledPeople}
+    \State CulledPeople $\gets$ \Call{t.inRange}{h,p} 
+    \State Result $\gets$ Result + \Call{analysePoint}{p,CulledPeople}
 \EndFor
+\State \textbf{Return} Result
+
 \EndFunction
 
-\Function{analysePoint}{Point x, List[person] people}
+\Function{analysePoint}{Point x, List people}\label{secondfunc}
 
-%kernelValSum, kernelValForPerson, nonNormVel, nonNormTur, turKernelValSum
 
-\State KernelValueSum $\gets 0$
-\State KernelValForPerson $\gets List[(0,vector(0.0,0.0))]$ \Comment{List of tuples containing individual Kernel values and velocity}
-\State NonNormalisedVelocitySum $\gets vector(0.0,0.0)$
-\State NonNormalisedTurbulenceSum $\gets 0$
-\State TurbulenceKernelValueSum $\gets 0$ \Comment{Summarised Kernel variable adjusted for turbulence}
+\State KernelValSum $\gets 0$\label{firstval}
+\State NonNormVeloSum $\gets vector(0.0,0.0)$\label{veloval}
+\State NonNormTurbuSum $\gets 0$
+\State TurbuKernelValSum $\gets 0$\label{lastval}
 
 
 \ForAll{People, P}
-    \State TempKernelValue $\gets$ \Call{Kernel}{P}
-    \State KernelValueSum $\gets$ KernelValueSum + TempKernelValue
-    \State KernelValForPerson $\gets$ \Call{Concat}{(P.Velocity,TempKernelValue),NonNormalisedVelocitySum}
-    \State NonNormalisedVelocitySum $\gets$ NonNormalisedVelocitySum + Velocity * TempKernelValue
-    \If{P.HeadingDirection is valid}
-        \State NonNormalisedTurbulenceSum $\gets$ NonNormalisedTurbulenceSum + P.HeadingDirection * TempKernelValue
-        \State TurbulenceKernelValueSum $\gets$ TurbulenceKernelValueSum + TempKernelValue
+    \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}\label{tmpkernel}
+    \State KernelValSum $\gets$ KernelValSum + TmpKernelVal
+    \State NonNormVeloSum $\gets$ NonNormVeloSum + Velocity * TmpKernelVal
+    \If{P.H-Direction is valid}\label{validhead}
+        \State AdjustedTurbu $\gets$ P.H-Direction $\cdot$ TmpKernelVal\label{adjustturbu}
+        \State NonNormTurbuSum $\gets$ NonNormTurbuSum $+$ Adjusted Turbu \label{turbusum}
+        \State TurbuKernelValSum $\gets$ TurbuKernelValSum + TmpKernelVal\label{turbukernel}
     \EndIf
 \EndFor
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ForAll{points, x}
-    \State KernelSum $\gets 0$
-    \State VelocitySum $\gets 0$
+\If{KernelValSum is 0}\label{nullcheck}
+    \State \textbf{Return} (0,(0,0),0,0)
+\Else
+    \State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$\label{firstres}
+    \State Velocity $\gets$ NonNormVelocitySum / KernelValSum \label{secondres}
+    \State Turbulence $\gets$ 1 - ( NonNormTurbuSum / TurbuKernelValSum )\label{thirdres}
+    \State VelocityDiffSum $\gets$ \label{firstpres}
     \ForAll{People, P}
-        \State VelocitySum $\gets$ VelocitySum $+$ \Call{VelocityOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
+        \State VelocityDiff $\gets$ |P.velocity - Velocity|$^2 \cdot$ \Call{Kernel}{|x - P|}\label{secondkernel}
+        \State VelocityDiffSum $\gets$ VelocityDiffSum $+$ VelocityDiff
     \EndFor
-    \State x.LocalVelocity $\gets$ VelocitySum $/$ KernelSum
-\EndFor
-
-\ForAll{points, x}
-    \State KernelSum $\gets 0$
-    \State TurbuSum $\gets 0$
-    \ForAll{People, P}%
-        \State TurbuSum $\gets$ TurbuSum $+$ \Call{DirectionOf}{P} $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
-    \EndFor
-    \State LocalTurbulence $\gets$ TurbuSum $/$ KernelSum
-\EndFor
-
-\ForAll{points, x}
-    \State KernelSum $\gets 0$
-    \State PressSum $\gets 0$
-    \ForAll{People, P}
-        \State VelocityDif $\gets$ (\Call{VelocityOf}{P} $-$ x.LocalVelocity)
-        \State PressSum $\gets$ PressSum $+$ \Call{Abs}{VelocityDif}$^2$ $\cdot$ \Call{Kernel}{P}
-        \State KernelSum $\gets$ KernelSum $+$ \Call{Kernel}{P}
-    \EndFor
-    \State LocalPressure $\gets$ x.LocalDensity $\cdot$ (PressSum $/$ KernelSum)
-\EndFor
+    \State Pressure $\gets$ Density $\cdot$ ( VelocityDiffSum / KernelValSum )\label{lastpres}
+\State \textbf{Return} (x, Density, Velocity, Turbulence, Pressure)\label{return}
+\EndIf
 \EndFunction
-
-
 \end{algorithmic}
-
 \end{center}
+
+
+
+
+
+

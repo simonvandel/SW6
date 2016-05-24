@@ -3,19 +3,19 @@
 
 Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result~\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
 
-Another method is to use kernel density estimation. With this approach we estimate the density contentious across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any the point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
+Another method is to use kernel density estimation. With this approach we estimate the density continuously across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any the point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
 
 \subsubsection{Finding Local Crowd Densities}
-There exists multiple kernel functions that can be used in the kernel density estimation. The most commonly used is the Gaussian distribution, also known as the normal distribution, given by the function in \cref{eq:1dGaussianDistribution}. The function, given the distance $d$ from an observation to the center of the kernel, returns the probability of the observation. An observation in this context, is a sample drawn from the distribution. The Gaussian distribution is commonly used as a kernel function because it arises naturally, both in theory and in experiments.
+There exists multiple kernel functions that can be used in the kernel density estimation. The most commonly used is the Gaussian distribution, also known as the normal distribution, given by the function in \cref{eq:1dGaussianDistribution}. The function, given the distance $d$ from an observation to the centre of the kernel, returns the probability of the observation. An observation in this context, is a sample drawn from the distribution. The Gaussian distribution is commonly used as a kernel function because it arises naturally, both in theory and in experiments.
 
 \begin{equation}
 \label{eq:1dGaussianDistribution}
 K(d) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} d^2}
 \end{equation}
 
-The plot of the function is shown in \cref{fig:1dGaussianDistributionPlot}. Notice that the function converges with the x axis in $-\infty$ and $\infty$. This means that if we were to use this function for calculating the local crowd density, we would have to consider every person in the data set, because the function is defined for every x value. For performance reasons, this is not preferable.
+The plot of the function is shown in \cref{fig:1dGaussianDistributionPlot}. Notice that the function converges with the x axis in $-\infty$ and $\infty$. This means that if we were to use this function for calculating the local crowd density, we would have to consider every person in the data set, because the function has a non-zero value for any $x \in \mathbb{R}$. For performance reasons, this is not preferable.
 
-Another kernel function is the Epanechnikov kernel, given by the function in \cref{eq:1dEpanechnikovDistribution}.
+Another kernel function is the Epanechnikov kernel, given by \cref{eq:1dEpanechnikovDistribution}.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistribution}
@@ -41,13 +41,11 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
     ytick={-0.2,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
     height=7.5cm,
     anchor=center]
-    \addplot[mark=none, thick, samples=100, smooth, domain=-1:1] {epanechnikov2d(1)};
-    \addplot[mark=none, thick, samples=100, smooth, domain=1:3] {0};
-    \addplot[mark=none, thick, samples=100, smooth, domain=-1:-3] {0};
+    \addplot[mark=none, thick, samples=100, smooth] {gaussian2d(1)};
     \end{axis}
     \end{tikzpicture}
-    \caption{Epanechnikov distribution}
-    \label{fig:1dEpanechnikovDistributionPlot}
+    \caption{Gaussion/normal distribution.}
+    \label{fig:1dGaussianDistributionPlot}
 \end{subfigure}
 %
 \begin{subfigure}[c]{.49\linewidth}
@@ -66,18 +64,44 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
     ytick={-0.2,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
     height=7.5cm,
     anchor=center]
-    \addplot[mark=none, thick, samples=100, smooth] {gaussian2d(1)};
+    \addplot[mark=none, thick, samples=100, smooth, domain=-1:1] {epanechnikov2d(1)};
+    \addplot[mark=none, thick, samples=100, smooth, domain=1:3] {0};
+    \addplot[mark=none, thick, samples=100, smooth, domain=-1:-3] {0};
     \end{axis}
     \end{tikzpicture}
-    \caption{Gaussion/normal distribution}
-    \label{fig:1dGaussianDistributionPlot}
+    \caption{Epanechnikov distribution.}
+    \label{fig:1dEpanechnikovDistributionPlot}
 \end{subfigure}
-\caption{Kernel density function plots}
+\caption{Kernel function plots.}
 \end{figure}
 
-For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are area bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which makes the performance of an implementation better. There are many other kernel functions that also apply the indicator function and has an area of 1 beneath its curve which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
+For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance~\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which enables better asymptotic complexity. There are many other bell curve kernel functions that hold this property which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
 
 \begin{figure}[htbp]
+\begin{subfigure}[c]{.49\linewidth}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+    \begin{axis}[
+    axis y line=center,
+    axis x line=middle,
+    grid=both,
+    xmin=-3,xmax=3,
+    ymin=-0.2,ymax=1,
+    xlabel=$x$,ylabel=$y$,
+    x label style={at={(axis description cs:1,0.2)},anchor=east},
+    y label style={at={(axis description cs:0.5,1)},anchor=north west},
+    xtick={-3,-2,-1,0,1,2,3},
+    ytick={-0.2,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
+    height=7.5cm,
+    anchor=center]
+    \addplot[mark=none, thick, samples=100, smooth] {gaussian2d(1)};
+    \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, restrict y to domain=0:1] {gaussian2d(1)};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Gaussian/normal distribution.}
+    \label{fig:1dGaussianAreaPlot}
+\end{subfigure}
+%
 \begin{subfigure}[c]{.49\linewidth}
     \centering
     \begin{tikzpicture}[scale=0.9]
@@ -100,49 +124,25 @@ For a function to be a kernel function it must have an area of 1 beneath it and 
     \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, domain=-1:1] {epanechnikov2d(1)};
     \end{axis}
     \end{tikzpicture}
-    \caption{Epanechnikov distribution}
+    \caption{Epanechnikov distribution.}
     \label{fig:1dEpanechnikovAreaPlot}
 \end{subfigure}
-%
-\begin{subfigure}[c]{.49\linewidth}
-    \centering
-    \begin{tikzpicture}[scale=0.9]
-    \begin{axis}[
-    axis y line=center,
-    axis x line=middle,
-    grid=both,
-    xmin=-3,xmax=3,
-    ymin=-0.2,ymax=1,
-    xlabel=$x$,ylabel=$y$,
-    x label style={at={(axis description cs:1,0.2)},anchor=east},
-    y label style={at={(axis description cs:0.5,1)},anchor=north west},
-    xtick={-3,-2,-1,0,1,2,3},
-    ytick={-0.2,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1},
-    height=7.5cm,
-    anchor=center]
-    \addplot[mark=none, thick, samples=100, smooth] {gaussian2d(1)};
-    \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, restrict y to domain=0:1] {gaussian2d(1)};
-    \end{axis}
-    \end{tikzpicture}
-    \caption{Gaussian/normal distribution}
-    \label{fig:1dGaussianAreaPlot}
-\end{subfigure}
-\caption{The area beneath both Epanechnikov and the Gaussian distribution}
+\caption{The area beneath both Epanechnikov and the Gaussian distribution.}
 \label{fig:1dGaussianEpanechnikovAreaPlot}
 \end{figure}
 
-A kernel density estimation is performed for a specific point, and can be calculated as either absolute, relative, or probabilistic density. The absolute density is the amount of people per local crowd density point. This means that the densities for all points have to sum up to the total amount of people.
+A kernel estimation is performed for a specific point, and can be calculated as either absolute, relative, or probabilistic. If we relate this to density, the absolute density is the amount of people per local crowd density point. This means that the densities for all points have to sum up to the total amount of people.
 
-The relative densities are the absolute densities divided by the area that each point covers, for instance people per square meter. Since we want to be able to compare the values calculated for the crowd factors with certain limits, this is the type of kernel density we want to calculate.
+The relative densities are the absolute densities divided by the area that each point covers, for instance resulting in people per square meter. Since we want to be able to compare the values calculated for the crowd factors with certain limits, this is the type of kernel density we want to calculate.
 
 The last kernel density type is probabilistic. This is the absolute densities divided by the total amount of people, meaning that the total sum of probabilistic local crowd densities has to be 1.
 
 \subsubsection{Bandwidth}
 
-Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the density of the point. For our chosen kernel function, Epanechnikov, this ranges between between -1 and 1. 
-This constant range presents a problem, since we do not know how far away observations affect the density. Therefore we want a way to adjust the limit marking which observations should be considered in the estimation.
+Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the the point. For our chosen kernel function, Epanechnikov, this ranges between between -1 and 1. 
+This constant range presents a problem, since we do not know how far away observations affect the density. Therefore we want a way to adjust the limit marking which observations should be considered in the estimation variable.
 
-This is done using a bandwidth variable. The Epanechnikov function with the bandwidth can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel density function.
+This is done using a bandwidth variable. The Epanechnikov function with the bandwidth variable, $h$, can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel function.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
@@ -151,7 +151,7 @@ K(d) = \frac{3}{4 h} \left( 1-\left(\frac{d}{h}\right)^2 \right) \mathbbm{1}_{\l
 
 Here $d$ is the distance from the center of the kernel function to the observation, and $h$ is the bandwidth.
 
-\begin{figure}
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[baseline]
 \begin{axis}[
@@ -173,33 +173,31 @@ anchor=center]
 \addplot[mark=none, thick, samples=100, smooth, fill=lightgray, fill opacity=0.5, domain=-5:5] {epanechnikov2d(5)};
 \end{axis}
 \end{tikzpicture}
-\caption{The area beneath the Epanechnikov function with bandwidth 5}
+\caption{The area beneath the Epanechnikov function with bandwidth 5.}
 \label{fig:1dEpanechnikovDistributionWithHPlot}
 \end{figure}
 
 \subsubsection{Multidimensional Estimation}
 
-So far we have only been looking at the distribution in one dimension. In our domain we get observations from a plane, giving us two dimensions to consider. This would require us to model our bandwidth as dependent on two variables, but given our domain we can instead extend the kernel function to work by calculating the distance from the kernel center to the observation, and therefore use a single variable bandwidth. This can be seen plotted in \cref{fig:3dEpanechnikov}.
+So far we have only been looking at the distribution in one dimension. In our domain we get observations from a plane, giving us two dimensions to consider. This would require us to model our bandwidth as dependent on two variables, but given our domain and the symmetric property of the kernel function we can instead extend the kernel function to work on the distance from the kernel centre to the observation. This can be seen plotted in \cref{fig:3dEpanechnikov} with a bandwidth of 5.
 
 \begin{figure}[htbp]
 \centering
     \includegraphics[width=0.5\textwidth]{3dEpanechnikov.eps}
-    \caption{Epanechnikov over an area shown in 3 dimensions.}
+    \caption{This illustration represents the distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weights.}
     \label{fig:3dEpanechnikov}
 \end{figure}
 
-\Cref{fig:3dEpanechnikov} represents the distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weights.
-
 \subsubsection{Relative Density Form}
 
-As explained earlier, the function is currently on a probability form, and not on the desired relative density form. In order to modify it, we first transform it to an absolute form. We assume that every person contributes the same density, so the mean value of the function should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the desired volume. The desired volume is that of which the kernel function has a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to center is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
+As explained earlier, the function is currently on a probability form, and not on the desired relative form. In order to modify it, we first transform it to an absolute form. Since we do not know how much each observation weighs we want every observation to have a variable to identify this. We call this the intensity of the observation, and is multiplied on the function, and will be further introduced at the end of the section. The mean value of the function without the intensity should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the volume beneath the kernel function with a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to centre is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
 
 \begin{equation}
 \label{eq:volumeUnder3dEpanechnikov}
-\int_0^{2 \pi} \int_0^h \int_0^1 \frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) \cdot r \mathrm{d}z\ \mathrm{d}r\ \mathrm{d}\theta\ = \frac{3 \pi h}{8}
+\int_0^{2 \pi} \int_0^h \int_0^1 \frac{3}{4 h} \left(1 - \left(\frac{r}{h}\right)^2\right) r \mathrm{ d}z\ \mathrm{d}r\ \mathrm{d}\theta\ = \frac{3 \pi h}{8}
 \end{equation}
 
-Because we are working in a cylindrical coordinate system, we use three variables to index every point in the coordinate system. $z$ is the height in the cylindrical system. $r$ is the distance from the center of the coordinate system to the point. $\theta$ is the angle in the coordinate system.
+Because we are working in a cylindrical coordinate system, we use three variables to index every point in the coordinate system. $z$ is the height in the cylindrical system. $r$ is the distance from the centre of the coordinate system to the point. $\theta$ is the angle in the coordinate system.
 
 We now need to find the desired volume. Since we want a mean height to be 1, the area beneath the desired function is the same as a cylinder spanning over the same area with a height of 1. This cylinder has the volume of $h^2 \cdot \pi$ where $h$ is the bandwidth. To find the absolute densities we therefore divide by the actual volume and multiply by the desired volume, as shown in \cref{eq:absoluteDensitiesEpanechnikov}.
 
@@ -208,7 +206,7 @@ We now need to find the desired volume. Since we want a mean height to be 1, the
 \frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}}{\frac{3\pi h}{8}} \cdot \left(h^2 \cdot \pi\right)
 \end{equation}
 
-We here return to denoting the distance to the observation by $d$. To go from this absolute density form to a relative density form, we divide by the area of the absolute density form, which is $h^2 \cdot \pi$. The relative density can then be found as shown by the reduction in \cref{eq:relativeDensitiesEpanechnikov}.
+We here return to denoting the distance to the observation by $d$. To go from this absolute form to a relative form, we divide by the area absolute form spans over, which is $h^2 \cdot \pi$. The relative density can then be found as shown by the reduction in \cref{eq:relativeDensitiesEpanechnikov}.
 
 \begin{equation}
 \label{eq:relativeDensitiesEpanechnikov}
@@ -219,7 +217,7 @@ We here return to denoting the distance to the observation by $d$. To go from th
 \end{split}
 \end{equation}
 
-Finally, we sum the relative densities for all people, in order to find the estimated kernel density.
+Finally, we sum the relative values for all people, in order to find the estimated kernel density.
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikov}
@@ -234,8 +232,6 @@ We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by int
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
 \frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N I \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
-
-
 
 %\includemovie[
 %	poster,

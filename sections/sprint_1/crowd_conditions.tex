@@ -2,7 +2,7 @@
 
 When people gather in crowds, conditions develop that are beyond the deliberate actions of the individuals. These conditions are referred to as crowd conditions. At large events and gatherings the personnel should be aware of the crowd conditions, as they must be able to decide when, where, and how they need to intervene in order to ensure the safety and comfort of the crowd.
 
-This section will first outline some conditions that are hazardous or have potential to evolve into such. Afterwards it will cover crowd characteristics, that when observed can supply the personnel with information which will help them predict, prevent and dissolve hazardous crowd conditions.
+This section will first outline some conditions that are hazardous or have potential to evolve into such. Afterwards it will cover crowd factors, that when observed can supply the personnel with information which will help them predict, prevent and dissolve hazardous crowd conditions.
 
 \subsection{Hazardous Crowd Conditions}
 Large crowds are intrinsically dangerous, as the effects of individual people's actions combine into great forces, which the individuals are not aware of~\cite{website:Wikipedia-Hajj}. Some of these conditions are:
@@ -31,21 +31,18 @@ Large crowds are intrinsically dangerous, as the effects of individual people's 
 %\enquote{To collect location information of festival attendees, we developed a generic festival app for mobile devices which can be tailored to a specific event and provides the users with relevant, event-related information such as the festival program, a map indicating points of interest and background information. These features are designed to be attractive and useful during the event to reach a large user base. While a user is running the app, GPS location is regularly sampled with a frequency of 1Hz on the device and periodically sent to our servers running the CoenoSense}
 
 %\enquote{Having an estimated number of the actual crowd density, would be preferred}
-\subsection{Crowd Condition Characteristics}
+\subsection{Crowd Factors}
 
 The condition of a crowd and its effect on safety and comfort can be difficult to deduce, even if event organisers and their safety staff are well educated~\cite{franke2015smart}. Even if a hazard is discovered it may be too late to prevent an oncoming accident. Because of this, it is important to be aware of preconditions of a developing hazard as early as possible, so that appropriate action can be taken.
 
-In \citet{wirz2012inferring}, four distinct characteristics were found that can be used to infer crowd conditions; density, velocity, turbulence and pressure.
+In \citet{wirz2012inferring}, four distinct factors were found that can be used to infer crowd conditions; density, velocity, turbulence and pressure.
 
 \subsection{Density}
-Density is the amount of people relative to available space. In this project we will look at $\text{people} / m^2$, but it is important to keep in mind that it is possible to expand to other measures of available space.
+Density is the amount of people relative to available space. In this project we will look at $\text{people} / m^2$, but it should be kept in mind that it is possible to expand to other measures of available space.
 
-Density can be a good indicator for inferring hazardous situations. For instance most stampedes occur in high-density crowds~\cite{wirz2012inferring}. Research has determined  certain density limits for still-standing crowds, where it becomes highly uncomfortable to be in. 
-Density can however also be misleading with regards to safety and comfort. For instance people standing tightly packed inside a metro train can often tolerate standing a lot closer, than when moving down the subway stairs during rush hour. When illustrating density with the purpose of observing the safety and comfort in the crowd, it is important that this is not the only information available.
+Density can be a good indicator for inferring hazardous situations. For instance most stampedes occur in high-density crowds~\cite{wirz2012inferring}. Research has determined certain density limits for still-standing crowds, where it becomes highly uncomfortable to be in\kanote{insert citation}. Density can however also be misleading with regards to safety and comfort. For instance people standing tightly packed inside a metro train can often tolerate standing a lot closer, than when moving down the subway stairs during rush hour. When illustrating density with the purpose of observing the safety and comfort in the crowd, it is important that this is not the only information available.
 
 If a hazardous situation has been predicted or observed, density can be an important factor to observe. Density can have an impact on the accessibility of an area. In \citet{wirz2013probing} it was found that the density of the people in an area has a direct effect on how fast people can comfortably move within it. They use it to predict the density of the crowd from an observed local crowd velocity. This could therefore also be used to predict how fast a person generally moves through a crowd using observed densities. Because of this, density can help the personnel to better plan how to access a potentially hazardous area.
-
-The specific pros and cons of density as a crowd condition is summarised in \cref{sec:crowd_conditions_summary}.
 
 \subsection{Movement Velocity and Heading Direction}
 The safety and comfort of a crowd does not only depend on density, but also on the movement in a crowd. Movement in a crowd can be split up into two categories, where people are heading, and what their velocity is.
@@ -79,7 +76,6 @@ We use the standard concept of velocity, i.e. the direction people are moving an
 
 \filldraw[color = blue]
 (P) circle (3pt);
-\draw (P) node[anchor=south west] {Local Crowd Velocity};
 
 \end{tikzpicture}
 \caption{Uniform velocity - Everyone is moving in the same direction with the same speed, so the local crowd velocity matches this velocity.}
@@ -108,10 +104,9 @@ We use the standard concept of velocity, i.e. the direction people are moving an
 (C) circle (2pt);
 \filldraw[color = blue]
 (P) circle (3pt);
-\draw node[anchor=south west] {Local Crowd Velocity};
 
 \end{tikzpicture}
-\caption{Nonuniform velocity - The majority of the people move in the same direction with same speed. The rest of the crowd moves in the opposite direction with the same speed as the majority of the crowd. The local crowd velocity is the same direction as the majority, but with a smaller speed in that direction.}
+\caption{Nonuniform velocity - The majority of the people move in the same direction with same speed, but one moves in the opposite direction. The local crowd velocity is the same direction as the majority, but with a smaller speed in that direction.}
 \end{subfigure}
 \caption[Local crowd velocity illustration]{An illustration of the local crowd velocity in different situations. Red points symbolises people with a direction and speed. The blue dots symbolises the local crowd velocity in the area.}
 \label{fig:localCrowdVelocity}
@@ -123,9 +118,6 @@ Certain conditions of a crowd can have a direct effect on how fast people can pa
 
 The local crowd velocity can be used to predict where the crowd, or specific parts of the crowd, is heading and to an extension how the crowd conditions will change. For example, if two crowds are moving towards each other and their combined density will exceed the capacity of their collision point, it is reasonable to expect congestion in that point, however there is no guarantee that people will not change direction. 
 
-% Crowd’s movement velocity. The local crowd velocity can be seen as the weighted average velocity of each user at a given location by weighting the speed values of each user depending on the distance to that location with a Gaussian weighting scheme. <--- Useful sentence for later, BUT it has been copied, not written ourselves!
-
-The specific pros and cons of velocity as a crowd condition is summarised in \cref{sec:crowd_conditions_summary}.
 
 \subsubsection{Heading Direction}\label{subsubsec:headingDirection}
 People can change their velocity quickly and drastically. They often have a goal, and the best way to reach that goal is not necessary to set a heading straight for it, due to objects being in the way or other inconvenient obstacles. Because of this, \citet{wirz2012inferring} based on work of \citet{localTrendStatistics} introduced the concept of heading direction of individuals. Instead of expecting people to move according to their velocity we expect them to move according to how they have moved over the last couple of observations. In other words, we expect peoples' direction of movement to be the average angle with which they have changed their direction of movement over previous observations. This is called heading direction and is illustrated in \cref{fig:headingvsvelocity}. The illustration shows the movement of a person, currently present in point $t$. $v$ is the velocity of the person over the last two observations, $t$ and $t-1$. $h$ is the heading direction of the person over all observations in the example, $t-4$ through $t$. In this example we can imagine that the person is moving around a obstacle to reach the other side. In order to reach tho other side of the obstacle the person will have to continue to move around the obstacle, i.e. continue according to their heading direction.
@@ -153,13 +145,11 @@ People can change their velocity quickly and drastically. They often have a goal
 \draw[dashed] (D) -- (E);
 \draw[thick, ->] (E) -- node[above right] {$v$} (2.196, 6);
 \end{tikzpicture}
-\caption{Example of difference between heading direction and velocity}
+\caption{Example of difference between heading direction and velocity.}
 \label{fig:headingvsvelocity}
 \end{figure}
 
 The heading direction is useful based on the assumption that the person is most likely to continue his or her movement at any given time. Note that the heading direction is not the same as averaging over all vectors in an observation, for example, averaging over all vectors in, $t-4$ through $t$, will only bring the resulting vector further from the heading direction.
-
-
 
 \subsection{Turbulence}
 \label{sub:crowdFactorTurbulence}
@@ -168,152 +158,63 @@ The concept of local crowd turbulence was first introduced by \citet{videoanalys
 %Turbulence can be hard to infer from visual observations. The severity of the situation is also hard to observe without any form of calculations. Here a mobile based system with specific positions over time for the users, can do this a lot easier, since the velocity is easily observed here and calculations for turbulence can then be done before visualising it for the user.
 
 \subsection{Pressure}
-The pressure is the variance of the local crowd velocity times the local crowd density, and was suggested by \citeauthor{empircalstudy} \citeyearpar{empircalstudy} \cite{empircalstudy} and \citeauthor{videoanalysis} \citeyearpar{videoanalysis} \cite{videoanalysis}. As a way of [...] \jenote{Gør denne sætning færdig, potentielt med specifik quote fra dem}
+\label{subsec:crowdConditionsPressure}
+The pressure is the variance of the local crowd velocity times the local crowd density, and was suggested by \citeauthor{empircalstudy} \citeyearpar{empircalstudy} \cite{empircalstudy}. Pressure shows in a crowd, where the density have reached a level where people are moved involuntarily in random directions, due to the increasing forces that is present in the crowd.
 
-In high density crowds people are more affected by velocity rather than their own goal of movement. It is therefore variance in velocity combined with the density that pressure tries to capture.
+Pressure has been found to cause compressive asphyxia, either by being too high or causing crowd panic. If a stop-and-go wave collides with a high pressure area, people can easily fall because of turbulence and the high pressure will cause even more people to fall on top of them\cite{videoanalysis}.
 
-Pressure has been found to cause compressive asphyxia, either by being too high or causing crowd panic. When combined with turbulence, the situation can become especially dangerous. People can easily fall because of turbulence and the high pressure will cause even more people to fall on top of them.\jenote{Kilde, måske Fruin}
+Pressure is therefore a useful factor for inspecting the level of hazard within the crowd.
 
-If a high pressure stop-and-go wave collides with a turbulent area [...]\jenote{find ud af hvorfor det egentlig var så farligt og sæt kilde ind!}
-
-Pressure is therefore a useful characteristic for inspecting the level of hazard within the crowd.
-
-Pressure is also especially good at giving advance warning signs of critical crowd conditions: \enquote{The crowd accident on 12 January 2006 started about 10 min after “turbulent” crowd motion set in—i.e., after the “pressure” exceeded a value of $0.02 \text{ people} / s^2$}\jenote{formuler bedre og omskriv citatet her til vores egne ord og referer til kilden med citatet}
+%Pressure has also been found to present advanced warning signs of critical crowd conditions: \enquote{The crowd accident on 12 January 2006 started about 10 min after “turbulent” crowd motion set in—i.e., after the “pressure” exceeded a value of $0.02 \text{ people} / s^2$}\jenote{formuler bedre og omskriv citatet her til vores egne ord og referer til kilden med citatet}
 
 \subsection{Levels of Hazard}
 \label{subsec:levelsOfHazard}
-The level of the four factors found in this section have been tested and researched at different events and situations in crowds. It is therefore possible for us some extend relate at what level a situation gets critical. It is important to note that the values for density and velocity are general for large crowds and pressure for a specific event in Mekkah on January the 12 2006. Limits are not fitted specifically to the mentality a crowd present on a festival, especially for pressure. Real limits may therefore differ. These values are meant as guidelines and false negatives and, potentially false positives, can occur. It is always important to not only rely on the registration of these limits, but to always have experienced and trained security personnel present and observing an event.
+The four factors described in this section all have a critical level, where the crowd conditions become hazardous. Based on the reports of the factor levels from past events where incidents occurred, we have assumed a scale for each of the factors. These scales and their limits are estimations and may differ between events. Some events might reach critical levels without incidents, and others might have incidents at levels assumed to be safe. It is therefore important to note that event safety should primarily be handled by experienced personnel, and that this application can only ever assist them in their job.
+
+%\sinote*{levels?}{The level} of the four factors found in this section have been tested and researched at different events and situations in crowds. \sinote*{It is therefore possible for us some extend relate at what level a situation gets critical.}{weird} \sinote*{general, specific?}{It is important to note that the values for density and velocity are general for large crowds and pressure for a specific event in Mekkah on January the 12 2006}. \sinote*{the flow'er ikke så godt, synes jeg}{Limits are not fitted specifically to the mentality a crowd present on a festival, especially for pressure}. Real limits may therefore differ. These values are meant as guidelines and false negatives and, \sinote*{potential?}{potentially} false positives, can occur. It is always important to not only rely on the \sinote*{ikke det klareste ord at bruge}{registration} of these limits, but to always have experienced and trained security personnel present and observing an event.
 
 \subsubsection{Density and Velocity}
-Velocity and density should in our case mainly be used to predict the accessibility of an area and how the crowd factors will change and move, as described earlier in the section in their respectively subsections. Even though this is the case, some limits for hazardous situations can also be found for velocity and density.
+Velocity and density should in our case mainly be used to predict the accessibility of an area and how the crowd factors will change and people causing them will move, as described earlier in the section in their respectively subsections. Even though this is the case, some limits for hazardous situations can also be found for velocity and density.
 
-The severity of the situation relative to the density is highly dependant on how fast people in the crowd are moving, this were originally developed by \citet{crowdDistasters} and here used as presented in \citet{wirz2013probing}. With a still standing crowd the situation gets critical at a limit of $7.1 \text{ people} / m^2$, where $m$ denotes meters. To denote the severity of the situation the term crowd flow is used. Crowd flow is the amount of people passing through an area per second. Naturally this dependant on both density and velocity, and can be calculated as the $\frac{d}{v}$ where $d$ is the density and $v$ is the velocity. The severity of a situation relative to the crowd flow can be seen in \jenote{find et godt sted hvor nogen bruger crowd flow som limits (potentielt sammen med levels of service)}
+The severity of the situation relative to the density is highly dependant on how fast people in the crowd are moving. This was originally developed by \citet{crowdDistasters} and used here as presented in \citet{wirz2013probing}. With a still standing crowd the situation gets critical at a limit of $7.1 \text{ people} / m^2$, where $m$ denotes meters. To denote the severity of the situation, related to velocity, the term crowd flow is used. Crowd flow is the amount of people passing through per second, $\frac{1}{m \cdot s}$, where m is meters and s is seconds. Naturally this is dependant on both density and velocity, and can be calculated as ${d} \cdot {v}$ where $d$ is the density and $v$ is the velocity. The severity of a situation relative to the crowd flow is split into levels of service originally introduced by \citet{crowdDistasters}. Different levels of service have been calculated for different situations. It was not possible to find any studies on the levels of service of a festival and the most researched area were used instead, pedestrian on walkways. The study used here were conducted by Transport for London~\cite{levelsOfServiceLondon} and found the results seen in \cref{fig:levelsOFServiceLondon}. In Transport for London~\cite{levelsOfServiceLondon} movement restriction is defined as \enquote{when people had to change their speed, route, experienced "shoulder brushing" or bumped into other users}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\textwidth}{>{\hsize=0.5\hsize}X >{\hsize=0.5\hsize}X >{\hsize=2\hsize}X}
+\toprule
+Crowd flow $\frac{1}{m \cdot s}$ & Movement Restriction & Description \\ \midrule
+\textless0.13 & \textless 22\% & \textbf{Comfortable for all areas}\newline
+The pedestrian environment is very comfortable at with plenty of space for people to walk at the speed and the route that they choose \\ \midrule
+0.13 - 0.18 & 22\% - 31\% & \textbf{Recommended minimum for all areas}\newline
+Recommended level of comfort for all area types. This level provides enough space for normal walking speed and some choice in routes taken \\ \midrule
+0.18 - 0.28 & 31\% - 50\% & \textbf{Recommended minimum for all areas}\newline
+Normal walking speed is still possible but conflicts are becoming more frequent and, in retail areas, people start to consider avoiding the area. \\ \midrule
+0.28 - 0.43 & 50\% - 78\% & \textbf{Increasingly uncomfortable}\newline
+The pedestrian environment is becoming increasingly uncomfortable, with the majority of people experiencing conflict or closeness with other pedestrians and bi-directional movement becoming difficult. \\ \midrule
+0.43 - 0.58 & 78\% - 100\% & \textbf{Very uncomfortable}\newline
+Walking speeds are restricted and reduced and there are difficulties in bypassing slower pedestrians or moving in reverse flow. \\ \midrule
+\textgreater0.58 & 100\% & \textbf{Very uncomfortable}\newline
+People have very little personal space and speed and movement is very restricted. Extreme difficulties are experienced if moving in reverse flow.
+\end{tabularx}
+\caption{Levels of Service at Footways in London~\cite{levelsOfServiceLondon}}
+\label{fig:levelsOFServiceLondon}
+\end{table}
 
 \subsubsection{Turbulence}
-Turbulence is different from the three other factors in regards to being probabilistic, meaning that we calculate a pro cent turbulent. I.e. a crowd can be 0\% to 100\% turbulent. 100\% means that the crowd is completely turbulent, and everyone is moving in exactly opposite directions, and 0\% meaning that the crowd have a completely uniform movement. In turbulence it is not possible limit for a hazardous situation. A highly turbulent area does not necessary have to be hazardous, since a few people moving verry diverse i nan area can create high turbulence without being in any hazardous situation. Likewise can a very highly populated area with nearly everyone standing still be a very dangerous situation with low turbulence. Therefore shourd the overlay always be reviewed by trained and experienced security personnel together with other information. 
+Turbulence differs from the other factors, since we denote it with a percentage rather than a relative level. A 100\% turbulent crowd is a crowd where everybody is moving in opposing directions, and a 0\% turbulence level is a crowd with a completely uniform movement. Since turbulence is not on a relative scale, we can not give it a meaningful critical limit by itself. In combination with other factors, turbulence can however still provide personnel with a feeling of the conditions of a crowd.
+
+%\sinote*{lyder lidt mærkeligt}{Turbulence is different from the three other factors in regards to being probabilistic, meaning that we calculate a per cent turbulent}. \sinote{starter man en sætning med i.e?} I.e. a crowd can be 0\% to 100\% turbulent. 100\% means that the crowd is completely turbulent, and everyone is moving in exactly opposite directions, and 0\% meaning that the crowd has a completely uniform movement. \sinote*{der mangler ord i denne sætning}{In turbulence it is not possible limit for a hazardous situation.} A highly turbulent area does not necessary have to be hazardous, since a few people moving very different directions in an area can create high turbulence without it being a hazardous situation. Likewise, a very highly populated area with nearly everyone standing can still be a very dangerous situation with low turbulence. Therefore, the overlay should always be reviewed by trained and experienced security personnel together with other information. 
 
 \subsubsection{Pressure}
-At \citet{empircalstudy} the video recordings of the crowd disaster in Mina/Makkah during the Hajj in 1426H on January 12, 2006, were analysed and pressure were calculated during the event. A turbulent crowd behaviour began when the pressure exceeded $0.02 \text{ people} / s^2$, where $s$ denotes seconds. The accident started when the pressure hit its peak of about $0.045 \text{ people} / s^2$. The specific graph can be seen in \cref{mekkahCrowdDistaster206}
+In \citet{empircalstudy} the video recordings of the crowd disaster in Mina/Makkah during the Hajj on January 12, 2006, was analysed and pressure during the event was calculated. At a pressure of $0.02 \text{ people} / s^2$, where $s$ denotes seconds, the pressure was so high that people were moved around involuntarily. The accident started when the pressure hit its peak of about $0.04-0.045 \text{ people} / s^2$. The specific graph can be seen in \cref{mekkahCrowdDistaster206}. Even though this is an empirical study conducted on a specific accident \citeauthor{empircalstudy} expects the results to be transferable to other mass gatherings.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{Pressure.eps}
-    \caption{The pressure leading up the the crowd disaster in Mina/Makkah during the Hajj in 1426H on January 12, 2006 \cite{empircalstudy}}
+    \caption{The pressure leading up the the crowd disaster in Mina/Makkah during the Hajj on January 12, 2006 \cite{empircalstudy}.}
     \label{mekkahCrowdDistaster206}
 \end{figure}
 
-\sinote{Det kunne være fedt hvis vi skriver nøjagtigt hvad grænseværdier er for de 4 faktorer. Se fruin Crowd distasters - A systems evaluation of causes and countermeasures (1981)}
-
 \subsection{Summary}\label{sec:crowd_conditions_summary}
 
-\sinote{Write conclusion and use below pros, cons list}
-
-\subsubsection{Density}
-
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Pros
-%    \begin{itemize}
-%        \item Good for determining how easy it is to pass through an area
-%    \end{itemize}
-%\end{minipage}%
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Cons
-%    \begin{itemize}
-%        \item Can be misleading regarding the danger level of a crowd since a high density of people is not dangerous on its own. Low density areas can be more dangerous than high density areas for the people in it
-%    \end{itemize}
-%\end{minipage}\par\bigskip
-
-\paragraph{Pros}
-\begin{itemize}
-    \item Good for determining how easy it is to pass through an area
-\end{itemize}
-
-\paragraph{Cons}
-\begin{itemize}
-    \item Can be misleading regarding the danger level of a crowd since a high density of people is not dangerous on its own. Low density areas can be more dangerous than high density areas for the people in it
-\end{itemize}
-
-\subsubsection{Velocity}
-
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Pros
-%    \begin{itemize}
-%        \item Can help predict how distribution of density will change
-%    \end{itemize}
-%\end{minipage}%
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Cons
-%    \begin{itemize}
-%        \item Hard to represent
-%        \item It can easily be mistaken for turbulence and vice versa
-%        \item It implies a crowd movement tendency that does not necessarily hold. To increase precision of crowd movement predictions other characteristics such as paths, buildings and previous patterns should also considered
-%    \end{itemize}
-%\end{minipage}\par\bigskip
-
-\paragraph{Pros}
-\begin{itemize}
-    \item Can help predict how distribution of density will change
-\end{itemize}
-
-\paragraph{Cons}
-\begin{itemize}
-    \item Hard to represent
-    \item It can easily be mistaken for turbulence and vice versa
-    \item It implies a crowd movement tendency that does not necessarily hold. To increase precision of crowd movement predictions other characteristics such as paths, buildings and previous patterns should also considered
-\end{itemize}
-
-\subsubsection{Turbulence}
-
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Pros
-%    \begin{itemize}
-%        \item Useful as an early indicator of potential crowd control situations
-%    \end{itemize}
-%\end{minipage}%
-%begin{minipage}[t]{0.46\linewidth}
-%    \centering Cons
-%    \begin{itemize}
-%        \item Can be hard to infer from visual observation
-%        \item Easy to misinterpret as movement velocity and flow direction
-%    \end{itemize}
-%\end{minipage}\par\bigskip
-
-\paragraph{Pros}
-\begin{itemize}
-    \item Useful as an early indicator of potential crowd control situations
-\end{itemize}
-
-\paragraph{Cons}
-\begin{itemize}
-    \item Can be hard to infer from visual observation
-    \item Easy to misinterpret as movement velocity and flow direction
-\end{itemize}
-
-\subsubsection{Pressure}
-
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Pros
-%    \begin{itemize}
-%        \item Very useful for finding potential dangerous situations in a crowd
-%        \item Tested and documented quantifiable limit for dangerous environments
-%    \end{itemize}
-%\end{minipage}%
-%\begin{minipage}[t]{0.46\linewidth}
-%    \centering Cons
-%    \begin{itemize}
-%        \item Hard to calculate
-%        \item Easy to misinterpret as movement velocity and flow direction
-%    \end{itemize}
-%\end{minipage}\par\bigskip
-
-\paragraph{Pros}
-\begin{itemize}
-    \item Very useful for finding potential dangerous situations in a crowd
-    \item Tested and documented quantifiable limit for dangerous environments
-\end{itemize}
-
-\paragraph{Cons}
-\begin{itemize}
-    \item Hard to calculate
-    \item Easy to misinterpret as movement velocity and flow direction
-\end{itemize}
+In this section we have looked at different crowd conditions, that are known causes of crowd disasters. Since these conditions can be hard to observe directly, we found four crowd factors that are easier to observe. These four factors can provide an indicator of the crowd conditions, and therefore be useful for safety personnel. Deducing these factors from position data and visualising them will be in our focus moving forward with the project.

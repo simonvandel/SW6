@@ -1,67 +1,89 @@
-\section{Requirements Specification} \label{sec:s3_reqs}
+\section{Requirements Specification} \label{sec:s3_requirements}
+During the user test with Alarm HS, several new use cases were identified. For the application to support these new use cases, additional requirements will be added to the previous requirements from \cref{sec:s2_reqs}.
 
-Based on the feedback received from the second Alarm HS meeting, additional requirements will be added to the requirement specification from \cref{sec:s2_reqs}. This gives the following requirement specification.
+\subsection{Revised Users} \label{ss:s3_users}
+Along with the additional use cases, we also identified new users for the system. These users include guest users, medical users, and guard users.
 
-\textbf{Must have}
+The guest users are briefly described in \cref{tab:guest_user}. While guests users share some characteristics with the mobile users described in \cref{tab:mob_user}, they are specified as a separate user, as they should only have very limited access to the features of the system.
+
+The medical and guard users are specialisations of the previously defined mobile user, and so references to mobile users will include both medical and guard users. A description of these users can be seen in \cref{tab:med_user,tab:guard_user}. These specific users are added in order to support targeted information in the system. This could be beneficial if there are incidents that only require the attention of one specific group.
+
+\input{tables/s3-users.tex}
+
+\subsection{Additional Use Cases \label{ss:s3_uc}}
+In addition to the privously identified use cases, during the user test some additio
+
+
+Here we describe the additional use cases identified during the meeting with Alarm HS. In addition to the assumed use cases described in \cref{ss:s1_uc}, seven additional use cases were identified from the meeting. These additional requirements are described in \cref{tab:s2-uc1,tab:s2-uc2,tab:s2-uc3,tab:s2-uc4,tab:s2-uc5,tab:s2-uc6,tab:s2-uc7}.
+
+
+\input{tables/s3-usecases.tex}
+
+\subsection{Revised Requirements} \label{ss:s2_reqs}
+Based on the new use cases, and the general feedback from the user test, several additional functional requirements have been identified, which must be added to the requirements previously identified in \cref{ss:s2_update_reqs}. The following requirements will be added:
+
 \begin{enumerate}
-    \item The system must be able to analyse position data collected from the crowd via mobile technology.
-    \item The system must be able to present a visualisation of relevant information about the state of the crowd.
-    \item The system must be able to run on multiple platforms.
-    \item A highly detailed map that enables a detailed overview of the festival. This entails the inclusion of points of interest on the map, such as toilets, bars, or fixpoints. The map should also include geographical structures such as buildings, fences and pedestrian paths.
-    \item A real-time representation displaying position data of the people present in the festival areas. This includes estimation of position data, where the actual readings are not available.
-    \item Toggleable levels of detail. The different information available must be possible to disable, so that cluttering and information overflow can be avoided.
-    \item Preservation of privacy. It must not be possible to infer specific information of the individual festival attendees. This is in accordance with the values of the festival, as well as danish law.
-    \item An interface for computers. Since the main use will be in a control room, the application must be able to run on a desktop computer.
-    \item User authorization, so the system is only available to employees with a valid login.
-    \item \textbf{[Added]} A map legend, explaining the visualisations on the map. It must be clear what a colour in the visualisation symbolises.
-    \item \textbf{[Added]} Multiple levels of data access for different users. It must be possible to restrict users ability to access certain data, in order to only show information that is relevant to that user.
+    \item \emph{A map legend.} In order to make the crowd information overlays more intuitive, a map legend explaining the overlays must be added. This is very important for a usable system, and will be prioritised as must have.
+    \item \emph{Multiple access levels.} The system must have multiple access levels, such that information and features can be targeted at the relevant users. This is important for the system, is prioritised as must have.
+    \item \emph{Adding of markers at specific locations.} These markers could be used to contain information of incidents, and should be visible to all relevant users. This is prioritised as should have.
+    \item \emph{A help feature.} The application should have a help feature that explains the applications functionalities. This is prioritised as should have.
+    \item \emph{Send notification to other users.} It could be possible for some users with a sufficient access level to send notification to other users. This is prioritised as could have.
+    \item \emph{A menu with searchable contact information.} A menu containing the contact information of the festival employees. It should be possible to search through the contacts. This is prioritised as won't have, as it is not important for the usability of the application.
+    \item \emph{Reporting of incidents by festival guests.} It could be possible for festival guests to access the application, and report an incident on the map. This requirement is not in the scope of the project, and is prioritised as won't have.
 \end{enumerate}
 
+Updating the previous requirements specification from \cref{tab:s2_req} gives us the requirement specification shown in \cref{tab:s3_req}.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabularx}{\textwidth}{lXl}
+		\toprule
+		\textbf{ID} & \textbf{Requirement} & \textbf{Priority} \\
+		\midrule 
+		\rowcolor[HTML]{EFEFEF} 
+		S1-FR1 & A detailed map of the area & Must have \\
+		S2-FR1 & A map overlay that intuitively visualises crowd density & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR2 & A map overlay that intuitively visualises crowd velocity & Must have \\
+		S2-FR3 & A map overlay that intuitively visualises crowd turbulence & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR4 & A map overlay that intuitively visualises crowd pressure & Must have \\
+		S1-FR3 & A graphical user interface for desktop computers & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S1-FR4 & A graphical user interface for smartphones & Must have \\
+		S2-FR5 & Layers of details that can be toggled on and off & Must have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR6 & User authentication & Must have \\
+		S3-FR1 & A map legend & Must have \\
+		\rowcolor[HTML]{EFEFEF}
+		S3-FR2 & Multiple access levels & Must have \\
+		S2-FR7 & A search function & Should have \\
+		\rowcolor[HTML]{EFEFEF}
+		S3-FR3 & Adding of markers at specific locations & Should have \\
+		S3-FR4 & A help feature & Should have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR8 & Navigation assistance & Could have \\
+		S2-FR9 & Automatic warning system & Could have \\
+		\rowcolor[HTML]{EFEFEF} 
+		S2-FR10 & A visualisation of available personnel & Could have \\
+		S3-FR5 & Send notification to other users & Could have \\
+		\rowcolor[HTML]{EFEFEF}
+		S2-FR11 & Projection onto camera images & Won't have \\
+		S3-FR6 & A menu with searchable contact information & Won't have \\
+		\rowcolor[HTML]{EFEFEF}
+		S3-FR7 & Reporting of incidents by festival guests & Won't have \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Functional requirements for the third sprint.}
+	\label{tab:s3_req}
+\end{table}
+
+No non-functional requirements are added in this sprint, so the non-functional requirements are still given by \cref{tab:s2_nreqs}.
+
+% Or is this a non-functional requirement?? TBD
 \textbf{Should have}
 \begin{enumerate}[resume]
-    \item A search function. Specific places of interest should be possible to find through search, in order to enable faster orientation on the map.
-    \item A mobile interface for use outside the control room. This is oriented towards field personnel, such as paramedics and security guards.
-    \item \textbf{[Added]} A way of creating markers at specific positions on the map that can contain information, for example a marker indicating a medical situation. These markers should then be visible by other users for which this marker is relevant.
-    \item \textbf{[Added]} A menu with searchable contact information about the festival workers, in case a specific person needs to be contacted.
-    \item \textbf{[Added]} An feature that provides the user with help information, that explains the features and functionality of the system.
+    
     \item \textbf{[Added]} All data displayed to the user could also be stored for later retrieval, allowing for analysis of a problematic situation, which could improve the ability to handle similar future situations.
+    
 \end{enumerate}
-
-\textbf{Could have}
-\begin{enumerate}[resume]
-    \item Navigation assistance for use in crowds. Should serve to enable faster reaction times, by supplying a route to personnel having to traverse the festival.
-    \item An automated reaction to problematic situations. This would entail having the system analysing current situations and notifying the operators of possible problems that may have occurred, such as crowd congestion.
-    \item A display of available personnel. In order to better judge the coverage of personnel, real-time tracking could provide a better overview for the control room operators. Matters of personal privacy for the personnel also has to be considered.
-    \item \textbf{[Added]} Users with a sufficient access level should be able to send notifications/commands to other users. E.g. \enquote{Centre on this position} would centre the other user's application to the specific position.
-    \item \textbf{[Added]} Festival guests can report situations on the map. For example, \enquote{Fight here} or \enquote{too many people}.
-\end{enumerate}
-
-\textbf{Won't have}
-\begin{enumerate}[resume]
-    \item Projection onto camera images. Such a functionality would require a system by itself, and is considered out of scope.
-\end{enumerate}
-
-
-%% Outcommented reqs
-\iffalse
-\textbf{Must have}
-\begin{enumerate}
-    \item A map legend, explaining the visualisations on the map. It must be clear what a colour in the visualisation symbolises.
-    \item Multiple levels of data access for different users. It must be possible to restrict users ability to access certain data, in order to only show information that is relevant to that user. 
-\end{enumerate}
-
-\textbf{Should have}
-\begin{enumerate}[resume]
-    \item A way of creating markers at specific positions on the map that can contain information, for example a marker indicating a medical situation. These markers should then be visible by other users for which this marker is relevant.
-    \item A menu with searchable contact information about the festival workers, in case a specific person needs to be contacted.
-    \item An feature that provides the user with help information, that explains the features and functionality of the system.
-    \item All data displayed to the user could also be stored for later retrieval, allowing for analysis of a problematic situation, which could improve the ability to handle similar future situations.
-\end{enumerate}
-
-\textbf{Could have}
-\begin{enumerate}[resume]
-    \item A way of visualising the positions of guards or other personnel.
-    \item Users with a sufficient access level should be able to send notifications/commands to other users. E.g. \enquote{Centre on this position} would centre the other user's application to the specific position.
-    \item Festival guests can report situations on the map. For example, \enquote{Fight here} or \enquote{too many people}.
-\end{enumerate}
-\fi

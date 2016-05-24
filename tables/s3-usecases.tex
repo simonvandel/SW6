@@ -1,0 +1,83 @@
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Mark incident on map \\ \midrule
+        \textbf{ID:}    & S3-UC1 \\ \midrule
+        \textbf{Description:} & A user marks an incident location on the map. \\ \midrule
+        \textbf{Actors:} & Stationary users, mobile users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user marks a location on the map
+            \item The user specifies the incident type
+            \item The user specifies user groups that should respond to the incident
+            \item The incident is marked on the map for relevant users
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Mark incident on map use case description.}
+    \label{tab:s3-uc1}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Send notification \\ \midrule
+        \textbf{ID:}    & S3-UC2 \\ \midrule
+        \textbf{Description:} & A user sends a notification to other users. \\ \midrule
+        \textbf{Actors:} & Stationary users, mobile users, guest users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item A stationary user access a notification menu
+            \item The user writes a notification
+            \item The user specifies the user groups that should receive this notification
+            \item The user sends the notification
+            \item All members of the specified user group receives the notification
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Send notification use case description.}
+    \label{tab:s3-uc2}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Find contact information \\ \midrule
+        \textbf{ID:}    & S3-UC3 \\ \midrule
+        \textbf{Description:} & A user finds the contact information of another employee. \\ \midrule
+        \textbf{Actors:} & Stationary users, mobile users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enters the name of an employee as a search term
+            \item The application finds the relevant employees
+            \item The application shows the employees contact information
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Find contact information use case description.}
+    \label{tab:s3-uc3}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        \textbf{Name:}  & Report incident on map \\ \midrule
+        \textbf{ID:}    & S3-UC4 \\ \midrule
+        \textbf{Description:} & A guest user reports an incident on the map. \\ \midrule
+        \textbf{Actors:} & Guest users \\ \midrule
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item A guest user opens the application
+            \item The user marks a location on the map
+            \item The user describes the incident
+            \item The incident report is sent to stationary and mobile users for confirmation
+        \end{enumerate}
+        \\ \bottomrule
+    \end{tabularx}
+    \caption{Report incident on map use case description.}
+    \label{tab:s3-uc4}
+\end{table}

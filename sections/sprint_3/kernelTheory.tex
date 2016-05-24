@@ -1,13 +1,8 @@
 \section{Kernel Density Estimation}
-
-\kanote{introduktion til kernel density - HUSK at skriv motivation om hvorfor vi skal vide hvordan man udregner det her, samt hvordan det binder sammen med tidligere afsnit}
-
-This section will first explain how kernel density estimation is used to estimate the local crowd density. Afterwards, we explain how this approach can be extended to estimating velocity, turbulence, and pressure.
-
+\label{sec:kernelDensityEstimation}
+In order to be able to visualise the crowd factors introduced in \cref{sec:related_work} we must analyse the position data and then estimate the local crowd factors. This section will first explain how kernel density estimation is used in the context of this project. Afterwards, we explain how this approach can be used to estimate the crowd factors. Lastly we will discuss the bandwidth variable, how to find it, and how it impacts our project.
 
 \input{sections/sprint_3/kernelDensityEstimation.tex}
 \input{sections/sprint_3/kernelCrowdConditions.tex}
 \input{sections/sprint_3/bandwidthSelection.tex}
-
-
-\kanote{summary af de teoretiske afsnit}
+\input{sections/sprint_3/kernelsummary.tex}
