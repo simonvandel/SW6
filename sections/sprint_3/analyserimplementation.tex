@@ -1,7 +1,7 @@
 \subsection{Implementation of the Analyser}\label{s3:analyser_implementation}
 
-In order to fully understand the need for a good implementation of the analyser, we start with a quick rundown of the complexity of the unoptimised direct analysis algorithm seen in \cref{alg:unoptimised_algorithm}, which follows the mathematical formulae in \cref{sub:kernelDensityEstimation}.
-
+In order to fully understand the need for a good implementation of the analyser, we start with a quick run-down of the complexity of the unoptimised algorithm implemented directly as derived in \cref{subsec:estimatingCrowdFactors}. The the pseudo code implementation can be seen in \cref{alg:unoptimised_algorithm}.
+\jenote{Overvej om algoritmen skal ned i bilag (dvs at sektionen skal skrives lidt om)}
 \begin{center}
 \captionof{algorithm}{Unoptimised algorithm}\label{alg:unoptimised_algorithm}
 \begin{algorithmic}[1]
@@ -59,32 +59,33 @@ This algorithm has an asymptotic time complexity of $$\mathcal{O}(\text{points} 
 
 \subsubsection{Reducing Complexity}
 
-The first thing we need to reduce is the complexity. This would mean either the reduction of points or people.
+The first thing we need to reduce is the complexity. This would mean the reduction either of the terms of the complexity, namely points or people.
 
-Points can obviously be reduced, but not without also reducing the granularity of the result. But even if we reduce the number of points, we are not able to reduce the complexity. So if we want to reduce the complexity we need to reduce the amount of people iterated through. Considering that the kernel function will return zero for any person further away from the point than the bandwidth, we can reduce the complexity given that a reasonable bandwidth is used. This also relies on the reasonable assumption that people take up space, and that therefore we can only have a certain amount people inside a given bandwidth.
+All points have to be considered since these are the points we want to find the local crowd factors for. We could reduce the amount of points we want to analyse on, but this would not reduce the complexity of the analyser itself. If we want to reduce the complexity we need to reduce the amount of people iterated through per point. Considering that the kernel function will return zero for any person further away from the point than the bandwidth, we can reduce the complexity given that a reasonable bandwidth is used. This also relies on the reasonable assumption that people take up space, and that therefore we can only have a certain amount people inside a given bandwidth.
 
-But before we can utilise this, we need a way to check if a person is further away than the bandwidth, without having to iterate through all the people. Luckily such a way exists in the form of R-trees. An R-tree is a data structure that takes $\mathcal{O}(n)$ to build, and allows us to do range searches in $\mathcal{O}(log(n))$ \cite{rtree}. If we start the analysis with building an r-tree of the people, each point would only have to query $\mathcal{O}(log(n)$ people, giving us the complexity of $$\mathcal{O}(\text{people} + \text{points} \cdot log(\text{people}) * PeopleWithinBandwidth(h))$$
+Before we can utilise the drop off point of the kernel function, we need a way to check if a person is further away than the bandwidth, without having to iterate through all the people. This can be done using R-trees. An R-tree is a data structure that takes $\mathcal{O}(n)$ to build, and allows us to do range searches in $\mathcal{O}(log(n))$ \cite{rtree}. If we start the analysis with building an r-tree of the people, the needed people for each point would only take $\mathcal{O}(log(n))$ time to find, where n is the amount of people. The amount of people found using the range trees is here denoted with the function PeopleWithinBandwidth. This would give us the complexity of $$\mathcal{O}(\text{people} + \text{points} \cdot log(\text{people}) * PeopleWithinBandwidth(h))$$
 
-Considering that there is a physical limit as too how dense people can be packed, the function $PeopleWithinBandwidth(h) = h^2 * \pi * maxDensity$. Since we at runtime will have a constant bandwidth, $h$, the final complexity will be $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$.
+Considering that there is a physical limit as too how dense people can be packed, the function $PeopleWithinBandwidth(h) = h^2 * \pi * maxDensity$. Since we at runtime will have a constant bandwidth, $h$, and the max density is also constant, $PeopleWithinBandwidth(h)$ will have a constant worst case. The final complexity is therefore $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$
 
 \subsubsection{Parallel Computation}
 
-Another way to increase the calculation of the analysis, is to take advantage of the embarrassingly parallel problem of calculating point. Since none of the calculations done for any individual point affect the the other points, we can calculate their values in parallel.
+Another way to decrease the time spent in on the analysis, is to take advantage of the embarrassingly parallel problem of calculating point. Since none of the calculations done for any individual point affect the the other points, we can calculate their values in parallel, meaning that we in principle can have an individual thread for each point.
 
 \subsubsection{An Optimised Algorithm}
+All these considerations leads us to the pseudo-code for the optimised analyser algorithm. The algorithm is split into two functions and can be seen in \cref{alg:revised_algorithm}. The first function on \cref{firstfunc} is the analyser function. This is basically a for-loop with two objectives: Find the relevant people for each point through an R-tree, and call the \emph{analysePoint} function. This for-loop represents the embarrassingly parallel part of the problem. It should be noted that while the same R-tree is used for multiple points, only read actions are done, and as such there are no race conditions.
 
-All these considerations leads us to the pseudo-code for the optimised analyser algorithm. The algorithm is split into two functions and can be seen in \cref{alg:revised_algorithm}. The first function on \cref{firstfunc} is the analyser function. This is basically a for-loop with to objectives: Find the relevant people through an R-tree, and call the \emph{analysePoint} function. This for-loop represents the embarrassingly parallel part of the problem. It should be noted that while the same R-tree is used for multiple points, only read actions are done, and as such there are no race conditions.
+The second function on \cref{secondfunc} of the algorithm, is the part where the local crowd factors are calculated. The primary change here, is the reduction of four for-loops, down to two. The primary reason for this reduction is the repeated calls to the \emph{Kernel} function, which calculates a given persons Kernel value. Since this is a rather costly calculation, we store the result of the calculation on \cref{tmpkernel}, and use this value for each factor. Note that on \cref{secondkernel}, another call is made to the \emph{Kernel} function. In the actual implementation this is avoided through a technical workaround in the first for-loop. However we have omitted that detail in order to keep the pseudo-code less complicated.
 
-The second function on \cref{secondfunc} of the algorithm, is the part where the local crowd densities are calculated. The primary change here, is the reduction of four for-loops, down to two. The primary reason for this reduction is the repeated calls to the \emph{Kernel} function, which calculates a given persons Kernel value. Since this is a rather costly calculation, we store the result of the calculation on \cref{tmpkernel}, and use this value for each factor. Note that on \cref{secondkernel}, another call is made to the \emph{Kernel} function. In the actual implementation this is avoided through a technical workaround in the first for-loop. However we have omitted that detail in order to keep the pseudo-code less complicated.
+On line \cref{firstval} through \ref{lastval} we introduce summation variables, which will store the non-normalised values. Note that the value for velocity on \cref{veloval} is a vector. We then reach the first for-loop, which will iterate through every person in the reduced list, and add that person's crowd factors to the respective accumulator after it has been adjusted by the kernel value.
 
-On line \cref{firstval} through \ref{lastval} we introduce summation variables, which will store the non-normalised values. Note that the value for velocity on \cref{veloval} is a vector. We then reach the first for-loop, which will iterate through every person in the reduced list, and add that persons value to the accumulators after it has been adjusted by the kernel value.
+At \cref{validhead} we have an \emph{if} statement, which makes sure that the heading direction is not invalid, in accordance with the solution presented in \cref{subsub:turbu}, to the problem of still standing people. If the heading direction is valid, the accumulator is updated on \cref{adjustturbu} and \ref{turbusum}, along with the separate Kernel value summation on \cref{turbukernel}.
 
-At \cref{validhead} we have an \emph{if} statement, which makes sure that the heading direction is not invalid, in accordance with the solution presented in \cref{subsub:turbu}, to the problem of stilling standing people. If the heading direction is valid, the accumulator is updated on \cref{adjustturbu} and \ref{turbusum}, along with the separate Kernel value summation on \cref{turbukernel}.
-
-On \cref{nullcheck} we have an \emph{if} statement, which checks if the point has a Kernel value of $0$, which would cause a division error in \cref{secondres}.
+On \cref{nullcheck} we have an \emph{if} statement, which checks if the point has a Kernel value of $0$, which would cause a division error in \cref{secondres,lastpres}. The same principle goes for the \emph{if} on \cref{turbunullcheck} and the division on \cref{thirdres}.
 Then at \cref{firstres} through \ref{thirdres} the first three factors are normalised, and on \cref{firstpres} through \ref{lastpres} we calculate the local crowd pressure. We finally return the result on \cref{return}.
 
-This algorithm holds the desired complexity of $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$.
+This algorithm holds the desired complexity of $$\mathcal{O}(\text{points} \cdot log(\text{people}))$$
+
+assuming the previously found constant maximum of people within an area.
 
 \begin{center}
 \captionof{algorithm}{Optimised algorithm using RTree range search}\label{alg:revised_algorithm}
@@ -112,9 +113,9 @@ This algorithm holds the desired complexity of $$\mathcal{O}(\text{points} \cdot
 \ForAll{People, P}
     \State TmpKernelVal $\gets$ \Call{Kernel}{|x - P|}\label{tmpkernel}
     \State KernelValSum $\gets$ KernelValSum + TmpKernelVal
-    \State NonNormVeloSum $\gets$ NonNormVeloSum + Velocity * TmpKernelVal
-    \If{P.H-Direction is valid}\label{validhead}
-        \State AdjustedTurbu $\gets$ P.H-Direction $\cdot$ TmpKernelVal\label{adjustturbu}
+    \State NonNormVeloSum $\gets$ NonNormVeloSum + P.Velocity * TmpKernelVal
+    \If{P.HeadingDirection is valid}\label{validhead}
+        \State AdjustedTurbu $\gets$ P.HeadingDirection $\cdot$ TmpKernelVal\label{adjustturbu}
         \State NonNormTurbuSum $\gets$ NonNormTurbuSum $+$ Adjusted Turbu \label{turbusum}
         \State TurbuKernelValSum $\gets$ TurbuKernelValSum + TmpKernelVal\label{turbukernel}
     \EndIf
@@ -125,8 +126,11 @@ This algorithm holds the desired complexity of $$\mathcal{O}(\text{points} \cdot
 \Else
     \State Density $\gets$ KernelValSum $\cdot \; 2 / (\pi \cdot h^2)$\label{firstres}
     \State Velocity $\gets$ NonNormVelocitySum / KernelValSum \label{secondres}
-    \State Turbulence $\gets$ 1 - ( NonNormTurbuSum / TurbuKernelValSum )\label{thirdres}
-    \State VelocityDiffSum $\gets$ \label{firstpres}
+    \State Turbulence $\gets$ 0
+    \If{TurbuKernelValSum is 0} \label{turbunullcheck}
+        \State Turbulence $\gets$ 1 - ( NonNormTurbuSum / TurbuKernelValSum )\label{thirdres}
+    \EndIf
+    \State VelocityDiffSum $\gets$ 0 \label{firstpres}
     \ForAll{People, P}
         \State VelocityDiff $\gets$ |P.velocity - Velocity|$^2 \cdot$ \Call{Kernel}{|x - P|}\label{secondkernel}
         \State VelocityDiffSum $\gets$ VelocityDiffSum $+$ VelocityDiff
