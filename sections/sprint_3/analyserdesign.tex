@@ -53,7 +53,7 @@ We divide the area to analyse into a grid of hexagons. In \cref{sub:kernelDensit
 
 
 \subsection{Lightweight Results}
-
+\label{subsec:lightweightResults}
 While we are primarily concerned with reduction of complexity and computation time of the analysis, there are other aspects of the design that require some attention. The amount of data required for a single analysis can reach rather large sizes, and in order to keep network traffic with potentially multiple users to a minimum, the analyser should, as a bi-product of its analysis, reduce the size of a completed analysis. In other words, a lightweight data structure for the results should be conceived. 
 
 The conceived data structure stores the result of the crowd condition analysis along with the matching position, by taking advantage of the uniform distribution of analysed points in a grid. This allows the data structure to only keep track of the global position of one single point and then the distance between points, as well as the dimensions of the analysed area. From this information a client can recreate the grid and start plotting the sequential data accordingly.
