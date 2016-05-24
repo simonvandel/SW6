@@ -16,12 +16,12 @@ In this report we use the WGS84 standard for spatial referencing. It was created
 
 \subsection{Calculating Distances}
 
-Due to the nature of non-euclidean geometry, special formulae should be used when calculating geometry on the surface of the Earth. A good example of this is the Pythagorean theorem $a^2 + b^2 = c^2$. If the triangle is curved around a sphere, it becomes necessary to modify the formula to $cos(\frac{a}{R}) * cos(\frac{b}{R}) = cos(\frac{c}{R})$ where $R$ is the radius of the sphere\cite{website:lawofcosines}.
+Due to the nature of non-euclidean geometry, special formulae should be used when calculating geometry on the surface of the Earth. A good example of this is the Pythagorean theorem $a^2 + b^2 = c^2$. If the triangle is curved around a sphere, it becomes necessary to modify the formula to $cos(\frac{a}{R}) \cdot cos(\frac{b}{R}) = cos(\frac{c}{R})$ where $R$ is the radius of the sphere\cite{website:lawofcosines}.
 
 \begin{figure}
     \centering
 \includegraphics[width=\textwidth/2]{noneuclidean.jpg}
-\caption[Triangle on sphere]{Triangle on sphere showing properties of Non-euclidean geometry \cite{earthtriangle}}
+\caption[Triangle on sphere]{Triangle on sphere showing properties of Non-euclidean geometry \cite{earthtriangle}.}
 \label{noneuclidean}
 \end{figure}
 
@@ -43,11 +43,9 @@ The projection used in this project is the Web Mercator projection \cite{webmerc
 \begin{figure}
     \centering
 \includegraphics[width=\textwidth/2]{tissotmercator.png}
-\caption{Tissot's indicatrices on Web Mercator projection}
+\caption{Tissot's indicatrices on Web Mercator projection.}
 \label{tissots}
 \end{figure}
-
-\kanote{husk at tjekke op på copyright af dette billede}
 
 We can see how the northern and southern circles are distorted in area, but does not stretch into ellipses, which illustrate the property that the map projects distances from east to west with the same level of distortion as distances from south to north. We can also see that the lines of longitudes and latitudes remain straight and parallel, which also displays the conformal property of the projection. The projection is unable to display the two poles, since the distortion would stretch infinitely as we approach them.
 
