@@ -33,29 +33,60 @@
     \centering
     \begin{tabularx}{\textwidth}{|l|X|}
         \hline
-        \textbf{Name:}  & Report incident \\ \hline
-        \textbf{ID:}    & S3-UC1 \\ \hline
+        \textbf{Name:}  & Send notification \\ \hline
+        \textbf{ID:}    & S3-UC4 \\ \hline
         \textbf{Description:} & A guest user reports an incident on the map. \\ \hline
         \textbf{Actors:} & Guest users \\ \hline
         \textbf{Success scenario:} & 
         \begin{enumerate}
-            \item The user opens the application on any device
-            \item The application presents a login screen
-            \item The user enters his/her username and password
-            \item The login information is validated
-            \item The user has access to the application's features
-        \end{enumerate}
-        \\ \hline
-        \textbf{Extensions:} & Invalid login information \newline
-        \begin{enumerate}
-            \item The user opens the application on any device
-            \item The application presents a login screen
-            \item The user enters his/her username and password
-            \item The login informations are invalid
-            \item The user is prompted to re-enter username and password
+            \item A guest user opens the application
+            \item The user marks a location on the map
+            \item The user describes the incident
+            \item The incident report is sent to stationary and mobile users for confirmation
         \end{enumerate}
         \\ \hline
     \end{tabularx}
-    \caption{????? use case description.}
-    \label{tab:s3-uc1}
+    \caption{Send notification use case description.}
+    \label{tab:s3-uc4}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Find contact information \\ \hline
+        \textbf{ID:}    & S3-UC5 \\ \hline
+        \textbf{Description:} & A user finds the contact information of another employee. \\ \hline
+        \textbf{Actors:} & Stationary users, mobile users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item The user enters the name of an employee as a search term
+            \item The application finds the relevant employees
+            \item The application shows the employees contact information
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Find contact information use case description.}
+    \label{tab:s3-uc5}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \textbf{Name:}  & Report incident \\ \hline
+        \textbf{ID:}    & S3-UC6 \\ \hline
+        \textbf{Description:} & A guest user reports an incident on the map. \\ \hline
+        \textbf{Actors:} & Guest users \\ \hline
+        \textbf{Success scenario:} & 
+        \begin{enumerate}
+            \item A guest user opens the application
+            \item The user marks a location on the map
+            \item The user describes the incident
+            \item The incident report is sent to stationary and mobile users for confirmation
+        \end{enumerate}
+        \\ \hline
+    \end{tabularx}
+    \caption{Report incident use case description.}
+    \label{tab:s3-uc6}
 \end{table}
