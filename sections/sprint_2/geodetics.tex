@@ -29,9 +29,7 @@ As a consequence of this, calculating absolute distances between two positions o
 
 Vincenty's formulae~\cite{vincenty} is an iterative method for calculating the distance between two points on an oblate spheroid with a high accuracy. However this accuracy can come at the cost of potentially thousands of iterations.
 
-The Haversine formula considers a simplified Earth in the shape of a sphere, and can be derived from the spherical law of cosines~\cite{website:lawofcosines}. It lacks in accuracy in comparison with Vincenty's method but it is not as costly a calculation.
-
-Whenever distances are calculated the required properties should be considered, and the appropriate method chosen. For this project we will be using Haversine since the limited distances will minimise the inaccuracies of the formula, and that the better performance is helpful during the calculation of the crowd factors described in \cref{sec:related_work}.\jenote{maybe we should say how inaccurate it is and why this is good enough for us?}
+The Haversine formula considers a simplified Earth in the shape of a sphere, and can be derived from the spherical law of cosines~\cite{website:lawofcosines}. Calculating the distance from the two points furthest from each other on SmukFest reveals a difference of 1.4 meters over a distance of 903.2 meters, calculated by Vincenty. This gives us a worst case difference in accuracy of about 0.15\%. Considering that the wifi triangulation system used at SmukFest most likely will have a accuracy of around 5 meters \cite{ciscoaccu}, the difference in precision will not have much to say in comparison. The Haversine function was chosen over Vincenty due to its lower calculation cost, and that the better performance is helpful during the calculation of the crowd factors described in \cref{sec:related_work}.
 
 \subsection{Projection}
 Whenever a two dimensional map of the Earth is made, it will be subjected to distortion~\cite{projectionalbum}. However the level and area of distortion will differ depending on the choice of map projection. Some projections will distort the poles but have accurate information near the Equator, while others might try to distort the oceans and keep landmasses accurate~\cite{website:Wikipedia-mapprojections}.
@@ -48,8 +46,6 @@ The projection used in this project is the Web Mercator projection~\cite{webmerc
 We can see how the northern and southern circles are distorted in area, but does not stretch into ellipses, which illustrate the property that the map projects distances from east to west with the same level of distortion as distances from south to north. We can also see that the lines of longitudes and latitudes remain straight and parallel, which also displays the conformal property of the projection. The projection is unable to display the two poles, since the distortion would stretch infinitely as we approach them.
 
 Since the solution will not require distant area comparison, and primarily need to display a given local area in relation to itself, this projection suits the project well.
-\jenote{maybe argue that the amount of skewing that would occur on smukfest and say that that is acceptable again?}
 
 \subsection{Summary}
-
 In summary, the development of the application should involve considerations on geodetics in order to sustain precision. Referencing of positions on the Earth is done relative to the Earth according to the WGS84 standard, and as such any geometric calculation must consider the consequences of the shape of the Earth. This will mainly manifest itself in the use of the Haversine formula and derivations thereof. Projection will be done using the Web Mercator standard, which will allow for a direct translation between projection and referencing. These choices aim to minimise the geodetic problems, allowing for a more clean implementation.

@@ -1,17 +1,17 @@
-\section{Requirements Specification} \label{sec:s3_requirements}
+\section{Requirements} \label{sec:s3_requirements}
 During the user test with Alarm HS, several new use cases were identified. For the application to support these new use cases, additional requirements will be added to the previous requirements from \cref{sec:s2_reqs}.
 
 \subsection{Revised Users} \label{ss:s3_users}
 Along with the additional use cases, we also identified new users for the application. These users include guest users, medical users, and guard users.
 
-The guest users are briefly described in \cref{tab:guest_user}. While guest users share some characteristics with the mobile users described in \cref{tab:mob_user}, they are specified as a separate user, as they should only have very limited access to the features of the system.
+The guest users are briefly described in \cref{tab:guest_user}. While guest users share some characteristics with the mobile users described in \cref{tab:mob_user}, they are specified as a separate user, as they should only have very limited access to the features of the application.
 
-The medical and guard users are specialisations of the previously defined mobile user, and so references to mobile users will include both medical and guard users. A description of these users can be seen in \cref{tab:med_user,tab:guard_user}. These specific users are added in order to support targeted information in the system. This could be beneficial if there are incidents that only require the attention of one specific group.
+The medical and guard users are specialisations of the previously defined mobile user, and so references to mobile users will include both medical and guard users. A description of these users can be seen in \cref{tab:med_user,tab:guard_user}. These specific users are added in order to support targeted information in the application. This could be beneficial if there are incidents that only require the attention of one specific group.
 
 \input{tables/s3-users.tex}
 
 \subsection{Additional Use Cases \label{ss:s3_uc}}
-In addition to the previously identified use cases, during the user test some additional potential uses of the system were discussed. Based on the discussion we identified five additional use cases, described in \cref{tab:s3-uc1,tab:s3-uc2,tab:s3-uc3,tab:s3-uc4,tab:s3-uc5}.
+In addition to the previously identified use cases, during the user test some additional potential uses of the application were discussed. Based on the discussion we identified five additional use cases, described in \cref{tab:s3-uc1,tab:s3-uc2,tab:s3-uc3,tab:s3-uc4,tab:s3-uc5}.
 
 \input{tables/s3-usecases.tex}
 
@@ -19,12 +19,12 @@ In addition to the previously identified use cases, during the user test some ad
 Based on the new use cases, and the general feedback from the user test, several additional functional requirements have been identified, which must be added to the requirements previously identified in \cref{ss:s2_update_reqs}. The following requirements will be added:
 
 \begin{enumerate}
-    \item \emph{A map legend.} In order to make the crowd information overlays more intuitive, a map legend explaining the overlays must be added. This is important for the usability of the system, and will be prioritised as must have.
-    \item \emph{Multiple access levels.} The system must have multiple access levels, such that information and features can be targeted at the relevant users. This is important for the system, and is prioritised as must have.
+    \item \emph{A map legend.} In order to make the crowd information overlays more intuitive, a map legend explaining the overlays must be added. This is important for the usability of the application, and will be prioritised as must have.
+    \item \emph{Multiple access levels.} The application must feature multiple access levels, such that information and features can be targeted at the relevant users. This is important for the application, and is prioritised as must have.
     \item \emph{Placing of markers at specific locations.} These markers could be used to contain information of incidents, and should be visible to all relevant users. This is prioritised as should have.
     \item \emph{A help feature.} The application should have a help feature that explains the application's functionality. This is prioritised as should have.
     \item \emph{Send notification to other users.} It could be possible for some users with a sufficient access level to send notification to other users. This is prioritised as could have.
-    \item \emph{Visualisation of historical data.} It could be possible to request historical data, and have this data visualised on the map. This would allow users to analyse prior incidents, possibly improving their ability to handle similar future situations. The real-time representation is the primary focus in the application, so this requirement is prioritised as could have.
+    \item \emph{Visualisation of historical data.} It could be possible to request historical data, and have this data visualised on the map. This would allow users to analyse prior incidents, possibly improving their ability to handle similar future situations. The near real-time representation is the primary focus in the application, so this requirement is prioritised as could have.
     \item \emph{A menu with searchable contact information.} A menu containing the contact information of the festival employees, making it possible to search through the contacts. This is prioritised as won't have, as it is not important for the usability of the application.
     \item \emph{Reporting of incidents by festival guests.} It could be possible for festival guests to access the application, and report an incident on the map. This requirement is not in the scope of the project, and is prioritised as won't have.
 \end{enumerate}

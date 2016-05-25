@@ -13,11 +13,10 @@ Large crowds are intrinsically dangerous, as the effects of individual people's 
     
     %\item Crowd psychology - physical crowds vs. psychological crowd. undlader at nævne crowd psychology her, da vi ikke kommer ind på det efterfølgende.
     
-    \item Stop and go waves - Which is a form of irregular movement in the crowd. It is caused by a drop in the flow of the crowd. If the drop in the flow is significant, temporary congestion can occur which forces people to stop their movement completely, causing a rippling effect which propagates backwards through the crowd, which in turn causes pressure to build, as people stop their movement against the crowd. This kind of movement can cause people to fall over, as they are pushed around, or cause compression of the crowd~\cite{empircalstudy,videoanalysis}.
+    \item Stop-and-go waves - Which is a form of irregular movement in the crowd. It is caused by a drop in the flow of the crowd. If the drop in the flow is significant, temporary congestion can occur which forces people to stop their movement completely, causing a rippling effect which propagates backwards through the crowd, which in turn causes pressure to build, as people stop their movement against the crowd. This kind of movement can cause people to fall over, as they are pushed around, or cause compression of the crowd~\cite{empircalstudy,videoanalysis}.
     
     \item Crowd Panic - Is a state in which the crowd experiences discomfort to such an extent that they will disregard normal social behaviour in order to relieve their discomfort. Examples would be attempts to push other people away in order to gain breathing space, or violently trying to pass through the masses in an attempt to vacate the area~\cite{empircalstudy}. An example of this would be the LoveParade incident of 2010, where some people tried to escape the situation by crawling on top of others~\cite{loveParadeDisaster}.
     
-\jenote{make sure that these definitions are used}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -178,20 +177,19 @@ Density and velocity should often be considered together when trying to estimate
 \begin{tabularx}{\textwidth}{>{\hsize=0.5\hsize}X >{\hsize=0.5\hsize}X >{\hsize=2\hsize}X}
 \toprule
 Crowd flow $\frac{|\text{people}|}{m \cdot s}$ & Movement Restriction & Description \\ \midrule
-\textless0.13 & \textless 22\% & \textbf{Comfortable for all areas}\newline
-The pedestrian environment is very comfortable at with plenty of space for people to walk at the speed and the route that they choose. \\ \midrule
-0.13 - 0.18 & 22\% - 31\% & \textbf{Recommended minimum for all areas}\newline
-Recommended level of comfort for all area types. This level provides enough space for normal walking speed and some choice in routes taken. \\ \midrule
-0.18 - 0.28 & 31\% - 50\% & \textbf{Recommended minimum for all areas}\newline
-Normal walking speed is still possible but conflicts are becoming more frequent and, in retail areas, people start to consider avoiding the area. \\ \midrule
-0.28 - 0.43 & 50\% - 78\% & \textbf{Increasingly uncomfortable}\newline
-The pedestrian environment is becoming increasingly uncomfortable, with the majority of people experiencing conflict or closeness with other pedestrians and bi-directional movement becoming difficult. \\ \midrule
-0.43 - 0.58 & 78\% - 100\% & \textbf{Very uncomfortable}\newline
-Walking speeds are restricted and reduced and there are difficulties in bypassing slower pedestrians or moving in reverse flow. \\ \midrule
-\textgreater0.58 & 100\% & \textbf{Very uncomfortable}\newline
-People have very little personal space and speed and movement is very restricted. Extreme difficulties are experienced if moving in reverse flow. \\ \bottomrule
+\textless0.13 & \textless 22\% & \enquote{\textbf{Comfortable for all areas}:
+The pedestrian environment is very comfortable at with plenty of space for people to walk at the speed and the route that they choose.}~\cite{levelsOfServiceLondon} \\ \midrule
+0.13 - 0.18 & 22\% - 31\% & \enquote{\textbf{Recommended minimum for all areas}: Recommended level of comfort for all area types. This level provides enough space for normal walking speed and some choice in routes taken.}~\cite{levelsOfServiceLondon} \\ \midrule
+0.18 - 0.28 & 31\% - 50\% & \enquote{\textbf{Recommended minimum for all areas}:
+Normal walking speed is still possible but conflicts are becoming more frequent and, in retail areas, people start to consider avoiding the area.}~\cite{levelsOfServiceLondon} \\ \midrule
+0.28 - 0.43 & 50\% - 78\% & \enquote{\textbf{Increasingly uncomfortable}:
+The pedestrian environment is becoming increasingly uncomfortable, with the majority of people experiencing conflict or closeness with other pedestrians and bi-directional movement becoming difficult.}~\cite{levelsOfServiceLondon} \\ \midrule
+0.43 - 0.58 & 78\% - 100\% & \enquote{\textbf{Very uncomfortable}:
+Walking speeds are restricted and reduced and there are difficulties in bypassing slower pedestrians or moving in reverse flow.}~\cite{levelsOfServiceLondon} \\ \midrule
+\textgreater0.58 & 100\% & \enquote{\textbf{Very uncomfortable}:
+People have very little personal space and speed and movement is very restricted. Extreme difficulties are experienced if moving in reverse flow.}~\cite{levelsOfServiceLondon} \\ \bottomrule
 \end{tabularx}
-\caption[Levels of Service at Footways in London.]{Levels of Service at Footways in London. The crowd flow is converted into appropriate units. The descriptions and movement restrictions are quoted from Transport of London~\cite{levelsOfServiceLondon}.}
+\caption[Levels of Service at Footways in London.]{Levels of Service at Footways in London. The crowd flow is converted into appropriate units. The descriptions and movement restrictions are quoted directly from Transport for London~\cite{levelsOfServiceLondon}.}
 \label{fig:levelsOFServiceLondon}
 \end{table}
 
@@ -210,6 +208,6 @@ Turbulence differs from the other factors, since we denote it with a percentage.
 
 \subsection{Summary}\label{sec:crowd_conditions_summary}
 
-In this section we have looked at different crowd conditions, that are known causes of crowd disasters. Since these conditions can be hard to observe directly, we found four crowd factors that are easier to observe. These four factors can provide an indicator of the crowd conditions, and therefore be useful for safety personnel.Deducing these factors from position data and visualising them will be in our focus moving forward with the project.
+In this section we have looked at different crowd conditions, that are known causes of crowd disasters. Since these conditions can be hard to observe directly, we found four crowd factors that are easier to observe: Density, velolicity, turbulence, and pressure. These four factors can provide an indicator of the crowd conditions, and therefore be useful for safety personnel.Deducing these factors from position data and visualising them will be in our focus moving forward with the project.
 
-We also discussed the critical levels of each of the four factors based upon related work, and the crowd conditions which each factor helps identify or predict.
+We also discussed the critical levels of each of the four factors based upon related work, and the crowd conditions which each factor helps identify or predict. These levels can be used later in the design and implementation to help the visualisation of the factors.

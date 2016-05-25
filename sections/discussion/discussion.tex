@@ -5,16 +5,16 @@ This chapter discusses considerations regarding the use of the system, that are 
 
 % ethics
 \section{Ethics \& Malicious Usage}
-Since this system is effectively able to display real-time positions of people, ethical issues regarding surveillance and potential malicious usage have to be considered. If the system is receiving location data using Wi-Fi triangulation, positions of users can be recorded without user's consent. The tracking of users without their knowledge is a big ethical issue.
+Since this system is effectively able to display near real-time positions of people, ethical issues regarding surveillance and potential malicious usage have to be considered. If the system is receiving location data using Wi-Fi triangulation, positions of users can be recorded without user's consent. The tracking of users without their knowledge is a big ethical issue.
 
 Malicious usage of the system can expose sensitive information about individuals. Although we do not receive information from the aSTEP project that can directly be used to identify individuals, it is possible to infer the identity of individuals using auxiliary information. For example, by combining knowledge about an individual's music taste, one can cross reference the location of all positions with specific music performances at a festival. Another potential issue in this system is finding individuals who appear to be alone in an area, making them vulnerable to violent crimes.
 
-While we have successfully lobbied for a strict control of access to position data stored on the aSTEP servers, the problem persists on an ethical level as long as the data is available. \jenote{What do we think maybe?}
+We believe that the tracking of individual people, and the possibility of linking the position data placed in the aSTEP platform with a person in the real world without their knowledge is morally wrong. Because of this we have also had a personal incentive to prevent this from being possible during the development of our application. This is also the reason why we do not wish to include a layer showing exact positions. Any layer on the application interface is the general local crowd factor, and contains no direct information on a person, making sensitive information considerably harder to infer. This view is also one of the reasons for our heavy lobbying for strict access control to position data on the aSTEP platform, which resulted in the restriction of data access to the users who provide them or those whom they explicitly share it with. This also ended in a terms of service, specifying that people storing positions on the aSTEP platform are responsible for their usage and obtainment of that data.
 
 % usefulness of the system
-\section{Usefulness of The System}
+\section{Usefulness of the System}
 %% pressure and turbulence was not intuitive. Is it even possible to make it intuitive? Can it get too high level, such that expert users can not use the system efficiently?
-The evaluation of the system as described in \cref{sec:s4_test}, finds that the system is \jenote{is thin a good word?}{useful} at visualising crowd factors, but only the velocity and density overlays were intuitive. One can argue whether the non-intuitiveness of the turbulence and pressure overlays is a fault of the system, or the concepts themselves. The turbulence and pressure concepts are not familiar to users as the density and velocity concepts, but on the other hand, there is room for additional research in other visualisation techniques. 
+The evaluation of the system as described in \cref{sec:s4_test}, finds that the system is useful for visualising crowd factors, but only the velocity and density overlays were intuitive. One can argue whether the non-intuitiveness of the turbulence and pressure overlays is a fault of the system, or the concepts themselves. The turbulence and pressure concepts are not familiar to users as the density and velocity concepts, but on the other hand, there is room for additional research in other visualisation techniques. 
 
 
 %% data - router requirements (WIFI) OR gps data

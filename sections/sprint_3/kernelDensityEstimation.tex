@@ -5,7 +5,7 @@ Finding a local crowd density can be a simple task. Simply define the local area
 
 Another method is to use kernel density estimation. With this approach we estimate the density continuously across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
 
-\subsubsection{Finding Local Crowd Densities}
+\subsubsection{Kernel Functions}
 There exists multiple kernel functions that can be used in the kernel density estimation. The most commonly used is the Gaussian distribution, also known as the normal distribution, given by the function in \cref{eq:1dGaussianDistribution}. The function, given the distance $d$ from an observation to the centre of the kernel, returns the probability of the observation. An observation in this context, is a sample drawn from the distribution. The Gaussian distribution is commonly used as a kernel function because it arises naturally, both in theory and in experiments.
 
 \begin{equation}

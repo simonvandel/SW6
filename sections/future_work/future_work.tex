@@ -5,7 +5,7 @@ This chapter presents possible improvements to the system that was not implement
 \section{Map Matching}
 In the project two different types of problems appear: one working with errors in the density estimation and one with moving people. Map matching techniques can be used to solve these problems and thereby improve the system.
 
-\subsection{Density Estimation Error With Obstacles}
+\subsection{Density Estimation Error with Obstacles}
 In \cref{sub:kernelDensityEstimation} we calculate the local crowd density considering points that are a maximum of the bandwidth away from the point and assume an area of a circle with a radius of the bandwidth. A problem arises with this. In \cref{fig:fenceCrowd} a crowd standing against a fence is illustrated. If a person was standing at the red point, which is the centre of the blue area illustrating the bandwidth, they would only be affected by the people south of the fence and not the absence of people north of it. If we assume a bandwidth of 5 meters, the person's perceived density would be around $1 \text{ people} / m^2$. If we calculate the density as explained in \cref{sub:kernelDensityEstimation}, with the blue area taken into consideration the density would be around $0.5 \text{ people} / m^2$.
 This problem could be solved with some form of map matching that could dynamically change the area considered for each local crowd density, taking obstacles into consideration.
 
@@ -83,7 +83,7 @@ This problem could be solved with some form of map matching that could dynamical
 \label{fig:fenceCrowd}
 \end{figure}
 
-\subsection{Moving people}
+\subsection{Moving People}
 Due to the imprecision of real world data a person can jump back and forth between two points on a map that are separated by an obstacle when they in reality are just standing on one side of the obstacle. 
 
 Some of these issues could be eliminates using map matching techniques. If people moving towards an obstacle reach the obstacle and stop or move along it, any observation received from the opposite side of the obstacle could be projected to the correct side. This behaviour should be defined in terms of some form of distance where this projection should not happen in case of errors in the map data.

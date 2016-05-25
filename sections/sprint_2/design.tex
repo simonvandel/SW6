@@ -4,9 +4,7 @@ This section covers the main design decisions made during this sprint. It first 
 \subsection{Web Application}
 %During the user testing of the prototype in the first sprint it was confirmed that the application should be able to run on multiple platforms, which is also reflected in the requirement specification.\jenote{Måske bare referer til kravene} Therefore we consider two different approaches to meet this requirement. The first approach would consist of developing a separate application for each of the platforms. This would necessarily include applications for major operating systems for both desktop computers and mobile devices. The other approach is developing a web application. By doing this, any platform with a common browser will be able to use the application. This is advantageous as it means only one application has to be developed. Therefore we continue the project on the basis of a web application.\jenote{er vi efterhånden ikke kommet frem til det her en del gange?}
 
-During the user testing of the prototype in the first sprint it was confirmed that the application should be able to run on multiple platforms. The prototype started out as a web application in the first sprint, which is a good choice, as web applications run on all platforms with a browser
-
-\sinote{jeg har skrevet det om, hvad siger i?}
+During the user testing of the prototype in the first sprint it was confirmed that the application should be able to run on multiple platforms. The prototype started out as a web application in the first sprint, which is a good choice, as web applications run on all platforms with a browser.
 
 \subsection{Architecture} \label{sec:s2_architecture}
 In \cref{sec:s1_prototype} we assumed that the system would be based on a client-server architecture, due to the need of supporting many users on different platforms simultaneously. This was confirmed during the meetings held with potential users at the end of the first sprint. As a concrete architecture was not crucial to the prototype developed during the first sprint, it was not formalised at that point. In the second sprint the architecture started to have a bigger impact on the development of our application, and as such we here present our considerations on the architecture.
@@ -17,8 +15,6 @@ We use the model-view-controller (MVC architectural pattern for the web applicat
 
 \input{diagrams/architecture_diagram.tex}
 This architecture describes how a request from a user is handled by the HotMap server. In this architecture the controller component serves as a request handler. The controller also handles computations such as analysing position data to determine crowd factors. The model components encapsulates information in classes for passing information between views and the controller easily. Information computed by the controller can either result in a view sent to the user, or data from the controller can be converted to JSON, and then update the data displayed on the user's current view. 
-
-\jenote{You are going to hate me.. But i think that this is not descriptive and detailed enough, compared to what we were actually thinking at the time. At least not as far as our own application goes. We had ideas about the caches, misses and so on. If it is written here it will also be a let easier to reference later, and use as argumentation}
 
 
 The following list describes the purpose of each transaction shown on \cref{fig:architecture_diagram} in the order they are evaluated.

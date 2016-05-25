@@ -15,16 +15,15 @@ Colour represents the value of the displayed crowd factor, e.g. the value for th
 \definecolor{higher}{HTML}{FFFF00}
 \definecolor{highest}{HTML}{FF0000}
     \centering
-    \sinote{disse tal skal passe med de tal i \cref{subsec:levelsOfHazard}}
     \begin{tabular}{l l l l l} \toprule
                         & Density & Velocity & Turbulence & Pressure \\ \midrule
     \cellcolor{low}     & 0       & 0        & 0          & 0         \\
-    \cellcolor{medium}  & 2       & 1        & 0.25       & 0.0075         \\
-    \cellcolor{high}    & 4       & 2        & 0.5        & 0.015         \\
-    \cellcolor{higher}  & 6       & 3        & 0.75       & 0.0225         \\
-    \cellcolor{highest} & 8       & 4        & 1          & 0.03         \\ \bottomrule
+    \cellcolor{medium}  & 1.775   & 1        & 0.25       & 0.0075         \\
+    \cellcolor{high}    & 3.55    & 2        & 0.5        & 0.015         \\
+    \cellcolor{higher}  & 5.325   & 3        & 0.75       & 0.0225         \\
+    \cellcolor{highest} & 7.1     & 4        & 1          & 0.03         \\ \bottomrule
     \end{tabular}
-    \caption[Crowd factor scale]{Table illustrating how the four crowd factors scale their colour. The max values follows the values presented in \cref{subsec:levelsOfHazard}.}
+    \caption[Crowd factor scale]{Table illustrating how the four crowd factors scale their colour. The max values follows the values presented in \cref{subsec:levelsOfHazard}. Since no high level of turbulence was found, it was chosen that the scale of turbulence from 0 to 1 should be represented by the complete colour scale. In \cref{subsec:levelsOfHazard} values of 0.04-0.045 were considered extremely high, and have been known to cause fatalities. We chose the value of 0.03 since we wanted the red colour to appear much earlier than this. The velocity levels were chosen to range from standing still to regular running speed. One could consider changing the colour scheme of the velocity arrows to be dependant on crowd flow and fitting this to the crowd flows found in \Cref{subsec:levelsOfHazard}.}
     \label{tab:color_scale}
 \end{table}
 

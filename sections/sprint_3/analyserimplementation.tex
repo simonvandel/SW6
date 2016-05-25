@@ -54,7 +54,7 @@ In order to fully understand the need for a good implementation of the analyser,
 \end{algorithmic}
 \end{center}
 
-This algorithm has an asymptotic time complexity of $$\mathcal{O}(\text{points} \cdot \text{people})$$ which at first might seem decent. However, recall that the amount of points is related to the resolution, meaning that a point for every square meter at SmukFest, will result in 230,000 points~\cite{smukFacts}. Combining this with potentially 50,000 festival guests~\cite{smukFacts}, we reach an amount of potential calculation, for each analysis, that a regular server will struggle to evaluate within the real-time requirement S1-NR1 in \cref{tab:s2_nreqs}. We therefore want to reduce the complexity as much as possible.
+This algorithm has an asymptotic time complexity of $$\mathcal{O}(\text{points} \cdot \text{people})$$ which at first might seem decent. However, recall that the amount of points is related to the resolution, meaning that a point for every square meter at SmukFest, will result in 230,000 points~\cite{smukFacts}. Combining this with potentially 50,000 festival guests~\cite{smukFacts}, we reach an amount of potential calculation, for each analysis, that a regular server will struggle to evaluate within the near real-time requirement S1-NR1 in \cref{tab:s2_nreqs}. We therefore want to reduce the complexity as much as possible.
 
 
 \subsubsection{Reducing Complexity}
