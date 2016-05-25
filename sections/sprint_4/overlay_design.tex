@@ -6,7 +6,7 @@
 %%% Designing the different overlays
 When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{sec:s2_design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citet{wirz2012inferring}.
 
-Colour represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The colour scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed. \Cref{tab:color_scale} explains the colour scale. As different people associate different values to colours, it is difficult to find a universal colour scheme that is perfect for everyone. This colour scheme is arbitrarily chosen as ranging from blue to red.
+Colour represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The colour scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed. \Cref{tab:color_scale} explains the colour scale. As different people associate different values to colours, it is difficult to find a universal colour scheme that is perfect for everyone. This colour scheme is arbitrarily chosen to range from blue to red, but this should be reconsidered according to each specific users needs, before being put into actual use.
 
 \begin{table}[htbp]
 \definecolor{low}{HTML}{0000FF}
@@ -36,7 +36,7 @@ Since each overlay is representing its values in the same manner, it supports a 
 %%% Density, Pressure, Turbulence hexagoner
 %%%% Hvordan vi gør det
 \subsection{Density, Turbulence, and Pressure}
-The three overlays density, turbulence, and pressure have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}.
+The three overlays density, turbulence, and pressure, have their visualisation technique in common. They render an analysed point as a hexagon. The arguments for using hexagons are the same as described in \cref{s3:select_points}.
 
 
 %%% Velocity
@@ -93,6 +93,6 @@ Our first design iteration used arrows with the shape as seen in \cref{fig:first
 
 The second design iteration focused on improving the visibility of the arrowhead, and making the arrows compose better. \Cref{fig:second_arrow_design} illustrates this design. This design features arrows that are more reminiscent of the less-than and greater-than symbols. Because these arrows appear less symmetric, a break in the pattern is more noticeable. The  increased size of the arrowhead makes it easier to tell the direction.
 
-The opacity in this overlay differs from the rest. Instead of the opacity being proportional to the density, it depends on the speed of the crowd. Density is still important when considering the danger level of the crowd velocity, but since the velocity overlay can easily be combined with the density overlay, opacity can be used in a different way. First, it does not make sense to display the direction of a crowd that moves at a slow pace, because there is no dominating direction. Second, as the surface area of the arrow is small, it can be hard to differentiate different opacity values. We therefore use a binary opacity; Either an arrow is shown, or it is not. The threshold value is defined as 0.18 meters per second based on non-scientific eye-balled tests. Finding a better value would likely happen in collaboration with users.
+The opacity in this overlay differs from the rest. Instead of the opacity being proportional to the density, it depends on the speed of the crowd. Density is still important when considering the danger level of the crowd velocity, but since the velocity overlay can easily be combined with the density overlay, opacity can be used in a different way. First, it does not make sense to display the direction of a crowd that moves at a slow pace, because there is no dominating direction. Second, as the surface area of the arrow is small, it can be hard to differentiate different opacity values. We therefore use a binary opacity; Either an arrow is shown, or it is not. The threshold value is defined as 0.18 meters per second based on non-scientific eye-balling tests. Finding a better value would likely happen in collaboration with users.
 
 Since visualisation is a subjective matter, the considerations made in this section should also be viewed as such. Because of this we ought to evaluate our design in collaboration with potential users.

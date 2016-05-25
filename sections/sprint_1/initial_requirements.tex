@@ -20,7 +20,7 @@ First we consider potential use cases for the stationary users. The application 
 
 \input{tables/s1-uc1.tex}
 
-Next we consider the mobile users. They are likely stationed around the events area, and must respond to incident reports from these positions. The application should assist these users in finding a path to the incident location, avoiding congested areas thus reducing their response time. This use case is described in \cref{tab:s1-uc2}.
+Next we consider the mobile users. They are likely stationed around the event area, and must respond to incident reports from these positions. The application should assist these users in finding a path to the incident location, avoiding congested areas thus reducing their response time. This use case is described in \cref{tab:s1-uc2}.
 
 \input{tables/s1-uc2.tex}
 
@@ -53,15 +53,15 @@ Here we identify the functional requirements for our application, based on the t
 First we consider the \emph{Survey crowd} use case shown in \cref{tab:s1-uc1}. We can see that the application must feature a detailed map of the event's area, along with a representation of the state of the crowd on this map. We also see that the application must be accessible on a desktop computer. From this use case we define the following requirements:
 
 \begin{enumerate}
-    \item \emph{A detailed map of the area.} The application must feature a map of the event's area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan a route to their destination.
+    \item \emph{A detailed map of the area.} The application must feature a map of the event area. The map must be detailed enough to facilitate identification of the user's own location and the reported incident location. The map details also help users plan a route to their destination.
     \item \emph{An intuitive visual presentation of relevant crowd information.} The application must visually present any relevant crowd information in an intuitive manner. The user should be able to quickly gain an overview of the state of the crowd using this information, and use the knowledge to avoid congested areas that might increase the travel time.
     \item \emph{A graphical user interface for desktop computers.} The stationary users primarily use the system to maintain an overview of the event area from a stationary position. For this purpose the application should be running constantly during the event, and a large screen is preferable for giving a better overview. Therefore it is preferable for these users to access the application on a desktop computer.
 \end{enumerate}
 
-If we consider the \emph{Find fastest route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a smartphone \jenote{or tablet?}. Therefore we add the following requirement.
+If we consider the \emph{Find fastest route} use case in \cref{tab:s1-uc2}, we see that this use case require many of the same features as the use case in \cref{tab:s1-uc1}. However, as the mobile users are moving around the event area, they must be able to access the application from any location from a mobile device. Therefore we add the following requirement.
 
 \begin{enumerate}[resume]
-    \item \emph{A graphical user interface for smartphones.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the user's smartphone \jenote{or tablet?}.
+    \item \emph{A graphical user interface for mobile devices.} As the user is mobile and moving around the area, the service provided by the application must be available to the user at any given location, accessible through the user's mobile device.
 
 \end{enumerate}
 
@@ -78,7 +78,7 @@ These requirements are all essential to the application, and will as such be pri
 		S1-FR2 & An intuitive visual presentation of relevant crowd information & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
 		S1-FR3 & A graphical user interface for desktop computers & Must have \\
-		S1-FR4 & A graphical user interface for smartphones & Must have \\
+		S1-FR4 & A graphical user interface for mobile devices & Must have \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Functional requirements for the first sprint, prioritised using the MoSCoW method.}

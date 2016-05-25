@@ -1,21 +1,21 @@
 \section{Design} \label{sec:s2_design}
-This section covers the main design decisions made during this sprint, which was choosing the architecture for the prototype, as well as decisions regarding the user interface design.
+This section covers the main design decisions made during this sprint. It first covers the choice of the architecture for the prototype, and then decisions regarding the user interface design.
 
 \subsection{Web Application}
-During the user testing of the prototype in the first sprint it was confirmed that the application should be able to run on multiple platforms, which is also reflected in the requirement specification. Therefore we consider two different approaches to meet this requirement. The first approach would consist of developing a separate application for each of the platforms. This would necessarily include applications for major operating systems for both desktop computers and smartphones. The other approach is developing a web application. By doing this, any platform with a common browser will be able to use the application. This is advantageous as it means only one application has to be developed. Therefore we continue the project on the basis of a web application. 
+During the user testing of the prototype in the first sprint it was confirmed that the application should be able to run on multiple platforms, which is also reflected in the requirement specification.\jenote{Måske bare referer til kravene} Therefore we consider two different approaches to meet this requirement. The first approach would consist of developing a separate application for each of the platforms. This would necessarily include applications for major operating systems for both desktop computers and mobile devices. The other approach is developing a web application. By doing this, any platform with a common browser will be able to use the application. This is advantageous as it means only one application has to be developed. Therefore we continue the project on the basis of a web application.\jenote{er vi efterhånden ikke kommet frem til det her en del gange?}
 
 \subsection{Architecture} \label{sec:s2_architecture}
 In \cref{sec:s1_prototype} we assumed that the system would be based on a client-server architecture, due to the need of supporting many users on different platforms simultaneously. This was confirmed during the meetings held with potential users at the end of the first sprint. As a concrete architecture was not crucial to the prototype developed during the first sprint, it was not formalised at that point. In the second sprint the architecture started to have a bigger impact on the development of our application, and as such we here present our considerations on the architecture.
 
-The main reason for using this architecture is to make the system more adaptable, which is enforced because of the separation between the functionality, the model layer and the representation layer.
+The main reason for using the following architecture is to make the system more adaptable, which is enforced because of the separation between the functionality, the model layer and the representation layer. This also supports requirements S1-NR3 and S1-NR4 in \cref{tab:s2_nreqs}, of making the application maintainable and extensible.
 
-We use the model-view-controller (MVC)~\cite{website:MVC} architectural pattern for the web application, as this pattern supports low-coupling and high cohesion. The aSTEP project follows a client-server architecture, where the aSTEP core represents the server, and applications using the core represents different clients. As our application also follows a client-server architecture, the HotMap server will act as a middle-end between the aSTEP core and the actual users. The architecture is shown in \cref{fig:architecture_diagram}.
+We use the model-view-controller (MVC architectural pattern for the web application, as this pattern supports low-coupling and high cohesion)~\cite{website:MVC}. The aSTEP platform follows a client-server architecture, where the platform itself represents the server, and applications using the platform represents clients. As our application also follows a client-server architecture, the HotMap server will act as a middle-end between the aSTEP platform and the actual users. The architecture is shown in \cref{fig:architecture_diagram}.
 
 \input{diagrams/architecture_diagram.tex}
-This architecture describes how a request from a user is handled by the HotMap server. In this architecture the controller component serves as a request handler. The controller also handles computations such as analyzing position data to determine crowd factors. The model components encapsulates information in classes for passing information between views and the controller easily. Information computed by the controller can either result in a view sent to the user, or data from the controller can be converted to JSON, and then update the data displayed on the user's current view. 
+This architecture describes how a request from a user is handled by the HotMap server. In this architecture the controller component serves as a request handler. The controller also handles computations such as analysing position data to determine crowd factors. The model components encapsulates information in classes for passing information between views and the controller easily. Information computed by the controller can either result in a view sent to the user, or data from the controller can be converted to JSON, and then update the data displayed on the user's current view. \jenote{You are going to hate me.. But i think that this is not descriptive and detailed enough, compared to what we were actually thinking at the time. At least not as far as our own application goes. We had ideas about the caches, misses and so on. If it is written here it will also be a let easier to reference later, and use as argumentation}
 
 
-The following enumeration describes the purpose of each transaction shown on \cref{fig:architecture_diagram} in the order they are evaluated.
+The following list describes the purpose of each transaction shown on \cref{fig:architecture_diagram} in the order they are evaluated.
 
 \begin{enumerate}
     \item \textbf{user request:} The user requests a page at the HotMap server.
@@ -27,25 +27,21 @@ The following enumeration describes the purpose of each transaction shown on \cr
     \item \textbf{user respond:} This transaction handles sending data to the user. It can either be a new view, or data to display on the current view.
 \end{enumerate}
 
-
-In summary, this architecture was chosen to keep components on the server adaptable. This MVC architecture pattern is also designed in order to display the models in a suitable form for interaction by web browsers. This is achieved because every model can be converted into JSON, which is a common data format for communication with browsers.
-
 \subsection{Graphical User Interface Design} \label{sec:s2_gui}
 
 During this sprint we designed a graphical user interface (GUI) for our web application. We based this design on the requirements we had from the meeting with the SmukFest personnel. The focus of the design was to maximise available information without causing information overflow, as well as making the application responsive, such that it automatically adapts to multiple screen sizes. 
 
-The result is a map centric design, meaning that the map was considered the focus of the application, making it visible as much as possible. The map manipulation options, such as overlays and zoom functions, were put on top of the map. Additional information, such as an employee information page, is accessible through a menu bar on the desktop or on a slide-in menu on a phone or tablet screen, in accordance with the responsive design goal. A search bar, which searches through points-of-interest, was kept visible at all times on all devices, as this was a wanted feature by the SmukFest personnel.
+The result is a map centric design, which can be seen in \cref{desktopscreenshot,phonescreenshot}, meaning that the map was considered the focus of the application, making it as visible as possible. The map manipulation options, such as overlays and zoom functions, were put on top of the map. Additional information, such as an employee information page, is accessible through a menu bar on a desktop computer, or on a slide-in menu on a phone or tablet screen, in accordance with the responsive design goal. A search bar, shown in \cref{desktopscreenshot,phonescreenshot} with the text \enquote{søg}, which searches through points of interest, is visible at all times on all devices. This was done in accordance with a feature wanted by the Alarm HS, as seen in requirement S2-FR7 in \cref{tab:s2_req}.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
 \includegraphics[width=\textwidth]{gui_desktop.png}
-\caption{Screenshot of the application on a desktop computer}
+\caption{Screenshot of the application on a desktop computer.}
 \label{desktopscreenshot}
 \end{figure}
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
 \includegraphics[width=\textwidth/3]{gui_phone.png}
-\caption{Screenshot of the application on a smartphone}
+\caption{Screenshot of the application on a smartphone.}
 \label{phonescreenshot}
 \end{figure}

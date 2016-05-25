@@ -1,11 +1,10 @@
 \section{Requirements} \label{sec:s2_reqs}
-In this section we revise the initial requirements identified in \cref{sec:s1_requirements}, based on additional knowledge acquired during the first sprint, and feedback received on our system. The meeting with Alarm HS confirmed the two types of users identified in \cref{ss:s1_users}, but presented several additional use cases.
+In this section we revise the initial requirements identified in \cref{sec:s1_requirements}, based on additional knowledge acquired during the first sprint, and feedback received on our application. The meeting with Alarm HS confirmed the two types of users identified in \cref{ss:s1_users}, but presented several additional use cases.
 
 \subsection{Additional Use Cases} \label{ss:s2_uc}
-Here we describe the additional use cases identified during the meeting with Alarm HS. In addition to the assumed use cases described in \cref{ss:s1_uc}, seven additional use cases were identified from the meeting. These additional requirements are described in \cref{tab:s2-uc1,tab:s2-uc2,tab:s2-uc3,tab:s2-uc4,tab:s2-uc5,tab:s2-uc6,tab:s2-uc7}.
+Here we describe the additional use cases identified during the meeting with Alarm HS. In addition to the assumed use cases described in \cref{ss:s1_uc}, seven additional use cases were identified from the meeting. These additional use cases are described in \cref{tab:s2-uc1,tab:s2-uc2,tab:s2-uc3,tab:s2-uc4,tab:s2-uc5,tab:s2-uc6,tab:s2-uc7}.
 
 \input{tables/s2-usecases.tex}
-
 
 \subsection{Revised Requirements} \label{ss:s2_update_reqs}
 In \cref{sec:related_work} we identified density, velocity, turbulence, and pressure as important crowd factors for determining problematic crowd scenarios. To reflect this in the requirement specification, we replace requirement S1-FR2: \enquote{\emph{An intuitive visual presentation of relevant crowd information}}, shown in \cref{tab:s1_req}, with the following four requirements, all prioritised as must have:
@@ -47,7 +46,7 @@ Applying these changes gives the functional requirement specification shown in \
 		S2-FR4 & A map overlay that intuitively visualises crowd pressure & Must have \\
 		S1-FR3 & A graphical user interface for desktop computers & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
-		S1-FR4 & A graphical user interface for smartphones & Must have \\
+		S1-FR4 & A graphical user interface for mobile devices & Must have \\
 		S2-FR5 & Layers of details that can be toggled on and off & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
 		S2-FR6 & User authentication & Must have \\
@@ -81,11 +80,11 @@ Adding this to the existing non-functional requirements from \cref{tab:s1_nreqs}
 		\rowcolor[HTML]{EFEFEF} 
 		S1-NR1 & The visualisation must be updated in real-time & High \\
 		S1-NR2 & Location data must be acquired using the aSTEP core & High \\
-		\rowcolor[HTML]{EFEFEF} 
-		S1-NR3 & The application must be maintainable & Medium \\
-		S1-NR4 & The application must be extensible & Medium \\
 		\rowcolor[HTML]{EFEFEF}
 		S2-NR1 & Preservation of privacy & High \\
+		S1-NR3 & The application must be maintainable & Medium \\
+		\rowcolor[HTML]{EFEFEF} 
+		S1-NR4 & The application must be extensible & Medium \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Non-functional requirements for the second sprint.}

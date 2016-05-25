@@ -1,14 +1,16 @@
 \section{Meetings}
 
-In order to validate the prototype we again arranged meetings with potential users, to get their feedback on the system. Two meetings were arranged during this sprint. The meeting with SmukFest was held at their premises in Skanderborg, and the meeting with Alarm HS was held on Skype. 
+In order to validate the prototype we again arranged meetings with potential users, to get their feedback on the system. Two meetings were arranged during this sprint.
 
-\subsection{Meeting With SmukFest}
+\subsection{Meeting With SmukFest Security Officer}
 
-Through our contact with Alarm HS we arranged a meeting with Søren Eskildsen, who is head of security for SmukFest. The point of the meeting was to establish whether the system could have a use at the organisational level of the festival. Søren Eskildsen is in charge of crowd management, meaning that it is his task to make sure that the festival is safe by predicting and avoiding dangerous situations. Søren's main task is to schedule the concerts in a way such that dangerous situations do not arise. If dangerous situations do occur, his job also includes solving them as quickly and safely as possible.
+Through our contact with Alarm HS we arranged a meeting with Søren Eskildsen, who is head of security for SmukFest. The point of the meeting was to establish whether the system could have a use at the organisational level of the festival. Søren Eskildsen is in charge of crowd management, meaning that it is his task to make sure that the festival is safe by predicting and avoiding dangerous situations. Søren's main responsibility is to ensure that the concert schedule and the layout of the festival grounds are structured in a way such that dangerous situations do not arise. If dangerous situations do occur, his job also includes solving them as quickly and safely as possible.
 
-Currently SmukFest uses analysis tools for crowd management, such as the DIM-ICE model, and the extensive literature there exists on the subject \kanote{insert reference}\cite{}. Søren employs a team of experts together with these tools to asses possible problematic situations and plan the schedules for the guards accordingly.
+Since the meeting with Søren included sensitive information regarding the festival we were asked not to share specifics of the interview. In order to accommodate his request, we have chosen not to include a summary of the interview.
 
-In addition to the security personnel employed by the festival, Søren also has information screens, emergency exits, and the ability to close off areas in his toolkit. They currently do not use any software to help in the analysis phase of crowd management, which is during the months leading up the start of the festival. Søren expressed great interest for a software tool, that is able to simulate the flow of people and predict where potential congestion could happen, based on three types of information:
+Currently SmukFest uses analysis tools for crowd management, such as the DIM-ICE model, and the extensive literature there exists on the subject~\cite{dimice}. Søren employs a team of experts together with these tools to predict possible problematic situations and plan the schedules for the guards accordingly.
+
+In addition to the security personnel employed by the festival, Søren also has information screens, emergency exits, and the ability to close off areas in his toolkit. They currently do not use any software to help in the analysis phase of crowd management, which is done during the months leading up the start of the festival. Søren expressed great interest for a software tool, that is able to simulate the flow of people and predict where potential congestion could happen, based on three types of information:
 
 \begin{itemize}
     \item The area with fences, buildings, paths and similar.
@@ -21,12 +23,10 @@ The system should be able to update its simulation based on changes in this info
 
 The prototype was presented to Søren. He did not express any need for knowing the general distribution of people on the festival, as there are currently only a few congestion areas on the festival. Only these points needs to be surveilled in order to get the real-time picture needed for crowd management. Other points, such as density in front of stages and so on, are not really that important for crowd management at SmukFest since these rarely pose any real safety threats. The big problems arise from the flow of people. When big groups of people travel through narrow openings, congestion can occur, which leads to dangerous situations.
 
-Currently they are developing systems, both via cameras and Wi-Fi triangulation, to monitor these areas. A general Wi-Fi triangulation system, displaying density across the whole festival, is therefore not needed. Søren expressed that because he did not deal with the daily organisation of the festival our prototype was not as relevant for him. Such a system was more relevant for the personnel in Alarm HS.
-
+Currently they are developing systems, both via cameras and Wi-Fi triangulation, to monitor these areas. A general Wi-Fi triangulation system, displaying density across the whole festival, is therefore not needed. Søren expressed that because he did not deal with the daily organisation of the festival our prototype was not as relevant for him.
 
 \subsection{Meeting With Alarm HS}
-
-In the previous meeting with Alarm HS, they agreed to provide feedback on the system during development. Between the first meeting and this meeting, the following changes have been made to the system.
+In the previous meeting with Alarm HS, they agreed to provide feedback on the system during development. Since the previous meeting, the following changes have been made to the system.
 
 \begin{itemize}
     \item More realistic crowds that move in predetermined patterns.

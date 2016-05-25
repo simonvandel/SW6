@@ -2,7 +2,7 @@
 During the user test with Alarm HS, several new use cases were identified. For the application to support these new use cases, additional requirements will be added to the previous requirements from \cref{sec:s2_reqs}.
 
 \subsection{Revised Users} \label{ss:s3_users}
-Along with the additional use cases, we also identified new users for the system. These users include guest users, medical users, and guard users.
+Along with the additional use cases, we also identified new users for the application. These users include guest users, medical users, and guard users.
 
 The guest users are briefly described in \cref{tab:guest_user}. While guest users share some characteristics with the mobile users described in \cref{tab:mob_user}, they are specified as a separate user, as they should only have very limited access to the features of the system.
 
@@ -19,14 +19,14 @@ In addition to the previously identified use cases, during the user test some ad
 Based on the new use cases, and the general feedback from the user test, several additional functional requirements have been identified, which must be added to the requirements previously identified in \cref{ss:s2_update_reqs}. The following requirements will be added:
 
 \begin{enumerate}
-    \item \emph{A map legend.} In order to make the crowd information overlays more intuitive, a map legend explaining the overlays must be added. This is very important for a usable system, and will be prioritised as must have.
+    \item \emph{A map legend.} In order to make the crowd information overlays more intuitive, a map legend explaining the overlays must be added. This is important for the usability of the system, and will be prioritised as must have.
     \item \emph{Multiple access levels.} The system must have multiple access levels, such that information and features can be targeted at the relevant users. This is important for the system, and is prioritised as must have.
-    \item \emph{Adding of markers at specific locations.} These markers could be used to contain information of incidents, and should be visible to all relevant users. This is prioritised as should have.
-    \item \emph{A help feature.} The application should have a help feature that explains the application's functionalities. This is prioritised as should have.
+    \item \emph{Placing of markers at specific locations.} These markers could be used to contain information of incidents, and should be visible to all relevant users. This is prioritised as should have.
+    \item \emph{A help feature.} The application should have a help feature that explains the application's functionality. This is prioritised as should have.
     \item \emph{Send notification to other users.} It could be possible for some users with a sufficient access level to send notification to other users. This is prioritised as could have.
-    \item \emph{A menu with searchable contact information.} A menu containing the contact information of the festival employees. It should be possible to search through the contacts. This is prioritised as won't have, as it is not important for the usability of the application.
+    \item \emph{Visualisation of historical data.} It could be possible to request historical data, and have this data visualised on the map. This would allow users to analyse prior incidents, possibly improving their ability to handle similar future situations. The real-time representation is the primary focus in the application, so this requirement is prioritised as could have.
+    \item \emph{A menu with searchable contact information.} A menu containing the contact information of the festival employees, making it possible to search through the contacts. This is prioritised as won't have, as it is not important for the usability of the application.
     \item \emph{Reporting of incidents by festival guests.} It could be possible for festival guests to access the application, and report an incident on the map. This requirement is not in the scope of the project, and is prioritised as won't have.
-    \item \emph{Visualisation of historical data.} It could be possible to request historical data, and have this data visualised on the map. This would allow users to analyse prior incidents, possibly improving their ability to handle similar future situations. The real-time representation is the primary focus in the application, so this requirement is prioritised as won't have.
 \end{enumerate}
 
 Updating the previous requirements specification from \cref{tab:s2_req} gives us the requirement specification shown in \cref{tab:s3_req}.
@@ -47,7 +47,7 @@ Updating the previous requirements specification from \cref{tab:s2_req} gives us
 		S2-FR4 & A map overlay that intuitively visualises crowd pressure & Must have \\
 		S1-FR3 & A graphical user interface for desktop computers & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
-		S1-FR4 & A graphical user interface for smartphones & Must have \\
+		S1-FR4 & A graphical user interface for mobile devices & Must have \\
 		S2-FR5 & Layers of details that can be toggled on and off & Must have \\
 		\rowcolor[HTML]{EFEFEF} 
 		S2-FR6 & User authentication & Must have \\
@@ -56,7 +56,7 @@ Updating the previous requirements specification from \cref{tab:s2_req} gives us
 		S3-FR2 & Multiple access levels & Must have \\
 		S2-FR7 & A search function & Should have \\
 		\rowcolor[HTML]{EFEFEF}
-		S3-FR3 & Adding of markers at specific locations & Should have \\
+		S3-FR3 & Placing of markers at specific locations & Should have \\
 		S3-FR4 & A help feature & Should have \\
 		\rowcolor[HTML]{EFEFEF} 
 		S2-FR8 & Navigation assistance & Could have \\
@@ -65,11 +65,11 @@ Updating the previous requirements specification from \cref{tab:s2_req} gives us
 		S2-FR10 & A visualisation of available personnel & Could have \\
 		S3-FR5 & Send notification to other users & Could have \\
 		\rowcolor[HTML]{EFEFEF}
+		S3-FR6 & Visualisation of historical data & Could have \\
 		S2-FR11 & Projection onto camera images & Won't have \\
-		S3-FR6 & A menu with searchable contact information & Won't have \\
 		\rowcolor[HTML]{EFEFEF}
-		S3-FR7 & Reporting of incidents by festival guests & Won't have \\
-		S3-FR8 & Visualisation of historical data & Won't have \\
+		S3-FR7 & A menu with searchable contact information & Won't have \\
+		S3-FR8 & Reporting of incidents by festival guests & Won't have \\
 		\bottomrule
 	\end{tabularx}
 	\caption{Functional requirements for the third sprint.}

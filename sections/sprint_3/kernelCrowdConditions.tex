@@ -1,28 +1,29 @@
 \subsection{Estimating Crowd Factors}
 \label{subsec:estimatingCrowdFactors}
-Using what we now know about kernel density estimation, we can now expand this to the four crowd factors presented in \cref{sec:related_work}. The calculations for these crowd factors have mainly been developed by \citet{wirz2012inferring}, with only slight modifications from us. The main difference between the calculations done in their paper and this project is for density and in extension of that pressure, which we will explain further.
+Using what we now know about kernel density estimation, we can now expand this to the four crowd factors presented in \cref{sec:related_work}. The calculations for these crowd factors have mainly been developed by \citet{wirz2012inferring}, with modifications from us. The main difference between the calculations done in their paper and this project is for density and in extension of that pressure, which we will explain further.
 
 \subsubsection{Density}
-When calculating the crowd densities, using kernel density estimation, we insert the \enquote{intensity} of a person into the formula. The intensity, in this case, is the amount which a given person contributes to the density, which is his physical size. However, since we have no way of deducing a persons size based on his position data, we assume that every person is the same size, which would be \enquote{1 person}. This gives us the formula:
+When calculating the crowd densities, using kernel density estimation, we insert the \enquote{intensity} of a person into the formula \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}. The intensity, in this case, is the amount which a given person contributes to the density, which is their physical size. However, since we have no way of deducing a person's size based on their position data, we assume that every person is the same size, which would be \enquote{1 person}. This gives us the formula:
 
 \begin{equation}
 D_x = \frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N 1 \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
-The density calculation in this project differs from the one done by \citet{wirz2012inferring} in the one used here being relative and the one used by \citet{wirz2012inferring} is probabilistic. This is in our project done since we want to be able compare the densities found in our system to results found in research for dangerous and hazardous levels, explained in \cref{subsec:levelsOfHazard}.
+The density calculation in this project differs from the one done by \citet{wirz2012inferring}, since we use a relative form rather than a probabilistic one. This is done in our project, because we want to be able compare the densities found in our system to results found in research for dangerous and hazardous levels, explained in \cref{subsec:levelsOfHazard}.
 
 \subsubsection{Velocity}
-The local crowd velocity is essentially calculated as in \citet{wirz2012inferring}. Here we use each persons velocity, $\vv{v_i}$, as the intensity of the kernel density estimation. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. We diverge from \citet{wirz2012inferring} by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) using either a relative or probabilistic kernel density estimation will both give a relative local crowd velocity. This is because we divide with the kernel density sum.
+The local crowd velocity is essentially calculated as \citet{wirz2012inferring} do. Here we use each person's velocity $\vv{v_i}$, as the intensity of the kernel density estimation from \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}. Since we do not want the summed velocity of all people but rather the mean velocity, we divide by the kernel density sum. Again we diverge from \citet{wirz2012inferring} by using a relative kernel function instead of a probabilistic. Assuming that the velocity is on relative form (meters per second) using either a relative or probabilistic kernel density estimation will both give a relative local crowd velocity. This is because we divide with the kernel density sum, shown in \cref{localvelocity}.
 
 \begin{equation}
-\vv{V_x} = \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
+\label{localvelocity}
+\begin{split}
+\vv{V_x} &= \frac{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)} \\
+%
+%
+\vv{V_x} &= \frac{\sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
+\end{split}
 \end{equation}
 
-The function can be reduced to:
-
-\begin{equation}
-\vv{V_x} = \frac{\sum_{i=1}^N \vv{v_i} \cdot \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}{\sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\{|u| \leq 1\} }\right)}
-\end{equation}
 
 \subsubsection{Turbulence}\label{subsub:turbu}
 Turbulence is calculated from the heading direction rather than the velocity, as explained in \cref{sub:crowdFactorTurbulence}. In order to do this, we require a way to represent a direction. Following the method of \citet{localTrendStatistics}, we choose to represent direction as an angle. However the cyclic nature of angles provides an obstacle when we wish to find the average direction. This problem is illustrated in \cref{fig:radiansHeadingdirection}.
@@ -76,9 +77,9 @@ Turbulence is calculated from the heading direction rather than the velocity, as
 \label{fig:radiansHeadingdirection}
 \end{figure}
 
-If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. This also results in the magnitude of the resulting complex number to illustrate the variance in the heading directions of the people with a values between 0 and 1. This is what we later in this section will use to calculate turbulence. 
+If we were to summarise the 8 heading directions marked with black dots, and find the mean direction, we would get $\pi$ instead of the desired direction of $0$. This problem was introduced and solved by \citet{localTrendStatistics}. Their solution is to denote the angle as a complex number with magnitude $1$. This would overcome the problem of the cyclic nature of angles, and allow us to find the desired mean direction. This also results in the magnitude of the resulting complex number illustrating the variance in the heading directions with a value between 0 and 1. We use later in this section to calculate turbulence.
 
-While this could have also been done with a two dimensional vector, we chose to keep with the complex numbers of the original solution, partly in order to better differentiate from velocity and also since a vector is often associated to not only direction but also speed. This also makes this project easier comparable to the research on which it build.
+While this could have also been done with a two dimensional vector, we chose to keep using complex numbers like the original solution, partly in order to better differentiate from velocity and also since a vector is often associated with not only direction but also speed.
 
 Using this solution the mean direction would be found with this formula: $$\frac{\sum_{i=1}^{N} z_i}{N}$$ where $z_i$ is the heading direction for person $i$ and $N$ is the total amount of people.
 
@@ -86,7 +87,7 @@ In order to apply this to find the turbulence, we need to adjust the heading dir
 
 Consider an area where everybody is standing still. This should be considered the opposite of a turbulent area, suggesting that a still standing person should contribute to less turbulence in an area.
 
-However, an area where everybody is moving in a uniform direction, the introduction of still standing people would surely increase the turbulence of that area.
+However, in an area where everybody is moving in a uniform direction, the introduction of still standing people would surely increase the turbulence of that area.
 
 These two conflicting observations makes it impossible to perfectly evaluate a still standing person's influence on turbulence, without considering the context. Therefore we choose to remove any still standing people from our turbulence calculations, on the assumption that the remaining people's heading direction will adequately represent the turbulence levels. This does leave us vulnerable to scenarios where everybody is standing still, except for two people, who happen to be moving in opposite  directions. However considering the low possibility of this situation persisting across multiple analysis runs, we accept this vulnerability.
 
@@ -102,7 +103,7 @@ T_x &= 1 - \left|\frac{\sum_{i=1}^{N'} z_i \cdot \left(1-\left(\frac{d_{x,i}}{h}
 \end{split}
 \end{equation}
 
-The formula works by summarising the individual heading directions and normalising them, in order to find the average heading direction. With each heading direction having a magnitude of $1$, the normalised summation will have a magnitude between $0$ and $1$ depending on the uniformity, with $1$ being a completely uniform heading direction. We then subtract this from $1$, such that a high uniformity will result in a low turbulence level.
+The formula works by summarising the individual heading directions inserted as intensities in the formula \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}, in order to find the average heading direction. With each heading direction having a magnitude of $1$, the normalised summation will have a magnitude between $0$ and $1$ depending on the uniformity, with $1$ being a completely uniform heading direction. We then subtract this from $1$, such that a high uniformity will result in a low turbulence level.
 
 
 \subsubsection{Pressure}
@@ -112,7 +113,7 @@ The factor was originally introduced by \citet{empircalstudy} as
 D_x \cdot \text{var}(\vv{V_x})
 \end{equation}
 
-where $D_x$ is the local crowd density and $\text{var}(\vv{V_x})$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the variance introduced by \citet{wirz2012inferring}, as seen in \cref{eq:pressure_final}.
+where $D_x$ is the local crowd density and $\text{var}(\vv{V_x})$ is the variance in the local crowd velocity. We use the density found in \cref{sub:kernelDensityEstimation} and multiply it with the formula in \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight} where the local crowd velocity variance, introduced by \citet{wirz2012inferring}, as the intensity variable. We normalise this by dividing with the kernel density estimation as seen in \cref{eq:pressure_final}.
 
 \begin{equation}
 \label{eq:pressure_final}
@@ -124,6 +125,6 @@ P_x &= D_x \cdot \frac{\sum_{i=1}^{N} \left|\vv{v_i} - \vv{V_x}\right|^2 \cdot \
 \end{split}
 \end{equation}
 
-The main difference between this and the solution from Franke et al. is that our density is relative and not probabilistic. This combined with the fact that the velocity variance is also relative means that the result will also be relative rather than probabilistic. As explained in \cref{subsec:crowdConditionsPressure} \citet{empircalstudy} did not only introduce the factor, but also recorded data and pressure in relative values from the incident during the Hajj on the 12th of January 2006\cite{website:Wikipedia-Hajj}. This means that we can compare our results for local crowd pressure with the limits and high pressure found from real world incidents, found in \cref{subsec:levelsOfHazard}.
+The main difference between \cref{eq:pressure_final} and the solution from \citet{wirz2012inferring} is that our density is relative and not probabilistic. This combined with the fact that the velocity variance is also relative means that the result will also be relative rather than probabilistic. As explained in \cref{subsec:crowdConditionsPressure}, \citet{empircalstudy} did not only introduce the factor, but also recorded data and pressure in relative values from the incident during the Hajj on the 12th of January 2006~\cite{website:Wikipedia-Hajj}. This means that we can compare our results for local crowd pressure with the limits and high pressure found from real world incidents, introduced in \cref{subsec:levelsOfHazard}.
 
 %this will be used later in \jenote{referer til det sted hvor vi sætter gradienten for pres og potentiel warning layer}.

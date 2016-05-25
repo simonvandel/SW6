@@ -1,9 +1,9 @@
 \subsection{Kernel Density Estimation}
 \label{sub:kernelDensityEstimation}
 
-Finding a local crowd density can be a simple task. Simply define the local area, and count the number of people inside that areas, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and your bin-width, which is the size of your grid cells, directly influences the end result~\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
+Finding a local crowd density can be a simple task. Simply define the local area, count the number of people inside that area, and divide it by the size of the local area. This process could then be repeated across multiple local areas, to give us the the local densities across the entire map. If the local areas are defined in a grid, we call this a histogram. While histograms provide a simple and fast way of estimating crowd densities, there are considerable drawbacks. The placement of the grid and the chosen bin-width, which is the size of your grid cells, directly influences the end result~\cite{histogramDrawbacks}. This can give a skewed overview, and since we wish to avoid this, we need another approach.
 
-Another method is to use kernel density estimation. With this approach we estimate the density continuously across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any the point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
+Another method is to use kernel density estimation. With this approach we estimate the density continuously across the map. This is done by considering the density of any given point to be influenced according to the proximity of observations. We define this influence through a kernel function, which gives a probability distribution for each observation. By modifying the kernel function used in this approach it can be used to estimate the density of any point on the map rather than probabilities of the observations. While this approach overcomes the drawbacks of histograms, it is considerably more complicated.
 
 \subsubsection{Finding Local Crowd Densities}
 There exists multiple kernel functions that can be used in the kernel density estimation. The most commonly used is the Gaussian distribution, also known as the normal distribution, given by the function in \cref{eq:1dGaussianDistribution}. The function, given the distance $d$ from an observation to the centre of the kernel, returns the probability of the observation. An observation in this context, is a sample drawn from the distribution. The Gaussian distribution is commonly used as a kernel function because it arises naturally, both in theory and in experiments.
@@ -75,7 +75,7 @@ Here $\mathbbm{1}_{\{|d| \leq 1\}}$ denotes the indicator function, meaning that
 \caption{Kernel function plots.}
 \end{figure}
 
-For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance~\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which enables better asymptotic complexity. There are many other bell curve kernel functions that hold this property which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
+For a function to be a kernel function it must have an area of 1 beneath it and be symmetric around the y-axis. The actual choice of kernel function is of minor importance~\cite{masteropgave}, as long as it is a bell curve kernel function. The area of the Gaussian and Epanechnikov functions can be seen plotted in \cref{fig:1dGaussianEpanechnikovAreaPlot}. While both functions are bell curve kernel functions, Epanechnikov was chosen because of the indicator function, which enables better performance. There are many other bell curve kernel functions that hold this property which could have been considered. However since the choice of the kernel function is of minor importance, we did not pursue other options.
 
 \begin{figure}[htbp]
 \begin{subfigure}[c]{.49\linewidth}
@@ -139,10 +139,10 @@ The last kernel density type is probabilistic. This is the absolute densities di
 
 \subsubsection{Bandwidth}
 
-Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the the point. For our chosen kernel function, Epanechnikov, this ranges between between -1 and 1. 
+Kernel functions denote the probability of finding an observation at certain distances from the kernel center. In our case, the probability denotes how much an observed person weighs for the the point. For our chosen Epanechnikov kernel function this ranges between between -1 and 1. 
 This constant range presents a problem, since we do not know how far away observations affect the density. Therefore we want a way to adjust the limit marking which observations should be considered in the estimation variable.
 
-This is done using a bandwidth variable. The Epanechnikov function with the bandwidth variable, $h$, can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel function.
+In kernel density estimation this is achieved through the use of a bandwidth variable. The Epanechnikov function with the bandwidth variable $h$, can be seen in \cref{eq:1dEpanechnikovDistributionWithH} and the plot of the function with a bandwidth of 5 is shown in \cref{fig:1dEpanechnikovDistributionWithHPlot}. The area of this function is still 1 and therefore holds the property of a kernel function.
 
 \begin{equation}
 \label{eq:1dEpanechnikovDistributionWithH}
@@ -184,13 +184,13 @@ So far we have only been looking at the distribution in one dimension. In our do
 \begin{figure}[htbp]
 \centering
     \includegraphics[width=0.5\textwidth]{3dEpanechnikov.eps}
-    \caption[Epanechnikov in 2 dimensions]{This illustration represents the distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weights.}
+    \caption[Epanechnikov in 2 dimensions]{This illustration represents the Epanechnikov distribution over a 2 dimensional space, where the third dimension represents how much the 2 dimensional points weighs.}
     \label{fig:3dEpanechnikov}
 \end{figure}
 
 \subsubsection{Relative Density Form}
 
-As explained earlier, the function is currently on a probability form, and not on the desired relative form. In order to modify it, we first transform it to an absolute form. Since we do not know how much each observation weighs we want every observation to have a variable to identify this. We call this the intensity of the observation, and is multiplied on the function, and will be further introduced at the end of the section. The mean value of the function without the intensity should be 1. In order to \enquote{raise} the function so the mean value is 1, we can divide by the volume beneath the plane and multiply with the volume beneath the kernel function with a mean value of 1. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to centre is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
+As explained earlier, the function is currently on a probability form, and not on the desired relative form. In order to modify it, we first transform it to an absolute form. Since we do not know how much each observation weighs we want every observation to have a variable to identify this. We call this the intensity of the observation, and this is multiplied with the function. This will be further explained in \cref{subsec:estimatingCrowdFactors}. The mean value of the function without the intensity should be 1. We can \enquote{raise} the function so the mean value becomes 1. This is done by dividing the function by the volume of the space between the plane of the function and the plane where weights equal $0$. Then we multiply this with the volume beneath the kernel function with a mean value of 1, in order to get the desired result. We start by calculating the current volume beneath the plane. This can be done through a triple integration on the function using a cylindrical coordinate set. As defined previously, the distance from point to centre is the radius. The integration is done as shown in \cref{eq:volumeUnder3dEpanechnikov}.
 
 \begin{equation}
 \label{eq:volumeUnder3dEpanechnikov}
@@ -206,7 +206,7 @@ We now need to find the desired volume. Since we want a mean height to be 1, the
 \frac{\frac{3}{4 h} \left(1 - \left(\frac{d}{h}\right)^2\right) \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}}{\frac{3\pi h}{8}} \cdot \left(h^2 \cdot \pi\right)
 \end{equation}
 
-We here return to denoting the distance to the observation by $d$. To go from this absolute form to a relative form, we divide by the area absolute form spans over, which is $h^2 \cdot \pi$. The relative density can then be found as shown by the reduction in \cref{eq:relativeDensitiesEpanechnikov}.
+We here return to denoting the distance to the observation by $d$. To go from this absolute form to a relative form, we divide by the area that the absolute form spans over, which is $h^2 \cdot \pi$. The relative density can then be found as shown by the reduction in \cref{eq:relativeDensitiesEpanechnikov}.
 
 \begin{equation}
 \label{eq:relativeDensitiesEpanechnikov}
@@ -217,16 +217,16 @@ We here return to denoting the distance to the observation by $d$. To go from th
 \end{split}
 \end{equation}
 
-Finally, we sum the relative values for all people, in order to find the estimated kernel density.
+Finally, we sum the relative values for all people, in order to find the estimated kernel density, shown in \cref{eq:sumRelativeDensitiesEpanechnikov}.
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikov}
 \frac{2}{\pi \cdot h^2} \cdot \sum_{i=1}^N \left(1-\left(\frac{d_{x,i}}{h}\right)^2 \cdot \mathbbm{1}_{\left\{\left|\left(\frac{d}{h}\right)\right| \leq 1\right\}}\right)
 \end{equation}
 
-Here $d_{x,i}$ is the distance from the desired point $x$ to the person $i$, and $N$ is the total amount of people. Since we have used a kernel function with an indicator function, in practice we only have to sum up densities for people within this of the point. This, as already mentioned, gives us some advantageous properties when we later in this chapter have to implement this function.
+Here $d_{x,i}$ is the distance from the desired point $x$ to the person $i$, and $N$ is the total amount of people. Since we have used a kernel function with an indicator function, in practice we only have to sum up densities for people within the bandwidth distance of the point. This, as already mentioned, gives us some advantageous properties when we later in this chapter have to implement this function.
 
-We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by introducing an intensity variable $I$. See \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}. This variable will be utilised later in this section.
+We can add some flexibility to \cref{eq:sumRelativeDensitiesEpanechnikov} by introducing an intensity variable $I$, see  \cref{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}. This variable will be utilised later in this section.
 
 \begin{equation}
 \label{eq:sumRelativeDensitiesEpanechnikovWithIntensityWeight}
