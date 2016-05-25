@@ -26,7 +26,7 @@ Another approach is to choose a bandwidth based on a metric of minimal errors. T
 
 In this method we take the integral of the squared difference between the estimate function $\hat f$ given bandwidth $h$ and the true density function $f$. We then multiply this with the expected mean value $E$ for the true density data. The intuition is that the bandwidth which will give the lowest area of error should be chosen. The hardest part of this method is to identify $f$.
 
-As noted in the introduction to this section, we will do a very simple bandwidth selection experiment. We therefore use a simpler metric of error called the sum of squared error (SSE). The SSE is defined in \cref{eq:sse}.
+As noted in the introduction to this section, we will do a very simple bandwidth selection experiment. We therefore use a simpler metric of error called the sum of squared errors (SSE). The SSE is defined in \cref{eq:sse}.
 
 \begin{equation}\label{eq:sse}
     \sum (\hat f_{h}(x) - f(x) )^2

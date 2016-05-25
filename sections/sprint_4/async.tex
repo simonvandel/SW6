@@ -10,9 +10,9 @@ The infinite loop is repeated at most once per 5 seconds. In the case that an it
 
 \begin{enumerate}
 	\item \textbf{Get position data:} The loop fetches the data from the aSTEP core.
-    \item \textbf{Process the position data:} At this stage all the fetched positions are associated with the corresponding person, based on a id received together with every position. This id identifies a single Wi-Fi device. Afterwards the method \emph{movePerson} is called for every instance of the class \emph{Person}, with the corresponding new position as parameter, in order to add this position to a persons history.
+    \item \textbf{Process the position data:} At this stage all the fetched positions are associated with the corresponding person, based on a id received together with every position. This id identifies a single Wi-Fi device. Afterwards the method \emph{movePerson} is called for every instance of the class \emph{Person}, with the corresponding new position as parameter, in order to add this position to a person's history.
     \item \textbf{Fetch position data:} This stage fetches position data from the aSTEP core.
-    \item \textbf{Calculate analysis data:} The purpose of this stage is to calculate the list of \emph{AnalyserData} for each \emph{Area}. This involves calculating all peoples heading direction and velocity, and encapsulate this in an instance of the class \emph{AnalyserData}.
+    \item \textbf{Calculate analysis data:} The purpose of this stage is to calculate the list of \emph{AnalyserData} for each \emph{Area}. This involves calculating all people's heading direction and velocity, and encapsulate this in an instance of the class \emph{AnalyserData}.
     \item \textbf{Analysis:} This stages analyses the data from the last stage, estimating the crowd factors of each \emph{Area}.
     \item \textbf{JSON Conversion:} At the last stage the result of the analysis is converted into JSON format, which is then stored in the global variable used for user requests. 
 \end{enumerate}
