@@ -1,12 +1,12 @@
 \section{Overlay Design} \label{sec:s4_overlay}
 %%% Intro paragraph
 
-\Cref{s3:analyser_implementation} describes how the analysis produces crowd factors for a set of points on a map. This section considers ways to visualise the result of the analysis, such that the information can be of help to an operator.
+\Cref{s3:analyser_implementation} describes how the analysis produces crowd factors for a set of points on a map. This section considers ways to visualise the result of the analysis in an intuitive way in accordance to the requirements S2-FR1 through S2-FR4 in \cref{tab:s3_req}, such that the information can be of help to an operator.
 
 %%% Designing the different overlays
-When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{sec:s2_design}. To keep each overlay simple, we will only use color and opacity for conveying information. We have borrowed this idea from \citet{wirz2012inferring}.
+When visualising information, one has to be careful not to oversaturate the visualisation, which will cause information overload. We attempt to solve this problem by making each overlay toggleable, as described in \cref{sec:s2_design}. To keep each overlay simple, we will only use colour and opacity for conveying information. We have borrowed this idea from \citet{wirz2012inferring}.
 
-Colour represents the value of the displayed crowd factor, e.g. the value for the density overlay could be 2 people per square metre. The colour scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed. \Cref{tab:color_scale} explains the colour scale. As different people associate different values to colours, it is difficult to find a universal colour scheme that is perfect for everyone. This colour scheme is arbitrarily chosen to range from blue to red, but this should be reconsidered according to each specific users needs, before being put into actual use.
+Colour represents the value of the displayed crowd factor, e.g. the value for the density overlay could be two people per square metre. The colour scheme ranges from low values as blue to high values as red. What denotes a high value depends on the crowd factor being displayed, as explained in the \cref{subsec:levelsOfHazard}. \Cref{tab:color_scale} explains the colour scale. As different people associate different values to colours, it is difficult to find a universal colour scheme that is perfect for everyone. The chosen colour scheme is known as a 5 colour heatmap~\cite{fiveheatmap}, but this should be reconsidered according to each specific users needs, before being put into actual use.
 
 \begin{table}[htbp]
 \definecolor{low}{HTML}{0000FF}
@@ -28,7 +28,7 @@ Colour represents the value of the displayed crowd factor, e.g. the value for th
     \label{tab:color_scale}
 \end{table}
 
-Since the density of a crowd should always be considered when evaluating the danger represented by another crowd factor, we wish to convey the density levels at all times. This is done by making the opacity dependent on the density. The idea is that although an area has a high turbulence, the density of the area may be low, meaning that there is a lower probability of danger in the area. We define that the opacity can at maximum be 90\%, since the underlying map should always be visible.
+Since the density of a crowd should often be considered when evaluating the danger represented by another crowd factor, we wish to convey the density levels at all times. This is done by making the opacity dependent on the density, an idea inspired by the work of \citet{wirz2012inferring}. The idea is that although an area has a high turbulence, the density of the area may be low, meaning that there is a lower probability of danger in the area. We define that the opacity can at maximum be 90\%, since the underlying map should always be visible.
 
 
 Since each overlay is representing its values in the same manner, it supports a common intuition which helps the user better understand each crowd factor.

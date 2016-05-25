@@ -29,13 +29,13 @@ We start the test with a very simple tutorial, consisting of four groups of peop
 \begin{subfigure}[t]{.49\linewidth}
     \centering
     \includegraphics[width=\linewidth]{turbulence_tutorial.png}
-    \caption{Turbulence - Groups A and B are \enquote{crashing} which shows up as high turbulence.}
+    \caption{Turbulence - Groups A and B collides, which shows up as high turbulence.}
 \end{subfigure}
 \caption{Screenshots of the tutorial scenario.}
 \label{fig:tutorial_screens}
 \end{figure}
 
-After the tutorial scenario, we will switch to a more detailed data set. The data set is artificially created by us, and resembles a normal day at SmukFest with a variety of interesting situations. \Cref{fig:test_data_screens} illustrates these situations. A large dense crowd is standing in front of a stage, denoted as A. South of the stage, people are moving in a circular walking pattern marked by the dashed lined. This causes a crossroad near the C, where the paths of different groups cross. In the top left corner of the area, near the B, people are moving in opposite directions close to each other, simulating people entering and exiting the festival area.
+After the tutorial scenario, we switch to a more detailed data set. The data set is artificially created by us, and resembles a normal day at SmukFest with a variety of interesting situations. \Cref{fig:test_data_screens} illustrates these situations. A large dense crowd is standing in front of a stage, denoted as \emph{A}. South of the stage, people are moving in a circular walking pattern marked by the dashed lined. This causes a crossroad near \emph{C}, where the paths of different groups cross. In the top left corner of the area, near \emph{B}, people are moving in opposite directions close to each other, simulating people entering and exiting the festival area.
 
 \begin{figure}[htbp]
 \begin{subfigure}[t]{.49\linewidth}
@@ -71,7 +71,7 @@ Switching to the velocity overlay, he did not immediately notice the arrows, as 
 
 The meaning of the turbulence overlay was not completely clear to Anders as he turned it on, but he quickly noticed that there was no turbulence at the area in front of the stage. His hypothesis was that the crowd was standing still at the area, which we could confirm. He also noticed the high turbulence at the crossroad and at the top left corner.
 
-Overall, Anders was able to find all the interesting situations we had put in the test data, meaning that the visualisations of the system were good. He however expressed that he was not completely confident in his knowledge about what each overlay represents. To overcome this issue, Anders suggested that a user of the system receives some sort of training on the system. 
+Overall, Anders was able to find all the interesting situations we had put in the test data, meaning that the visualisations of the system were good. He however expressed that he was not completely confident in his knowledge about what each overlay represents. To overcome this issue, Anders suggested that a map legend would help considerably, and that a users should receive some sort of training in the use of the system. 
 
 We can conclude that the test was successful, as Anders found all the interesting situations. We do however need to reconsider the design of the turbulence overlay, as it was not intuitive, and the design of the velocity, as the arrows were difficult to see.
 
